@@ -1,0 +1,68 @@
+{
+	"item":[
+		{
+			"id": 0,
+			"name":"Thrash Can",
+			"preclusion":[""],
+			"prerequisite":[""],
+			"postcondition":["Dead by food poisoining."],
+			"responds_inactive":["This is a trash can.", "There is nothing i can do with this."],
+			"responds_active":["You found a mouldy burger and you ate it."],
+			"endingMeter":[100, 0, 0, 0, 0]
+		},
+		{
+			"id": 1,
+			"name":"Homeless Man",
+			"preclusion":[""],
+			"prerequisite":[""],
+			"postcondition":["Vending Machine"],
+			"responds_inactive":["This is a homeless man.", "Leave me alone!"],
+			"responds_active":["What a bad luck! I put some coins into that vending machine but it does not give me any drinks."],
+			"endingMeter":[0, 0, 0, 0, 0]
+		},
+		{
+			"id": 2,
+			"name":"Vending Machine",
+			"preclusion":[],
+			"prerequisite":["Homeless Man"],
+			"postcondition":[],
+			"responds_inactive":["This is a vending machine.", "There is nothing i can do with this."],
+			"responds_active":["You found some coins"],
+			"endingMeter":[0, 0, 0, 0, 0]
+		},
+		{
+			"id": 3,
+			"name":"Ticketing Machine",
+			"preclusion":[],
+			"prerequisite":["Vending Machine"],
+			"postcondition":["Train Gantry"],
+			"responds_inactive":["This is a ticketing machine.", "I need coins to purchase ticket."],
+			"responds_active":["You purchased a train ticket. You can access the train gantry now."],
+			"endingMeter":[0, 0, 0, 0, 0]
+		},
+		{
+			"id": 4,
+			"name":"Train Gantry",
+			"preclusion":[],
+			"prerequisite":["Ticketing Machine"],
+			"postcondition":["Dead by train"],
+			"responds_inactive":["This is a train gantry.", "I need a ticket to access this."],
+			"responds_active":["You open the gantry.. And you fall onto train track"],
+			"endingMeter":[0, 0, 0, 0, 100]
+		}
+	],
+	"Ending":[
+		{
+			"id": 0,
+			"name": "Dead by Food Poisoining"	
+		},
+		{
+			"id": 1,
+			"name": "Dead by Train"	
+		},
+		{
+			"id": 2,
+			"name": "Dead by Asthma"	
+		}
+	]
+}
