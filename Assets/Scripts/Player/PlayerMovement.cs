@@ -6,11 +6,15 @@ public class PlayerMovement : MonoBehaviour
 	public float speed = 6f;            // The speed that the player will move at.
 	public float closeToDestinationThreshold = 0.2f; // Player will stop moving when the distance from the destination is below this threshold
 	Vector3 destination;                   // The vector to store the direction of the player's movement.
+	bool mouseOverButton = false;
+
 
 	Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
 	SpriteRenderer spriteRenderer;		// Reference to player's spriteRenderer
 	int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
 	float camRayLength = 100f;          // The length of the ray from the camera into the scene.
+
+
 
 	// Movement Controls
 	bool isWalking;
@@ -46,12 +50,19 @@ public class PlayerMovement : MonoBehaviour
 		spriteRenderer.sprite = sprites[currDirection + currFrame];
 
 	}
+	public void MouseOverButton(){
+		mouseOverButton = true;
+	}
+
+	public void MouseLeftButton(){
+		mouseOverButton = false;
+	}
 
 	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
 		// Check mouse input
-		if (Input.GetKeyDown (KeyCode.Mouse0)) {
+		if (Input.GetKeyDown (KeyCode.Mouse0)&& PlayerData.MoveFlag && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
 			Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
