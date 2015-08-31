@@ -6,15 +6,31 @@ public class PlayerMovement : MonoBehaviour
 	public float speed = 6f;            // The speed that the player will move at.
 	public float closeToDestinationThreshold = 0.2f; // Player will stop moving when the distance from the destination is below this threshold
 	Vector3 destination;                   // The vector to store the direction of the player's movement.
-	Animator anim;                      // Reference to the animator component.
+
 	Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
+	SpriteRenderer spriteRenderer;		// Reference to player's spriteRenderer
 	int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
 	float camRayLength = 100f;          // The length of the ray from the camera into the scene.
+
+	// Movement Controls
 	bool isWalking;
 	Vector3 lastMovement;
 	int noOfFramesNotMoving = 0;
 	int maxNoOfFramesNotMoving = 3;
 	float noMovementThreshold = 0.005f;
+
+	// Sprite Frame Controls
+	const int downOffset = 0;
+	const int leftOffset = 3;
+	const int rightOffset = 6;
+	const int upOffset = 9;
+	int currDirection =0;
+	int currFrame = 1;
+	bool flip = true;
+	float currTime = 0;
+	float timePerFrame = 0.1f;
+
+	Sprite[] sprites;
 
 	void Awake ()
 	{
@@ -22,14 +38,18 @@ public class PlayerMovement : MonoBehaviour
 		floorMask = LayerMask.GetMask ("Floor");
 		
 		// Set up references.
-		anim = GetComponent <Animator> ();
-		playerRigidbody = GetComponent <Rigidbody> ();
+		spriteRenderer = GetComponent<SpriteRenderer> ();
+		playerRigidbody = GetComponent<Rigidbody> ();
+
+		// Load Sprite
+		sprites = Resources.LoadAll<Sprite>(PlayerData.TextureName);
+		spriteRenderer.sprite = sprites[currDirection + currFrame];
+
 	}
 
-
-
-	void Update ()
+	void FixedUpdate ()
 	{
+		currTime += Time.deltaTime;
 		// Check mouse input
 		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
@@ -53,8 +73,30 @@ public class PlayerMovement : MonoBehaviour
 				Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
 				
 				// Set the player's rotation to this new rotation.
-				playerRigidbody.MoveRotation (newRotation);
 
+				float angle = newRotation.eulerAngles.y;
+
+				//Debug.Log(angle);
+
+
+				currTime = timePerFrame;
+
+				// Left
+				if(angle>=225 && angle <= 315){
+					currDirection = leftOffset;
+				}
+				//Right
+				else if(angle>=45 && angle <= 135){
+					currDirection = rightOffset;
+				}
+				// Up
+				else if(angle>=315 || angle <= 45){
+					currDirection = upOffset;
+				}
+				// Down
+				else{
+					currDirection = downOffset;
+				}
 				isWalking = true;
 			}
 		}
@@ -68,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
 
 		
 			float moveDifference = lastMovement.magnitude - movement.magnitude;
-			Debug.Log (moveDifference);
+
 			if(moveDifference < noMovementThreshold)
 				noOfFramesNotMoving++;
 			else
@@ -92,8 +134,32 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-	
-		anim.SetBool ("IsWalking", isWalking);
+		// Check for sprite frame update
+		if (currTime >= timePerFrame) {
+			if(isWalking){
+				if(currFrame == 1){
+					if(flip)
+						currFrame = 0;
+					else
+						currFrame = 2;
+
+					flip = !flip;
+
+				}
+				else{
+					currFrame = 1;
+				}
+			}
+			else{
+				currFrame = 1;
+				flip = true;
+			}
+
+			// Load New Frame
+			spriteRenderer.sprite = sprites[currDirection + currFrame];
+			currTime = 0;
+		}
+
 	}
 
 }
