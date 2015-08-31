@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerData : MonoBehaviour {
-	public static string TextureName = "PlaceHolders/TestSprite2";
+	public static string TextureName = "Sprites/TestSprite2";
 
 	// Use this for initialization
 	void Start () {
