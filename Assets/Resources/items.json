@@ -1,0 +1,47 @@
+[
+	{
+		"id":"Thrash Can",
+		"restrictedItems":[],
+		"requiredItems":[],
+		"leadItems":["Dead by food poisoining."],
+		"eventDialouge":["This is a trash can.", "There is nothing i can do with this."],
+		"defaultDialouge":["You found a mouldy burger and you ate it."],
+		"endingPoints":[100, 0, 0, 0, 0]
+	},
+	{
+		"id": "Homeless Man",
+		"restrictedItems":[],
+		"requiredItems":[],
+		"leadItems":["Vending Machine"],
+		"eventDialouge":["This is a homeless man.", "Leave me alone!"],
+		"defaultDialouge":["What a bad luck! I put some coins into that vending machine but it does not give me any drinks."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Vending Machine",
+		"restrictedItems":[],
+		"requiredItems":["Homeless Man"],
+		"leadItems":[],
+		"eventDialouge":["This is a vending machine.", "There is nothing i can do with this."],
+		"defaultDialouge":["You found some coins"],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Ticketing Machine",
+		"restrictedItems":[],
+		"requiredItems":["Vending Machine"],
+		"leadItems":["Train Gantry"],
+		"eventDialouge":["This is a ticketing machine.", "I need coins to purchase ticket."],
+		"defaultDialouge":["You purchased a train ticket. You can access the train gantry now."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Train Gantry",
+		"restrictedItems":[],
+		"requiredItems":["Ticketing Machine"],
+		"leadItems":["Dead by train"],
+		"eventDialouge":["This is a train gantry.", "I need a ticket to access this."],
+		"defaultDialouge":["You open the gantry.. And you fall onto train track"],
+		"endingPoints":[0, 0, 0, 0, 100]
+	}
+]
