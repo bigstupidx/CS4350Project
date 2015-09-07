@@ -26,10 +26,10 @@ public class GameController : MonoBehaviour {
 
 		JsonData[] itemsData = JsonReader.readItems();
 		foreach (JsonData itemData in itemsData) {
-			Item item = items[(string) itemData["id"]];
-			if (item == null) {
+			if (!items.ContainsKey((string) itemData["id"])) {
 				continue;
 			}
+			Item item = items[(string) itemData["id"]];
 			item.itemId = (string) itemData["id"];
 			item.restrictedItems = JsonReader.toStrArray(itemData["restrictedItems"]);
 			item.requiredItems = JsonReader.toStrArray(itemData["requiredItems"]);
