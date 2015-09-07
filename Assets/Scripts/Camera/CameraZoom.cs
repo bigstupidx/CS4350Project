@@ -4,7 +4,6 @@ using System.Collections;
 public class CameraZoom : MonoBehaviour {
 
 	CameraFollow mainCamFollowScript;
-	Transform playerTransform;
 	PlayerMovement playerMoveScript;
 	bool isLookingHere = false;
 
@@ -17,7 +16,6 @@ public class CameraZoom : MonoBehaviour {
 	void Start () {
 		mainCamFollowScript = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<CameraFollow> ();
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
-		playerTransform = player.transform;
 		playerMoveScript = player.GetComponent <PlayerMovement>();
 	}
 
@@ -34,7 +32,7 @@ public class CameraZoom : MonoBehaviour {
 		if (isLookingHere) {
 			lookAtMeTimer += Time.deltaTime;
 			if(lookAtMeTimer >= lookAtMeTime){
-				mainCamFollowScript.ChangeTarget (playerTransform);
+				mainCamFollowScript.ResetTarget();
 				GameObject.Destroy(transform.gameObject);
 				PlayerData.MoveFlag = true;
 			}
