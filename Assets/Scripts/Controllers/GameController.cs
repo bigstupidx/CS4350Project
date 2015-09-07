@@ -34,10 +34,12 @@ public class GameController : MonoBehaviour {
 			item.restrictedItems = JsonReader.toStrArray(itemData["restrictedItems"]);
 			item.requiredItems = JsonReader.toStrArray(itemData["requiredItems"]);
 			item.leadItems = JsonReader.toStrArray(itemData["leadItems"]);
-			item.eventDialouge = JsonReader.toStrArray(itemData["eventDialouge"]);
-			item.defaultDialouge = JsonReader.toStrArray(itemData["defaultDialouge"]);
+			item.eventDialogue = JsonReader.toStrArray(itemData["eventDialogue"]);
+			item.defaultDialogue = JsonReader.toStrArray(itemData["defaultDialogue"]);
 			item.endingPoints = JsonReader.toIntArray(itemData["endingPoints"]);
 		}
+
+
 	}
 
 	public void GameOver(EndingType endingType) {
