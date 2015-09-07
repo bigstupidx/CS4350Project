@@ -26,18 +26,20 @@ public class GameController : MonoBehaviour {
 
 		JsonData[] itemsData = JsonReader.readItems();
 		foreach (JsonData itemData in itemsData) {
-			Item item = items[(string) itemData["id"]];
-			if (item == null) {
+			if (!items.ContainsKey((string) itemData["id"])) {
 				continue;
 			}
+			Item item = items[(string) itemData["id"]];
 			item.itemId = (string) itemData["id"];
 			item.restrictedItems = JsonReader.toStrArray(itemData["restrictedItems"]);
 			item.requiredItems = JsonReader.toStrArray(itemData["requiredItems"]);
 			item.leadItems = JsonReader.toStrArray(itemData["leadItems"]);
-			item.eventDialouge = JsonReader.toStrArray(itemData["eventDialouge"]);
-			item.defaultDialouge = JsonReader.toStrArray(itemData["defaultDialouge"]);
+			item.eventDialogue = JsonReader.toStrArray(itemData["eventDialogue"]);
+			item.defaultDialogue = JsonReader.toStrArray(itemData["defaultDialogue"]);
 			item.endingPoints = JsonReader.toIntArray(itemData["endingPoints"]);
 		}
+
+
 	}
 
 	public void GameOver(EndingType endingType) {
