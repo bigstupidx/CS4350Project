@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerData : MonoBehaviour {
-	public static string TextureName = "Sprites/TestSprite2";
+	public static string TextureName = "spr";
+	public static string HairTextureName = "hair1";
 	public static bool MoveFlag = true;
 	public static int nearestObjectId = -1;
 

@@ -24,15 +24,19 @@ public class PlayerMovement : MonoBehaviour
 	float noMovementThreshold = 0.005f;
 
 	// Sprite Frame Controls
-	const int downOffset = 0;
-	const int leftOffset = 3;
-	const int rightOffset = 6;
-	const int upOffset = 9;
+	const int walkFrames = 8;
+	const int idleFrames = 15;
+	const int downCnst = 0;
+	const int leftConst = 1;
+	const int rightConst = 2;
+	const int upConst = 3;
 	int currDirection =0;
-	int currFrame = 1;
-	bool flip = true;
+	int currFrame = 0;
+	//bool flip = true;
 	float currTime = 0;
-	float timePerFrame = 0.1f;
+	public float timePerFrame = 0.025f;
+
+
 
 	Sprite[] sprites;
 
@@ -46,8 +50,37 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody> ();
 
 		// Load Sprite
-		sprites = Resources.LoadAll<Sprite>(PlayerData.TextureName);
+		sprites = new Sprite[walkFrames*4+idleFrames];
+
+		// Load Down
+		for (int i=0; i<walkFrames; i++) {
+			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_walk_south" + i);
+		}
+
+		// Load Left
+		for (int i=0; i<walkFrames; i++) {
+			sprites[i+leftConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_west" + i);
+		}
+
+		// Load Right
+		for (int i=0; i<walkFrames; i++) {
+			sprites[i+rightConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_east" + i);
+		}
+
+		// Load Up
+		for (int i=0; i<walkFrames; i++) {
+			sprites[i+upConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_north" + i);
+		}
+
+		// Load Idle
+		for (int i=0; i<idleFrames; i++) {
+			sprites[4*walkFrames+i] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_idle" + i);
+		}
+
+	
 		spriteRenderer.sprite = sprites[currDirection + currFrame];
+	
+
 
 	}
 	public void MouseOverButton(){
@@ -60,6 +93,11 @@ public class PlayerMovement : MonoBehaviour
 
 	public void StopMoving(){
 		isWalking = false;
+	}
+
+
+	public int GetCurrDir(){
+		return currDirection;
 	}
 
 	void FixedUpdate ()
@@ -95,23 +133,22 @@ public class PlayerMovement : MonoBehaviour
 
 
 				currTime = timePerFrame;
-
+				currFrame = 0;
 				// Right
 				if(angle>=225 && angle <= 315){
-					currDirection = rightOffset;
+					currDirection = leftConst;
 				}
 				//Left
 				else if(angle>=45 && angle <= 135){
-					currDirection = leftOffset;
-
+					currDirection = rightConst;
 				}
 				// Up
 				else if(angle>=315 || angle <= 45){
-					currDirection = upOffset;
+					currDirection = upConst;
 				}
 				// Down
 				else{
-					currDirection = downOffset;
+					currDirection = downCnst;
 				}
 				isWalking = true;
 			}
@@ -153,26 +190,22 @@ public class PlayerMovement : MonoBehaviour
 		// Check for sprite frame update
 		if (currTime >= timePerFrame) {
 			if(isWalking){
-				if(currFrame == 1){
-					if(flip)
-						currFrame = 0;
-					else
-						currFrame = 2;
+				currFrame = (currFrame+1) % 8;
+			} else {
+				currFrame =0;
 
-					flip = !flip;
+				if(currDirection == downCnst){
+					// Reduce idle Timer
+					//frame=32+idleFrame;
+				}
 
-				}
-				else{
-					currFrame = 1;
-				}
-			}
-			else{
-				currFrame = 1;
-				flip = true;
 			}
 
 			// Load New Frame
-			spriteRenderer.sprite = sprites[currDirection + currFrame];
+			//Walkframe 0-7 
+			currFrame=currDirection*8+currFrame;
+
+			spriteRenderer.sprite = sprites[currFrame];
 			currTime = 0;
 		}
 
