@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 		restrictedItems.Add (itemId);
 		foreach (string restrictedItemId in item.restrictedItems) {
 			restrictedItems.Add(restrictedItemId);
+			validItems.Remove(restrictedItemId);
 		}
 	}
 }
