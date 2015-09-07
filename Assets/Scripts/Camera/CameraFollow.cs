@@ -9,7 +9,6 @@ public class CameraFollow : MonoBehaviour
 	Vector3 offset;                     // The initial offset from the target.
 
 	Vector3 targetCamPos;
-	bool isFollowing = true;
 
 	void Start ()
 	{
@@ -17,28 +16,18 @@ public class CameraFollow : MonoBehaviour
 		offset = transform.position - target.position;
 	}
 
-	public Vector3 GetTargetCamPos(){
-		return targetCamPos;
+
+	public void ChangeTarget(Transform newTarget){
+		target = newTarget;
 	}
-
-
-	public void DisableFollow(){
-		isFollowing = false;
-	}
-
-	public void EnableFollow(){
-		isFollowing = true;
-	}
-
-
+		
 	void FixedUpdate ()
 	{
-		if (isFollowing) {
-			// Create a postion the camera is aiming for based on the offset from the target.
-			targetCamPos = target.position + offset;
+		// Create a postion the camera is aiming for based on the offset from the target.
+		targetCamPos = target.position + offset;
 		
-			// Smoothly interpolate between the camera's current position and it's target position.
-			transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
-		}
+		// Smoothly interpolate between the camera's current position and it's target position.
+		transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
+
 	}
 }

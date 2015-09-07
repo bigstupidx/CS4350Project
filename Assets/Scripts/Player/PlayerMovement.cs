@@ -58,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
 		mouseOverButton = false;
 	}
 
+	public void StopMoving(){
+		isWalking = false;
+	}
+
 	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
@@ -92,13 +96,14 @@ public class PlayerMovement : MonoBehaviour
 
 				currTime = timePerFrame;
 
-				// Left
+				// Right
 				if(angle>=225 && angle <= 315){
-					currDirection = leftOffset;
-				}
-				//Right
-				else if(angle>=45 && angle <= 135){
 					currDirection = rightOffset;
+				}
+				//Left
+				else if(angle>=45 && angle <= 135){
+					currDirection = leftOffset;
+
 				}
 				// Up
 				else if(angle>=315 || angle <= 45){
