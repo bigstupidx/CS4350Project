@@ -5,7 +5,7 @@
 		"requiredItems":[],
 		"leadItems":["Cube_B"],
 		"eventDialogue":["You unlocked Cube_B!"],
-		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this."],
+		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this. \nx2There is nothing i can do with this. \nx3There is nothing i can do with this. \nx4There is nothing i can do with this."],
 		"endingPoints":[0, 0, 0, 0, 100]
 	},
 	{
