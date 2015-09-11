@@ -6,6 +6,7 @@
 		"leadItems":["Cube_B"],
 		"eventDialogue":["You unlocked Cube_B!"],
 		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this. \nx2There is nothing i can do with this. \nx3There is nothing i can do with this. \nx4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
 		"endingPoints":[0, 0, 0, 0, 100]
 	},
 	{
@@ -15,6 +16,7 @@
 		"leadItems":["Cube_D"],
 		"eventDialogue":["You unlocked Cube_D!"],
 		"defaultDialogue":["This is Cube_B.", "There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube B."],
 		"endingPoints":[0, 0, 0, 0, 100]
 	},
 	{
@@ -24,6 +26,7 @@
 		"leadItems":["Dead by food poisoining."],
 		"eventDialogue":["You found a mouldy burger and you ate it."],
 		"defaultDialogue":["This is a trash can.", "There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube C."],
 		"endingPoints":[100, 0, 0, 0, 0]
 	},
 	{

@@ -10,6 +10,7 @@ public class Item : MonoBehaviour {
 	public string[] leadItems;
 	public string[] eventDialogue;
 	public string[] defaultDialogue;
+	public string[] idleDialogue;
 	public int[] endingPoints;
 	
 

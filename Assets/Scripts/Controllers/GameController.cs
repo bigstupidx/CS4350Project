@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour {
 			item.leadItems = JsonReader.toStrArray(itemData["leadItems"]);
 			item.eventDialogue = JsonReader.toStrArray(itemData["eventDialogue"]);
 			item.defaultDialogue = JsonReader.toStrArray(itemData["defaultDialogue"]);
+			item.idleDialogue = JsonReader.toStrArray(itemData["idleDialogue"]);
 			item.endingPoints = JsonReader.toIntArray(itemData["endingPoints"]);
 		}
 

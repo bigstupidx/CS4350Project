@@ -10,8 +10,11 @@ public class PlayerController : MonoBehaviour {
 	public List<string> validItems;
 	public List<string> restrictedItems;
 
+	private float idleTimer;
+
 	public void Awake() {
 		instance = this;
+		idleTimer = Time.time;
 	}
 
 	public void Init(List<string> initialItems) {
@@ -44,6 +47,16 @@ public class PlayerController : MonoBehaviour {
 		foreach (string restrictedItemId in item.restrictedItems) {
 			restrictedItems.Add(restrictedItemId);
 			validItems.Remove(restrictedItemId);
+		}
+
+		idleTimer = Time.time;
+	}
+
+	public void Update()
+	{
+		if( (Time.time - idleTimer) / 60 >= 1) {
+			Item validItem = GameController.instance.GetItem( validItems[0] );
+			GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
 		}
 	}
 }
