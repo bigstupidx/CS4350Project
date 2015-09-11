@@ -10,6 +10,7 @@ public class Item : MonoBehaviour {
 	public string[] leadItems;
 	public string[] eventDialogue;
 	public string[] defaultDialogue;
+	public string[] idleDialogue;
 	public int[] endingPoints;
 	
 
@@ -22,7 +23,7 @@ public class Item : MonoBehaviour {
 		if (isActivated) {
 			return eventDialogue [0];
 		} else {
-			return defaultDialogue[(Random.Range(1,1000) % defaultDialogue.Length)];
+			return defaultDialogue[(Random.Range(1, defaultDialogue.Length * 256) % defaultDialogue.Length)];
 		}
 	}
 

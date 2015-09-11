@@ -20,7 +20,7 @@ public class triggerTextBox : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyUp (KeyCode.Space)) {
+		if (FeedTextFromObject.moreThanOneLine == false && Input.GetKeyUp (KeyCode.Space)) {
 			if(currentObject != null){
 				Item curr = GameController.instance.GetItem(currentObject.name);
 				bool status =  PlayerController.instance.GetComponent<PlayerController>().AbleToTrigger(curr);
@@ -36,8 +36,10 @@ public class triggerTextBox : MonoBehaviour {
 		}
 
 		if (currentObject != null) {
-			if ((currentObject.transform.position - transform.position).magnitude > 2.0f)
+			if ((currentObject.transform.position - transform.position).magnitude > 1.5f){
 				currentObject = null;
+				FeedTextFromObject.moreThanOneLine = false;
+			}
 		}
 
 	}
