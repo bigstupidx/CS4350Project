@@ -18,9 +18,9 @@ public class FeedTextFromObject : MonoBehaviour {
 
 	public void SetText(string _respond)
 	{
-		if (_respond.Contains("\n")) {
+		if (_respond.Contains("\\")) {
 			moreThanOneLine = true; 
-			multipleResponds = _respond.Split('\n');
+			multipleResponds = _respond.Split('\\');
 			ind = 0;
 		} else {
 			text.text = _respond;

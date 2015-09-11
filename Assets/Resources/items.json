@@ -5,7 +5,7 @@
 		"requiredItems":[],
 		"leadItems":["Cube_B"],
 		"eventDialogue":["You unlocked Cube_B!"],
-		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this. \nx2There is nothing i can do with this. \nx3There is nothing i can do with this. \nx4There is nothing i can do with this."],
+		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
 		"idleDialogue":["I think I should talk to Cube A."],
 		"endingPoints":[0, 0, 0, 0, 100]
 	},
@@ -25,53 +25,148 @@
 		"requiredItems":[],
 		"leadItems":["Dead by food poisoining."],
 		"eventDialogue":["You found a mouldy burger and you ate it."],
-		"defaultDialogue":["This is a trash can.", "There is nothing i can do with this."],
+		"defaultDialogue":["This is Cube_C.", "There is nothing i can do with this."],
 		"idleDialogue":["I think I should talk to Cube C."],
 		"endingPoints":[100, 0, 0, 0, 0]
 	},
 	{
-		"id":"Thrash Can",
+		"id":"ThrashCan_1",
 		"restrictedItems":[],
 		"requiredItems":[],
-		"leadItems":["Dead by food poisoining."],
-		"eventDialogue":["You found a mouldy burger and you ate it."],
-		"defaultDialogue":["This is a trash can.", "There is nothing i can do with this."],
-		"endingPoints":[100, 0, 0, 0, 0]
-	},
-	{
-		"id": "Homeless Man",
-		"restrictedItems":[],
-		"requiredItems":[],
-		"leadItems":["Vending Machine"],
-		"eventDialogue":["What a bad luck! I put some coins into that vending machine but it does not give me any drinks."],
-		"defaultDialogue":["This is a homeless man.", "Leave me alone!"],
+		"leadItems":["Cat_1"],
+		"eventDialogue":["You found a fish bone"],
+		"defaultDialogue":["This is a dirty Thrash can", "There is nothing i can do here."],
+		"idleDialogue":["I think the Thrash Can over there looks interesting."],
 		"endingPoints":[0, 0, 0, 0, 0]
 	},
 	{
-		"id": "Vending Machine",
+		"id": "Cat_1",
 		"restrictedItems":[],
-		"requiredItems":["Homeless Man"],
+		"requiredItems":["ThrashCan_1"],
+		"leadItems":["ThrashCan_2"],
+		"eventDialogue":["The cat seems hungry, Do you want to have this fish bone, kitty?"],
+		"defaultDialogue":["Meow", "There is nothing i can do here."],
+		"idleDialogue":["The cat over there looks hungry. "],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "ThrashCan_2",
+		"restrictedItems":[],
+		"requiredItems":["Cat_1"],
+		"leadItems":["Cat_2"],
+		"eventDialogue":["You found a fish tail"],
+		"defaultDialogue":["This is a dirty Thrash can", "There is nothing i can do here."],
+		"idleDialogue":["I think the Thrash Can over there looks interesting."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Cat_2",
+		"restrictedItems":[],
+		"requiredItems":["ThrashCan_2"],
+		"leadItems":["ThrashCan_3"],
+		"eventDialogue":["The cat seems hungry, Do you want to have this fish tail, kitty?"],
+		"defaultDialogue":["Meow Meow", "There is nothing i can do here."],
+		"idleDialogue":["The cat over there looks hungry. "],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "ThrashCan_3",
+		"restrictedItems":[],
+		"requiredItems":["Cat_2"],
+		"leadItems":["Cat_3", "HomelessMan"],
+		"eventDialogue":["You found a half eaten fish burger"],
+		"defaultDialogue":["This is a dirty Thrash can", "There is nothing i can do here."],
+		"idleDialogue":["I think the Thrash Can over there looks interesting."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Cat_3",
+		"restrictedItems":["HomelessMan"],
+		"requiredItems":["ThrashCan_3"],
+		"leadItems":["ThrashCan_4"],
+		"eventDialogue":["The cat seems hungry, Do you want to have this fish burger, kitty? \\ You found a Missing Bolt!"],
+		"defaultDialogue":["Meow Meow Meow", "There is nothing i can do here."],
+		"idleDialogue":["The cat over there looks hungry. "],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "HomelessMan",
+		"restrictedItems":["Cat_3"],
+		"requiredItems":["ThrashCan_3"],
+		"leadItems":["VendingMachine_lv2"],
+		"eventDialogue":["Uncle, you seems hungry, Do you want to have this fish burger? \\ What a bad luck! I put some coins into the vending machine over there but it does not give me any drinks!!"],
+		"defaultDialogue":["Leave Me Alone!!!", "This is a Homeless Man."],
+		"idleDialogue":["That man over there looks hungry. "],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "ThrashCan_4",
+		"restrictedItems":[],
+		"requiredItems":["Cat_3"],
+		"leadItems":["Dog_1"],
+		"eventDialogue":["You found a half eaten chicken thigh"],
+		"defaultDialogue":["This is a dirty Thrash can", "There is nothing i can do here."],
+		"idleDialogue":["I think the Thrash Can over there looks interesting."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Dog_1",
+		"restrictedItems":[],
+		"requiredItems":["ThrashCan_4"],
+		"leadItems":["ThrashCan_5"],
+		"eventDialogue":["The dog seems hungry, Do you want to have this chicken thigh, doggy? \\ You found a Note"],
+		"defaultDialogue":["Woof Woof", "There is nothing i can do here."],
+		"idleDialogue":["The dog over there looks hungry."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "ThrashCan_5",
+		"restrictedItems":[],
+		"requiredItems":["Dog_1"],
+		"leadItems":["Cat_4"],
+		"eventDialogue":["You found a dog treat"],
+		"defaultDialogue":["This is a dirty Thrash can", "There is nothing i can do here."],
+		"idleDialogue":["I think the Thrash Can over there looks interesting."],
+		"endingPoints":[0, 0, 0, 0, 0]
+	},
+	{
+		"id": "Cat_4",
+		"restrictedItems":[],
+		"requiredItems":["ThrashCan_5"],
 		"leadItems":[],
-		"eventDialogue":["You found some coins"],
-		"defaultDialogue":["This is a vending machine.", "There is nothing i can do with this."],
+		"eventDialogue":["The cat seems hungry, Do you want to have this dog treat, kitty? \\ The Dog dash towards me! \\ They fight over the dog treat \\ You hit the gantry gate, the gantry gate is loose...\\ You fell onto the train trails....."],
+		"defaultDialogue":["Meow Meow Meow", "There is nothing i can do here."],
+		"idleDialogue":["The cat over there looks hungry. "],
+		"endingPoints":[1000, 0, 0, 0, 0]
+	},
+	{
+		"id": "VendingMachine_lv2",
+		"restrictedItems":[],
+		"requiredItems":["HomelessMan"],
+		"leadItems":["TicketingMachine"],
+		"eventDialogue":["You push the vending machine. \\ You found some coins."],
+		"defaultDialogue":["This is a vending machine", "There is nothing i can do here."],
+		"idleDialogue":["The uncle said something about vending machine, i should check it out. "],
 		"endingPoints":[0, 0, 0, 0, 0]
 	},
 	{
-		"id": "Ticketing Machine",
+		"id": "TicketingMachine",
 		"restrictedItems":[],
-		"requiredItems":["Vending Machine"],
-		"leadItems":["Train Gantry"],
-		"eventDialogue":["You purchased a train ticket. You can access the train gantry now."],
-		"defaultDialogue":["This is a ticketing machine.", "I need coins to purchase ticket."],
+		"requiredItems":["VendingMachine_lv2"],
+		"leadItems":["Esclator"],
+		"eventDialogue":["I remember i always alight at XXX station. \\ You get a ticket to XXX station. "],
+		"defaultDialogue":["This is a ticketing machine", "There is nothing i can do here."],
+		"idleDialogue":["I should get a ticket to go home."],
 		"endingPoints":[0, 0, 0, 0, 0]
 	},
 	{
-		"id": "Train Gantry",
+		"id": "Esclator",
 		"restrictedItems":[],
-		"requiredItems":["Ticketing Machine"],
-		"leadItems":["Dead by train"],
-		"eventDialogue":["You open the gantry.. And you fall onto train track"],
-		"defaultDialogue":["This is a train gantry.", "I need a ticket to access this."],
-		"endingPoints":[0, 0, 0, 0, 100]
+		"requiredItems":["TicketingMachine"],
+		"leadItems":[],
+		"eventDialogue":["You will now move to level 1"],
+		"defaultDialogue":["This is an Esclator", "There is nothing i can do here."],
+		"idleDialogue":["I should get use Esclator to go another level"],
+		"endingPoints":[0, 0, 0, 0, 0]
 	}
 ]

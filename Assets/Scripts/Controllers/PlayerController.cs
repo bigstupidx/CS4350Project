@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour {
 	public void Update()
 	{
 		if( (Time.time - idleTimer) / 60 >= 1) {
-			Item validItem = GameController.instance.GetItem( validItems[0] );
+			Item validItem = GameController.instance.GetItem( validItems[validItems.Count-1] );
+			FadeInFadeOut.isActivated = true;
 			GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
 		}
 	}

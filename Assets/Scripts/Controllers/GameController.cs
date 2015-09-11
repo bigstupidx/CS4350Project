@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver(EndingType endingType) {
-
+		Debug.Log ("Game Over");
 	}
 
 	public void TriggerItem(string itemId) {
