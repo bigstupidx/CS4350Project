@@ -19,7 +19,7 @@ public class FadeInFadeOut : MonoBehaviour {
 			{
 				isActivated = true;
 				gameObject.GetComponent<Image>().material.color = new Color(255.0f, 255.0f, 255.0f, 255.0f);
-				interactingObject = GameObject.FindGameObjectWithTag("Player").GetComponent<triggerTextBox>().currentObject;
+				//interactingObject = GameObject.FindGameObjectWithTag("Player").GetComponent<triggerTextBox>().currentObject;
 			}
 		}
 
