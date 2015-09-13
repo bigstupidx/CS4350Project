@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Displaytextbox : MonoBehaviour {
-	//public GameObject textbox;
+
+	private FeedTextFromObject textbox;
 	public GameObject currentObject;
 
 	bool isTrigger = false;
@@ -10,6 +11,7 @@ public class Displaytextbox : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		textbox = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
 		//textbox.SetActive (false);
 		//StartCoroutine (MyCoroutine (textbox));
 	}
@@ -30,23 +32,31 @@ public class Displaytextbox : MonoBehaviour {
 	void Update () {
 		if (isTrigger) {
 			//textbox.SetActive(true);
-			if (FeedTextFromObject.moreThanOneLine == false && Input.GetKeyUp (KeyCode.Space)) {
-				if(currentObject != null){
+			if(currentObject != null){
+				if(FeedTextFromObject.moreThanOneLine == false && Input.GetKeyUp (KeyCode.Space)){
 					Item curr = GameController.instance.GetItem(colliderName);
-					bool status =  PlayerController.instance.GetComponent<PlayerController>().AbleToTrigger(curr);
+					bool status =  PlayerController.instance.AbleToTrigger(curr);
 					
-					GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(curr.GetRespond(status));
+					textbox.SetText(curr.GetRespond(status));
 					//Debug.Log (curr.GetRespond(status));
 					if( status )
 					{
-						PlayerController.instance.GetComponent<PlayerController>().ItemTriggered(curr);
+						GameController.instance.TriggerItem(curr.itemId);
 					}
-				}else
-					GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText("Mum?");
-				
+				}
 			}
 		} else {
 			//textbox.SetActive (false);
+			if (currentObject == null && Input.GetKeyUp (KeyCode.Space)) {
+				textbox.SetText("Mum?");
+			}
+		}
+
+		if (currentObject != null) {
+			if ((currentObject.transform.position - transform.position).magnitude > 1.5f){
+				currentObject = null;
+				FeedTextFromObject.moreThanOneLine = false;
+			}
 		}
 	}
 

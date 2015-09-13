@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
 
 	public void Start() {
 		GameController.instance.Init ();
+		EndingController.instance.Init ();
 		PlayerController.instance.Init (this.getInitialItems());
 	}
 

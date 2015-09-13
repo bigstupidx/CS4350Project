@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void ItemTriggered(Item item) {
+		Debug.Log("PlayerController");
 		string itemId = item.itemId;
 		triggeredItems.Add(itemId);
 		validItems.Remove(itemId);
@@ -55,9 +56,14 @@ public class PlayerController : MonoBehaviour {
 	public void Update()
 	{
 		if( (Time.time - idleTimer) / 60 >= 1) {
-			Item validItem = GameController.instance.GetItem( validItems[validItems.Count-1] );
-			FadeInFadeOut.isActivated = true;
-			GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
+			displayHint();
+			idleTimer = Time.time;
 		}
+	}
+	public void displayHint()
+	{
+		Item validItem = GameController.instance.GetItem( validItems[validItems.Count-1] );
+		GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
+		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox();
 	}
 }
