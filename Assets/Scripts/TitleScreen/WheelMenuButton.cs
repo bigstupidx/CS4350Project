@@ -8,32 +8,53 @@ public class WheelMenuButton : MonoBehaviour {
 	public static float posRight = 700.0f;
 	static float totalMoveTimeInSec = 0.2f;
 	static float halfScreenWidth = 1080;
+	static float blackFadeAlphaChg = 0.3f;
 
 	RectTransform myRect;
 	Text myText;
 
 	public WheelMenuButton leftFriend;
 	public WheelMenuButton rightFriend;
-
+	public Image blackScreen;
+	public int myID;
 
 	float moveTime = 0.0f;
 	float dest;
 	static bool isGoingLeft = false; // false == left, true == right
+	static int choice = -1;
 
 	// Use this for initialization
 	void Start () {
 		myRect = transform.GetComponent<RectTransform> ();
 		myText = transform.GetComponent<Text> ();
+		blackScreen.enabled = false;
 	}
 
 	public void onClick(){
+		if (choice != -1)
+			return;
 
 		if (myRect.anchoredPosition.x == 0) {
+
+			// Set menu choice
 			Debug.Log (transform.name + " EXECTUE");
-			if(transform.name.Equals ("NewStory")){
-				Application.LoadLevel("MainScene");
+			choice = myID;
+
+
+			if(choice == 1){
+				// set black screen to begin fading
+				blackScreen.enabled = true;
+				Color tempColor = blackScreen.color;
+				tempColor.a = 0.0f;
+				blackScreen.color = tempColor;
 			}
-		} else {
+			else{
+				// So menu moves if choices arent implemnted yet
+				choice = -1;
+			}
+		}
+		
+		else {
 
 			if(myRect.anchoredPosition.x <= 0){
 				isGoingLeft = false;
@@ -56,6 +77,21 @@ public class WheelMenuButton : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (blackScreen.enabled) {
+			// Fade black in
+			Color tempColor = blackScreen.color;
+			tempColor.a = Mathf.Min(1.0f, tempColor.a + blackFadeAlphaChg*Time.deltaTime);
+			blackScreen.color = tempColor;
+
+			Debug.Log (blackScreen.color.a);
+
+			// Change Scene if menu choice selected
+			if(blackScreen.color.a >= 1.0f && choice != -1){
+				if(choice == 1){
+					Application.LoadLevel("PreludeScene");
+				}
+			}
+		}
 
 		if (moveTime > 0) {
 			float currX = myRect.anchoredPosition.x;
