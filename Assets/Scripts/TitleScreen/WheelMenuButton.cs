@@ -33,6 +33,9 @@ public class WheelMenuButton : MonoBehaviour {
 			if(transform.name.Equals ("NewStory")){
 				Application.LoadLevel("MainScene");
 			}
+			if(transform.name.Equals ("BackToTitleScene")){
+				Application.LoadLevel ("TitleScene");
+			}
 		} else {
 
 			if(myRect.anchoredPosition.x <= 0){
