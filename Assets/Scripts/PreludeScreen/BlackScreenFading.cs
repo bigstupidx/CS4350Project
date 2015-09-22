@@ -7,12 +7,12 @@ public class BlackScreenFading : MonoBehaviour {
 	bool isTransferingToMain = false;
 	bool isClearing = true;
 	public float alphaChgPerSec = 0.3f;
-	Image blackScreenImage;
+	RawImage blackScreenImage;
 	//float timer = 0.0f;
 	// Use this for initialization
 	void Start () {
 
-		blackScreenImage = transform.GetComponent<Image> ();
+		blackScreenImage = transform.GetComponent<RawImage> ();
 		blackScreenImage.enabled = true;
 	}
 	

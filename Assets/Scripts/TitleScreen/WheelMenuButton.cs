@@ -15,7 +15,7 @@ public class WheelMenuButton : MonoBehaviour {
 
 	public WheelMenuButton leftFriend;
 	public WheelMenuButton rightFriend;
-	public Image blackScreen;
+	public RawImage blackScreen;
 	public int myID;
 
 	float moveTime = 0.0f;
