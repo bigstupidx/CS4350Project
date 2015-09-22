@@ -58,36 +58,39 @@ public class PlayerMovement : MonoBehaviour
 		// Load Sprite
 		sprites = new Sprite[walkFrames*4+idleFrames+repeatedFrameTimes];
 
+        string pieceName = "walk" + PlayerData.GenderId;
+
+
 		// Load Down
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_walk_south" + i);
+			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
 		}
 
 		// Load Left
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+leftConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_west" + i);
-		}
+			sprites[i+leftConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 1) + i);
+        }
 
 		// Load Right
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+rightConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_east" + i);
-		}
+			sprites[i+rightConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 2) + i);
+        }
 
 		// Load Up
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+upConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_north" + i);
-		}
+			sprites[i+upConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 3) + i);
+        }
 
         // Load Idle
         int j = 0;
 		for (int i=0; i<idleFrames; i++) {
-			sprites[idleConst*walkFrames+j] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_idle" + i);
+			sprites[idleConst*walkFrames+j] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 4) + i);
             j++;
             if (i==repeatedFrame)
             {
                 for(int k=0; k<repeatedFrameTimes; k++)
                 {
-                    sprites[idleConst * walkFrames + j] = Resources.Load<Sprite>("Sprites/" + PlayerData.TextureName + "/" + PlayerData.TextureName + "_walk_idle" + i);
+                    sprites[idleConst * walkFrames + j] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 4) + i);
                     j++;
                 }
             }
@@ -252,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
                 currFrame = currDirection * 8 + currFrame;
             
 
-            Debug.Log(currFrame);
+            //Debug.Log(currFrame);
 			spriteRenderer.sprite = sprites[currFrame];
 			currTime = 0;
 

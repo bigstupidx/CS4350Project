@@ -20,13 +20,13 @@ public class PlayerSpritePiece : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		sprites[0] =  Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_"+ pieceName +"_south");
-		sprites[1] =  Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_"+ pieceName +"_west");
-		sprites[2] =  Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_"+ pieceName +"_east");
-		sprites[3] =  Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_"+ pieceName +"_north");
+		sprites[0] =  Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 0));
+        sprites[1] =  Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 1));
+        sprites[2] =  Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 2));
+        sprites[3] =  Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 3));
 
-		// Set up references.
-		spriteRenderer = GetComponent<SpriteRenderer> ();
+        // Set up references.
+        spriteRenderer = GetComponent<SpriteRenderer> ();
 		spriteRenderer.sprite = sprites [0];
 
 
