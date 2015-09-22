@@ -26,15 +26,21 @@ public class PlayerMovement : MonoBehaviour
 	// Sprite Frame Controls
 	const int walkFrames = 8;
 	const int idleFrames = 15;
+    const int repeatedFrame = 7;
+    const int repeatedFrameTimes = 20;
 	const int downCnst = 0;
 	const int leftConst = 1;
 	const int rightConst = 2;
 	const int upConst = 3;
-	int currDirection =0;
+    const int idleConst = 4;
+    int currDirection =0;
 	int currFrame = 0;
 	//bool flip = true;
 	float currTime = 0;
-	public float timePerFrame = 0.025f;
+    float idleTime = 0;
+    public float timeBeforeIdle = 30.0f;
+    public float timePerFrame = 0.025f;
+
 
 
 
@@ -50,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody> ();
 
 		// Load Sprite
-		sprites = new Sprite[walkFrames*4+idleFrames];
+		sprites = new Sprite[walkFrames*4+idleFrames+repeatedFrameTimes];
 
 		// Load Down
 		for (int i=0; i<walkFrames; i++) {
@@ -72,9 +78,20 @@ public class PlayerMovement : MonoBehaviour
 			sprites[i+upConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_north" + i);
 		}
 
-		// Load Idle
+        // Load Idle
+        int j = 0;
 		for (int i=0; i<idleFrames; i++) {
-			sprites[4*walkFrames+i] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_idle" + i);
+			sprites[idleConst*walkFrames+j] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_idle" + i);
+            j++;
+            if (i==repeatedFrame)
+            {
+                for(int k=0; k<repeatedFrameTimes; k++)
+                {
+                    sprites[idleConst * walkFrames + j] = Resources.Load<Sprite>("Sprites/" + PlayerData.TextureName + "/" + PlayerData.TextureName + "_walk_idle" + i);
+                    j++;
+                }
+            }
+            
 		}
 
 	
@@ -187,26 +204,58 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		// Check for sprite frame update
-		if (currTime >= timePerFrame) {
-			if(isWalking){
-				currFrame = (currFrame+1) % 8;
-			} else {
-				currFrame =0;
+        // Change Idle Timer
+        if (currDirection == downCnst && !isWalking)
+        {
+            float prevTime = idleTime;
+            idleTime += Time.deltaTime;
+            if(idleTime >= timeBeforeIdle && prevTime < timeBeforeIdle)
+            {
+                currFrame = walkFrames * idleConst;
+            }
+        }
+        else
+        {
+            idleTime = 0;
+        }
 
-				if(currDirection == downCnst){
-					// Reduce idle Timer
-					//frame=32+idleFrame;
-				}
+
+        // Check for sprite frame update
+        if (currTime >= timePerFrame) {
+			if(isWalking){
+				currFrame = (currFrame+1) % walkFrames;
+			} else {
+
+                if (idleTime < timeBeforeIdle)
+                {
+                    currFrame = 0;
+                }
+                else
+                {
+
+                    currFrame++;
+                    if(currFrame >= sprites.Length)
+                    {
+                        currFrame = 0;
+                        idleTime = 0;
+                    }
+
+
+                }
+
 
 			}
 
-			// Load New Frame
-			//Walkframe 0-7 
-			currFrame=currDirection*8+currFrame;
+            // Load New Frame
+            //Walkframe 0-7 
+            if (idleTime < timeBeforeIdle)
+                currFrame = currDirection * 8 + currFrame;
+            
 
+            Debug.Log(currFrame);
 			spriteRenderer.sprite = sprites[currFrame];
 			currTime = 0;
+
 		}
 
 	}
