@@ -1,0 +1,622 @@
+[
+	{
+		"id": "Train_Map_A",
+		"restrictedItems":[],
+		"requiredItems":[],
+		"leadItems":["Bench_A"],
+		"eventDialogue":["Go To Bench_A"],
+		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[1, 0, 0, 0, 0]
+	},
+	{
+		"id": "Bench_A",
+		"restrictedItems":[],
+		"requiredItems":["Train_Map_A"],
+		"leadItems":["Stranger_1"],
+		"eventDialogue":["Find the Owner of the Phone"],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[1,0,0,0,0]
+	},
+	{
+		"id": "Stranger_1",
+		"restrictedItems":[],
+		"requiredItems":["Bench_A"],
+		"leadItems":["Notice_Board_A", "Trash_Can_A"],
+		"eventDialogue":["Unlimited Ticket Obtained"],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[1,0,0,0,0]
+	},
+	{
+		"id": "Trash_Can_A",
+		"restrictedItems":[],
+		"requiredItems":["Stranger_1"],
+		"leadItems":["Cat_1"],
+		"eventDialogue":["Fish Bone Found! I can feed a cat with it."],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["Meow* Kitty kitty where are you?"],
+		"endingPoints":[1,0,0,0,0]
+	},
+	{
+		"id": "Cat_1",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_A"],
+		"leadItems":["Trash_Can_B"],
+		"eventDialogue":["*Purr*"],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[1,0,0,0,0]
+	},
+	{
+		"id": "Trash_Can_B",
+		"restrictedItems":[],
+		"requiredItems":["Cat_1"],
+		"leadItems":["Cat_2"],
+		"eventDialogue":["Found a Fish Tail, maybe there's another cat somewhere that's hungry."],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[1,0,0,0,0]
+	},
+	{
+		"id": "Cat_2",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_B"],
+		"leadItems":["Trash_Can_C"],
+		"eventDialogue":["*Meow* <3"],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[1,0,0,0,0]
+	},
+	{
+		"id": "Trash_Can_C",
+		"restrictedItems":[],
+		"requiredItems":["Cat_2"],
+		"leadItems":["Cat_3", "Homeless_Man"],
+		"eventDialogue":["Looks Yummy! \\But mommy says not to eat anything from the trash can. \\Maybe someone else can eat it."],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cat_3",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_C"],
+		"leadItems":["Trash_Can_D"],
+		"eventDialogue":["Oh What is this? //*Found a missing Bolt*"],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Trash_Can_D",
+		"restrictedItems":[],
+		"requiredItems":["Cat_3"],
+		"leadItems":["Dog_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Dog_1",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_D"],
+		"leadItems":["Trash_Can_E"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Trash_Can_E",
+		"restrictedItems":[],
+		"requiredItems":["Dog_1"],
+		"leadItems":["Dog_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Dog_2",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_E"],
+		"leadItems":["Bench_B"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Bench_B",
+		"restrictedItems":[],
+		"requiredItems":["Dog_2"],
+		"leadItems":["Cat_4"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cat_4",
+		"restrictedItems":[],
+		"requiredItems":["Bench_B"],
+		"leadItems":["Notice_Board_B"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Notice_Board_B",
+		"restrictedItems":[],
+		"requiredItems":["Cat_4"],
+		"leadItems":["Vending_Machine_A"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Vending_Machine_A",
+		"restrictedItems":[],
+		"requiredItems":["Notice_Board_B"],
+		"leadItems":["Cat_5"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cat_5",
+		"restrictedItems":[],
+		"requiredItems":["Vending_Machine_A"],
+		"leadItems":["Cat_6"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cat_6",
+		"restrictedItems":[],
+		"requiredItems":["Cat_5"],
+		"leadItems":[""],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Homeless_Man",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_C"],
+		"leadItems":["Photo_Booth_A"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Photo_Booth_A",
+		"restrictedItems":[],
+		"requiredItems":["Homeless_Man"],
+		"leadItems":["Cafe_Chair_A"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cafe_Chair_A",
+		"restrictedItems":["Bench_Fountain_A"],
+		"requiredItems":["Photo_Booth_A"],
+		"leadItems":["Vending_Machine_B"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Vending_Machine_B",
+		"restrictedItems":["Shop_1"],
+		"requiredItems":["Cafe_Chair_A", "Bench_Fountain_A"],
+		"leadItems":["Bench_D"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Bench_D",
+		"restrictedItems":[],
+		"requiredItems":["Vending_Machine_B", "Shop_1"],
+		"leadItems":["Info_Counter_1", "Ticket_Officer_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Info_Counter_1",
+		"restrictedItems":[],
+		"requiredItems":["Bench_D"],
+		"leadItems":["Ticket_Office_Door"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Ticket_Office_Door",
+		"restrictedItems":[],
+		"requiredItems":["Info_Counter_1"],
+		"leadItems":["Trash_Can_F", "Rusty_Pipe_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Trash_Can_F",
+		"restrictedItems":[],
+		"requiredItems":["Ticket_Office_Door"],
+		"leadItems":["Engine_Room_Door"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Engine_Room_Door",
+		"restrictedItems":[],
+		"requiredItems":["Trash_Can_F"],
+		"leadItems":["Rusty_Pipe_1", "Control_Panel_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Control_Panel_1",
+		"restrictedItems":[],
+		"requiredItems":["Engine_Room_Door"],
+		"leadItems":["Cleaning_Room_Door_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cleaning_Room_Door_1",
+		"restrictedItems":[],
+		"requiredItems":["Control_Panel_1"],
+		"leadItems":["Cleaning_Room_Storage_Door_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cleaning_Room_Storage_Door_1",
+		"restrictedItems":[],
+		"requiredItems":["Cleaning_Room_Door_1"],
+		"leadItems":[""],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Rusty_Pipe_1",
+		"restrictedItems":[],
+		"requiredItems":["Engine_Room_Door", "Cafe_Counter"],
+		"leadItems":["Control_Panel_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Control_Panel_2",
+		"restrictedItems":[],
+		"requiredItems":["Rusty_Pipe_1"],
+		"leadItems":["Machine_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Machine_1",
+		"restrictedItems":[],
+		"requiredItems":["Control_Panel_2"],
+		"leadItems":["Machine_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Machine_2",
+		"restrictedItems":[],
+		"requiredItems":["Machine_1"],
+		"leadItems":[""],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Ticket_Officer_1",
+		"restrictedItems":[],
+		"requiredItems":["Bench_D"],
+		"leadItems":["Ticket_Officer_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Ticket_Officer_2",
+		"restrictedItems":[],
+		"requiredItems":["Ticket_Officer_1"],
+		"leadItems":["Cafe_Counter"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cafe_Counter",
+		"restrictedItems":[],
+		"requiredItems":["Ticket_Officer_2"],
+		"leadItems":["Toilet_Door_1", "Rusty_Pipe_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Toilet_Door_1",
+		"restrictedItems":[],
+		"requiredItems":["Cafe_Counter"],
+		"leadItems":["Info_Counter_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Info_Counter_2",
+		"restrictedItems":[],
+		"requiredItems":["Toilet_Door_1"],
+		"leadItems":["Cleaning_Lady"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cleaning_Lady",
+		"restrictedItems":[],
+		"requiredItems":["Info_Counter_2"],
+		"leadItems":["Toilet_Sink_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Toilet_Sink_1",
+		"restrictedItems":[],
+		"requiredItems":["Cleaning_Lady"],
+		"leadItems":[""],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Notice_Board_A",
+		"restrictedItems":[],
+		"requiredItems":["Stranger_1"],
+		"leadItems":["Photo_Booth_B"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Photo_Booth_B",
+		"restrictedItems":[],
+		"requiredItems":["Notice_Board_A"],
+		"leadItems":["Phone_Booth_A", "ATM_A"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "ATM_A",
+		"restrictedItems":[],
+		"requiredItems":["Photo_Booth_B"],
+		"leadItems":["Information_Board_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Information_Board_1",
+		"restrictedItems":[],
+		"requiredItems":["ATM_A"],
+		"leadItems":["Supermarket_Cashier_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Supermarket_Cashier_1",
+		"restrictedItems":[],
+		"requiredItems":["Information_Board_1"],
+		"leadItems":["Shop_1", "Security_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Shop_1",
+		"restrictedItems":["Vending_Machine_B"],
+		"requiredItems":["Supermarket_Cashier_1"],
+		"leadItems":["Bench_D"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Security_1",
+		"restrictedItems":[],
+		"requiredItems":["Supermarket_Cashier_1"],
+		"leadItems":["Shop_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Shop_2",
+		"restrictedItems":[],
+		"requiredItems":["Security_1"],
+		"leadItems":["Kid_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Kid_1",
+		"restrictedItems":[],
+		"requiredItems":["Shop_2"],
+		"leadItems":["Corpse"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Corpse",
+		"restrictedItems":[],
+		"requiredItems":["Kid_1"],
+		"leadItems":["Supermarket_Cart_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Supermarket_Cart_1",
+		"restrictedItems":[],
+		"requiredItems":["Corpse"],
+		"leadItems":["Cafe_Table_A"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cafe_Table_A",
+		"restrictedItems":[],
+		"requiredItems":["Supermarket_Cart_1"],
+		"leadItems":["Flower_Pot_1"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Flower_Pot_1",
+		"restrictedItems":[],
+		"requiredItems":["Cafe_Table_A"],
+		"leadItems":["Cleaning_Room_Door_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Cleaning_Room_Door_2",
+		"restrictedItems":[],
+		"requiredItems":["Flower_Pot_1"],
+		"leadItems":["Clock_Tower_Door"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Clock_Tower_Door",
+		"restrictedItems":[],
+		"requiredItems":["Cleaning_Room_Door_2"],
+		"leadItems":[""],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Rusty_Pipe_2",
+		"restrictedItems":[],
+		"requiredItems":["Ticket_Office_Door"],
+		"leadItems":["Toilet_Sink_2"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Toilet_Sink_2",
+		"restrictedItems":[],
+		"requiredItems":["Rusty_Pipe_2"],
+		"leadItems":["Control_Panel_3"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Control_Panel_3",
+		"restrictedItems":[],
+		"requiredItems":["Toilet_Sink_2"],
+		"leadItems":["Bench_Fountain_B"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Bench_Fountain_B",
+		"restrictedItems":[],
+		"requiredItems":["Control_Panel_3"],
+		"leadItems":["Machine_3"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	},
+	{
+		"id": "Machine_3",
+		"restrictedItems":[],
+		"requiredItems":["Bench_Fountain_B"],
+		"leadItems":["Machine_4"],
+		"eventDialogue":[""],
+		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
+		"idleDialogue":["I think I should talk to Cube A."],
+		"endingPoints":[0,0,0,0,0]
+	}
+]
