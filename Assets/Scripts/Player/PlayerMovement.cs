@@ -38,7 +38,10 @@ public class PlayerMovement : MonoBehaviour
 	//bool flip = true;
 	float currTime = 0;
     float idleTime = 0;
+	float idleMidTime = 0;
+	bool isIdlePlaying = false;
     public float timeBeforeIdle = 30.0f;
+	public float timePauseInIdle = 3.0f;
     public float timePerFrame = 0.025f;
 
 
@@ -81,19 +84,9 @@ public class PlayerMovement : MonoBehaviour
 			sprites[i+upConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 3) + i);
         }
 
-        // Load Idle
-        int j = 0;
+		// Load Idle
 		for (int i=0; i<idleFrames; i++) {
-			sprites[idleConst*walkFrames+j] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 4) + i);
-            j++;
-            if (i==repeatedFrame)
-            {
-                for(int k=0; k<repeatedFrameTimes; k++)
-                {
-                    sprites[idleConst * walkFrames + j] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 4) + i);
-                    j++;
-                }
-            }
+			sprites[idleConst*walkFrames+i] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 4) + i);
             
 		}
 
@@ -212,13 +205,14 @@ public class PlayerMovement : MonoBehaviour
         {
             float prevTime = idleTime;
             idleTime += Time.deltaTime;
-            if(idleTime >= timeBeforeIdle && prevTime < timeBeforeIdle)
+            if(idleTime >= timeBeforeIdle)
             {
-                currFrame = walkFrames * idleConst;
+				isIdlePlaying = true;
             }
         }
         else
         {
+			isIdlePlaying = false;
             idleTime = 0;
         }
 
@@ -229,18 +223,31 @@ public class PlayerMovement : MonoBehaviour
 				currFrame = (currFrame+1) % walkFrames;
 			} else {
 
-                if (idleTime < timeBeforeIdle)
+				if (!isIdlePlaying)
                 {
                     currFrame = 0;
                 }
                 else
                 {
+					if(currFrame == repeatedFrame){
+						if(idleMidTime < timePauseInIdle){
+							idleMidTime += Time.deltaTime;
+						}
+						else{
+							idleMidTime = 0;
+							currFrame++;
+						}
+					}
+					else{
+                    	currFrame++;
+					}
 
-                    currFrame++;
-                    if(currFrame >= sprites.Length)
+
+					if(currFrame >= idleFrames)
                     {
                         currFrame = 0;
                         idleTime = 0;
+						isIdlePlaying = false;
                     }
 
 
@@ -249,14 +256,18 @@ public class PlayerMovement : MonoBehaviour
 
 			}
 
+			int frameToLoad = 0;
             // Load New Frame
             //Walkframe 0-7 
             if (idleTime < timeBeforeIdle)
-                currFrame = currDirection * 8 + currFrame;
+				frameToLoad = currDirection * 8 + currFrame;
             
+			else if(isIdlePlaying){
+				frameToLoad = idleConst *  8 + currFrame;
+			}
 
             //Debug.Log(currFrame);
-			spriteRenderer.sprite = sprites[currFrame];
+			spriteRenderer.sprite = sprites[frameToLoad];
 			currTime = 0;
 
 		}

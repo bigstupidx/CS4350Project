@@ -26,13 +26,18 @@ public class PlayerSpritePiece : MonoBehaviour {
         sprites[3] =  Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 3));
 
         // Set up references.
-        spriteRenderer = GetComponent<SpriteRenderer> ();
+        spriteRenderer = transform.GetComponent<SpriteRenderer> ();
 		spriteRenderer.sprite = sprites [0];
 
 
 		playerMoveScript = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ();
 	}
-	
+
+	public void SwitchSprites(Sprite[] newSet){
+		sprites = newSet;
+		spriteRenderer.sprite = sprites [currDir];
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (playerMoveScript.GetCurrDir() != currDir) {
@@ -41,4 +46,6 @@ public class PlayerSpritePiece : MonoBehaviour {
 			spriteRenderer.sprite = sprites [currDir];
 		}
 	}
+
+
 }

@@ -6,7 +6,7 @@ public class PlayerData : MonoBehaviour {
 
 
     public static int GenderId = 2;
-    public static int HairId = 6;
+    public static int HairId = 4;
 	public static bool MoveFlag = true;
 	public static int nearestObjectId = -1;
 
