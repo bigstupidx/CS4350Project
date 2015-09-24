@@ -20,28 +20,28 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Init() {
+		this.loadLevel(0);
+	}
+
+	public void loadLevel(int level) {
 		items = new Dictionary<string, Item> ();
 		foreach (Transform t in this.transform) {
 			items.Add(t.name, (Item) t.gameObject.GetComponent("Item"));
 		}
 
-		JsonData[] itemsData = JsonReader.readItems();
-		foreach (JsonData itemData in itemsData) {
-			if (!items.ContainsKey((string) itemData["id"])) {
+		ItemState[] itemsState = JsonReader.readItemsState();
+		foreach (ItemState itemState in itemsState) {
+			if (itemState.level != -1) {
+				if (itemState.level != level) {
+					continue;
+				}
+			}
+			if (!items.ContainsKey(itemState.id)) {
 				continue;
 			}
-			Item item = items[(string) itemData["id"]];
-			item.itemId = (string) itemData["id"];
-			item.restrictedItems = JsonReader.toStrArray(itemData["restrictedItems"]);
-			item.requiredItems = JsonReader.toStrArray(itemData["requiredItems"]);
-			item.leadItems = JsonReader.toStrArray(itemData["leadItems"]);
-			item.eventDialogue = JsonReader.toStrArray(itemData["eventDialogue"]);
-			item.defaultDialogue = JsonReader.toStrArray(itemData["defaultDialogue"]);
-			item.idleDialogue = JsonReader.toStrArray(itemData["idleDialogue"]);
-			item.endingPoints = JsonReader.toIntArray(itemData["endingPoints"]);
+			Item item = items[itemState.id];
+			item.loadItemState(itemState);
 		}
-
-
 	}
 
 	public void GameOver(EndingType endingType) {

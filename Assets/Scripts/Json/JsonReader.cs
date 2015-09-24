@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.IO;
 using LitJson;
 
@@ -9,6 +10,25 @@ public class JsonReader : MonoBehaviour {
 	static public JsonData[] readItems() {
 		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/items.json");
 		return JsonMapper.ToObject<JsonData[]>(jsonString);
+	}
+
+	static public ItemState[] readItemsState() {
+		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/items.json");
+		return JsonMapper.ToObject<ItemState[]>(jsonString);
+	}
+
+	static public PlayerState readPlayerState() {
+		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/player.json");
+		return JsonMapper.ToObject<PlayerState> (jsonString);
+	}
+  
+	static public void writePlayerState(PlayerState state) {
+		StringBuilder builder = new StringBuilder();
+		JsonWriter writer = new JsonWriter(builder);
+		writer.PrettyPrint = true;
+		writer.IndentValue = 2;
+		JsonMapper.ToJson(state, writer);
+		File.WriteAllText (Application.dataPath + "/Resources/player.json", builder.ToString ());
 	}
 
 	static public string[] toStrArray(JsonData jsonData) {
