@@ -7,6 +7,7 @@ public class PlayerEyeMovement : MonoBehaviour {
 	//float camRayLength = 100f;          // The length of the ray from the camera into the scene
 
 	public float detectionRadius = 6.0f;
+	public bool isTargetting = false;
 
 	// Use this for initialization
 	void Start () {
@@ -16,44 +17,47 @@ public class PlayerEyeMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (isTargetting) {
+			Vector3 targetPos = Vector3.zero;
+			bool targetFound = false;
+			Collider[] nearbyColliders = Physics.OverlapSphere (GameObject.FindGameObjectWithTag ("Player").transform.position, detectionRadius);
 
-		Vector3 targetPos = Vector3.zero;
-		bool targetFound = false;
-		Collider[] nearbyColliders = Physics.OverlapSphere(GameObject.FindGameObjectWithTag("Player").transform.position, detectionRadius);
+			foreach (Collider col in nearbyColliders) {
 
-		foreach(Collider col in nearbyColliders){
+				Item curr = GameController.instance.GetItem (col.gameObject.name);
 
-			Item curr = GameController.instance.GetItem (col.gameObject.name);
-
-			if(curr!=null){
-				bool status = PlayerController.instance.AbleToTrigger (curr);
-				if(status){
-					targetPos = col.transform.position;
-					targetFound = true;
-					break;
+				if (curr != null) {
+					bool status = PlayerController.instance.AbleToTrigger (curr);
+					if (status) {
+						targetPos = col.transform.position;
+						targetFound = true;
+						break;
+					}
 				}
 			}
-		}
 
-		if (!targetFound) {
-			transform.localPosition = new Vector3 (0, 0, 0);
+			if (!targetFound) {
+				transform.localPosition = new Vector3 (0, 0, 0);
+			} else {
+				Vector3 playerPosition = GameObject.FindGameObjectWithTag ("Player").transform.position;
+				playerPosition.y = 0;
+
+				targetPos.y = 0;
+
+				Vector3 diffVec = targetPos - playerPosition;
+
+				float angle = Mathf.Atan2 (diffVec.z, diffVec.x) * Mathf.Rad2Deg;
+			
+				Vector3 pos = new Vector3 ();
+				float eyeStrength = Mathf.Min (1.0f, Mathf.Max (0.0f, diffVec.magnitude / detectionRadius));
+				pos.x = Mathf.Cos (angle * Mathf.Deg2Rad) * 0.01f * eyeStrength;
+				pos.y = Mathf.Sin (angle * Mathf.Deg2Rad) * 0.01f * eyeStrength;
+				pos.z = 0.0f;
+			
+				transform.localPosition = pos;
+			}
 		} else {
-			Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-			playerPosition.y=0;
-
-			targetPos.y = 0;
-
-			Vector3 diffVec = targetPos - playerPosition;
-
-			float angle = Mathf.Atan2(diffVec.z,diffVec.x)*Mathf.Rad2Deg;
-			
-			Vector3 pos = new Vector3();
-			float eyeStrength = Mathf.Min (1.0f,Mathf.Max (0.0f,diffVec.magnitude/detectionRadius));
-			pos.x = Mathf.Cos (angle*Mathf.Deg2Rad)  * 0.01f * eyeStrength;
-			pos.y = Mathf.Sin (angle*Mathf.Deg2Rad) * 0.01f * eyeStrength;
-			pos.z = 0.0f;
-			
-			transform.localPosition  = pos;
+			transform.localPosition = new Vector3 (0, 0, 0);
 		}
 		/*
 		Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
