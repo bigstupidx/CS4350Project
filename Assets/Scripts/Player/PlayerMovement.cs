@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody> ();
 
 		// Load Sprite
-		sprites = new Sprite[walkFrames*4+idleFrames+repeatedFrameTimes];
+		sprites = new Sprite[walkFrames*4+idleFrames];
 
         string pieceName = "walk" + PlayerData.GenderId;
 
