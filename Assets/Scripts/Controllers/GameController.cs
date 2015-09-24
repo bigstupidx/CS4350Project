@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour {
 
 	static public GameController instance;
 
+	public GameObject endingCanvas;
+
 	private Dictionary<string, Item> items;
 
 	public void Awake() {
@@ -46,6 +48,7 @@ public class GameController : MonoBehaviour {
 
 	public void GameOver(EndingType endingType) {
 		Debug.Log ("Game Over");
+
 	}
 
 	public void TriggerItem(string itemId) {
