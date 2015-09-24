@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public List<string> triggeredItems;
 	public List<string> validItems;
 	public List<string> restrictedItems;
+	public int currentLevel;
 
 	private float idleTimer;
 
@@ -21,6 +22,23 @@ public class PlayerController : MonoBehaviour {
 		triggeredItems = new List<string>();
 		validItems = initialItems;
 		restrictedItems = new List<string>();
+	}
+
+	public void Load() {
+		PlayerState saveState = JsonReader.readPlayerState ();
+		this.triggeredItems = saveState.triggeredItems;
+		this.validItems = saveState.validItems;
+		this.restrictedItems = saveState.restrictedItems;
+		this.currentLevel = saveState.currentLevel;
+	}
+
+	public void Save() {
+		PlayerState saveState = new PlayerState ();
+		saveState.triggeredItems = this.triggeredItems;
+		saveState.validItems = this.validItems;
+		saveState.restrictedItems = this.restrictedItems;
+		saveState.currentLevel = this.currentLevel;
+		JsonReader.writePlayerState (saveState);
 	}
 
 	public bool AbleToTrigger(Item item) {
@@ -63,6 +81,19 @@ public class PlayerController : MonoBehaviour {
 	{
 		Item validItem = GameController.instance.GetItem( validItems[validItems.Count-1] );
 		GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
-		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox(true);
+		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox();
+	}
+}
+
+public class PlayerState {
+	public List<string> triggeredItems;
+	public List<string> validItems;
+	public List<string> restrictedItems;
+	public int currentLevel;
+
+	public PlayerState() {
+		triggeredItems = new List<string> ();
+		validItems = new List<string> ();
+		restrictedItems = new List<string> ();
 	}
 }
