@@ -4,9 +4,9 @@
 		"restrictedItems":[],
 		"requiredItems":[],
 		"leadItems":["Bench_A"],
-		"eventDialogue":["Go To Bench_A"],
-		"defaultDialogue":["This is Cube_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"eventDialogue":["I see a phone picture. \\It's so pretty. \\Oh wait! \\I can read this... \\L... O... S... T... \\Maybe someone lost their phone!"],
+		"defaultDialogue":["This looks like a Train Map.", "I guess it shows the Train Lines \\There's line colours everywhere like the one that mummy used to show to me.", "I think i'm at the correct station? \\Or maybe not...."],
+		"idleDialogue":["Where am i now...?"],
 		"endingPoints":[1, 0, 0, 0, 0]
 	},
 	{
@@ -14,19 +14,19 @@
 		"restrictedItems":[],
 		"requiredItems":["Train_Map_A"],
 		"leadItems":["Stranger_1"],
-		"eventDialogue":["Find the Owner of the Phone"],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
-		"endingPoints":[1,0,0,0,0]
+		"eventDialogue":["*A phone is found* \\Maybe it is the lost phone that was on display earlier. \\I should look for its owner. \\They must be worrying..... \\There's 51 missed calls already afterall."],
+		"defaultDialogue":["This is just a normal Bench.", "There is nothing here."],
+		"idleDialogue":["Ring.... Ring..... Where are you?"],
+		"endingPoints":[1, 0, 0, 0, 0]
 	},
 	{
 		"id": "Stranger_1",
 		"restrictedItems":[],
 		"requiredItems":["Bench_A"],
 		"leadItems":["Notice_Board_A", "Trash_Can_A"],
-		"eventDialogue":["Unlimited Ticket Obtained"],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"eventDialogue":["Stranger: Oh my Phone!! My Phone.... I'm so glad!! \\Stranger: Oh i wish my wallet can be found too..... \\*A pass was dropped.* \\Oh Its a ticket to go outside. \\Seems like i can use it to find mum..."],
+		"defaultDialogue":["I don't think i should talk to stranger..."],
+		"idleDialogue":["Is there anyone looking for their phone?"],
 		"endingPoints":[1,0,0,0,0]
 	},
 	{
@@ -34,9 +34,9 @@
 		"restrictedItems":[],
 		"requiredItems":["Stranger_1"],
 		"leadItems":["Cat_1"],
-		"eventDialogue":["Fish Bone Found! I can feed a cat with it."],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["Meow* Kitty kitty where are you?"],
+		"eventDialogue":["*Found a Fish Bone* \\I can feed kitty with this."],
+		"defaultDialogue":["It's a trash can.", "There's nothing here."],
+		"idleDialogue":["Maybe i should look around and try to explore the area in first floor."],
 		"endingPoints":[1,0,0,0,0]
 	},
 	{
@@ -44,9 +44,9 @@
 		"restrictedItems":[],
 		"requiredItems":["Trash_Can_A"],
 		"leadItems":["Trash_Can_B"],
-		"eventDialogue":["*Purr*"],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"eventDialogue":["Purrrrr.... \\ It seems so happy. \\I bet its so hungry."],
+		"defaultDialogue":["Meow... It doesn't seem hungry."],
+		"idleDialogue":["Kitty Kitty where are you??"],
 		"endingPoints":[1,0,0,0,0]
 	},
 	{
@@ -55,8 +55,8 @@
 		"requiredItems":["Cat_1"],
 		"leadItems":["Cat_2"],
 		"eventDialogue":["Found a Fish Tail, maybe there's another cat somewhere that's hungry."],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":["It's a trash can.", "There's nothing here."],
+		"idleDialogue":["Hmmmm.... Maybe there's more food around."],
 		"endingPoints":[1,0,0,0,0]
 	},
 	{
@@ -65,9 +65,10 @@
 		"requiredItems":["Trash_Can_B"],
 		"leadItems":["Trash_Can_C"],
 		"eventDialogue":["*Meow* <3"],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
-		"endingPoints":[1,0,0,0,0]
+		"defaultDialogue":["Meow... It doesn't seem hungry."],
+		"idleDialogue":["Meowwwww!! \\Kitty Kitty where are you?"],
+		"endingPoints":[1,0,0,0,0],
+		"level": 0
 	},
 	{
 		"id": "Trash_Can_C",
@@ -75,9 +76,10 @@
 		"requiredItems":["Cat_2"],
 		"leadItems":["Cat_3", "Homeless_Man"],
 		"eventDialogue":["Looks Yummy! \\But mommy says not to eat anything from the trash can. \\Maybe someone else can eat it."],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
-		"endingPoints":[0,0,0,0,0]
+		"defaultDialogue":["It's a trash can.", "There's nothing here."],
+		"idleDialogue":["More food for Kitty seems good"],
+		"endingPoints":[0,0,0,0,0],
+		"level": 0
 	},
 	{
 		"id": "Cat_3",
@@ -85,8 +87,8 @@
 		"requiredItems":["Trash_Can_C"],
 		"leadItems":["Trash_Can_D"],
 		"eventDialogue":["Oh What is this? //*Found a missing Bolt*"],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":["Meow... It doesn't seem hungry."],
+		"idleDialogue":["Meowwwww!! \\Kitty Kitty where are you?"],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -95,8 +97,8 @@
 		"requiredItems":["Cat_3"],
 		"leadItems":["Dog_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":["It's a trash can.", "There's nothing here."],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -105,8 +107,8 @@
 		"requiredItems":["Trash_Can_D"],
 		"leadItems":["Trash_Can_E"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -115,8 +117,8 @@
 		"requiredItems":["Dog_1"],
 		"leadItems":["Dog_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -125,8 +127,8 @@
 		"requiredItems":["Trash_Can_E"],
 		"leadItems":["Bench_B"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -135,8 +137,8 @@
 		"requiredItems":["Dog_2"],
 		"leadItems":["Cat_4"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -145,8 +147,8 @@
 		"requiredItems":["Bench_B"],
 		"leadItems":["Notice_Board_B"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -155,8 +157,8 @@
 		"requiredItems":["Cat_4"],
 		"leadItems":["Vending_Machine_A"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -165,8 +167,8 @@
 		"requiredItems":["Notice_Board_B"],
 		"leadItems":["Cat_5"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -175,8 +177,8 @@
 		"requiredItems":["Vending_Machine_A"],
 		"leadItems":["Cat_6"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -185,8 +187,8 @@
 		"requiredItems":["Cat_5"],
 		"leadItems":[""],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -195,8 +197,8 @@
 		"requiredItems":["Trash_Can_C"],
 		"leadItems":["Photo_Booth_A"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -205,8 +207,8 @@
 		"requiredItems":["Homeless_Man"],
 		"leadItems":["Cafe_Chair_A"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -215,8 +217,8 @@
 		"requiredItems":["Photo_Booth_A"],
 		"leadItems":["Vending_Machine_B"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -225,8 +227,8 @@
 		"requiredItems":["Cafe_Chair_A", "Bench_Fountain_A"],
 		"leadItems":["Bench_D"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -235,8 +237,8 @@
 		"requiredItems":["Vending_Machine_B", "Shop_1"],
 		"leadItems":["Info_Counter_1", "Ticket_Officer_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -245,8 +247,8 @@
 		"requiredItems":["Bench_D"],
 		"leadItems":["Ticket_Office_Door"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -255,8 +257,8 @@
 		"requiredItems":["Info_Counter_1"],
 		"leadItems":["Trash_Can_F", "Rusty_Pipe_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -265,8 +267,8 @@
 		"requiredItems":["Ticket_Office_Door"],
 		"leadItems":["Engine_Room_Door"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -275,8 +277,8 @@
 		"requiredItems":["Trash_Can_F"],
 		"leadItems":["Rusty_Pipe_1", "Control_Panel_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -285,8 +287,8 @@
 		"requiredItems":["Engine_Room_Door"],
 		"leadItems":["Cleaning_Room_Door_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -295,8 +297,8 @@
 		"requiredItems":["Control_Panel_1"],
 		"leadItems":["Cleaning_Room_Storage_Door_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -305,8 +307,8 @@
 		"requiredItems":["Cleaning_Room_Door_1"],
 		"leadItems":[""],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -315,8 +317,8 @@
 		"requiredItems":["Engine_Room_Door", "Cafe_Counter"],
 		"leadItems":["Control_Panel_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -325,8 +327,8 @@
 		"requiredItems":["Rusty_Pipe_1"],
 		"leadItems":["Machine_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -335,8 +337,8 @@
 		"requiredItems":["Control_Panel_2"],
 		"leadItems":["Machine_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -345,8 +347,8 @@
 		"requiredItems":["Machine_1"],
 		"leadItems":[""],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -355,8 +357,8 @@
 		"requiredItems":["Bench_D"],
 		"leadItems":["Ticket_Officer_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -365,8 +367,8 @@
 		"requiredItems":["Ticket_Officer_1"],
 		"leadItems":["Cafe_Counter"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -375,8 +377,8 @@
 		"requiredItems":["Ticket_Officer_2"],
 		"leadItems":["Toilet_Door_1", "Rusty_Pipe_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -385,8 +387,8 @@
 		"requiredItems":["Cafe_Counter"],
 		"leadItems":["Info_Counter_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -395,8 +397,8 @@
 		"requiredItems":["Toilet_Door_1"],
 		"leadItems":["Cleaning_Lady"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -405,8 +407,8 @@
 		"requiredItems":["Info_Counter_2"],
 		"leadItems":["Toilet_Sink_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -415,8 +417,8 @@
 		"requiredItems":["Cleaning_Lady"],
 		"leadItems":[""],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -425,8 +427,8 @@
 		"requiredItems":["Stranger_1"],
 		"leadItems":["Photo_Booth_B"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -435,8 +437,8 @@
 		"requiredItems":["Notice_Board_A"],
 		"leadItems":["Phone_Booth_A", "ATM_A"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -445,8 +447,8 @@
 		"requiredItems":["Photo_Booth_B"],
 		"leadItems":["Information_Board_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -455,8 +457,8 @@
 		"requiredItems":["ATM_A"],
 		"leadItems":["Supermarket_Cashier_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -465,8 +467,8 @@
 		"requiredItems":["Information_Board_1"],
 		"leadItems":["Shop_1", "Security_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -475,8 +477,8 @@
 		"requiredItems":["Supermarket_Cashier_1"],
 		"leadItems":["Bench_D"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -485,8 +487,8 @@
 		"requiredItems":["Supermarket_Cashier_1"],
 		"leadItems":["Shop_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -495,38 +497,38 @@
 		"requiredItems":["Security_1"],
 		"leadItems":["Kid_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
 		"id": "Kid_1",
 		"restrictedItems":[],
 		"requiredItems":["Shop_2"],
-		"leadItems":["Corpse"],
+		"leadItems":["Supermarket_Cashier_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
-		"id": "Corpse",
+		"id": "Supermarket_Cashier_2",
 		"restrictedItems":[],
 		"requiredItems":["Kid_1"],
 		"leadItems":["Supermarket_Cart_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
 		"id": "Supermarket_Cart_1",
 		"restrictedItems":[],
-		"requiredItems":["Corpse"],
+		"requiredItems":["Supermarket_Cashier_2"],
 		"leadItems":["Cafe_Table_A"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -535,8 +537,8 @@
 		"requiredItems":["Supermarket_Cart_1"],
 		"leadItems":["Flower_Pot_1"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -545,8 +547,8 @@
 		"requiredItems":["Cafe_Table_A"],
 		"leadItems":["Cleaning_Room_Door_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -555,8 +557,8 @@
 		"requiredItems":["Flower_Pot_1"],
 		"leadItems":["Clock_Tower_Door"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -565,8 +567,8 @@
 		"requiredItems":["Cleaning_Room_Door_2"],
 		"leadItems":[""],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -575,8 +577,8 @@
 		"requiredItems":["Ticket_Office_Door"],
 		"leadItems":["Toilet_Sink_2"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -585,8 +587,8 @@
 		"requiredItems":["Rusty_Pipe_2"],
 		"leadItems":["Control_Panel_3"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -595,8 +597,8 @@
 		"requiredItems":["Toilet_Sink_2"],
 		"leadItems":["Bench_Fountain_B"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -605,8 +607,8 @@
 		"requiredItems":["Control_Panel_3"],
 		"leadItems":["Machine_3"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	},
 	{
@@ -615,8 +617,8 @@
 		"requiredItems":["Bench_Fountain_B"],
 		"leadItems":["Machine_4"],
 		"eventDialogue":[""],
-		"defaultDialogue":["This is Bench_A.", "There is nothing i can do with this. \\x2There is nothing i can do with this. \\x3There is nothing i can do with this. \\x4There is nothing i can do with this."],
-		"idleDialogue":["I think I should talk to Cube A."],
+		"defaultDialogue":[""],
+		"idleDialogue":[""],
 		"endingPoints":[0,0,0,0,0]
 	}
 ]
