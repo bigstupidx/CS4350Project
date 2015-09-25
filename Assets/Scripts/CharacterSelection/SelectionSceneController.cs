@@ -62,7 +62,7 @@ public class SelectionSceneController : MonoBehaviour {
 
 			if (AmariSelection.selectionDone) {
 				AmariSelection.selectionEnabled = false;
-
+				Application.LoadLevel("MainScene");
 				//AmariMovement selected = m1;
 				//switch(PlayerD
 
