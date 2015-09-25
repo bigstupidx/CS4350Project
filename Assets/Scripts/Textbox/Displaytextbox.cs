@@ -30,7 +30,7 @@ public class Displaytextbox : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyUp (KeyCode.Space)) {
+		if (Input.GetKeyUp (KeyCode.Space) && !colliderName.Contains("ZoomPoint") ) {
 			if (feedText.ind == -1 ){	// textbox is not fed yet
 
 				if (colliderName.Length < 1) { // player stand at out of nowhere

@@ -13,12 +13,10 @@ public class Audiofeedback : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		colliderName = this.gameObject.name;
-		Debug.Log (gameObject.name);
 
 		Item curr = GameController.instance.GetItem (colliderName);
 		bool status = PlayerController.instance.GetComponent<PlayerController> ().AbleToTrigger (curr);
-		
-		Debug.Log ("status + " + status);
+
 		
 		if (status) {
 			GetComponent<AudioSource> ().Play ();

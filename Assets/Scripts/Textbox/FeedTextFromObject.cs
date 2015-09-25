@@ -23,8 +23,7 @@ public class FeedTextFromObject : MonoBehaviour {
 	void Start(){
 		textBox = GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ();
 		text = transform.GetComponent<Text> ();
-		text.text = "";
-		defaultColor = new Color (1.0f, 1.0f, 1.0f, 1.0f);//text.color;
+		defaultColor = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 		ResetTextFeed ();
 	}
 

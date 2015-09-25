@@ -16,8 +16,8 @@ public class FadeInFadeOut : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
-		defaultColor = gameObject.GetComponent<Image> ().material.color;
-		gameObject.GetComponent<Image>().material.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.0f);
+		defaultColor = gameObject.GetComponent<Image> ().color;
+		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.0f);
 		alpha = 0.0f;
 		isActivated = false;
 	}
@@ -26,7 +26,7 @@ public class FadeInFadeOut : MonoBehaviour {
 	{
 		isActivated = true;
 		isFadingOn = _fadingOption;
-		gameObject.GetComponent<Image>().material.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1.0f);
+		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1.0f);
 
 		int wordCount = transform.GetComponentInChildren<Text>().text.Length;
 		fadeSpeed = 0.40f;
@@ -55,15 +55,15 @@ public class FadeInFadeOut : MonoBehaviour {
 			{
 				PlayerData.MoveFlag = false;
 			}
-			else if (isFadingOn && gameObject.GetComponent<Image> ().material.color.a > 0.0f) {
-				alpha = gameObject.GetComponent<Image> ().material.color.a;
+			else if (isFadingOn && gameObject.GetComponent<Image> ().color.a > 0.0f) {
+				alpha = gameObject.GetComponent<Image> ().color.a;
 				alpha -= (fadeSpeed * Time.deltaTime);
-				gameObject.GetComponent<Image> ().material.color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, alpha);
+				gameObject.GetComponent<Image> ().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, alpha);
 				feedText.setAlpha(alpha);
 				PlayerData.MoveFlag = true;
 			}
 
-			if (gameObject.GetComponent<Image> ().material.color.a <= 0.0f) {
+			if (gameObject.GetComponent<Image> ().color.a <= 0.0f) {
 				isActivated = false;
 			}
 		}
