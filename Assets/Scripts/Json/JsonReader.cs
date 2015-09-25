@@ -6,19 +6,15 @@ using System.IO;
 using LitJson;
 
 public class JsonReader : MonoBehaviour {
-	
-	static public JsonData[] readItems() {
-		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/items.json");
-		return JsonMapper.ToObject<JsonData[]>(jsonString);
-	}
 
 	static public ItemState[] readItemsState() {
-		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/items.json");
+		TextAsset itemAsset = Resources.Load ("items") as TextAsset;
+		string jsonString = itemAsset.text;
 		return JsonMapper.ToObject<ItemState[]>(jsonString);
 	}
 
 	static public PlayerState readPlayerState() {
-		string jsonString = File.ReadAllText (Application.dataPath + "/Resources/player.json");
+		string jsonString = File.ReadAllText (JsonReader.getDocumentDir() + "/player.json");
 		return JsonMapper.ToObject<PlayerState> (jsonString);
 	}
   
@@ -28,7 +24,11 @@ public class JsonReader : MonoBehaviour {
 		writer.PrettyPrint = true;
 		writer.IndentValue = 2;
 		JsonMapper.ToJson(state, writer);
-		File.WriteAllText (Application.dataPath + "/Resources/player.json", builder.ToString ());
+		File.WriteAllText (JsonReader.getDocumentDir() + "/player.json", builder.ToString ());
+	}
+
+	static public string getDocumentDir() {
+		return System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 	}
 
 	static public string[] toStrArray(JsonData jsonData) {
