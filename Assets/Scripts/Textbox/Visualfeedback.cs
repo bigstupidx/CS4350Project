@@ -37,7 +37,7 @@ public class Visualfeedback : MonoBehaviour {
 			//player.GetComponent<Displaytextbox> ().currentObject = null;
 			if (status) {
 				halo.GetType ().GetProperty ("enabled").SetValue (halo, true, null);
-				player.GetComponent<Displaytextbox> ().currentObject = this.gameObject;
+				//player.GetComponent<Displaytextbox> ().currentObject = this.gameObject;
 			} else {
 				halo.GetType ().GetProperty ("enabled").SetValue (halo, false, null);
 			}

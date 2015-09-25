@@ -20,6 +20,7 @@ public class triggerTextBox : MonoBehaviour {
 	}
 
 	void Update(){
+		/*
 		if (FeedTextFromObject.moreThanOneLine == false && Input.GetKeyUp (KeyCode.Space)) {
 			if(currentObject != null){
 				Item curr = GameController.instance.GetItem(currentObject.name);
@@ -41,7 +42,7 @@ public class triggerTextBox : MonoBehaviour {
 				FeedTextFromObject.moreThanOneLine = false;
 			}
 		}
-
+*/
 	}
 
 	void OnTriggerExit(Collider other){

@@ -5,7 +5,7 @@ public class PlayerLoadHair : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.GetComponent<PlayerSpritePiece> ().pieceName = PlayerData.HairTextureName;
+        transform.GetComponent<PlayerSpritePiece>().pieceName = "hair" + PlayerData.HairId;
 	}
 	
 	// Update is called once per frame

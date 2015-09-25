@@ -26,15 +26,24 @@ public class PlayerMovement : MonoBehaviour
 	// Sprite Frame Controls
 	const int walkFrames = 8;
 	const int idleFrames = 15;
+    const int repeatedFrame = 7;
+    const int repeatedFrameTimes = 20;
 	const int downCnst = 0;
 	const int leftConst = 1;
 	const int rightConst = 2;
 	const int upConst = 3;
-	int currDirection =0;
+    const int idleConst = 4;
+    int currDirection =0;
 	int currFrame = 0;
 	//bool flip = true;
 	float currTime = 0;
-	public float timePerFrame = 0.025f;
+    float idleTime = 0;
+	float idleMidTime = 0;
+	bool isIdlePlaying = false;
+    public float timeBeforeIdle = 30.0f;
+	public float timePauseInIdle = 3.0f;
+    public float timePerFrame = 0.025f;
+
 
 
 
@@ -42,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Awake ()
 	{
+
 		// Create a layer mask for the floor layer.
 		floorMask = LayerMask.GetMask ("Floor");
 		
@@ -52,35 +62,41 @@ public class PlayerMovement : MonoBehaviour
 		// Load Sprite
 		sprites = new Sprite[walkFrames*4+idleFrames];
 
+        string pieceName = "walk" + PlayerData.GenderId;
+
+
 		// Load Down
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" + PlayerData.TextureName + "_walk_south" + i);
+			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
 		}
 
 		// Load Left
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+leftConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_west" + i);
-		}
+			sprites[i+leftConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 1) + i);
+        }
 
 		// Load Right
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+rightConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_east" + i);
-		}
+			sprites[i+rightConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 2) + i);
+        }
 
 		// Load Up
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+upConst*walkFrames] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_north" + i);
-		}
+			sprites[i+upConst*walkFrames] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 3) + i);
+        }
 
 		// Load Idle
 		for (int i=0; i<idleFrames; i++) {
-			sprites[4*walkFrames+i] = Resources.Load<Sprite> ("Sprites/" +  PlayerData.TextureName + "/" +PlayerData.TextureName + "_walk_idle" + i);
+			sprites[idleConst*walkFrames+i] = Resources.Load<Sprite>(PlayerData.FormSpritePath(pieceName, 4) + i);
+            
 		}
 
 	
 		spriteRenderer.sprite = sprites[currDirection + currFrame];
-	
 
+
+
+	
 
 	}
 	public void MouseOverButton(){
@@ -100,9 +116,17 @@ public class PlayerMovement : MonoBehaviour
 		return currDirection;
 	}
 
+	public void ForceIdle(){
+		StopMoving ();
+		currDirection = downCnst;
+		currFrame = 0;
+		idleTime = timeBeforeIdle;
+	}
+
 	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
+
 		// Check mouse input
 		if (Input.GetKeyDown (KeyCode.Mouse0)&& PlayerData.MoveFlag && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
@@ -187,26 +211,76 @@ public class PlayerMovement : MonoBehaviour
 			}
 		}
 
-		// Check for sprite frame update
-		if (currTime >= timePerFrame) {
-			if(isWalking){
-				currFrame = (currFrame+1) % 8;
-			} else {
-				currFrame =0;
+        // Change Idle Timer
+        if (currDirection == downCnst && !isWalking)
+        {
+            float prevTime = idleTime;
+            idleTime += Time.deltaTime;
+            if(idleTime >= timeBeforeIdle)
+            {
+				isIdlePlaying = true;
+            }
+        }
+        else
+        {
+			isIdlePlaying = false;
+            idleTime = 0;
+        }
 
-				if(currDirection == downCnst){
-					// Reduce idle Timer
-					//frame=32+idleFrame;
-				}
+
+        // Check for sprite frame update
+        if (currTime >= timePerFrame) {
+			if(isWalking){
+				currFrame = (currFrame+1) % walkFrames;
+			} else {
+
+				if (!isIdlePlaying)
+                {
+                    currFrame = 0;
+                }
+                else
+                {
+					if(currFrame == repeatedFrame){
+						if(idleMidTime < timePauseInIdle){
+							idleMidTime += Time.deltaTime;
+						}
+						else{
+							idleMidTime = 0;
+							currFrame++;
+						}
+					}
+					else{
+                    	currFrame++;
+					}
+
+
+					if(currFrame >= idleFrames)
+                    {
+                        currFrame = 0;
+                        idleTime = 0;
+						isIdlePlaying = false;
+                    }
+
+
+                }
+
 
 			}
 
-			// Load New Frame
-			//Walkframe 0-7 
-			currFrame=currDirection*8+currFrame;
+			int frameToLoad = 0;
+            // Load New Frame
+            //Walkframe 0-7 
+            if (idleTime < timeBeforeIdle)
+				frameToLoad = currDirection * 8 + currFrame;
+            
+			else if(isIdlePlaying){
+				frameToLoad = idleConst *  8 + currFrame;
+			}
 
-			spriteRenderer.sprite = sprites[currFrame];
+            //Debug.Log(currFrame);
+			spriteRenderer.sprite = sprites[frameToLoad];
 			currTime = 0;
+
 		}
 
 	}
