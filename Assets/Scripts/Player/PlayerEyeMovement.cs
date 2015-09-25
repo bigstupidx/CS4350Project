@@ -20,6 +20,9 @@ public class PlayerEyeMovement : MonoBehaviour {
 		if (isTargetting) {
 			Vector3 targetPos = Vector3.zero;
 			bool targetFound = false;
+			float shortestDist = Mathf.Infinity;
+			Vector3 playerPosition = GameObject.FindGameObjectWithTag ("Player").transform.position;
+			playerPosition.y = 0;
 			Collider[] nearbyColliders = Physics.OverlapSphere (GameObject.FindGameObjectWithTag ("Player").transform.position, detectionRadius);
 
 			foreach (Collider col in nearbyColliders) {
@@ -29,9 +32,15 @@ public class PlayerEyeMovement : MonoBehaviour {
 				if (curr != null) {
 					bool status = PlayerController.instance.AbleToTrigger (curr);
 					if (status) {
-						targetPos = col.transform.position;
 						targetFound = true;
-						break;
+						Vector3 objectPos = col.transform.position;
+						objectPos.y = 0;
+						float distToObject = (objectPos - playerPosition).magnitude;
+						//Debug.Log (col.name +": " + distToObject);
+						if(shortestDist>distToObject){
+							targetPos = col.transform.position;
+							shortestDist = distToObject;
+						}
 					}
 				}
 			}
@@ -39,8 +48,8 @@ public class PlayerEyeMovement : MonoBehaviour {
 			if (!targetFound) {
 				transform.localPosition = new Vector3 (0, 0, 0);
 			} else {
-				Vector3 playerPosition = GameObject.FindGameObjectWithTag ("Player").transform.position;
-				playerPosition.y = 0;
+
+
 
 				targetPos.y = 0;
 
