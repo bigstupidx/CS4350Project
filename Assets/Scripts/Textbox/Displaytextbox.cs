@@ -60,7 +60,8 @@ public class Displaytextbox : MonoBehaviour {
 						textBox.TurnOnTextbox( false ); // means do not fade out
 				}
 				else {		// respond ONLY have 1 line
-					textBox.TurnOnTextbox( true );
+					if( !textBox.isFadingOn )
+						textBox.TurnOnTextbox( true );
 				}
 			}
 		}
