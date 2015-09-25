@@ -69,7 +69,7 @@ public class LevelHandler: MonoBehaviour{
 		
 		overlay.color = Color.black;
 		Debug.Log (overlay.color);
-		overlay.gameObject.SetActive (false);
+		//overlay.gameObject.SetActive (false);
 	    levelMethod();
 	}
 	
