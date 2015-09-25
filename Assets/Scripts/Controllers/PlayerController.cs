@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		Item validItem = GameController.instance.GetItem( validItems[validItems.Count-1] );
 		GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
-		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox(true);
+		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox(false);
 	}
 }
 
