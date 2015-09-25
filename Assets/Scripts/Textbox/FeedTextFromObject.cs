@@ -43,7 +43,7 @@ public class FeedTextFromObject : MonoBehaviour {
 
 	public void SetText(string _respond, Item _item = null, bool _status = false)
 	{
-		isActivated = false;
+		isActivated = true;
 		if (_respond.Length > 1) {
 			if (_respond.Contains ("\\")) {
 				moreThanOneLine = true; 
@@ -65,10 +65,10 @@ public class FeedTextFromObject : MonoBehaviour {
 
 	public void Update(){
 		// change text set when multiple lines of responds is detected
-		if (Input.GetKeyUp (KeyCode.Space)) {
+		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
 			endOfRespond = false;
 			isActivated = true;
-			text.color = defaultColor;
+			//text.color = defaultColor;
 			
 			if (moreThanOneLine) {
 				if( ind <= multipleResponds.Length-1)
@@ -105,8 +105,13 @@ public class FeedTextFromObject : MonoBehaviour {
 		}
 		
 		// guard to reset multipleResponds
-		if (endOfRespond && isActivated)
+		if ( (endOfRespond && isActivated) )
 			ResetTextFeed ();
+
+		if ( (!isActivated) )
+			ResetTextFeed ();
+		 
+
 
 	}
 	
