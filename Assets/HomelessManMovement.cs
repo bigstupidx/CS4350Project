@@ -36,7 +36,7 @@ public class HomelessManMovement : MonoBehaviour {
 	void FixedUpdate () {
 		idleTime += Time.deltaTime;
 		//timeFrame++;
-		Debug.Log ("Current frame" + currFrame);
+		//Debug.Log ("Current frame" + currFrame);
 		if (idleTime >= timeBeforeIdle) {
 
 			frameTime += Time.deltaTime;

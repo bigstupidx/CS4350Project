@@ -37,7 +37,7 @@ public class BlackScreenFading : MonoBehaviour {
 
 			if(isTransferingToMain && blackScreenImage.color.a>=1.0f){
 				//Application.LoadLevel("MainScene");
-				Application.LoadLevel("Testing_scene");
+				Application.LoadLevel("PlatformGameScene");
 			}
 		}
 	}

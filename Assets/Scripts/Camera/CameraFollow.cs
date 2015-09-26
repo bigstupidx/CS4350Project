@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
 	{
 		// Calculate the initial offset.
 		offset = transform.position - target.position;
-		Debug.Log (offset);
+		//Debug.Log (offset);
 		smoothing = followSpeed;
 		origTarget = target;
 	}
