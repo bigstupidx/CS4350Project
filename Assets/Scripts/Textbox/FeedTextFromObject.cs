@@ -58,10 +58,40 @@ public class FeedTextFromObject : MonoBehaviour {
 
 		if( returnRespond.Contains("#") )
 		{
-			Debug.Log("Found!: " + returnRespond.IndexOf("#") );
-			
-			//return( _input.Replace("[Parent]", temp) );
+			int length = returnRespond.LastIndexOf("#") - returnRespond.IndexOf("#");
+			string temp = returnRespond.Substring(returnRespond.IndexOf("#")+1, length-1);
+			string[] selection = temp.Split('/');
+
+			string target = "#";
+			target += temp;
+			target += "#";
+
+			if( PlayerData.GenderId == 1)
+			{
+				returnRespond = returnRespond.Replace(target, selection[0]);
+			}
+			else
+				returnRespond = returnRespond.Replace(target, selection[1]);
 		}
+
+		if( returnRespond.Contains("%") )
+		{
+			int length = returnRespond.LastIndexOf("%") - returnRespond.IndexOf("%");
+			string temp = returnRespond.Substring(returnRespond.IndexOf("%")+1, length-1);
+			string[] selection = temp.Split('/');
+			
+			string target = "%";
+			target += temp;
+			target += "%";
+			
+			if( PlayerData.GenderId == 1)
+			{
+				returnRespond = returnRespond.Replace(target, selection[0]);
+			}
+			else
+				returnRespond = returnRespond.Replace(target, selection[1]);
+		}
+
 		return returnRespond;
 	}
 
