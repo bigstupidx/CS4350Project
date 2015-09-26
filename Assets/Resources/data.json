@@ -1,5 +1,27 @@
 [
 	{
+		"id": "Dummy_level2",
+		"restrictedItems":[],
+		"requiredItems":[],
+		"leadItems":["Dummy_level1"],
+		"eventDialogue":["Hiks Hiks..... \\I think i'm lost. \\[Parent] where are you? \\I'm scared..... \\Maybe i should talk to a train officer. \\Maybe he can help me. "],
+		"defaultDialogue":["This is just a normal bench.", "There is nothing here"],
+		"idleDialogue":["Hiks Hiks..... \\[Parent] \\I'm Lost \\I'm tired"],
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 2
+	},
+	{
+		"id": "Dummy_level1",
+		"restrictedItems":[],
+		"requiredItems":[],
+		"leadItems":["Train_Officer_A"],
+		"eventDialogue":["Hiks Hiks..... \\I think i'm lost. \\#X where are you? \\I'm scared..... \\Maybe i should talk to a train officer. \\Maybe he can help me. "],
+		"defaultDialogue":["This is just a normal bench.", "There is nothing here"],
+		"idleDialogue":["Hiks Hiks..... \\[Parent] \\I'm Lost \\I'm tired"],
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 1
+	},
+	{
 		"id": "Bench_C",
 		"restrictedItems":[],
 		"requiredItems":[],
