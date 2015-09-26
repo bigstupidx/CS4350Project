@@ -1,13 +1,48 @@
 [
 	{
+		"id": "Bench_C",
+		"restrictedItems":[],
+		"requiredItems":[],
+		"leadItems":["Train_Officer_A"],
+		"eventDialogue":["Hiks Hiks..... \\I think i'm lost. \\#X where are you? \\I'm scared..... \\Maybe i should talk to a train officer. \\Maybe he can help me. "],
+		"defaultDialogue":["This is just a normal bench.", "There is nothing here"],
+		"idleDialogue":["Hiks Hiks..... \\Mummy \\I'm Lost \\I'm tired"],
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 2
+	},
+	{
+		"id": "Train_Officer_A",
+		"restrictedItems":[],
+		"requiredItems":["Bench_C"],
+		"leadItems":["Train_Map_A"],
+		"eventDialogue":["He looks busy.... \\Maybe i should find #x by myself... \\Maybe i can first try to look at the train map."],
+		"defaultDialogue":["He looks busy", "I shouldn't disturb him."],
+		"idleDialogue":["I should ask a Train Officer...."],
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 2
+		
+	},
+	{
 		"id": "Train_Map_A",
 		"restrictedItems":[],
 		"requiredItems":[],
+		"leadItems":["Train_Station_Map_A"],
+		"eventDialogue":["Hmmmmmm i see colourfull lines. \\Hmmmmmm..... \\I think we're at the correct station. \\I think..... \\Hey look, there's a scribble! \\It looks like a tetris block, a circle,a snake and teen titans tower to me. \\Maybe if i check other maps there will be more scribbles."],
+		"defaultDialogue":["Its a map....", "I'm not sure where am i now?", "There is nothing here."],
+		"idleDialogue":["Where am i now...?", "Maybe i should check some map to see where i am....."],
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 2
+	},
+	{
+		"id": "Train_Station_Map_A",
+		"restrictedItems":[],
+		"requiredItems":["Train_Map_A"],
 		"leadItems":["Bench_A"],
-		"eventDialogue":["I see a phone picture. \\It's so pretty. \\Oh wait! \\I can read this... \\L... O... S... T... \\Maybe someone lost their phone!"],
-		"defaultDialogue":["This looks like a Train Map.", "I guess it shows the Train Lines \\There's line colours everywhere like the one that mummy used to show to me.", "I think i'm at the correct station? \\Or maybe not...."],
+		"eventDialogue":["Aha!! There's another scribbling. \\There's a box picture in it. \\"],
+		"defaultDialogue":["Hmmmmmm i see colourfull lines.", "It's a train map.", "There's nothing here."],
 		"idleDialogue":["Where am i now...?"],
-		"endingPoints":[1, 0, 0, 0, 0]
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 2
 	},
 	{
 		"id": "Bench_A",
@@ -17,7 +52,8 @@
 		"eventDialogue":["*A phone is found* \\Maybe it is the lost phone that was on display earlier. \\I should look for its owner. \\They must be worrying..... \\There's 51 missed calls already afterall."],
 		"defaultDialogue":["This is just a normal Bench.", "There is nothing here."],
 		"idleDialogue":["Ring.... Ring..... Where are you?"],
-		"endingPoints":[1, 0, 0, 0, 0]
+		"endingPoints":[1, 0, 0, 0, 0],
+		"level": 2
 	},
 	{
 		"id": "Stranger_1",
@@ -27,7 +63,8 @@
 		"eventDialogue":["Stranger: Oh my Phone!! My Phone.... I'm so glad!! \\Stranger: Oh i wish my wallet can be found too..... \\*A pass was dropped.* \\Oh Its a ticket to go outside. \\Seems like i can use it to find mum..."],
 		"defaultDialogue":["I don't think i should talk to stranger..."],
 		"idleDialogue":["Is there anyone looking for their phone?"],
-		"endingPoints":[1,0,0,0,0]
+		"endingPoints":[1,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Trash_Can_A",
@@ -37,7 +74,8 @@
 		"eventDialogue":["*Found a Fish Bone* \\I can feed kitty with this."],
 		"defaultDialogue":["It's a trash can.", "There's nothing here."],
 		"idleDialogue":["Maybe i should look around and try to explore the area in first floor."],
-		"endingPoints":[1,0,0,0,0]
+		"endingPoints":[1,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cat_1",
@@ -47,7 +85,8 @@
 		"eventDialogue":["Purrrrr.... \\ It seems so happy. \\I bet its so hungry."],
 		"defaultDialogue":["Meow... It doesn't seem hungry."],
 		"idleDialogue":["Kitty Kitty where are you??"],
-		"endingPoints":[1,0,0,0,0]
+		"endingPoints":[1,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Trash_Can_B",
@@ -57,7 +96,8 @@
 		"eventDialogue":["Found a Fish Tail, maybe there's another cat somewhere that's hungry."],
 		"defaultDialogue":["It's a trash can.", "There's nothing here."],
 		"idleDialogue":["Hmmmm.... Maybe there's more food around."],
-		"endingPoints":[1,0,0,0,0]
+		"endingPoints":[1,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cat_2",
@@ -89,7 +129,8 @@
 		"eventDialogue":["Oh What is this? //*Found a missing Bolt*"],
 		"defaultDialogue":["Meow... It doesn't seem hungry."],
 		"idleDialogue":["Meowwwww!! \\Kitty Kitty where are you?"],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Trash_Can_D",
@@ -99,7 +140,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":["It's a trash can.", "There's nothing here."],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Dog_1",
@@ -109,7 +151,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Trash_Can_E",
@@ -119,7 +162,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Dog_2",
@@ -129,7 +173,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Bench_B",
@@ -139,7 +184,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cat_4",
@@ -149,7 +195,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Notice_Board_B",
@@ -159,7 +206,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Vending_Machine_A",
@@ -169,7 +217,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cat_5",
@@ -179,7 +228,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cat_6",
@@ -189,7 +239,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Homeless_Man",
@@ -199,7 +250,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Photo_Booth_A",
@@ -209,7 +261,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cafe_Chair_A",
@@ -219,7 +272,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Vending_Machine_B",
@@ -229,7 +283,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Bench_D",
@@ -239,7 +294,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Info_Counter_1",
@@ -249,7 +305,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Ticket_Office_Door",
@@ -259,7 +316,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Trash_Can_F",
@@ -269,7 +327,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Engine_Room_Door",
@@ -279,7 +338,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Control_Panel_1",
@@ -289,7 +349,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cleaning_Room_Door_1",
@@ -299,7 +360,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cleaning_Room_Storage_Door_1",
@@ -309,7 +371,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Rusty_Pipe_1",
@@ -319,7 +382,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Control_Panel_2",
@@ -329,7 +393,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Machine_1",
@@ -339,7 +404,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Machine_2",
@@ -349,7 +415,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Ticket_Officer_1",
@@ -359,7 +426,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Ticket_Officer_2",
@@ -369,7 +437,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cafe_Counter",
@@ -379,7 +448,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Toilet_Door_1",
@@ -389,7 +459,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Info_Counter_2",
@@ -399,7 +470,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cleaning_Lady",
@@ -409,7 +481,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Toilet_Sink_1",
@@ -419,7 +492,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Notice_Board_A",
@@ -429,7 +503,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Photo_Booth_B",
@@ -439,7 +514,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "ATM_A",
@@ -449,7 +525,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Information_Board_1",
@@ -459,7 +536,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Supermarket_Cashier_1",
@@ -469,7 +547,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Shop_1",
@@ -479,7 +558,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Security_1",
@@ -489,7 +569,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Shop_2",
@@ -499,7 +580,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Kid_1",
@@ -509,7 +591,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Supermarket_Cashier_2",
@@ -519,7 +602,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Supermarket_Cart_1",
@@ -529,7 +613,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cafe_Table_A",
@@ -539,7 +624,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Flower_Pot_1",
@@ -549,7 +635,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Cleaning_Room_Door_2",
@@ -559,7 +646,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Clock_Tower_Door",
@@ -569,7 +657,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Rusty_Pipe_2",
@@ -579,7 +668,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Toilet_Sink_2",
@@ -589,7 +679,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Control_Panel_3",
@@ -599,7 +690,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Bench_Fountain_B",
@@ -609,7 +701,8 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	},
 	{
 		"id": "Machine_3",
@@ -619,6 +712,7 @@
 		"eventDialogue":[""],
 		"defaultDialogue":[""],
 		"idleDialogue":[""],
-		"endingPoints":[0,0,0,0,0]
+		"endingPoints":[0,0,0,0,0],
+		"level": 2
 	}
 ]
