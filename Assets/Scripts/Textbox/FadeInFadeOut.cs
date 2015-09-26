@@ -18,7 +18,7 @@ public class FadeInFadeOut : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
-		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 1.0f);//gameObject.GetComponent<Image> ().color;
+		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 1.0f);
 		gameObject.GetComponent<Image>().color = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 0.0f);
 		alpha = 0.0f;
 		isActivated = false;
@@ -32,13 +32,15 @@ public class FadeInFadeOut : MonoBehaviour {
 		isFadingOn = _fadingOption;
 		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1.0f);
 
-		int wordCount = transform.GetComponentInChildren<Text>().text.Length;
-		fadeSpeed = 0.60f;
+		//int wordCount = transform.GetComponentInChildren<Text>().text.Length;
+		fadeSpeed = 0.70f;
 		
+		/*
 		if(wordCount >= 10 && wordCount <= 20)
 			fadeSpeed = 0.5f;
 		else if( wordCount >= 20 )
 			fadeSpeed = 0.4f;
+		*/
 	}
 
 	public bool getStatus()

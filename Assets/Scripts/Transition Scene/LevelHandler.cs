@@ -45,6 +45,8 @@ public class LevelHandler: MonoBehaviour{
 		
 		overlay.color = Color.clear;
 		overlay.gameObject.SetActive(false);
+
+		GameController.instance.InitializeLevel ();
 		
 	}
 	

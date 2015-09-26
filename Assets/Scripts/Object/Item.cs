@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Item : MonoBehaviour {
+
+	public readonly static string EVENT_TYPE = "event";
+	public readonly static string TRANSITION_TYPE = "transition";
 	
 	public string itemId;
+	public string type;
 	public int level;
 	public string[] requiredItems;
 	public string[] restrictedItems;
@@ -13,14 +17,16 @@ public class Item : MonoBehaviour {
 	public string[] defaultDialogue;
 	public string[] idleDialogue;
 	public int[] endingPoints;
+	public double[] offset;
 	
 
 	public void ItemTriggered(Item item) {
 		
 	}
 
-	public void loadItemState(ItemState state) {
+	public void loadEventItemState(ItemState state) {
 		itemId = state.id;
+		type = EVENT_TYPE;
 		level = state.level;
 		requiredItems = state.requiredItems;
 		restrictedItems = state.restrictedItems;
@@ -29,6 +35,17 @@ public class Item : MonoBehaviour {
 		defaultDialogue = state.defaultDialogue;
 		idleDialogue = state.idleDialogue;
 		endingPoints = state.endingPoints;
+	}
+
+	public void loadTransitionItemState(ItemState state) {
+		itemId = state.id;
+		type = TRANSITION_TYPE;
+		level = state.level;
+		requiredItems = state.requiredItems;
+		leadItems = state.leadItems;
+		eventDialogue = state.eventDialogue;
+		defaultDialogue = state.defaultDialogue;
+		offset = state.offset;
 	}
 
 	public string GetRespond(bool isActivated)
@@ -44,6 +61,7 @@ public class Item : MonoBehaviour {
 
 public class ItemState {
 	public string id;
+	public string type;
 	public int level;
 	public string[] requiredItems;
 	public string[] restrictedItems;
@@ -52,8 +70,17 @@ public class ItemState {
 	public string[] defaultDialogue;
 	public string[] idleDialogue;
 	public int[] endingPoints;
+	public double[] offset;
 
 	public ItemState() {
+		type = Item.EVENT_TYPE;
 		level = -1;
+		requiredItems = new string[0];
+		restrictedItems = new string[0];
+		leadItems = new string[0];
+		eventDialogue = new string[0];
+		defaultDialogue = new string[0];
+		endingPoints = new int[(int) EndingType.EndingCount];
+		offset = new double[2];
 	}
 }
