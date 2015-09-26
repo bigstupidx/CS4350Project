@@ -7,37 +7,49 @@ public class PlayerController : MonoBehaviour {
 	static public PlayerController instance;
 
 	public List<string> triggeredItems;
-	public List<string> validItems;
-	public List<string> restrictedItems;
+	public Dictionary<string, string> validItems;
+	public Dictionary<string, string> restrictedItems;
 	public int currentLevel;
 
 	private float idleTimer;
 
 	public void Awake() {
 		instance = this;
-		DontDestroyOnLoad (this.gameObject);
+		DontDestroyOnLoad (this);
 		idleTimer = Time.time;
 	}
 
-	public void Init(List<string> initialItems) {
+	public void Init() {
 		triggeredItems = new List<string>();
-		validItems = initialItems;
-		restrictedItems = new List<string>();
+		validItems = new Dictionary<string, string> ();
+		restrictedItems = new Dictionary<string, string>();
+	}
+
+	public void AddInitialItems(List<string> initialItems) {
+		foreach (string itemId in initialItems) {
+			validItems.Add(itemId, "true");
+		}
 	}
 
 	public void Load() {
 		PlayerState saveState = JsonReader.readPlayerState ();
 		this.triggeredItems = saveState.triggeredItems;
-		this.validItems = saveState.validItems;
-		this.restrictedItems = saveState.restrictedItems;
+		validItems = new Dictionary<string, string> ();
+		foreach (string itemId in saveState.validItems) {
+			validItems.Add(itemId, "true");
+		}
+		restrictedItems = new Dictionary<string, string> ();
+		foreach (string itemId in saveState.restrictedItems) {
+			validItems.Add(itemId, "true");
+		}
 		this.currentLevel = saveState.currentLevel;
 	}
 
 	public void Save() {
 		PlayerState saveState = new PlayerState ();
 		saveState.triggeredItems = this.triggeredItems;
-		saveState.validItems = this.validItems;
-		saveState.restrictedItems = this.restrictedItems;
+		saveState.validItems = new List<string>(this.validItems.Keys);
+		saveState.restrictedItems = new List<string>(this.restrictedItems.Keys);
 		saveState.currentLevel = this.currentLevel;
 		JsonReader.writePlayerState (saveState);
 	}
@@ -50,9 +62,9 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		return validItems.Contains(itemId) 
+		return validItems.ContainsKey(itemId) 
 			&& !triggeredItems.Contains(itemId) 
-			&& !restrictedItems.Contains(itemId);
+			&& !restrictedItems.ContainsKey(itemId);
 	}
 
 	public void ItemTriggered(Item item) {
@@ -60,15 +72,15 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.EVENT_TYPE)) {
 			triggeredItems.Add(itemId);
 			validItems.Remove(itemId);
-			restrictedItems.Add(itemId);
+			restrictedItems.Add(itemId, "true");
 		}
 
 		foreach (string leadItemId in item.leadItems) {
-			validItems.Add(leadItemId);
+			validItems.Add(leadItemId, "true");
 		}
 
 		foreach (string restrictedItemId in item.restrictedItems) {
-			restrictedItems.Add(restrictedItemId);
+			restrictedItems.Add(restrictedItemId, "true");
 			validItems.Remove(restrictedItemId);
 		}
 
@@ -84,7 +96,8 @@ public class PlayerController : MonoBehaviour {
 	}
 	public void displayHint()
 	{
-		Item validItem = GameController.instance.GetItem( validItems[validItems.Count-1] );
+		List<string> items = new List<string> (validItems.Keys);
+		Item validItem = GameController.instance.GetItem( items[items.Count - 1] );
 		GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
 		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox(false);
 	}
