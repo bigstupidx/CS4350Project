@@ -31,7 +31,7 @@ public class Displaytextbox : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyUp (KeyCode.Space) && !colliderName.Contains("ZoomPoint") ) {
-			Debug.Log("DisplayTextbox: " + feedText.ind);
+
 			if (feedText.ind == -1 ){	// textbox is not fed yet
 
 				if (colliderName.Length < 1) { // player stand at out of nowhere
@@ -50,9 +50,9 @@ public class Displaytextbox : MonoBehaviour {
 					string respond = curr.GetRespond (status);
 
 					if(respond.Length > 0){		// not empty respond 
+						transform.GetComponent <PlayerMovement>().StopMoving ();//PlayerData.MoveFlag = false;	// disable player move
 						feedText.SetText (respond, curr, status);
 						textBox.TurnOnTextbox( false ); // means do not fade out
-						Debug.Log("Done Feeding: near interactable");
 					}
 				}
 			}
@@ -63,9 +63,11 @@ public class Displaytextbox : MonoBehaviour {
 					if(feedText.ind == feedText.multipleResponds.Length)
 					{
 						textBox.TurnOnTextbox( true ); // fade out
+						//PlayerData.MoveFlag = true;	// ENABLE player move
 						Debug.Log("Exceed array bound. Fading ON");
 					}
 					else if(feedText.ind < feedText.multipleResponds.Length){
+						transform.GetComponent <PlayerMovement>().StopMoving ();//PlayerData.MoveFlag = false;	// disable player move
 						textBox.TurnOnTextbox( false ); // means do not fade out
 						Debug.Log("Less than array bound. Fading OFF");
 					}
@@ -73,6 +75,7 @@ public class Displaytextbox : MonoBehaviour {
 				else {		// respond ONLY have 1 line
 					if( !textBox.isFadingOn ){
 						textBox.TurnOnTextbox( true );
+						PlayerData.MoveFlag = true;	// ENABLE player move
 						Debug.Log("Only one line. Fading ON");
 					}
 				}

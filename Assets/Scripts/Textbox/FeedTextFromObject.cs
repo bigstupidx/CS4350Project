@@ -12,8 +12,8 @@ public class FeedTextFromObject : MonoBehaviour {
 	public string[] multipleResponds;
 	private Color defaultColor;
 
-	private Item targetItem;
-	private bool targetStatus;
+	public Item targetItem;
+	public bool targetStatus;
 
 	private Text text;
 	private float alpha = 1.0f;
@@ -148,14 +148,16 @@ public class FeedTextFromObject : MonoBehaviour {
 	void LateUpdate()
 	{
 		if (textBox.isFadingOn) {
-			string temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName;
+			//string temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName;
 			
-			if( temp.Length > 0 ){
+			//if( temp.Length > 0 ){
 				if(targetItem != null &&  targetStatus )
 				{
 					GameController.instance.TriggerItem(targetItem.itemId);
+					targetItem = null;
+					targetStatus = false;
 				}
-			}
+			//}
 		}
 		
 		// guard to reset multipleResponds
