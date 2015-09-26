@@ -34,7 +34,10 @@ public class Displaytextbox : MonoBehaviour {
 			if (feedText.ind == -1 ){	// textbox is not fed yet
 
 				if (colliderName.Length < 1) { // player stand at out of nowhere
-					feedText.SetText ("Mum?");
+					if(PlayerData.ParentGenderId == 1) // Male Parent
+						feedText.SetText ("Papa?");
+					else if(PlayerData.ParentGenderId == 2) // Female Parent
+						feedText.SetText ("Mama?");
 					textBox.TurnOnTextbox( false ); // means do not fade out
 				}
 
@@ -44,8 +47,10 @@ public class Displaytextbox : MonoBehaviour {
 					bool status = PlayerController.instance.AbleToTrigger (curr);
 					string respond = curr.GetRespond (status);
 
-					feedText.SetText (respond, curr, status);
-					textBox.TurnOnTextbox( false ); // means do not fade out
+					if(respond.Length > 0){		// not empty respond 
+						feedText.SetText (respond, curr, status);
+						textBox.TurnOnTextbox( false ); // means do not fade out
+					}
 				}
 			}
 			else{	// textbox fed already

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 
 	public void Awake() {
 		instance = this;
+		DontDestroyOnLoad (this);
 		timeSinceGameStart = Time.deltaTime;
 	}
 
@@ -20,32 +21,30 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Start() {
+		Debug.Log ("Start GameController");
 		GameController.instance.Init ();
 		EndingController.instance.Init ();
 		PlayerController.instance.Init (this.getInitialItems());
 	}
 
 	public void Init() {
-		this.loadLevel(0);
+		//this.loadLevel(2);
+		//this.InitializeLevel ();
 	}
 
-	public void loadLevel(int level) {
-		items = new Dictionary<string, Item> ();
+	public void InitializeLevel() {
+		this.items = new Dictionary<string, Item> ();
+		Debug.Log ("Initialize Items: " + items);
 		GameObject itemList = GameObject.Find ("Items");
 		foreach (Transform t in itemList.transform) {
 			items.Add(t.name, (Item) t.gameObject.GetComponent("Item"));
 		}
-
 		ItemState[] itemsState = JsonReader.readItemsState();
 		foreach (ItemState itemState in itemsState) {
-			if (itemState.level != -1) {
-				if (itemState.level != level) {
-					continue;
-				}
-			}
 			if (!items.ContainsKey(itemState.id)) {
 				continue;
 			}
+			Debug.Log ("Read item level: " + itemState.level);
 			Item item = items[itemState.id];
 			if (itemState.type.Equals(Item.EVENT_TYPE)) {
 				item.loadEventItemState(itemState);
@@ -53,6 +52,7 @@ public class GameController : MonoBehaviour {
 				item.loadTransitionItemState(itemState);		
 			}
 		}
+		Debug.Log ("done loading level");
 	}
 
 	public void GameOver(EndingType endingType) {
@@ -75,7 +75,8 @@ public class GameController : MonoBehaviour {
 
 	public Item GetItem(string itemId) {
 		Item item;
-		bool hasItem = items.TryGetValue(itemId, out item);
+		Debug.Log (this.items);
+		bool hasItem = this.items.TryGetValue(itemId, out item);
 		if (hasItem) {
 			return item;
 		}

@@ -41,6 +41,22 @@ public class FeedTextFromObject : MonoBehaviour {
 		moreThanOneLine = _newValue;
 	}
 
+	private string PostRespondProcessing(string _input)
+	{
+		if( _input.Contains("[Parent]") )
+		{
+			Debug.Log("Parent!");
+			string temp = "";
+			if(PlayerData.ParentGenderId == 1) // Male Parent
+				temp = "Papa";
+			else if(PlayerData.ParentGenderId == 2) // Female Parent
+				temp = "Mama";
+
+			return( _input.Replace("[Parent]", temp) );
+		}
+		return _input;
+	}
+
 	public void SetText(string _respond, Item _item = null, bool _status = false)
 	{
 		isActivated = true;
@@ -68,11 +84,10 @@ public class FeedTextFromObject : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
 			endOfRespond = false;
 			isActivated = true;
-			//text.color = defaultColor;
 			
 			if (moreThanOneLine) {
 				if( ind <= multipleResponds.Length-1)
-					text.text = multipleResponds [ind];
+					text.text = PostRespondProcessing( multipleResponds [ind] );
 			}
 		}
 
@@ -110,8 +125,6 @@ public class FeedTextFromObject : MonoBehaviour {
 
 		if ( (!isActivated) )
 			ResetTextFeed ();
-		 
-
 
 	}
 	
