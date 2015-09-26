@@ -31,7 +31,8 @@ public class GameController : MonoBehaviour {
 
 	public void loadLevel(int level) {
 		items = new Dictionary<string, Item> ();
-		foreach (Transform t in this.transform) {
+		GameObject itemList = GameObject.Find ("Items");
+		foreach (Transform t in itemList.transform) {
 			items.Add(t.name, (Item) t.gameObject.GetComponent("Item"));
 		}
 
@@ -46,7 +47,11 @@ public class GameController : MonoBehaviour {
 				continue;
 			}
 			Item item = items[itemState.id];
-			item.loadItemState(itemState);
+			if (itemState.type.Equals(Item.EVENT_TYPE)) {
+				item.loadEventItemState(itemState);
+			} else {
+				item.loadTransitionItemState(itemState);		
+			}
 		}
 	}
 
@@ -62,7 +67,9 @@ public class GameController : MonoBehaviour {
 		if (PlayerController.instance.AbleToTrigger(item)) {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
-			BroadcastMessage("ItemTriggered", item);
+			foreach(KeyValuePair<string, Item> entry in items) {
+				entry.Value.ItemTriggered(item);
+			}
 		}
 	}
 

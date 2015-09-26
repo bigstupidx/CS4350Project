@@ -56,12 +56,16 @@ public class PlayerController : MonoBehaviour {
 
 	public void ItemTriggered(Item item) {
 		string itemId = item.itemId;
-		triggeredItems.Add(itemId);
-		validItems.Remove(itemId);
+		if (item.type.Equals (Item.EVENT_TYPE)) {
+			triggeredItems.Add(itemId);
+			validItems.Remove(itemId);
+			restrictedItems.Add(itemId);
+		}
+
 		foreach (string leadItemId in item.leadItems) {
 			validItems.Add(leadItemId);
 		}
-		restrictedItems.Add (itemId);
+
 		foreach (string restrictedItemId in item.restrictedItems) {
 			restrictedItems.Add(restrictedItemId);
 			validItems.Remove(restrictedItemId);
