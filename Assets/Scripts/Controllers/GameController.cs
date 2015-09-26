@@ -56,7 +56,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver(EndingType endingType) {
-		Application.LoadLevel ("EndingScene");
+		LevelHandler.Instance.LoadSpecific ("EndingScene");
+		//Application.LoadLevel ("EndingScene");
 	}
 
 	public void TriggerItem(string itemId) {
