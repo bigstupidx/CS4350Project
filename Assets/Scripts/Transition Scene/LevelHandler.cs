@@ -29,10 +29,10 @@ public class LevelHandler: MonoBehaviour{
 	}
 	
 	private IEnumerator FadeToClear(){
-		Debug.Log ("i am fading to clear");
+		//Debug.Log ("i am fading to clear");
 		overlay.gameObject.SetActive(true);
 		overlay.color = Color.black;
-		Debug.Log ("color for fading to clear" + overlay.color);
+		//Debug.Log ("color for fading to clear" + overlay.color);
 		float rate = 1.0f/fadeTime;
 		
 		float progress = 0.0f;
@@ -70,7 +70,7 @@ public class LevelHandler: MonoBehaviour{
 		}
 		
 		overlay.color = Color.black;
-		Debug.Log (overlay.color);
+		//Debug.Log (overlay.color);
 		//overlay.gameObject.SetActive (false);
 	    levelMethod();
 	}

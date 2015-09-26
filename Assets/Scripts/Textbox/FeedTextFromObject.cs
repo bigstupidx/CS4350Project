@@ -104,7 +104,7 @@ public class FeedTextFromObject : MonoBehaviour {
 				multipleResponds = _respond.Split ('\\');
 				ind = 0;
 			} else {
-				text.text = _respond;
+				text.text = PostRespondProcessing(_respond);
 				moreThanOneLine = false;
 				ind = 0;
 			}
@@ -121,10 +121,11 @@ public class FeedTextFromObject : MonoBehaviour {
 		// change text set when multiple lines of responds is detected
 		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
 			endOfRespond = false;
-			isActivated = true;
+			//isActivated = true;
 			
 			if (moreThanOneLine) {
-				if( ind <= multipleResponds.Length-1)
+				Debug.Log("Display Multiple Lines. curr index: " + ind);
+				if( ind < multipleResponds.Length)
 					text.text = PostRespondProcessing( multipleResponds [ind] );
 			}
 		}

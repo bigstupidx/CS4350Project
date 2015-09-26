@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
 	public void Awake() {
 		instance = this;
 		DontDestroyOnLoad (this);
-		timeSinceGameStart = Time.deltaTime;
+		timeSinceGameStart = Time.time;
 	}
 
 	public float GetTime(){
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour {
 
 	public Item GetItem(string itemId) {
 		Item item;
-		Debug.Log (this.items);
+//		Debug.Log (this.items);
 		bool hasItem = this.items.TryGetValue(itemId, out item);
 		if (hasItem) {
 			return item;

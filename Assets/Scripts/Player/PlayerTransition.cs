@@ -7,7 +7,7 @@ public class PlayerTransition : MonoBehaviour {
 		switch (other.name) {
 			case "Ground":
 				{
-					Debug.Log("I am going to Ground");
+					//Debug.Log("I am going to Ground");
 					//Application.LoadLevel("GroundGameScene");
 					//LevelHandler.Instance.LoadSpecific ("GroundGameScene");
 					LevelHandler.Instance.LoadSpecific ("Testing_scene_1");
@@ -16,7 +16,7 @@ public class PlayerTransition : MonoBehaviour {
 			case "Platform":
 				{
 					//Application.LoadLevel ("PlatformGameScene");
-					LevelHandler.Instance.LoadSpecific ("Testing_scene");
+					LevelHandler.Instance.LoadSpecific ("PlatformGameScene");
 					break;
 				}
 			case "Sewage":
