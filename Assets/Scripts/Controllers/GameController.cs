@@ -6,11 +6,17 @@ using LitJson;
 public class GameController : MonoBehaviour {
 
 	static public GameController instance;
+	private float timeSinceGameStart;
 
 	private Dictionary<string, Item> items;
 
 	public void Awake() {
 		instance = this;
+		timeSinceGameStart = Time.deltaTime;
+	}
+
+	public float GetTime(){
+		return timeSinceGameStart;
 	}
 
 	public void Start() {
@@ -73,7 +79,8 @@ public class GameController : MonoBehaviour {
 	private List<string> getInitialItems() {
 		List<string> initialItems = new List<string>();
 		foreach (KeyValuePair<string, Item> entry in items) {
-			if (entry.Value.requiredItems.Length == 0) {
+			Item item = entry.Value;
+			if (item.itemId != null && item.itemId.Length > 0 && item.requiredItems.Length == 0) {
 				initialItems.Add(entry.Value.itemId);
 			}
 		}

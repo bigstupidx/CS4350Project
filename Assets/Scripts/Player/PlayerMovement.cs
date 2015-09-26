@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Awake ()
 	{
+
 		// Create a layer mask for the floor layer.
 		floorMask = LayerMask.GetMask ("Floor");
 		
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidbody = GetComponent<Rigidbody> ();
 
 		// Load Sprite
-		sprites = new Sprite[walkFrames*4+idleFrames+repeatedFrameTimes];
+		sprites = new Sprite[walkFrames*4+idleFrames];
 
         string pieceName = "walk" + PlayerData.GenderId;
 
@@ -92,8 +93,10 @@ public class PlayerMovement : MonoBehaviour
 
 	
 		spriteRenderer.sprite = sprites[currDirection + currFrame];
-	
 
+
+
+	
 
 	}
 	public void MouseOverButton(){
@@ -113,9 +116,17 @@ public class PlayerMovement : MonoBehaviour
 		return currDirection;
 	}
 
+	public void ForceIdle(){
+		StopMoving ();
+		currDirection = downCnst;
+		currFrame = 0;
+		idleTime = timeBeforeIdle;
+	}
+
 	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
+
 		// Check mouse input
 		if (Input.GetKeyDown (KeyCode.Mouse0)&& PlayerData.MoveFlag && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
