@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Awake() {
 		instance = this;
+		DontDestroyOnLoad (this.gameObject);
 		idleTimer = Time.time;
 	}
 
