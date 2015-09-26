@@ -6,11 +6,17 @@ using LitJson;
 public class GameController : MonoBehaviour {
 
 	static public GameController instance;
+	private float timeSinceGameStart;
 
 	private Dictionary<string, Item> items;
 
 	public void Awake() {
 		instance = this;
+		timeSinceGameStart = Time.deltaTime;
+	}
+
+	public float GetTime(){
+		return timeSinceGameStart;
 	}
 
 	public void Start() {

@@ -7,12 +7,10 @@ public class TimeCounter : MonoBehaviour {
 	int hour;
 	int minutes;
 	int seconds;
-	float startTime;
 
 	Text time;
 	// Use this for initialization
-	void Start () {
-		startTime = Time.time;
+	void Awake () {
 		time = gameObject.GetComponent<Text> ();
 		time.text = "00:00:00:00";
 	}
@@ -20,7 +18,7 @@ public class TimeCounter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		float curr = Time.time - startTime;
+		float curr = Time.time - GameController.instance.GetTime ();
 		hour = (int)curr / 3600;
 		minutes = (int)curr / 60;
 		seconds = (int)curr % 60;
