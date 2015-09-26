@@ -3,16 +3,15 @@ using System.Collections;
 
 public class Visualfeedback : MonoBehaviour {
 	
-	Component halo;
 	bool isTrigger = false;
 	private string colliderName = null;
 	private GameObject player;
+	private GameObject model;
 	
 	// Use this for initialization
 	void Start () {
-		halo = GetComponent ("Halo");
-		halo.GetType().GetProperty("enabled").SetValue(halo, false, null);
 		player = GameObject.FindGameObjectWithTag ("Player");
+		transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0f);
 	}
 
 	
@@ -27,22 +26,21 @@ public class Visualfeedback : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		//to test the shader
 		if (isTrigger) {
-			//Debug.Log (colliderName);
 			Item curr = GameController.instance.GetItem (colliderName);
 			bool status = PlayerController.instance.AbleToTrigger (curr);
 			
 			//Debug.Log ("status + " + status);
 
-			//player.GetComponent<Displaytextbox> ().currentObject = null;
-			if (status) {
-				halo.GetType ().GetProperty ("enabled").SetValue (halo, true, null);
-				//player.GetComponent<Displaytextbox> ().currentObject = this.gameObject;
+			if (status) {//if it is interactable
+				transform.GetComponentInChildren<Renderer>().material.SetFloat("_Outline", 0.005f);
 			} else {
-				halo.GetType ().GetProperty ("enabled").SetValue (halo, false, null);
+				transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0.00f);
 			}
 		} else {
-				halo.GetType ().GetProperty ("enabled").SetValue (halo, false, null);
+				transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0.00f);
 		}
 	}	
 
