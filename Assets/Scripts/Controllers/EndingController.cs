@@ -20,7 +20,7 @@ public class EndingController : MonoBehaviour {
 
 	public void Awake() {
 		instance = this;
-		DontDestroyOnLoad (this);
+		DontDestroyOnLoad (this.gameObject);
 	}
 
 	public void Init() {
