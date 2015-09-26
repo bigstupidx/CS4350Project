@@ -4,7 +4,7 @@
 		"restrictedItems":[],
 		"requiredItems":[],
 		"leadItems":["Train_Officer_A"],
-		"eventDialogue":["Hiks Hiks..... \\I think i'm lost. \\#X where are you? \\I'm scared..... \\Maybe i should talk to a train officer. \\Maybe he can help me. "],
+		"eventDialogue":["#he /she # Hiks Hiks..... \\I think i'm lost. \\#X where are you? \\I'm scared..... \\Maybe i should talk to a train officer. \\Maybe he can help me. "],
 		"defaultDialogue":["This is just a normal bench.", "There is nothing here"],
 		"idleDialogue":["Hiks Hiks..... \\Mummy \\I'm Lost \\I'm tired"],
 		"endingPoints":[1, 0, 0, 0, 0],

@@ -43,7 +43,8 @@ public class FeedTextFromObject : MonoBehaviour {
 
 	private string PostRespondProcessing(string _input)
 	{
-		if( _input.Contains("[Parent]") )
+		string returnRespond = _input;
+		if( returnRespond.Contains("[Parent]") )
 		{
 			Debug.Log("Parent!");
 			string temp = "";
@@ -52,9 +53,16 @@ public class FeedTextFromObject : MonoBehaviour {
 			else if(PlayerData.ParentGenderId == 2) // Female Parent
 				temp = "Mama";
 
-			return( _input.Replace("[Parent]", temp) );
+			returnRespond = returnRespond.Replace("[Parent]", temp);
 		}
-		return _input;
+
+		if( returnRespond.Contains("#") )
+		{
+			Debug.Log("Found!: " + returnRespond.IndexOf("#") );
+			
+			//return( _input.Replace("[Parent]", temp) );
+		}
+		return returnRespond;
 	}
 
 	public void SetText(string _respond, Item _item = null, bool _status = false)
