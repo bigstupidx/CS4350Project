@@ -8,7 +8,7 @@ using LitJson;
 public class JsonReader : MonoBehaviour {
 
 	static public ItemState[] readItemsState() {
-		TextAsset itemAsset = Resources.Load ("items") as TextAsset;
+		TextAsset itemAsset = Resources.Load ("data") as TextAsset;
 		string jsonString = itemAsset.text;
 		return JsonMapper.ToObject<ItemState[]>(jsonString);
 	}
