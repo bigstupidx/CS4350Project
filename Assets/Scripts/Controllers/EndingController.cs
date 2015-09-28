@@ -20,6 +20,7 @@ public class EndingController : MonoBehaviour {
 
 	public void Awake() {
 		instance = this;
+		DontDestroyOnLoad (this);
 	}
 
 	public void Init() {
@@ -27,6 +28,9 @@ public class EndingController : MonoBehaviour {
 	}
 
 	public void ItemTriggered(Item item) {
+		if (item.type.Equals (Item.TRANSITION_TYPE)) {
+			return;
+		}
 		for (int i = 0; i < endings.Length; i++) {
 			if (i < item.endingPoints.Length) {
 				endings[i] += item.endingPoints[i];

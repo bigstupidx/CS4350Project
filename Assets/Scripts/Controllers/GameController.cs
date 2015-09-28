@@ -12,7 +12,8 @@ public class GameController : MonoBehaviour {
 
 	public void Awake() {
 		instance = this;
-		timeSinceGameStart = Time.deltaTime;
+		DontDestroyOnLoad (this);
+		timeSinceGameStart = Time.time;
 	}
 
 	public float GetTime(){
@@ -22,36 +23,41 @@ public class GameController : MonoBehaviour {
 	public void Start() {
 		GameController.instance.Init ();
 		EndingController.instance.Init ();
-		PlayerController.instance.Init (this.getInitialItems());
+		PlayerController.instance.Init ();
 	}
 
 	public void Init() {
-		this.loadLevel(0);
+	
 	}
 
-	public void loadLevel(int level) {
-		items = new Dictionary<string, Item> ();
-		foreach (Transform t in this.transform) {
+	public void InitializeLevel() {
+		this.items = new Dictionary<string, Item> ();
+		GameObject itemList = GameObject.Find ("Items");
+		foreach (Transform t in itemList.transform) {
 			items.Add(t.name, (Item) t.gameObject.GetComponent("Item"));
 		}
-
 		ItemState[] itemsState = JsonReader.readItemsState();
+		List<string> noReqItems = new List<string> ();
 		foreach (ItemState itemState in itemsState) {
-			if (itemState.level != -1) {
-				if (itemState.level != level) {
-					continue;
-				}
-			}
 			if (!items.ContainsKey(itemState.id)) {
 				continue;
 			}
+			if (itemState.requiredItems.Length == 0) {
+				noReqItems.Add(itemState.id);
+			}
 			Item item = items[itemState.id];
-			item.loadItemState(itemState);
+			if (itemState.type.Equals(Item.EVENT_TYPE)) {
+				item.loadEventItemState(itemState);
+			} else {
+				item.loadTransitionItemState(itemState);		
+			}
 		}
+		PlayerController.instance.AddInitialItems (noReqItems);
 	}
 
 	public void GameOver(EndingType endingType) {
-		Debug.Log ("Game Over");
+		LevelHandler.Instance.LoadSpecific ("EndingScene");
+		//Application.LoadLevel ("EndingScene");
 	}
 
 	public void TriggerItem(string itemId) {
@@ -62,28 +68,20 @@ public class GameController : MonoBehaviour {
 		if (PlayerController.instance.AbleToTrigger(item)) {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
-			BroadcastMessage("ItemTriggered", item);
+			foreach(KeyValuePair<string, Item> entry in items) {
+				entry.Value.ItemTriggered(item);
+			}
 		}
 	}
 
 	public Item GetItem(string itemId) {
 		Item item;
-		bool hasItem = items.TryGetValue(itemId, out item);
+//		Debug.Log (this.items);
+		bool hasItem = this.items.TryGetValue(itemId, out item);
 		if (hasItem) {
 			return item;
 		}
 
 		return null;
-	}
-
-	private List<string> getInitialItems() {
-		List<string> initialItems = new List<string>();
-		foreach (KeyValuePair<string, Item> entry in items) {
-			Item item = entry.Value;
-			if (item.itemId != null && item.itemId.Length > 0 && item.requiredItems.Length == 0) {
-				initialItems.Add(entry.Value.itemId);
-			}
-		}
-		return initialItems;
 	}
 }

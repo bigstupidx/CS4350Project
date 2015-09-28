@@ -12,8 +12,8 @@ public class FeedTextFromObject : MonoBehaviour {
 	public string[] multipleResponds;
 	private Color defaultColor;
 
-	private Item targetItem;
-	private bool targetStatus;
+	public Item targetItem;
+	public bool targetStatus;
 
 	private Text text;
 	private float alpha = 1.0f;
@@ -41,6 +41,60 @@ public class FeedTextFromObject : MonoBehaviour {
 		moreThanOneLine = _newValue;
 	}
 
+	private string PostRespondProcessing(string _input)
+	{
+		string returnRespond = _input;
+		if( returnRespond.Contains("[Parent]") )
+		{
+			Debug.Log("Parent!");
+			string temp = "";
+			if(PlayerData.ParentGenderId == 1) // Male Parent
+				temp = "Papa";
+			else if(PlayerData.ParentGenderId == 2) // Female Parent
+				temp = "Mama";
+
+			returnRespond = returnRespond.Replace("[Parent]", temp);
+		}
+
+		if( returnRespond.Contains("#") )
+		{
+			int length = returnRespond.LastIndexOf("#") - returnRespond.IndexOf("#");
+			string temp = returnRespond.Substring(returnRespond.IndexOf("#")+1, length-1);
+			string[] selection = temp.Split('/');
+
+			string target = "#";
+			target += temp;
+			target += "#";
+
+			if( PlayerData.GenderId == 1)
+			{
+				returnRespond = returnRespond.Replace(target, selection[0]);
+			}
+			else
+				returnRespond = returnRespond.Replace(target, selection[1]);
+		}
+
+		if( returnRespond.Contains("%") )
+		{
+			int length = returnRespond.LastIndexOf("%") - returnRespond.IndexOf("%");
+			string temp = returnRespond.Substring(returnRespond.IndexOf("%")+1, length-1);
+			string[] selection = temp.Split('/');
+			
+			string target = "%";
+			target += temp;
+			target += "%";
+			
+			if( PlayerData.GenderId == 1)
+			{
+				returnRespond = returnRespond.Replace(target, selection[0]);
+			}
+			else
+				returnRespond = returnRespond.Replace(target, selection[1]);
+		}
+
+		return returnRespond;
+	}
+
 	public void SetText(string _respond, Item _item = null, bool _status = false)
 	{
 		isActivated = true;
@@ -50,7 +104,7 @@ public class FeedTextFromObject : MonoBehaviour {
 				multipleResponds = _respond.Split ('\\');
 				ind = 0;
 			} else {
-				text.text = _respond;
+				text.text = PostRespondProcessing(_respond);
 				moreThanOneLine = false;
 				ind = 0;
 			}
@@ -67,12 +121,12 @@ public class FeedTextFromObject : MonoBehaviour {
 		// change text set when multiple lines of responds is detected
 		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
 			endOfRespond = false;
-			isActivated = true;
-			//text.color = defaultColor;
+			//isActivated = true;
 			
 			if (moreThanOneLine) {
-				if( ind <= multipleResponds.Length-1)
-					text.text = multipleResponds [ind];
+				Debug.Log("Display Multiple Lines. curr index: " + ind);
+				if( ind < multipleResponds.Length)
+					text.text = PostRespondProcessing( multipleResponds [ind] );
 			}
 		}
 
@@ -94,14 +148,16 @@ public class FeedTextFromObject : MonoBehaviour {
 	void LateUpdate()
 	{
 		if (textBox.isFadingOn) {
-			string temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName;
+			//string temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName;
 			
-			if( temp.Length > 0 ){
+			//if( temp.Length > 0 ){
 				if(targetItem != null &&  targetStatus )
 				{
 					GameController.instance.TriggerItem(targetItem.itemId);
+					targetItem = null;
+					targetStatus = false;
 				}
-			}
+			//}
 		}
 		
 		// guard to reset multipleResponds
@@ -110,8 +166,6 @@ public class FeedTextFromObject : MonoBehaviour {
 
 		if ( (!isActivated) )
 			ResetTextFeed ();
-		 
-
 
 	}
 	

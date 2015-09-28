@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerData : MonoBehaviour {
     public const string PlayerSpriteFilenameStart = "Sprites/PlayerSprites/spr_";
 
-
-    public static int GenderId = 2;
+	public static int ParentGenderId = 1; // 1: Male, 2: Female
+    public static int GenderId = 2; // 1: Boy, 2: Girl
     public static int HairId = 4;
 	public static bool MoveFlag = true;
 	public static int nearestObjectId = -1;

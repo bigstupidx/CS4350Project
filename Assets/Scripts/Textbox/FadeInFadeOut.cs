@@ -9,7 +9,7 @@ public class FadeInFadeOut : MonoBehaviour {
 	public float alpha;
 
 	private Color defaultColor;
-	private float fadeSpeed = 0.0f;
+	private float fadeSpeed = 0.7f;
 
 	private FeedTextFromObject feedText;
 
@@ -18,7 +18,7 @@ public class FadeInFadeOut : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
-		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 1.0f);//gameObject.GetComponent<Image> ().color;
+		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 1.0f);
 		gameObject.GetComponent<Image>().color = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 0.0f);
 		alpha = 0.0f;
 		isActivated = false;
@@ -31,14 +31,6 @@ public class FadeInFadeOut : MonoBehaviour {
 		button.SetActive (true);
 		isFadingOn = _fadingOption;
 		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1.0f);
-
-		int wordCount = transform.GetComponentInChildren<Text>().text.Length;
-		fadeSpeed = 0.60f;
-		
-		if(wordCount >= 10 && wordCount <= 20)
-			fadeSpeed = 0.5f;
-		else if( wordCount >= 20 )
-			fadeSpeed = 0.4f;
 	}
 
 	public bool getStatus()
@@ -55,7 +47,7 @@ public class FadeInFadeOut : MonoBehaviour {
 	void Update () {
 
 		if (isActivated) {
-			if(!isFadingOn)
+			if(!isFadingOn) // fading is OFF
 			{
 				PlayerData.MoveFlag = false;
 			}
@@ -67,10 +59,14 @@ public class FadeInFadeOut : MonoBehaviour {
 				feedText.setAlpha(alpha);
 				PlayerData.MoveFlag = true;
 			}
+		}
+	}
 
-			if (gameObject.GetComponent<Image> ().color.a <= 0.0f) {
-				isActivated = false;
-			}
+	void LateUpdate()
+	{
+		if (gameObject.GetComponent<Image> ().color.a <= 0.0f) {
+			isActivated = false;
+			isFadingOn = false;
 		}
 	}
 }
