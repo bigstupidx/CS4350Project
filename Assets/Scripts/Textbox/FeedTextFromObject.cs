@@ -147,6 +147,7 @@ public class FeedTextFromObject : MonoBehaviour {
 		if (textBox.isFadingOn) {
 				if(targetItem != null &&  targetStatus )
 				{
+					Debug.Log("Enter");
 					GameController.instance.TriggerItem(targetItem.itemId);
 					Debug.Log("Over");
 					targetStatus = false;	
