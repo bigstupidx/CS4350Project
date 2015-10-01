@@ -47,18 +47,11 @@ public class RoleFading : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.Translate ( 30.0f * Vector3.right * Time.deltaTime);
-		Debug.Log(transform.position.x);
+
 		float timeDiff = Time.time - startTime; 
 		if ((timeDiff) > 6.0f) {
-			//reference.SetActive(true);
 			myText.text = texts [1];
-
 			startTime = Time.time;
-			//FadeIn(true);
-
-
-		
-
 		} else if ((timeDiff) > 4.0f) {
 			FadeIn(false);
 		} else if ((timeDiff) > 2.0f) {

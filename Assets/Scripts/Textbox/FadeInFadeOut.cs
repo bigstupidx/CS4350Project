@@ -18,7 +18,7 @@ public class FadeInFadeOut : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
-		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 1.0f);
+		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 0.8f);
 		gameObject.GetComponent<Image>().color = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), 0.0f);
 		alpha = 0.0f;
 		isActivated = false;
@@ -30,7 +30,7 @@ public class FadeInFadeOut : MonoBehaviour {
 		isActivated = true;
 		button.SetActive (true);
 		isFadingOn = _fadingOption;
-		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1.0f);
+		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.8f);
 	}
 
 	public bool getStatus()
