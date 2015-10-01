@@ -12,7 +12,7 @@ public class TimeCounter : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		time = gameObject.GetComponent<Text> ();
-		time.text = "00:00:00:00";
+		time.text = "00:00:00";
 	}
 	
 	// Update is called once per frame
