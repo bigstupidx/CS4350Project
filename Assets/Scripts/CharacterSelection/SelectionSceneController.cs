@@ -35,40 +35,51 @@ public class SelectionSceneController : MonoBehaviour {
 			f5.MoveTo (new Vector3 (1.0f, 0.5f, -0.2f));
 			f6.MoveTo (new Vector3 (1.9f, 0.5f, -0.2f));
 		} else if (stage == 1) {
-			// Move to one line
-			if (!m1.IsMoving ())
-				m1.FaceFront ();
-			if (!m2.IsMoving ())
-				m2.FaceFront ();
-			if (!m3.IsMoving ())
-				m3.FaceFront ();
-			if (!f4.IsMoving ())
-				f4.FaceFront ();
-			if (!f5.IsMoving ())
-				f5.FaceFront ();
-			if (!f6.IsMoving ())
-				f6.FaceFront ();
 
-			if (!m1.IsMoving () && !m2.IsMoving () && !m3.IsMoving () && !f4.IsMoving () && !f5.IsMoving () && !f6.IsMoving ()) {
+
+
+            // Move to one line
+            if (!m1.IsMoving())
+                m1.FaceFront();
+            if (!m2.IsMoving())
+                m2.FaceFront();
+            if (!m3.IsMoving())
+                m3.FaceFront();
+            if (!f4.IsMoving())
+                f4.FaceFront();
+            if (!f5.IsMoving())
+                f5.FaceFront();
+            if (!f6.IsMoving())
+                f6.FaceFront();
+
+            if (!m1.IsMoving () && !m2.IsMoving () && !m3.IsMoving () && !f4.IsMoving () && !f5.IsMoving () && !f6.IsMoving ()) {
 				stage = 2;
 				// Stage 2 initialisation here
 				AmariSelection.selectionEnabled = true;
-			}
-		} else if (stage == 2) {
+                m1.FaceFront();
+                m2.FaceFront();
+                m3.FaceFront();
+                f4.FaceFront();
+                f5.FaceFront();
+                f6.FaceFront();
+            }
 
-			if (questionBox.anchoredPosition.y > 0) {
+        } else if (stage == 2) {
+
+            
+
+            if (questionBox.anchoredPosition.y > 0) {
 				questionBox.anchoredPosition = new Vector2 (questionBox.anchoredPosition.x, questionBox.anchoredPosition.y - (boxSpeedPerSec * Time.deltaTime));
 			}
 
 			if (AmariSelection.selectionDone) {
 				AmariSelection.selectionEnabled = false;
-				Application.LoadLevel("MainScene");
-				//AmariMovement selected = m1;
-				//switch(PlayerD
-
+				Application.LoadLevel("PlatformGameScene");
+				
+                // Find selected amari
 			}
 		} else if (stage == 3) {
-
+            // move selected amari to parent
 		}
 	}
 }

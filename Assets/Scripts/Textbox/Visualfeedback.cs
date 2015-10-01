@@ -5,12 +5,10 @@ public class Visualfeedback : MonoBehaviour {
 	
 	bool isTrigger = false;
 	private string colliderName = null;
-	private GameObject player;
 	private GameObject model;
 	
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
 		transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0f);
 	}
 
