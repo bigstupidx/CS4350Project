@@ -13,11 +13,14 @@ public class Item : MonoBehaviour {
 	public string[] requiredItems;
 	public string[] restrictedItems;
 	public string[] leadItems;
+	public string[] hideItems;
+	public string[] unhideItems;
 	public string[] eventDialogue;
 	public string[] defaultDialogue;
 	public string[] idleDialogue;
 	public int[] endingPoints;
 	public double[] offset;
+	public bool isInitiallyHidden;
 	
 
 	public void ItemTriggered(Item item) {
@@ -31,10 +34,13 @@ public class Item : MonoBehaviour {
 		requiredItems = state.requiredItems;
 		restrictedItems = state.restrictedItems;
 		leadItems = state.leadItems;
+		hideItems = state.hideItems;
+		unhideItems = state.unhideItems;
 		eventDialogue = state.eventDialogue;
 		defaultDialogue = state.defaultDialogue;
 		idleDialogue = state.idleDialogue;
 		endingPoints = state.endingPoints;
+		isInitiallyHidden = state.isInitiallyHidden;
 	}
 
 	public void loadTransitionItemState(ItemState state) {
@@ -66,11 +72,14 @@ public class ItemState {
 	public string[] requiredItems;
 	public string[] restrictedItems;
 	public string[] leadItems;
+	public string[] hideItems;
+	public string[] unhideItems;
 	public string[] eventDialogue;
 	public string[] defaultDialogue;
 	public string[] idleDialogue;
 	public int[] endingPoints;
 	public double[] offset;
+	public bool isInitiallyHidden;
 
 	public ItemState() {
 		type = Item.EVENT_TYPE;
@@ -78,9 +87,12 @@ public class ItemState {
 		requiredItems = new string[0];
 		restrictedItems = new string[0];
 		leadItems = new string[0];
+		hideItems = new string[0];
+		unhideItems = new string[0];
 		eventDialogue = new string[0];
 		defaultDialogue = new string[0];
 		endingPoints = new int[(int) EndingType.EndingCount];
 		offset = new double[2];
+		isInitiallyHidden = false;
 	}
 }

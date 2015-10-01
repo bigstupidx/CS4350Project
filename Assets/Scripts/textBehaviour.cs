@@ -15,8 +15,6 @@ public class textBehaviour : MonoBehaviour {
 		float currTime = Time.time - startTime;
 		Color temp = gameObject.GetComponent<Text> ().color;
 		if (currTime > 1.5f) {
-
-			pos
 			temp.a *= 0.5f;
 			gameObject.GetComponent<Text> ().color = temp;
 			

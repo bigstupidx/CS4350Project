@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	public List<string> triggeredItems;
 	public Dictionary<string, string> validItems;
 	public Dictionary<string, string> restrictedItems;
+	public Dictionary<string, string> hideItems;
+	public Dictionary<string, string> unhideItems;
 	public int currentLevel;
 
 	private float idleTimer;
@@ -27,7 +29,17 @@ public class PlayerController : MonoBehaviour {
 
 	public void AddInitialItems(List<string> initialItems) {
 		foreach (string itemId in initialItems) {
-			validItems.Add(itemId, "true");
+			if (!restrictedItems.ContainsKey(itemId)) {
+				validItems.Add(itemId, "true");
+			}
+		}
+	}
+
+	public void AddInitiallyHiddenItems(List<string> initialHiddenItems) {
+		foreach (string itemId in initialHiddenItems) {
+			if (!unhideItems.ContainsKey(itemId)) {
+				hideItems.Add(itemId, "true");
+			}
 		}
 	}
 
@@ -83,6 +95,14 @@ public class PlayerController : MonoBehaviour {
 			restrictedItems.Add(restrictedItemId, "true");
 			validItems.Remove(restrictedItemId);
 		}
+		foreach (string hideItemId in item.hideItems) {
+			hideItems.Add (hideItemId, "true");
+			unhideItems.Remove(hideItemId);
+		}
+		foreach (string unhideItemId in item.unhideItems) {
+			unhideItems.Add (unhideItemId, "true");
+			hideItems.Remove(unhideItemId);
+		}
 
 		idleTimer = Time.time;
 	}
@@ -107,11 +127,15 @@ public class PlayerState {
 	public List<string> triggeredItems;
 	public List<string> validItems;
 	public List<string> restrictedItems;
+	public List<string> hideItems;
+	public List<string> unhideItems;
 	public int currentLevel;
 
 	public PlayerState() {
 		triggeredItems = new List<string> ();
 		validItems = new List<string> ();
 		restrictedItems = new List<string> ();
+		hideItems = new List<string> ();
+		unhideItems = new List<string> ();
 	}
 }
