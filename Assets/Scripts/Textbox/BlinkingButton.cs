@@ -10,6 +10,7 @@ public class BlinkingButton : MonoBehaviour {
 
 	public List<Sprite> spriteSheet;
 	private int currFrame = 0;
+	private bool toggleNext = true;
 
 	//private Image spriteRenderer;	
 
@@ -38,7 +39,11 @@ public class BlinkingButton : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (currFrame < spriteLength) {
-			transform.GetComponent<Image> ().sprite = spriteSheet [currFrame++];
+			if(toggleNext)
+				currFrame++;
+
+				transform.GetComponent<Image> ().sprite = spriteSheet [currFrame];
+				toggleNext = !toggleNext;
 		} else {
 			currFrame = 0;
 		}
