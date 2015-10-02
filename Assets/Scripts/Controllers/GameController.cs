@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver(EndingType endingType) {
+		Debug.Log ("Game over");
 		LevelHandler.Instance.LoadSpecific ("EndingScene");
 		//Application.LoadLevel ("EndingScene");
 	}

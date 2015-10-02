@@ -38,7 +38,7 @@ public class BlinkingButton : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if (currFrame < spriteLength) {
+		if (currFrame < spriteLength-1) {
 			if(toggleNext)
 				currFrame++;
 
