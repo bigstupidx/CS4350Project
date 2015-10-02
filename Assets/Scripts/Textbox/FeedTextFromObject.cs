@@ -46,7 +46,6 @@ public class FeedTextFromObject : MonoBehaviour {
 		string returnRespond = _input;
 		if( returnRespond.Contains("[Parent]") )
 		{
-			Debug.Log("Parent!");
 			string temp = "";
 			if(PlayerData.ParentGenderId == 1) // Male Parent
 				temp = "Papa";
@@ -121,10 +120,8 @@ public class FeedTextFromObject : MonoBehaviour {
 		// change text set when multiple lines of responds is detected
 		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
 			endOfRespond = false;
-			//isActivated = true;
 			
 			if (moreThanOneLine) {
-				Debug.Log("Display Multiple Lines. curr index: " + ind);
 				if( ind < multipleResponds.Length)
 					text.text = PostRespondProcessing( multipleResponds [ind] );
 			}
@@ -148,16 +145,15 @@ public class FeedTextFromObject : MonoBehaviour {
 	void LateUpdate()
 	{
 		if (textBox.isFadingOn) {
-			//string temp = GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName;
-			
-			//if( temp.Length > 0 ){
 				if(targetItem != null &&  targetStatus )
 				{
+					Debug.Log("Enter");
 					GameController.instance.TriggerItem(targetItem.itemId);
+					Debug.Log("Over");
+					targetStatus = false;	
 					targetItem = null;
-					targetStatus = false;
+					
 				}
-			//}
 		}
 		
 		// guard to reset multipleResponds

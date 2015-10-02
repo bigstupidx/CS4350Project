@@ -40,7 +40,6 @@ public class Displaytextbox : MonoBehaviour {
 					else if(PlayerData.ParentGenderId == 2) // Female Parent
 						feedText.SetText ("Mama?");
 					textBox.TurnOnTextbox( false ); // means do not fade out
-					Debug.Log("Done Feeding: out of no where");
 				}
 
 				else //  player near to interactable object
@@ -59,24 +58,20 @@ public class Displaytextbox : MonoBehaviour {
 			else{	// textbox fed already
 				if( feedText.getIsMoreThanOneLine() ){		// respond more than 1 line
 					feedText.ind++;
-					Debug.Log("More than one line!! Incremented to " + feedText.ind);
 					if(feedText.ind == feedText.multipleResponds.Length)
 					{
 						textBox.TurnOnTextbox( true ); // fade out
 						//PlayerData.MoveFlag = true;	// ENABLE player move
-						Debug.Log("Exceed array bound. Fading ON");
 					}
 					else if(feedText.ind < feedText.multipleResponds.Length){
-						transform.GetComponent <PlayerMovement>().StopMoving ();//PlayerData.MoveFlag = false;	// disable player move
+						transform.GetComponent <PlayerMovement>().StopMoving ();
 						textBox.TurnOnTextbox( false ); // means do not fade out
-						Debug.Log("Less than array bound. Fading OFF");
 					}
 				}
 				else {		// respond ONLY have 1 line
 					if( !textBox.isFadingOn ){
 						textBox.TurnOnTextbox( true );
 						PlayerData.MoveFlag = true;	// ENABLE player move
-						Debug.Log("Only one line. Fading ON");
 					}
 				}
 			}
