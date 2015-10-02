@@ -153,11 +153,10 @@ public class PlayerMovement : MonoBehaviour
 
 				float angle = newRotation.eulerAngles.y;
 
-				//Debug.Log(angle);
+                //Debug.Log(angle);
 
-
-				currTime = timePerFrame;
-				currFrame = 0;
+                int prevDirection = currDirection;
+				
 				// Right
 				if(angle>=225 && angle <= 315){
 					currDirection = leftConst;
@@ -174,7 +173,12 @@ public class PlayerMovement : MonoBehaviour
 				else{
 					currDirection = downCnst;
 				}
-				isWalking = true;
+                if (currDirection != prevDirection)
+                {
+                    currTime = timePerFrame;
+                    currFrame = 0;
+                }
+                isWalking = true;
 			}
 		}
 
