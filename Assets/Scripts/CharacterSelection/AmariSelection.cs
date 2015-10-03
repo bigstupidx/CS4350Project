@@ -21,7 +21,6 @@ public class AmariSelection : MonoBehaviour {
 	void OnMouseDown ()
 	{
 		if (selectionEnabled) {
-			Debug.Log (transform.name);
 
 			PlayerData.GenderId = gender;
 			PlayerData.HairId = hair;
