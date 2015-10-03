@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour {
 		triggeredItems = new List<string>();
 		validItems = new Dictionary<string, string> ();
 		restrictedItems = new Dictionary<string, string>();
+		hideItems = new Dictionary<string, string> ();
+		unhideItems = new Dictionary<string, string> ();
 	}
 
 	public void AddInitialItems(List<string> initialItems) {
 		foreach (string itemId in initialItems) {
-			if (!restrictedItems.ContainsKey(itemId)) {
+			if (!restrictedItems.ContainsKey(itemId) && !validItems.ContainsKey(itemId)) {
 				validItems.Add(itemId, "true");
 			}
 		}
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void AddInitiallyHiddenItems(List<string> initialHiddenItems) {
 		foreach (string itemId in initialHiddenItems) {
-			if (!unhideItems.ContainsKey(itemId)) {
+			if (!unhideItems.ContainsKey(itemId) && !hideItems.ContainsKey(itemId)) {
 				hideItems.Add(itemId, "true");
 			}
 		}
@@ -84,23 +86,33 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.EVENT_TYPE)) {
 			triggeredItems.Add(itemId);
 			validItems.Remove(itemId);
-			restrictedItems.Add(itemId, "true");
+			if (!restrictedItems.ContainsKey(itemId)) {
+				restrictedItems.Add(itemId, "true");
+			}
 		}
 
 		foreach (string leadItemId in item.leadItems) {
-			validItems.Add(leadItemId, "true");
+			if (!validItems.ContainsKey(leadItemId)) {
+				validItems.Add(leadItemId, "true");
+			}
 		}
 
 		foreach (string restrictedItemId in item.restrictedItems) {
-			restrictedItems.Add(restrictedItemId, "true");
+			if (!restrictedItems.ContainsKey(restrictedItemId)) {
+				restrictedItems.Add(restrictedItemId, "true");
+			}
 			validItems.Remove(restrictedItemId);
 		}
 		foreach (string hideItemId in item.hideItems) {
-			hideItems.Add (hideItemId, "true");
+			if (!hideItems.ContainsKey(hideItemId)) {
+				hideItems.Add (hideItemId, "true");
+			}
 			unhideItems.Remove(hideItemId);
 		}
 		foreach (string unhideItemId in item.unhideItems) {
-			unhideItems.Add (unhideItemId, "true");
+			if (!unhideItems.ContainsKey(unhideItemId)) {
+				unhideItems.Add (unhideItemId, "true");
+			}
 			hideItems.Remove(unhideItemId);
 		}
 
