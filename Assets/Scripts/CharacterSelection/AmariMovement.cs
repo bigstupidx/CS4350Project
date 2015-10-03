@@ -4,22 +4,22 @@ using System.Collections;
 public class AmariMovement : MonoBehaviour {
 
 	
-	public static float speed = 3f;            // The speed that the player will move at.
-	public static float closeToDestinationThreshold = 0.05f; // Player will stop moving when the distance from the destination is below this threshold
-	Vector3 destination;                   // The vector to store the direction of the player's movement.
+	public static float speed = 3f;            // The speed that Amaris will move at.
+	public static float closeToDestinationThreshold = 0.1f; // Amari will stop moving when the distance from the destination is below this threshold
+	Vector3 destination;                   // The vector to store the direction of the amari's movement.
 	
 	
-	Rigidbody myRigidbody;          // Reference to the player's rigidbody.
-	SpriteRenderer spriteRenderer;		// Reference to player's spriteRenderer
+	Rigidbody myRigidbody;          // Reference to the this amari's rigidbody.
+	SpriteRenderer spriteRenderer;		// Reference to this amari's spriteRenderer
 	
 	
 	
 	// Movement Controls
 	bool isWalking;
 	Vector3 lastMovement;
-	int noOfFramesNotMoving = 0;
-	int maxNoOfFramesNotMoving = 3;
-	float noMovementThreshold = 0.005f;
+	//int noOfFramesNotMoving = 0;
+	//int maxNoOfFramesNotMoving =3 ;
+	//float noMovementThreshold = 0.005f;
 	
 	// Sprite Frame Controls
 	const int walkFrames = 8;
@@ -92,7 +92,12 @@ public class AmariMovement : MonoBehaviour {
 		currDirection = downCnst;
 	}
 	
-	public int GetCurrDir(){
+    public void StopMoving()
+    {
+        isWalking = false;
+    }
+
+    public int GetCurrDir(){
 		return currDirection;
 	}
 
@@ -106,8 +111,8 @@ public class AmariMovement : MonoBehaviour {
 		currTime += Time.deltaTime;
 		// Check mouse input
 		if (moveToCalled) {
-
-				moveToCalled = false;
+                isWalking = true;
+                moveToCalled = false;
 				// Create a vector from the player to the point on the floor the raycast from the mouse hit.
 				Vector3 playerToMouse = destination - transform.position;
 				
@@ -142,7 +147,7 @@ public class AmariMovement : MonoBehaviour {
 				else{
 					currDirection = downCnst;
 				}
-				isWalking = true;
+				
 
 		}
 		
@@ -156,11 +161,11 @@ public class AmariMovement : MonoBehaviour {
 			
 			float moveDifference = lastMovement.magnitude - movement.magnitude;
 			
-			if(moveDifference < noMovementThreshold)
+			/*if(moveDifference < noMovementThreshold)
 				noOfFramesNotMoving++;
 			else
 				noOfFramesNotMoving = 0;
-			
+			*/
 			lastMovement = movement;
 			movement = movement.normalized * speed * Time.deltaTime;
 			myRigidbody.MovePosition (transform.position + movement);
@@ -169,14 +174,14 @@ public class AmariMovement : MonoBehaviour {
 			movement = destination - transform.position;
 			if(movement.magnitude <= closeToDestinationThreshold){
 				isWalking = false;
-				noOfFramesNotMoving = 0;
+				//noOfFramesNotMoving = 0;
 			}
 			
 			//End walk if stuck for too many frames
-			if(noOfFramesNotMoving > maxNoOfFramesNotMoving){
+		/*	if(noOfFramesNotMoving > maxNoOfFramesNotMoving){
 				isWalking = false;
 				noOfFramesNotMoving = 0;
-			}
+			}*/
 		}
 
 		
