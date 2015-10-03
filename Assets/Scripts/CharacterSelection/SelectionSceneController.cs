@@ -28,7 +28,7 @@ public class SelectionSceneController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         teacherDialogue.SetActive(false);
-        AmariMovement.speed = 4.0f;
+        AmariMovement.speed = 3.5f;
         m1pt = 1;
         m2pt = 2;
         m3pt = 3;

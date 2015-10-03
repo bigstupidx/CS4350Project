@@ -4,7 +4,7 @@
 		"restrictedItems":[],
 		"requiredItems":[],
 		"leadItems":["ControlStation"],
-		"eventDialogue":["It says, T..something Station.. Exit..\\The arrow points down at the escalator."],
+		"eventDialogue":["The sign says..... 'Exit'!\\There is nobody around. Did [Parent] and everybody leave the station?"],
 		"defaultDialogue":["How do I read the station name..?", "Where is [Parent]?"],
 		"idleDialogue":["[Parent]! Where are you?"],
 		"endingPoints":[0, 0, 0, 0, 0],
