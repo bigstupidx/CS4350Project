@@ -17,8 +17,12 @@ public class PlayerController : MonoBehaviour {
 	private float idleTimer;
 
 	public void Awake() {
-		instance = this;
-		DontDestroyOnLoad (this);
+		if (instance == null) {
+			instance = this;
+			DontDestroyOnLoad (this);
+		} else {
+			DestroyImmediate(gameObject);
+		}
 		idleTimer = Time.time;
 	}
 

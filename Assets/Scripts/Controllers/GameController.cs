@@ -11,8 +11,12 @@ public class GameController : MonoBehaviour {
 	private Dictionary<string, Item> items;
 
 	public void Awake() {
-		instance = this;
-		DontDestroyOnLoad (this);
+		if (instance == null) {
+			instance = this;
+			DontDestroyOnLoad (this);
+		} else {
+			DestroyImmediate(gameObject);
+		}
 	}
 
 	public void SetStartTime()
