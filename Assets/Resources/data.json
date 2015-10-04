@@ -533,7 +533,21 @@
 		"isInitiallyHidden": false
 	},
 	{
-	  	"id": "Sewage",
+	  	"id": "SewageEntrance",
+	  	"type": "transition",
+	  	"restrictedItems": [ ],
+	    "requiredItems": [ ],
+	    "leadItems": [ ],
+	    "eventDialogue": [ ],
+	    "defaultDialogue": [ ],
+	    "idleDialogue": [ ],
+	    "endingPoints": [ 0, 0, 0, 0, 0 ],
+	    "offset": [-7.9, -0.12, 0.27],
+	  	"level": 1,
+	  	"nextLevel": 0
+  	},  
+  	{
+	  	"id": "SewageExit",
 	  	"type": "transition",
 	  	"restrictedItems": [ ],
 	    "requiredItems": [ ],
@@ -543,8 +557,8 @@
 	    "idleDialogue": [ ],
 	    "endingPoints": [ 0, 0, 0, 0, 0 ],
 	    "offset": [-2.71, 2.02, -48.66],
-	  	"level": 1,
-	  	"nextLevel": 0
+	  	"level": 0,
+	  	"nextLevel": 1
   	},  
   	{
 		"id": "GantryInside",
