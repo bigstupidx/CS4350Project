@@ -107,11 +107,13 @@ public class GameController : MonoBehaviour {
 		foreach (KeyValuePair<string, Item> entry in items) {
 			Item item = entry.Value;
 			if (PlayerController.instance.hideItems.ContainsKey(item.itemId)) {
-				item.enabled = false;
+				Debug.Log("Hide: " + item.itemId);
+				item.gameObject.SetActive(false);
 				continue;
 			}
 			if (PlayerController.instance.unhideItems.ContainsKey(item.itemId)) {
-				item.enabled = true;
+				Debug.Log("Unhide: " + item.itemId);
+				item.gameObject.SetActive(true);
 				continue;
 			}
 		}
