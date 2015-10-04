@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour {
 		PlayerController.instance.updatePlayerPositon ();
 		GameObject camera = GameObject.Find ("Main Camera");
 		CameraFollow followCamera = camera.GetComponent<CameraFollow> ();
+		Debug.Log (followCamera);
 		followCamera.switchOffset (PlayerController.instance.currentLevel);
 		updateItemsVisibility ();
 	}
@@ -102,7 +103,7 @@ public class GameController : MonoBehaviour {
 			} else if (nextLevel == 1) {
 				LevelHandler.Instance.LoadSpecific ("Testing_scene_1");
 			} else if (nextLevel == 0) {
-				LevelHandler.Instance.LoadSpecific ("Testing_scene_0");
+				LevelHandler.Instance.LoadSpecific ("BasementGameScene");
 			}
 		}
 	}
