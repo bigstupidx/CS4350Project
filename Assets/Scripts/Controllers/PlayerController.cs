@@ -142,9 +142,19 @@ public class PlayerController : MonoBehaviour {
 	public void displayHint()
 	{
 		List<string> items = new List<string> (validItems.Keys);
-		Item validItem = GameController.instance.GetItem( items[items.Count - 1] );
-		GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>().SetText(validItem.idleDialogue[0]);
-		GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().TurnOnTextbox(false);
+		Item validItem;
+
+		do {
+			int select = Random.Range(0, (items.Count) );
+			validItem = GameController.instance.GetItem (items [select]);
+		} while(validItem.type.Contains("transition") );
+
+		Debug.Log ("Chosen:" + validItem.name);
+		string respond = validItem.idleDialogue [0];
+		if (respond.Length > 0) {
+			GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
+			GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
+		}
 	}
 }
 
