@@ -4,7 +4,7 @@ using System.Collections;
 public class ModelRotate : MonoBehaviour {
 	public GameObject blackScreen;
 
-	public float[] angles = {0,20,40,60,80,100,120,140};
+	public float[] angles = { 0, 20, 40, 60, 80 };
 	int currAngle = 0;
 	public float displayTime = 5.0f;
 	public float blackOutTime = 0.05f;
@@ -22,7 +22,6 @@ public class ModelRotate : MonoBehaviour {
 		int i = 0;
 		foreach(Transform t in tArr){
 			if(!t.gameObject.Equals(transform.gameObject)&& t.name.Contains("obj")){
-				Debug.Log (t.name);
 				objTempArr[i] = t.gameObject;
 				objTempArr[i].SetActive(false);
 				i++;
@@ -32,7 +31,7 @@ public class ModelRotate : MonoBehaviour {
 		for (int j=0; j<i; j++) {
 			objArr[j] = objTempArr[j];
 		}
-		Debug.Log (objArr.Length);
+
 		SelectRandomObject ();
 	}
 
@@ -62,6 +61,7 @@ public class ModelRotate : MonoBehaviour {
 
 			while(oldAngle == currAngle)
 				currAngle = Random.Range(0, angles.Length-1);
+
 
 			transform.Rotate (Vector3.up *  -angles[oldAngle], Space.World);
 			transform.Rotate (Vector3.up * angles[currAngle], Space.World);
