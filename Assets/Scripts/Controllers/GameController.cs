@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour {
 	public void Awake() {
 		instance = this;
 		DontDestroyOnLoad (this);
+	}
+
+	public void SetStartTime()
+	{
 		timeSinceGameStart = Time.time;
 	}
 
