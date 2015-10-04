@@ -94,6 +94,7 @@ public class WheelMenuButton : MonoBehaviour {
                 {
                     Application.LoadLevel("CreditScene");
                 }
+                choice = -1;
 			}
 		}
 
