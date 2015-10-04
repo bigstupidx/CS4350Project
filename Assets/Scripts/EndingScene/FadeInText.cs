@@ -5,7 +5,7 @@ using System.Collections;
 public class FadeInText : MonoBehaviour {
 
 	private Text myText;
-	private float speed = 0.17f;
+	private float speed = 0.2f;
 	public GameObject reference;
 	// Use this for initialization
 	void Start () {
