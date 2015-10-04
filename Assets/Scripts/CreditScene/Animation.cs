@@ -13,8 +13,7 @@ public class Animation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//ground.SetActive (false);
-		//platform.SetActive (false);
+		platform.SetActive (false);
 		basement.SetActive (false);
 		startTime = Time.time;
 	}
@@ -22,10 +21,14 @@ public class Animation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		durationTime = Time.time - startTime;
-		if (durationTime > 41.0f && durationTime < 42.0f) {
+		if (durationTime > 4.0f && durationTime < 6.0f) {
+			platform.SetActive(true);
+		}
+		else if (durationTime > 41.0f && durationTime < 43.0f) {
+			basement.SetActive (true);
 			ground.SetActive (false);
 			platform.SetActive (false);
-			basement.SetActive (true);
+			Debug.Log("reach here");
 		}
 	}
 }
