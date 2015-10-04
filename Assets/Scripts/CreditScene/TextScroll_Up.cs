@@ -22,6 +22,8 @@ public class TextScroll_Up : MonoBehaviour {
 		header_temp = header.GetComponent<Image> ().color;
 		header_temp.a = 0.0f;
 		logo_temp.a = 0.0f;
+		text_temp.a = 0.0f;
+		text.GetComponent<Image> ().color = text_temp;
 		header.GetComponent<Image> ().color = header_temp;
 		logo.GetComponent<Image> ().color = logo_temp;
 		startTime = Time.time;
@@ -36,11 +38,16 @@ public class TextScroll_Up : MonoBehaviour {
 		} else if (duration > 6.0f && duration < 8.0f) {
 			header_temp.a += 1.0f * Time.deltaTime;
 			header.GetComponent<Image> ().color = header_temp;
+		} else if (duration > 8.0f && duration < 12.0f) {
+			text_temp.a += 1.0f * Time.deltaTime;
+			text.GetComponent<Image> ().color = text_temp;
 		} else if (duration > 12.0f && duration < 76.0f) {
 			transform.Translate (Vector3.up * 30.0f * Time.deltaTime);
 		} else if (duration > 78.0f && duration < 80.0f) {
 			text_temp.a -= 1.0f * Time.deltaTime;
 			text.GetComponent<Image> ().color = text_temp;
-		} 
+		} else if (duration > 82.0f) {
+			Application.LoadLevel("TitleScene");
+		}
 	}
 }
