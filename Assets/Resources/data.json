@@ -556,7 +556,7 @@
 	    "defaultDialogue": [ ],
 	    "idleDialogue": [ ],
 	    "endingPoints": [ 0, 0, 0, 0, 0 ],
-	    "offset": [-13.83128, 2.02, -37.29267],
+	    "offset": [-13.83128, 2.0, -37.29267],
 	  	"level": 0,
 	  	"nextLevel": 1
   	},  
@@ -572,7 +572,7 @@
 		"endingPoints": [ 0, 0, 0, 0, 0 ],
 		"level": 1,
 		"nextLevel": 1,
-		"offset": [9.56, 3.06, -19.0],
+		"offset": [9.56, 2.0, -19.0],
 		"hideItems": [],
 		"unhideItems":[],
 		"isInitiallyHidden": false
@@ -589,7 +589,7 @@
 		"endingPoints": [ 0, 0, 0, 0, 0 ],
 		"level": 1,
 		"nextLevel": 1,
-		"offset": [9.56, 3.06, -27],
+		"offset": [9.56, 2.0, -27],
 		"hideItems": [],
 		"unhideItems":[],
 		"isInitiallyHidden": false
@@ -604,7 +604,7 @@
 	    "defaultDialogue": [ ],
 	    "idleDialogue": [ ],
 	    "endingPoints": [ 0, 0, 0, 0, 0 ],
-	    "offset": [-2.71, 2.02, -48.66],
+	    "offset": [-2.71, 2.0, -48.66],
 	  	"level": 2,
 	  	"nextLevel": 1
   	},
