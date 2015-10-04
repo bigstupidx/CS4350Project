@@ -41,7 +41,7 @@ public class WheelMenuButton : MonoBehaviour {
 			choice = myID;
 
 
-			if(choice == 1){
+			if(choice == 1 || choice == 2){
 				// set black screen to begin fading
 				blackScreen.enabled = true;
 				Color tempColor = blackScreen.color;
@@ -92,6 +92,11 @@ public class WheelMenuButton : MonoBehaviour {
 				} else if(choice == 2) {
 					Application.LoadLevel("CreditScene");
 				}
+                else if(choice == 2)
+                {
+                    Application.LoadLevel("CreditScene");
+                }
+                choice = -1;
 			}
 		}
 

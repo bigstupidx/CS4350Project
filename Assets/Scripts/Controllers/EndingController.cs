@@ -19,8 +19,12 @@ public class EndingController : MonoBehaviour {
 	int[] endings;
 
 	public void Awake() {
-		instance = this;
-		DontDestroyOnLoad (this);
+		if (instance == null) {
+			instance = this;
+			DontDestroyOnLoad (this);
+		} else {
+			DestroyImmediate(gameObject);
+		}
 	}
 
 	public void Init() {
