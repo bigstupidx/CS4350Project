@@ -13,7 +13,8 @@ public class SelectionSceneController : MonoBehaviour {
 	public AmariMovement f5;
 	public AmariMovement f6;
 	public RectTransform questionBox;
-    public GameObject teacherDialogue;
+    public GameObject teacherDialogue1;
+	public GameObject teacherDialogue2;
     public RawImage blackScreenImage;
 
     float timer = 0.0f;
@@ -27,7 +28,8 @@ public class SelectionSceneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        teacherDialogue.SetActive(false);
+        teacherDialogue1.SetActive(true);
+		teacherDialogue2.SetActive(false);
         AmariMovement.speed = 3.5f;
         m1pt = 1;
         m2pt = 2;
@@ -38,22 +40,20 @@ public class SelectionSceneController : MonoBehaviour {
 
         blackScreenImage.color = Color.black;
 
-        parent.MoveTo(new Vector3(-2.0f,0.7f,-3.5f));
-        teacher.MoveTo(new Vector3(-2.6f, 0.7f, -3.2f));
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
         if (stage == 0) {
 
-
+			timer += Time.deltaTime;
             // Black screen Fade Out
             Color tempColor = blackScreenImage.color;
             tempColor.a = Mathf.Max(0.0f, tempColor.a - alphaChgPerSec * Time.deltaTime);
             blackScreenImage.color = tempColor;
 
 
-            if (!teacher.IsMoving())
+            if (timer >= 4.0f)
             {
                 m1.FaceFront();
                 m2.FaceFront();
@@ -75,9 +75,10 @@ public class SelectionSceneController : MonoBehaviour {
                 f4.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f5.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f6.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
-                teacherDialogue.SetActive(true);
-
+                teacherDialogue1.SetActive(false);
+				teacherDialogue2.SetActive(true);
                 stage = 1;
+				timer=0.0f;
                 
             }
             else
@@ -178,7 +179,7 @@ public class SelectionSceneController : MonoBehaviour {
                 f4.FaceFront();
                 f5.FaceFront();
                 f6.FaceFront();
-                teacherDialogue.SetActive(false);
+                teacherDialogue2.SetActive(false);
             }
 
         } else if (stage == 3) {
