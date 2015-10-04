@@ -89,6 +89,8 @@ public class WheelMenuButton : MonoBehaviour {
 			if(blackScreen.color.a >= 1.0f && choice != -1){
 				if(choice == 1){
 					Application.LoadLevel("PreludeScene");
+				} else if(choice == 2) {
+					Application.LoadLevel("CreditScene");
 				}
 			}
 		}

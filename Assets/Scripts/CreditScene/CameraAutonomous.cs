@@ -46,20 +46,6 @@ public class CameraAutonomous : MonoBehaviour {
 		} else if (durationTime > 42.0f && durationTime < 61.0f) {
 			cameraObject.transform.Translate (cam_movement_x * 0.03f * Time.deltaTime);
 		}
-
-//			else if (durationTime > 11.5f && durationTime < 18.5f) {
-//			cameraObject.transform.Translate (cam_movement_x * 0.05f * Time.deltaTime);
-//		} else if (durationTime > 24.0f && durationTime < 29.7f) {
-//			cameraObject.transform.Translate (cam_movement_x * 0.05f * Time.deltaTime);
-//		} else if (durationTime > 30.0f && durationTime < 46.0f) {
-//			cameraObject.transform.Translate (cam_movement_z * 0.05f * Time.deltaTime);
-//		} else if (durationTime > 46.0f && durationTime < 49.0f) {
-//			cameraObject.transform.Rotate (cam_movement_y, 30.0f * Time.deltaTime);
-//		} else if (durationTime > 51.0f && durationTime < 57.0f) {
-//			cameraObject.transform.Rotate (cam_movement_y, 30.0f * Time.deltaTime);
-//		} else if (durationTime > 57.0f && durationTime < 70.0f) {
-//			cameraObject.transform.Translate (cam_movement_z * 0.03f * Time.deltaTime);
-//		}
 	}
 	void moveCamera(Vector3 startPt, Vector3 rotationAngle) {
 		cameraObject.transform.position = startPt;
