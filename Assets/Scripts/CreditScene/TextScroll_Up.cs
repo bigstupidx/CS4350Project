@@ -9,7 +9,6 @@ public class TextScroll_Up : MonoBehaviour {
 	public GameObject logo;
 	public GameObject header;
 	public GameObject text;
-	public GameObject prompt;
 	private Color logo_temp;
 	private Color header_temp;
 	private Color text_temp;
@@ -23,7 +22,6 @@ public class TextScroll_Up : MonoBehaviour {
 		header_temp = header.GetComponent<Image> ().color;
 		header_temp.a = 0.0f;
 		logo_temp.a = 0.0f;
-		prompt.GetComponent<Text> ().color = logo_temp;
 		header.GetComponent<Image> ().color = header_temp;
 		logo.GetComponent<Image> ().color = logo_temp;
 		startTime = Time.time;
@@ -43,11 +41,6 @@ public class TextScroll_Up : MonoBehaviour {
 		} else if (duration > 78.0f && duration < 80.0f) {
 			text_temp.a -= 1.0f * Time.deltaTime;
 			text.GetComponent<Image> ().color = text_temp;
-		} else if (duration > 80.0f && duration < 82.0f) {
-			text_temp.a += 1.0f * Time.deltaTime;
-			prompt.GetComponent<Text> ().color = text_temp;
-		} else if (duration > 82.0f && Input.GetKeyDown (KeyCode.Space)){ 
-			Application.LoadLevel("TitleScene");
-		}
+		} 
 	}
 }
