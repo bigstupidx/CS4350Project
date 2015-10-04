@@ -10,6 +10,7 @@ public class Item : MonoBehaviour {
 	public string itemId;
 	public string type;
 	public int level;
+	public int nextLevel;
 	public string[] requiredItems;
 	public string[] restrictedItems;
 	public string[] leadItems;
@@ -47,6 +48,7 @@ public class Item : MonoBehaviour {
 		itemId = state.id;
 		type = TRANSITION_TYPE;
 		level = state.level;
+		nextLevel = state.nextLevel;
 		requiredItems = state.requiredItems;
 		leadItems = state.leadItems;
 		eventDialogue = state.eventDialogue;
@@ -69,6 +71,7 @@ public class ItemState {
 	public string id;
 	public string type;
 	public int level;
+	public int nextLevel;
 	public string[] requiredItems;
 	public string[] restrictedItems;
 	public string[] leadItems;
@@ -84,6 +87,7 @@ public class ItemState {
 	public ItemState() {
 		type = Item.EVENT_TYPE;
 		level = -1;
+		nextLevel = -1;
 		requiredItems = new string[0];
 		restrictedItems = new string[0];
 		leadItems = new string[0];
@@ -92,7 +96,7 @@ public class ItemState {
 		eventDialogue = new string[0];
 		defaultDialogue = new string[0];
 		endingPoints = new int[(int) EndingType.EndingCount];
-		offset = new double[2];
+		offset = new double[3];
 		isInitiallyHidden = false;
 	}
 }
