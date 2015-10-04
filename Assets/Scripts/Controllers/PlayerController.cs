@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public Dictionary<string, string> restrictedItems;
 	public Dictionary<string, string> hideItems;
 	public Dictionary<string, string> unhideItems;
+	public double[] position;
 	public int currentLevel;
 
 	private float idleTimer;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour {
 		restrictedItems = new Dictionary<string, string>();
 		hideItems = new Dictionary<string, string> ();
 		unhideItems = new Dictionary<string, string> ();
+		currentLevel = 2;
+		position = new double[3] {0.0f, 0.5f, 0.0f};
 	}
 
 	public void AddInitialItems(List<string> initialItems) {
@@ -81,6 +84,11 @@ public class PlayerController : MonoBehaviour {
 			&& !restrictedItems.ContainsKey(itemId);
 	}
 
+	public void updatePlayerPositon() {
+		GameObject player = GameObject.Find ("Player2D");
+		player.transform.position = new Vector3 ((float) position [0], (float) position [1], (float) position [2]);
+	}
+
 	public void ItemTriggered(Item item) {
 		string itemId = item.itemId;
 		if (item.type.Equals (Item.EVENT_TYPE)) {
@@ -89,6 +97,11 @@ public class PlayerController : MonoBehaviour {
 			if (!restrictedItems.ContainsKey(itemId)) {
 				restrictedItems.Add(itemId, "true");
 			}
+		}
+
+		if (item.type.Equals (Item.TRANSITION_TYPE)) {
+			position = item.offset;
+			currentLevel = item.nextLevel;
 		}
 
 		foreach (string leadItemId in item.leadItems) {
@@ -141,6 +154,7 @@ public class PlayerState {
 	public List<string> restrictedItems;
 	public List<string> hideItems;
 	public List<string> unhideItems;
+	public double[] position;
 	public int currentLevel;
 
 	public PlayerState() {
@@ -149,5 +163,7 @@ public class PlayerState {
 		restrictedItems = new List<string> ();
 		hideItems = new List<string> ();
 		unhideItems = new List<string> ();
+		position = new double[3] {0.0f, 0.5f, 0.0f};
+		currentLevel = 2;
 	}
 }

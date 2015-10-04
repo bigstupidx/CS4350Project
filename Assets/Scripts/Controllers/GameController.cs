@@ -59,6 +59,10 @@ public class GameController : MonoBehaviour {
 		}
 		PlayerController.instance.AddInitialItems (noReqItems);
 		PlayerController.instance.AddInitiallyHiddenItems (initiallyHiddenItems);
+		PlayerController.instance.updatePlayerPositon ();
+		GameObject camera = GameObject.Find ("Main Camera");
+		CameraFollow followCamera = camera.GetComponent<CameraFollow> ();
+		followCamera.switchOffset (PlayerController.instance.currentLevel);
 		updateItemsVisibility ();
 	}
 
@@ -76,11 +80,27 @@ public class GameController : MonoBehaviour {
 		if (PlayerController.instance.AbleToTrigger(item)) {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
+			updateItemsVisibility ();
 			foreach(KeyValuePair<string, Item> entry in items) {
 				entry.Value.ItemTriggered(item);
 			}
+			if (item.type == Item.TRANSITION_TYPE) {
+				this.transition(item);
+			}
 		}
-		updateItemsVisibility ();
+	}
+
+	public void transition (Item item) {
+		if (item.type == Item.TRANSITION_TYPE) {
+			int nextLevel = item.nextLevel;
+			if (nextLevel == 2) {
+				LevelHandler.Instance.LoadSpecific ("PlatformGameScene");
+			} else if (nextLevel == 1) {
+				LevelHandler.Instance.LoadSpecific ("Testing_scene_1");
+			} else if (nextLevel == 0) {
+				LevelHandler.Instance.LoadSpecific ("Testing_scene_0");
+			}
+		}
 	}
 
 	public void updateItemsVisibility() {
