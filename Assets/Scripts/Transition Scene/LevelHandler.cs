@@ -29,6 +29,7 @@ public class LevelHandler: MonoBehaviour{
 	}
 	
 	private IEnumerator FadeToClear(){
+		GameController.instance.InitializeLevel ();
 		//Debug.Log ("i am fading to clear");
 		overlay.gameObject.SetActive(true);
 		overlay.color = Color.black;
@@ -48,9 +49,6 @@ public class LevelHandler: MonoBehaviour{
 		
 		overlay.color = Color.clear;
 		overlay.gameObject.SetActive(false);
-
-		GameController.instance.InitializeLevel ();
-		
 	}
 	
 	private IEnumerator FadeToBlack(Action levelMethod){
