@@ -559,5 +559,33 @@
 		"hideItems": [],
 		"unhideItems":[],
 		"isInitiallyHidden": false
-	}
+	}  
+	{
+  	"id": "EscalatorDown",
+  	"type": "transition",
+  	"restrictedItems": [ ],
+    "requiredItems": [ ],
+    "leadItems": [ ],
+    "eventDialogue": [ ],
+    "defaultDialogue": [ ],
+    "idleDialogue": [ ],
+    "endingPoints": [ 0, 0, 0, 0, 0 ],
+    "offset": [-2.71, 2.02, -48.66],
+  	"level": 2,
+  	"nextLevel": 1
+  },
+  {
+  	"id": "EscalatorUp",
+  	"type": "transition",
+  	"restrictedItems": [ ],
+    "requiredItems": [ ],
+    "leadItems": [ ],
+    "eventDialogue": [ ],
+    "defaultDialogue": [ ],
+    "idleDialogue": [ ],
+    "endingPoints": [ 0, 0, 0, 0, 0 ],
+    "offset": [14.36854, 0.5, 1.504589],
+  	"level": 1,
+  	"nextLevel": 2
+  }
 ]
