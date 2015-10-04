@@ -83,7 +83,7 @@ public class WheelMenuButton : MonoBehaviour {
 			tempColor.a = Mathf.Min(1.0f, tempColor.a + blackFadeAlphaChg*Time.deltaTime);
 			blackScreen.color = tempColor;
 
-			Debug.Log (blackScreen.color.a);
+			//Debug.Log (blackScreen.color.a);
 
 			// Change Scene if menu choice selected
 			if(blackScreen.color.a >= 1.0f && choice != -1){
@@ -98,7 +98,7 @@ public class WheelMenuButton : MonoBehaviour {
 			float lengthLeft = 0; 
 			float moveAmt = 0;
 			float halfMyWidth = myRect.rect.width/2;
-			Debug.Log (myRect.name + ": " + dest + "   currX: " + currX);
+			//Debug.Log (myRect.name + ": " + dest + "   currX: " + currX);
 			if(isGoingLeft){
 				if(dest>currX){
 					lengthLeft = -(currX+halfScreenWidth)-(halfScreenWidth-dest) - halfMyWidth;
