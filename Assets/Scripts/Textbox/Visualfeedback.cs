@@ -33,7 +33,7 @@ public class Visualfeedback : MonoBehaviour {
 			//Debug.Log ("status + " + status);
 
 			if (status) {//if it is interactable
-				transform.GetComponentInChildren<Renderer>().material.SetFloat("_Outline", 0.0009f);
+				transform.GetComponentInChildren<Renderer>().material.SetFloat("_Outline", 0.01f);
 			} else {
 				transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0.00f);
 			}
