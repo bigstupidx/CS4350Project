@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerTransition : MonoBehaviour {
 
-	private Vector3 pos_inside_gantry;
+	/*private Vector3 pos_inside_gantry;
 	private Vector3 pos_outside_gantry;
 
 	void Start()
@@ -13,7 +13,7 @@ public class PlayerTransition : MonoBehaviour {
 
 		pos_outside_gantry.z += 1.0f;
 		pos_inside_gantry.z -= 1.0f;
-	}
+	}*/
 
 	public void OnTriggerEnter(Collider other){
 		string colliderName = other.name;
@@ -42,7 +42,7 @@ public class PlayerTransition : MonoBehaviour {
 				LevelHandler.Instance.LoadSpecific ("Testing_scene_0");
 				break;
 			}
-			case "Gantry_Outside":
+			/*case "Gantry_Outside":
 			{
 				gameObject.GetComponent<PlayerMovement>().StopMoving();
 				transform.position = pos_inside_gantry;
@@ -53,7 +53,7 @@ public class PlayerTransition : MonoBehaviour {
 				gameObject.GetComponent<PlayerMovement>().StopMoving();
 				transform.position = pos_outside_gantry;
 				break;
-			}
+			}*/
 		}
 	}
 }

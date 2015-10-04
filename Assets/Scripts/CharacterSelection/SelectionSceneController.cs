@@ -237,8 +237,10 @@ public class SelectionSceneController : MonoBehaviour {
                 selected.MoveTo(newDest);
             }
 
-            if(tempColor.a >= 1.0f)
+            if(tempColor.a >= 1.0f){
+				GameController.instance.SetStartTime();
                 Application.LoadLevel("PlatformGameScene");
+			}
 
         }
     }
