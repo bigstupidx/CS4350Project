@@ -29,11 +29,11 @@ public class GamePause: MonoBehaviour {
         movementScript.StopMoving();
         movementScript.MouseLeftButton();
         PlayerData.MoveFlag = false;
-        PlayerController.instance.isShowingHint = false;
+		GameController.instance.ToggleTimer ();
     }
 
     public void ResumePressed() {
-        PlayerController.instance.isShowingHint = true;
+		GameController.instance.ToggleTimer ();
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
         textboxScript.enabled = true;
