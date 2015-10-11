@@ -9,6 +9,13 @@ public class Displaytextbox : MonoBehaviour {
 	private FeedTextFromObject feedText;
 	private FadeInFadeOut textBox;
 
+	// Automated flip text
+	/*
+	private float duration = 1.5f;
+	private bool isAutomatedStart = false;
+	private float startTime = 0.0f;
+	*/
+
 	// Use this for initialization
 	void Start () {
 		feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
@@ -40,6 +47,12 @@ public class Displaytextbox : MonoBehaviour {
 					else if(PlayerData.ParentGenderId == 2) // Female Parent
 						feedText.SetText ("Mama?");
 					textBox.TurnOnTextbox( false ); // means do not fade out
+
+					// Automated flip text
+					/*
+					isAutomatedStart = true;
+					startTime = Time.time;
+					*/
 				}
 
 				else //  player near to interactable object
@@ -76,5 +89,35 @@ public class Displaytextbox : MonoBehaviour {
 				}
 			}
 		}
+
+		// Automated flip text
+		/*
+		if (isAutomatedStart) {
+			if( (Time.time - startTime) > duration) {
+				if( feedText.getIsMoreThanOneLine() ){		// respond more than 1 line
+					feedText.ind++;
+					startTime = Time.time;
+					feedText.UpdateText();
+					if(feedText.ind == feedText.multipleResponds.Length)
+					{
+						textBox.TurnOnTextbox( true ); // fade out
+						isAutomatedStart = false;
+						//PlayerData.MoveFlag = true;	// ENABLE player move
+					}
+					else if(feedText.ind < feedText.multipleResponds.Length){
+						transform.GetComponent <PlayerMovement>().StopMoving ();
+						textBox.TurnOnTextbox( false ); // means do not fade out
+					}
+				}
+				else {		// respond ONLY have 1 line
+					if( !textBox.isFadingOn ){
+						textBox.TurnOnTextbox( true );
+						isAutomatedStart = false;
+						PlayerData.MoveFlag = true;	// ENABLE player move
+					}
+				}
+			}
+		}
+		*/
 	}
 }
