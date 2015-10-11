@@ -12,24 +12,27 @@ public class SelectionSceneController : MonoBehaviour {
 	public AmariMovement f4;
 	public AmariMovement f5;
 	public AmariMovement f6;
-	public RectTransform questionBox;
-    public GameObject teacherDialogue1;
-	public GameObject teacherDialogue2;
     public RawImage blackScreenImage;
+
+     FeedTextFromObject feedText;
+    FadeInFadeOut textBox;
 
     float timer = 0.0f;
 	int stage = 0;
 	float boxSpeedPerSec = 100.0f;
     public float alphaChgPerSec = 0.5f;
     int m1pt, m2pt, m3pt, f4pt, f5pt, f6pt;
+    bool isReadyToProceed = false;
+    bool isFedText = false;
 
     Vector3[] movePoints = { new Vector3(0.0f, 0.5f, 1.5f), new Vector3(-2.0f, 0.5f, 1.5f), new Vector3(-2.0f, 0.5f, -0.5f), new Vector3(0.0f, 0.5f, -0.5f), new Vector3(2.0f, 0.5f, -0.5f), new Vector3(2.0f, 0.5f, 1.5f) };
     AmariMovement selected;
 
 	// Use this for initialization
 	void Start () {
-        teacherDialogue1.SetActive(true);
-		teacherDialogue2.SetActive(false);
+        feedText = GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>();
+        textBox = GameObject.Find("TextBox").GetComponent<FadeInFadeOut>();
+
         AmariMovement.speed = 3.5f;
         m1pt = 1;
         m2pt = 2;
@@ -41,20 +44,59 @@ public class SelectionSceneController : MonoBehaviour {
         blackScreenImage.color = Color.black;
 
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (stage == 0) {
 
-			timer += Time.deltaTime;
+    void Update() {
+      
+
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate() {
+
+        if (stage < 4)
+        {
             // Black screen Fade Out
             Color tempColor = blackScreenImage.color;
             tempColor.a = Mathf.Max(0.0f, tempColor.a - alphaChgPerSec * Time.deltaTime);
             blackScreenImage.color = tempColor;
+        }
 
-
-            if (timer >= 4.0f)
+        if (stage >= 2)
+        {
+            if (!textBox.isFadingOn)
             {
+                feedText.enabled = false;
+            }
+        }
+        if (stage == 0) {
+
+            if (!isFedText)
+            {
+                feedText.SetText("Testing1\\Testing2\\Testing3\\Testing4\\Testing5");
+                textBox.TurnOnTextbox(false);
+                isFedText = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space) && stage == 0 && feedText.getIsMoreThanOneLine())
+            {
+                feedText.ind++;
+                if (feedText.ind == feedText.multipleResponds.Length)
+                {
+                    textBox.TurnOnTextbox(true);
+                    isReadyToProceed = true;
+
+                }
+                else if (feedText.ind < feedText.multipleResponds.Length) {
+                    textBox.TurnOnTextbox(false);
+                }
+
+            }
+
+            if (isReadyToProceed)
+            {
+                feedText.SetText("Children, get into your lines!");
+                textBox.TurnOnTextbox(false);
                 m1.FaceFront();
                 m2.FaceFront();
                 m3.FaceFront();
@@ -75,15 +117,13 @@ public class SelectionSceneController : MonoBehaviour {
                 f4.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f5.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f6.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
-                teacherDialogue1.SetActive(false);
-				teacherDialogue2.SetActive(true);
                 stage = 1;
-				timer=0.0f;
-                
+                timer = 0.0f;
+
             }
             else
             {
-                if (!m1.IsMoving() )
+                if (!m1.IsMoving())
                 {
 
                     m1pt = (m1pt + 1) % movePoints.Length;
@@ -123,14 +163,13 @@ public class SelectionSceneController : MonoBehaviour {
             }
 
 
-       
         }
         else if(stage == 1) {
-            timer += Time.deltaTime;
-            if (timer >= 2.0f)
+            //timer += Time.deltaTime;
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                
 
+                textBox.TurnOnTextbox(true);
                 AmariMovement.speed = 3.0f;
                 stage = 2;
 
@@ -150,11 +189,12 @@ public class SelectionSceneController : MonoBehaviour {
                 f5.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
                 f6.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
 
+                
+
             }
         } else if (stage == 2) {
 
-
-
+            
             // Move to one line
             if (!m1.IsMoving())
                 m1.FaceFront();
@@ -179,7 +219,6 @@ public class SelectionSceneController : MonoBehaviour {
                 f4.FaceFront();
                 f5.FaceFront();
                 f6.FaceFront();
-                teacherDialogue2.SetActive(false);
             }
 
         } else if (stage == 3) {
@@ -190,9 +229,6 @@ public class SelectionSceneController : MonoBehaviour {
             f5.FaceFront();
             f6.FaceFront();
 
-            if (questionBox.anchoredPosition.y > 0) {
-				questionBox.anchoredPosition = new Vector2 (questionBox.anchoredPosition.x, questionBox.anchoredPosition.y - (boxSpeedPerSec * Time.deltaTime));
-			}
 
 			if (AmariSelection.selectionDone) {
 				AmariSelection.selectionEnabled = false;
@@ -221,10 +257,6 @@ public class SelectionSceneController : MonoBehaviour {
             }
 		} else if (stage == 4) {
 
-            if (questionBox.anchoredPosition.y < questionBox.rect.height)
-            {
-                questionBox.anchoredPosition = new Vector2(questionBox.anchoredPosition.x, questionBox.anchoredPosition.y + (boxSpeedPerSec * Time.deltaTime));
-            }
 
             Color tempColor = blackScreenImage.color;
             tempColor.a = Mathf.Min(1.0f, tempColor.a + alphaChgPerSec * Time.deltaTime);

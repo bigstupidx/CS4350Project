@@ -101,8 +101,9 @@ public class FeedTextFromObject : MonoBehaviour {
 			if (_respond.Contains ("\\")) {
 				moreThanOneLine = true; 
 				multipleResponds = _respond.Split ('\\');
-				ind = 0;
-			} else {
+                ind = 0;
+                text.text = PostRespondProcessing(multipleResponds[ind]);
+            } else {
 				text.text = PostRespondProcessing(_respond);
 				moreThanOneLine = false;
 				ind = 0;
