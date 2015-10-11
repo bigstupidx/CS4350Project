@@ -149,15 +149,12 @@ public class FeedTextFromObject : MonoBehaviour {
 	void LateUpdate()
 	{
 		if (textBox.isFadingOn) {
-				if(targetItem != null &&  targetStatus )
-				{
-					Debug.Log("Enter");
-					GameController.instance.TriggerItem(targetItem.itemId);
-					Debug.Log("Over");
-					targetStatus = false;	
-					targetItem = null;
-					
-				}
+			if(targetItem != null &&  targetStatus )
+			{
+				GameController.instance.TriggerItem(targetItem.itemId);
+				targetStatus = false;	
+				targetItem = null;
+			}
 		}
 		
 		// guard to reset multipleResponds

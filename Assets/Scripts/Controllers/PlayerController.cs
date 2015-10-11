@@ -152,7 +152,8 @@ public class PlayerController : MonoBehaviour {
 			if(items.Count > 0){
 				do {
 					int select = Random.Range (0, (items.Count));
-					validItem = GameController.instance.GetItem (items [select]);
+					if(items[select] != null)
+						validItem = GameController.instance.GetItem (items [select]);
 				}while(validItem.type.Contains("transition") );
 			} 
 
