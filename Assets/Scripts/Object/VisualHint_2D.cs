@@ -7,15 +7,15 @@ public class VisualHint_2D : MonoBehaviour {
 
 	public string fileName;
 	public int spriteLength = 4;
-	public float duration = 1.5f;
+	public double duration = 1.5;
 	
 	public List<Texture2D> defaultSpriteSheet;
 	public List<Texture2D> highlightSpriteSheet;
 
 	public int currFrame = 0;
-	private int delay = 2;
+	private int delay = 3;
 	private int curr = 0;
-	private bool toggleNext = true;
+	public bool isPlayerEntered = false;
 
 	private float startTime = 0.0f;
 	private bool startAnimation = true;
@@ -40,16 +40,18 @@ public class VisualHint_2D : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		Item curr = GameController.instance.GetItem (this.gameObject.name);
 		myStatus = PlayerController.instance.AbleToTrigger (curr);
+		isPlayerEntered = true;
 	}
 	
 	void OnTriggerExit(Collider other){
 		myStatus = false;
+		isPlayerEntered = false;
 	}
 
 	void Update()
 	{
 		if (spriteLength > 1) {
-			if (!startAnimation && (Time.time - startTime) > duration) {
+			if (!startAnimation && (Time.time - startTime) > (float)(duration) ) {
 				startAnimation = true;
 			}
 
@@ -79,5 +81,11 @@ public class VisualHint_2D : MonoBehaviour {
 				transform.GetComponentInChildren<Renderer> ().material.mainTexture = defaultSpriteSheet [currFrame];
 			}
 		}
+	}
+
+	void LateUpdate()
+	{
+		if(isPlayerEntered)
+			myStatus = PlayerController.instance.AbleToTrigger ( GameController.instance.GetItem (this.gameObject.name) );
 	}
 }

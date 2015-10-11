@@ -145,19 +145,24 @@ public class PlayerController : MonoBehaviour {
 	}
 	public void displayHint()
 	{
-		if ((Application.loadedLevelName).Contains ("CreditScene") == false) {
+		if ((Application.loadedLevelName).Contains ("GameScene")) {
 			List<string> items = new List<string> (validItems.Keys);
 			Item validItem = null;
 
 			if(items.Count > 0){
 				do {
 					int select = Random.Range (0, (items.Count));
-					if(items[select] != null)
+
+					if( select > items.Count-1 ){
+						select = Random.Range (0, (items.Count-1));
+					}
+
+					if(items[select].Length > 0 && GameController.instance != null){
 						validItem = GameController.instance.GetItem (items [select]);
+					}
 				}while(validItem.type.Contains("transition") );
 			} 
 
-			//Debug.Log ("Chosen:" + validItem.name);
 			if(validItem != null && validItem.idleDialogue.Length > 0){
 				string respond = validItem.idleDialogue [0];
 				if (respond.Length > 0) {
