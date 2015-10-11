@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public Dictionary<string, string> unhideItems;
 	public double[] position;
 	public int currentLevel;
+    public bool isShowingHint = true;
 
 	private float idleTimer;
 
@@ -145,7 +146,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	public void displayHint()
 	{
-		if ((Application.loadedLevelName).Contains ("GameScene")) {
+		if ((Application.loadedLevelName).Contains ("GameScene") && isShowingHint) {
 			List<string> items = new List<string> (validItems.Keys);
 			Item validItem = null;
 

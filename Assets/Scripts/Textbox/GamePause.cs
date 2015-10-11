@@ -29,10 +29,11 @@ public class GamePause: MonoBehaviour {
         movementScript.StopMoving();
         movementScript.MouseLeftButton();
         PlayerData.MoveFlag = false;
+        PlayerController.instance.isShowingHint = false;
     }
 
     public void ResumePressed() {
-
+        PlayerController.instance.isShowingHint = true;
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
         textboxScript.enabled = true;
@@ -41,9 +42,13 @@ public class GamePause: MonoBehaviour {
     }
 
     public void ExitPressed() {
-        
+
         textboxScript.enabled = true;
+        Destroy(GameController.instance);
+        Destroy(PlayerController.instance);
+        Destroy(EndingController.instance);
         LevelHandler.Instance.LoadSpecific("TitleScene");
+        
         PlayerData.MoveFlag = true;
     }
 
