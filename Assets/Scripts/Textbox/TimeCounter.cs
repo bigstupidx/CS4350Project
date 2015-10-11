@@ -18,10 +18,16 @@ public class TimeCounter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		float curr = Time.time - GameController.instance.GetTime ();
+		/*float curr = Time.time - GameController.instance.GetTime ();
 		hour = (int)curr / 3600;
 		minutes = (int)curr / 60;
 		seconds = (int)curr % 60;
+		*/
+
+		float curr = GameController.instance.GetTime ();
+		hour = curr / 21600;
+		minutes = (curr / 3600) %60;
+		seconds = (curr / 60)%60;
 
 		time.text = string.Format ("{0:00}:{1:00}:{2:00}",hour, minutes, seconds); 
 	}
