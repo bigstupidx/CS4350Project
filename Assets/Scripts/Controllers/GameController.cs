@@ -76,7 +76,23 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver(EndingType endingType) {
-		Debug.Log ("Game over");
+		switch (endingType) {
+		case EndingType.Ending1:
+			Debug.Log ("Game over: Death by Suffocation");
+			break;
+		case EndingType.Ending2:
+			Debug.Log ("Game over: Death by Dog Allergy");
+			break;
+		case EndingType.Ending3:
+			Debug.Log ("Game over: Death by Head Injury");
+			break;
+		case EndingType.Ending4:
+			Debug.Log ("Game over: Death by Fallen Ceiling");
+			break;
+		case EndingType.Ending5:
+			Debug.Log ("Game over: Death by Train Accident");
+			break;
+		}
 		LevelHandler.Instance.LoadSpecific ("EndingScene");
 		//Application.LoadLevel ("EndingScene");
 	}
@@ -105,7 +121,7 @@ public class GameController : MonoBehaviour {
 			if (nextLevel == 2) {
 				LevelHandler.Instance.LoadSpecific ("PlatformGameScene");
 			} else if (nextLevel == 1) {
-				LevelHandler.Instance.LoadSpecific ("Testing_scene_1");
+				LevelHandler.Instance.LoadSpecific ("GroundGameScene");
 			} else if (nextLevel == 0) {
 				LevelHandler.Instance.LoadSpecific ("BasementGameScene");
 			}

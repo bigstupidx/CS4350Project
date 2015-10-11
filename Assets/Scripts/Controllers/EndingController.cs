@@ -17,6 +17,7 @@ public class EndingController : MonoBehaviour {
 	static public EndingController instance;
 
 	int[] endings;
+	public EndingType deathReason;
 
 	public void Awake() {
 		if (instance == null) {
@@ -40,6 +41,7 @@ public class EndingController : MonoBehaviour {
 				endings[i] += item.endingPoints[i];
 			}
 			if (endings[i] > ENDING_LIMIT) {
+				deathReason = (EndingType) i;
 				GameController.instance.GameOver((EndingType) i);
 				break;
 			}
