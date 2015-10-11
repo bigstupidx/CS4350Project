@@ -105,52 +105,61 @@ public class AmariMovement : MonoBehaviour {
 		destination = newDest;
 		moveToCalled = true;
 	}
+    
+    void FixedUpdate()
+    {
+        // Check mouse input
+        if (moveToCalled)
+        {
+            isWalking = true;
+            moveToCalled = false;
+            // Create a vector from the player to the point on the floor the raycast from the mouse hit.
+            Vector3 playerToMouse = destination - transform.position;
 
-	void FixedUpdate ()
+            // Ensure the vector is entirely along the floor plane.
+            playerToMouse.y = 0f;
+
+            // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+
+            // Set the player's rotation to this new rotation.
+
+            float angle = newRotation.eulerAngles.y;
+
+            //Debug.Log(angle);
+
+
+            currTime = timePerFrame;
+            currFrame = 0;
+            // Right
+            if (angle >= 225 && angle <= 315)
+            {
+                currDirection = leftConst;
+            }
+            //Left
+            else if (angle >= 45 && angle <= 135)
+            {
+                currDirection = rightConst;
+            }
+            // Up
+            else if (angle >= 315 || angle <= 45)
+            {
+                currDirection = upConst;
+            }
+            // Down
+            else
+            {
+                currDirection = downCnst;
+            }
+
+
+        }
+    }
+
+	void Update ()
 	{
 		currTime += Time.deltaTime;
-		// Check mouse input
-		if (moveToCalled) {
-                isWalking = true;
-                moveToCalled = false;
-				// Create a vector from the player to the point on the floor the raycast from the mouse hit.
-				Vector3 playerToMouse = destination - transform.position;
 				
-				// Ensure the vector is entirely along the floor plane.
-				playerToMouse.y = 0f;
-				
-				// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-				Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
-				
-				// Set the player's rotation to this new rotation.
-				
-				float angle = newRotation.eulerAngles.y;
-				
-				//Debug.Log(angle);
-				
-				
-				currTime = timePerFrame;
-				currFrame = 0;
-				// Right
-				if(angle>=225 && angle <= 315){
-					currDirection = leftConst;
-				}
-				//Left
-				else if(angle>=45 && angle <= 135){
-					currDirection = rightConst;
-				}
-				// Up
-				else if(angle>=315 || angle <= 45){
-					currDirection = upConst;
-				}
-				// Down
-				else{
-					currDirection = downCnst;
-				}
-				
-
-		}
-		
 		
 		if(isWalking){
 			
