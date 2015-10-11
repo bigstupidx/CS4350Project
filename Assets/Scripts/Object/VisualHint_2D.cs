@@ -13,7 +13,7 @@ public class VisualHint_2D : MonoBehaviour {
 	public List<Texture2D> highlightSpriteSheet;
 
 	public int currFrame = 0;
-	private int delay = 3;
+	private int delay = 5;
 	private int curr = 0;
 	public bool isPlayerEntered = false;
 
