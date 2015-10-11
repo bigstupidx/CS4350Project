@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 	private Dictionary<string, Item> items;
 
 	private int timeSinceGameStart = 0;
-	public bool isPaused = true;
+	public bool isPaused = false;
 
 	public void Awake() {
 		if (instance == null) {

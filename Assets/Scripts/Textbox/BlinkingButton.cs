@@ -38,29 +38,16 @@ public class BlinkingButton : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if (currFrame < spriteLength-1) {
-			if(toggleNext)
-				currFrame++;
+		if (!GameController.instance.isPaused) {
+			if (currFrame < spriteLength - 1) {
+				if (toggleNext)
+					currFrame++;
 
 				transform.GetComponent<Image> ().sprite = spriteSheet [currFrame];
 				toggleNext = !toggleNext;
-		} else {
-			currFrame = 0;
+			} else {
+				currFrame = 0;
+			}
 		}
-	
 	}
-	
-	// Update is called once per frame
-	/*void Update () {
-		float alpha = gameObject.GetComponent<Image> ().color.a;
-		if (fadeOut) 
-			alpha -= (speed * Time.deltaTime);
-		else
-			alpha += (speed * Time.deltaTime);
-
-		gameObject.GetComponent<Image> ().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, alpha);
-
-		if (gameObject.GetComponent<Image> ().color.a <= 0.0f || gameObject.GetComponent<Image> ().color.a >= 0.5f)
-			fadeOut = !fadeOut;
-	}*/
 }
