@@ -8,13 +8,13 @@ public class GamePause: MonoBehaviour {
 
     Displaytextbox textboxScript;
     PlayerMovement movementScript;
-    BlinkingButton blinkingScript;
+    //BlinkingButton blinkingScript;
     // Use this for initialization
     void Awake()
     {
         textboxScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>();
         movementScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        blinkingScript = GameObject.Find("DownButton").GetComponent<BlinkingButton>();
+      //  blinkingScript = GameObject.Find("DownButton").GetComponent<BlinkingButton>();
 
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
@@ -29,7 +29,7 @@ public class GamePause: MonoBehaviour {
         pauseButton.SetActive(false);
         pausePanel.SetActive(true);
         textboxScript.enabled= false;
-        blinkingScript.enabled = false;
+        //blinkingScript.enabled = false;
         movementScript.StopMoving();
         movementScript.MouseLeftButton();
         PlayerData.MoveFlag = false;
@@ -41,13 +41,13 @@ public class GamePause: MonoBehaviour {
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
         textboxScript.enabled = true;
-        blinkingScript.enabled = true;
+        //blinkingScript.enabled = true;
         PlayerData.MoveFlag = true;
 
     }
 
     public void ExitPressed() {
-        blinkingScript.enabled = true;
+        //blinkingScript.enabled = true;
         textboxScript.enabled = true;
         Destroy(GameController.instance);
         Destroy(PlayerController.instance);
