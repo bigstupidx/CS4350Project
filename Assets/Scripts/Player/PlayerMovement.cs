@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
 	}
 	public void MouseOverButton(){
-		mouseOverButton = true;
+        PlayerData.MoveFlag = false;
 	}
 
 	public void MouseLeftButton(){
