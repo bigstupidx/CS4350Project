@@ -147,18 +147,22 @@ public class PlayerController : MonoBehaviour {
 	{
 		if ((Application.loadedLevelName).Contains ("CreditScene") == false) {
 			List<string> items = new List<string> (validItems.Keys);
-			Item validItem;
+			Item validItem = null;
 
-			do {
-				int select = Random.Range (0, (items.Count));
-				validItem = GameController.instance.GetItem (items [select]);
-			} while(validItem.type.Contains("transition") );
+			if(items.Count > 0){
+				do {
+					int select = Random.Range (0, (items.Count));
+					validItem = GameController.instance.GetItem (items [select]);
+				}while(validItem.type.Contains("transition") );
+			} 
 
-			Debug.Log ("Chosen:" + validItem.name);
-			string respond = validItem.idleDialogue [0];
-			if (respond.Length > 0) {
-				GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
-				GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
+			//Debug.Log ("Chosen:" + validItem.name);
+			if(validItem != null && validItem.idleDialogue.Length > 0){
+				string respond = validItem.idleDialogue [0];
+				if (respond.Length > 0) {
+					GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
+					GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
+				}
 			}
 		}
 	}

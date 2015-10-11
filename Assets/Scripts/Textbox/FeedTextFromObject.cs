@@ -101,9 +101,9 @@ public class FeedTextFromObject : MonoBehaviour {
 			if (_respond.Contains ("\\")) {
 				moreThanOneLine = true; 
 				multipleResponds = _respond.Split ('\\');
-                ind = 0;
-                text.text = PostRespondProcessing(multipleResponds[ind]);
-            } else {
+				ind = 0;
+				text.text = PostRespondProcessing( multipleResponds [ind] );
+			} else {
 				text.text = PostRespondProcessing(_respond);
 				moreThanOneLine = false;
 				ind = 0;
@@ -113,8 +113,14 @@ public class FeedTextFromObject : MonoBehaviour {
 
 		targetItem = _item;
 		targetStatus = _status;
+	}
 
-
+	public void UpdateText()
+	{
+		if (moreThanOneLine) {
+			if( ind < multipleResponds.Length)
+				text.text = PostRespondProcessing( multipleResponds [ind] );
+		}
 	}
 
 	public void Update(){
@@ -122,10 +128,7 @@ public class FeedTextFromObject : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
 			endOfRespond = false;
 			
-			if (moreThanOneLine) {
-				if( ind < multipleResponds.Length)
-					text.text = PostRespondProcessing( multipleResponds [ind] );
-			}
+			UpdateText();
 		}
 
 		if (isActivated) {
