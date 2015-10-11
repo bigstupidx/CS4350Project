@@ -266,7 +266,8 @@ public class SelectionSceneController : MonoBehaviour {
             }
 
             if(tempColor.a >= 1.0f){
-				GameController.instance.SetStartTime();
+                AmariSelection.selectionDone = false;
+                GameController.instance.SetStartTime();
                 Application.LoadLevel("PlatformGameScene");
 			}
 
