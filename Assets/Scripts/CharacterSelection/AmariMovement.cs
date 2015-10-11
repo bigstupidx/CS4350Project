@@ -105,9 +105,11 @@ public class AmariMovement : MonoBehaviour {
 		destination = newDest;
 		moveToCalled = true;
 	}
-    
-    void FixedUpdate()
-    {
+ 
+	void FixedUpdate ()
+	{
+		currTime += Time.deltaTime;
+
         // Check mouse input
         if (moveToCalled)
         {
@@ -154,14 +156,8 @@ public class AmariMovement : MonoBehaviour {
 
 
         }
-    }
 
-	void Update ()
-	{
-		currTime += Time.deltaTime;
-				
-		
-		if(isWalking){
+        if (isWalking){
 			
 			
 			// Movement

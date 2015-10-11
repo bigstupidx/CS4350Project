@@ -45,12 +45,6 @@ public class SelectionSceneController : MonoBehaviour {
 
     }
 
-    void Update() {
-      
-
-    }
-
-
     // Update is called once per frame
     void FixedUpdate() {
 
@@ -123,6 +117,7 @@ public class SelectionSceneController : MonoBehaviour {
             }
             else
             {
+                
                 if (!m1.IsMoving())
                 {
 
@@ -147,6 +142,7 @@ public class SelectionSceneController : MonoBehaviour {
                     f4pt = (f4pt + 1) % movePoints.Length;
                     f4.MoveTo(movePoints[f4pt]);
                 }
+
 
                 if (!f5.IsMoving())
                 {
