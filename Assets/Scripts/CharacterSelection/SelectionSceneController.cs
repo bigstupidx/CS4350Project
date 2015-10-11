@@ -73,7 +73,7 @@ public class SelectionSceneController : MonoBehaviour {
 
             if (!isFedText)
             {
-                feedText.SetText("Testing1\\Testing2\\Testing3\\Testing4\\Testing5");
+                feedText.SetText("Are you here to bring Amari to you spouse's place?\\Yes, it's getting late. We should really be going.\\Alright then...");
                 textBox.TurnOnTextbox(false);
                 isFedText = true;
             }
@@ -95,7 +95,7 @@ public class SelectionSceneController : MonoBehaviour {
 
             if (isReadyToProceed)
             {
-                feedText.SetText("Children, get into your lines!");
+                feedText.SetText("...Children, get into your lines!");
                 textBox.TurnOnTextbox(false);
                 m1.FaceFront();
                 m2.FaceFront();
