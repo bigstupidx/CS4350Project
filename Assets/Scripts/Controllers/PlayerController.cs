@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public double[] position;
 	public int currentLevel;
 
-	private float idleTimer;
+	private int idleTimer;
 
 	public void Awake() {
 		if (instance == null) {
@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			DestroyImmediate(gameObject);
 		}
-		idleTimer = Time.time;
 	}
 
 	public void Init() {
@@ -34,6 +33,8 @@ public class PlayerController : MonoBehaviour {
 		unhideItems = new Dictionary<string, string> ();
 		currentLevel = 2;
 		position = new double[3] {0.0f, 0.5f, 0.0f};
+
+		idleTimer = GameController.instance.GetTime ();
 	}
 
 	public void AddInitialItems(List<string> initialItems) {
@@ -133,14 +134,17 @@ public class PlayerController : MonoBehaviour {
 			hideItems.Remove(unhideItemId);
 		}
 
-		idleTimer = Time.time;
+		idleTimer = GameController.instance.GetTime ();
 	}
 
 	public void Update()
 	{
-		if( (Time.time - idleTimer) / 60 >= 1) {
+		int currTime = GameController.instance.GetTime () ;
+		int timeDiff = ( (currTime - idleTimer) / 60) % 60;
+
+		if( timeDiff >= 30 ){
 			displayHint();
-			idleTimer = Time.time;
+			idleTimer = currTime;
 		}
 	}
 

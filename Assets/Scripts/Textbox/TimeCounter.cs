@@ -24,7 +24,7 @@ public class TimeCounter : MonoBehaviour {
 		seconds = (int)curr % 60;
 		*/
 
-		float curr = GameController.instance.GetTime ();
+		int curr = GameController.instance.GetTime ();
 		hour = curr / 21600;
 		minutes = (curr / 3600) %60;
 		seconds = (curr / 60)%60;

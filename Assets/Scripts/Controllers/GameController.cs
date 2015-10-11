@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
 		timeSinceGameStart = 0;
 	}
 
-	public float GetTime(){
+	public int GetTime(){
 		return timeSinceGameStart;
 	}
 
