@@ -463,7 +463,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "The counter cafe where one can order drinks." ],
-    "pt2EventDialogue": [ "I got more and more annoyed by my child's stubborness.\\But if I had known that morning was my last time with the child at that cafe, it would had been different." ]
+    "pt2EventDialogue": [ "I got more and more annoyed by my child's stubborness.\\But if I had known that morning was my last time with the child at that cafe...\\...It would had been different." ]
   },
   {
     "id": "AdvertisementBoard",
@@ -543,7 +543,7 @@
 		"unhideItems":["Johnny3"],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": ["'Johnny' is the name of Amari's imaginary friend."],
-    "pt2EventDialogue": ["From what I hear about Johnny from Amari, he is quite the negative character.\\Often making terrible accusations that Amari is to blame for many things including the quarrels between me and my spouse.\\I wonder if he blamed Amari, too, for being left alone at the station.\\But more so, I wonder if his negativity was a reflection of my terrible parenting."]
+    "pt2EventDialogue": ["From what I heard about Johnny from Amari, he is quite a negative character.\\Often making terrible accusations that Amari is to blame for many things including the quarrels between me and my spouse.\\I wonder if he blamed Amari, too, for being left alone at the station.\\But more so, I wonder if his negativity was a reflection of my terrible parenting."]
 	},
 	{
 		"id": "Johnny3",
@@ -559,7 +559,7 @@
 		"unhideItems":[],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": ["'Johnny' is the name of Amari's imaginary friend."],
-    "pt2EventDialogue": ["Amari was running aroudn the station, laughing as if playing with someone no one can see.\\%He/She% was running too close to the edge of the platform. And fell."]
+    "pt2EventDialogue": ["After putting aside finding the ring we lost that morning, Amari was running around the platform.\\The child was laughing as if playing with someone no one can see.\\%He/She% was running close to the edge of the platform.\\And fell."]
 	},
 	{
 		"id": "JanitorDoorOutside",
