@@ -18,11 +18,12 @@ public class FadeInBlackscreen : MonoBehaviour {
 			temp.a += speed * Time.deltaTime;
 			myText.color = temp;
 		} else {
-			GameController.instance.Awake();
-			PlayerController.instance.Awake();
-			EndingController.instance.Awake();
+			Destroy(GameController.instance);
+			Destroy(PlayerController.instance);
+			Destroy(EndingController.instance);
 
-			Application.LoadLevel ("TitleScene");
+			Application.LoadLevel("TitleScene");
+
 		}
 	}
 }
