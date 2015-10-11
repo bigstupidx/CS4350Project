@@ -6,9 +6,10 @@ using LitJson;
 public class GameController : MonoBehaviour {
 
 	static public GameController instance;
-	private float timeSinceGameStart;
-
 	private Dictionary<string, Item> items;
+
+	private int timeSinceGameStart = 0;
+	public bool isPaused = true;
 
 	public void Awake() {
 		if (instance == null) {
@@ -21,11 +22,17 @@ public class GameController : MonoBehaviour {
 
 	public void SetStartTime()
 	{
-		timeSinceGameStart = Time.time;
+		isPaused = false;
+		timeSinceGameStart = 0;
 	}
 
 	public float GetTime(){
 		return timeSinceGameStart;
+	}
+
+	public void ToggleTimer()
+	{
+		isPaused = !isPaused;
 	}
 
 	public void Start() {
@@ -36,6 +43,12 @@ public class GameController : MonoBehaviour {
 
 	public void Init() {
 	
+	}
+
+	public void FixedUpdate()
+	{
+		if (!isPaused)
+			timeSinceGameStart++;
 	}
 
 	public void InitializeLevel() {

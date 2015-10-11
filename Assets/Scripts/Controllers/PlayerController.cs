@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour {
 			idleTimer = Time.time;
 		}
 	}
+
 	public void displayHint()
 	{
 		if ((Application.loadedLevelName).Contains ("GameScene")) {
