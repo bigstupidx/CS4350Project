@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
 	static public GameController instance;
 	private Dictionary<string, Item> items;
 
+	public Dictionary<string, string> allHintDic;
+
 	private int timeSinceGameStart = 0;
 	public bool isPaused = false;
 
@@ -15,6 +17,7 @@ public class GameController : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad (this);
+			allHintDic = new Dictionary<string, string>();
 		} else {
 			DestroyImmediate(gameObject);
 		}
@@ -60,7 +63,15 @@ public class GameController : MonoBehaviour {
 		ItemState[] itemsState = JsonReader.readItemsState();
 		List<string> noReqItems = new List<string> ();
 		List<string> initiallyHiddenItems = new List<string> ();
+
 		foreach (ItemState itemState in itemsState) {
+
+			if (itemState.type.Equals(Item.EVENT_TYPE)) {
+				if(itemState.idleDialogue.Length > 0 && !allHintDic.ContainsKey(itemState.id) ){
+					allHintDic.Add(itemState.id, itemState.idleDialogue[0]);
+				}
+			}
+
 			if (!items.ContainsKey(itemState.id)) {
 				continue;
 			}
@@ -81,6 +92,8 @@ public class GameController : MonoBehaviour {
 		PlayerController.instance.AddInitialItems (noReqItems);
 		PlayerController.instance.AddInitiallyHiddenItems (initiallyHiddenItems);
 		PlayerController.instance.updatePlayerPositon ();
+		PlayerController.instance.UpdateHintDic ();
+
 		GameObject camera = GameObject.Find ("Main Camera");
 		CameraFollow followCamera = camera.GetComponent<CameraFollow> ();
 		Debug.Log (followCamera);
@@ -157,12 +170,12 @@ public class GameController : MonoBehaviour {
 		foreach (KeyValuePair<string, Item> entry in items) {
 			Item item = entry.Value;
 			if (PlayerController.instance.hideItems.ContainsKey(item.itemId)) {
-				Debug.Log("Hide: " + item.itemId);
+//				Debug.Log("Hide: " + item.itemId);
 				item.gameObject.SetActive(false);
 				continue;
 			}
 			if (PlayerController.instance.unhideItems.ContainsKey(item.itemId)) {
-				Debug.Log("Unhide: " + item.itemId);
+//				Debug.Log("Unhide: " + item.itemId);
 				item.gameObject.SetActive(true);
 				continue;
 			}
@@ -178,5 +191,14 @@ public class GameController : MonoBehaviour {
 		}
 
 		return null;
+	}
+
+	public string GetHint(string itemId) {
+		string respond;
+		bool hasItem = this.allHintDic.TryGetValue(itemId, out respond);
+		if (hasItem) {
+			return respond;
+		}
+		return "";
 	}
 }

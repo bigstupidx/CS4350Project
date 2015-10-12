@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public Dictionary<string, string> restrictedItems;
 	public Dictionary<string, string> hideItems;
 	public Dictionary<string, string> unhideItems;
+	public Dictionary<string, string> hintDic;
 	public double[] position;
 	public int currentLevel;
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad (this);
+			hintDic = new Dictionary<string, string> ();
 		} else {
 			DestroyImmediate(gameObject);
 		}
@@ -36,6 +38,27 @@ public class PlayerController : MonoBehaviour {
 
 		idleTimer = GameController.instance.GetTime ();
 	}
+
+	public void UpdateHintDic()
+	{
+		foreach (string itemId in validItems.Keys) {
+			if( !hintDic.ContainsKey(itemId) )
+			{
+				if(GameController.instance.allHintDic.ContainsKey(itemId) )
+				{
+					string _respond = GameController.instance.GetHint(itemId);
+					hintDic.Add(itemId, _respond);
+				}
+			}
+		}
+
+		foreach (string itemId in restrictedItems.Keys) {
+			if( hintDic.ContainsKey(itemId) ){
+				hintDic.Remove(itemId);
+			}
+		}
+	}
+
 
 	public void AddInitialItems(List<string> initialItems) {
 		foreach (string itemId in initialItems) {
@@ -74,6 +97,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		this.position = saveState.position;
 		this.currentLevel = saveState.currentLevel;
+
+		UpdateHintDic ();
 	}
 
 	public void Save() {
@@ -111,6 +136,7 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.EVENT_TYPE)) {
 			triggeredItems.Add(itemId);
 			validItems.Remove(itemId);
+
 			if (!restrictedItems.ContainsKey(itemId)) {
 				restrictedItems.Add(itemId, "true");
 			}
@@ -134,12 +160,14 @@ public class PlayerController : MonoBehaviour {
 			}
 			validItems.Remove(restrictedItemId);
 		}
+
 		foreach (string hideItemId in item.hideItems) {
 			if (!hideItems.ContainsKey(hideItemId)) {
 				hideItems.Add (hideItemId, "true");
 			}
 			unhideItems.Remove(hideItemId);
 		}
+
 		foreach (string unhideItemId in item.unhideItems) {
 			if (!unhideItems.ContainsKey(unhideItemId)) {
 				unhideItems.Add (unhideItemId, "true");
@@ -148,6 +176,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		idleTimer = GameController.instance.GetTime ();
+		UpdateHintDic ();
 	}
 
 	public void Update()
@@ -163,27 +192,16 @@ public class PlayerController : MonoBehaviour {
 
 	public void displayHint()
 	{
-		if ((Application.loadedLevelName).Contains ("GameScene") ){
-			List<string> items = new List<string> (validItems.Keys);
-			Item validItem = null;
+		if ((Application.loadedLevelName).Contains ("GameScene")) {
+			List<string> allHints = new List<string> (hintDic.Keys);
 
-			if(items.Count > 0){
-				do {
-					int select = Random.Range (0, (items.Count));
+			if (allHints.Count > 0) {
+				int select = Random.Range (0, (allHints.Count));
+				string chosenHint = allHints [select];
 
-					if( select > items.Count-1 ){
-						select = Random.Range (0, (items.Count-1));
-					}
-
-					if(items[select].Length > 0 && GameController.instance != null){
-						validItem = GameController.instance.GetItem (items [select]);
-					}
-				}while(validItem.type.Contains("transition") );
-			} 
-
-			if(validItem != null && validItem.idleDialogue.Length > 0){
-				string respond = validItem.idleDialogue [0];
-				if (respond.Length > 0) {
+				string respond;
+				bool hasItem = hintDic.TryGetValue (chosenHint, out respond);
+				if (hasItem) {
 					GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
 					GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
 				}
