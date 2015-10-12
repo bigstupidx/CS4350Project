@@ -54,7 +54,7 @@
     "id": "ChargePoint",
     "restrictedItems": [ ],
     "requiredItems": [ "InfoCounter" ],
-    "leadItems": [ "TableWithCake", "WishingFountain1" ],
+    "leadItems": [ "TableWithCake" ],
     "eventDialogue": [ "I could power up the phone here!\\...now for my number, 6-7-4-4-6-7-0.\\.....\\'*beep!* Your call cannot be connected. Please try again lat--'\\The phone screen is black again.\\I'm starting to be hungry. What should I do...?" ],
     "defaultDialogue": [ "Someone left their phone wire here.", "People come here to put wires into their phone here during the day." ],
     "idleDialogue": [ "I need power for the phone." ],
@@ -324,7 +324,7 @@
   {
     "id": "WishingFountain1",
     "restrictedItems": [ ],
-    "requiredItems": [ "ChargePoint", "VendingMachine" ],
+    "requiredItems": [ "VendingMachine" ],
     "leadItems": [ "CoinPurse" ],
     "eventDialogue": [ "[Parent] said people throw coins in here to make wishes and the fountain fairies make them happen!\\I have a coin left! Let's make a wish!\\I wish [Parent] is here!\\...\\....\\Nothing happened? Is one coin not enough?" ],
     "defaultDialogue": [ "There are coins in the water.", "There are words in the side, 'Fountain of Wishes'.", "[Parent] once told me there are fairies under the fountain that grant wishes." ],
