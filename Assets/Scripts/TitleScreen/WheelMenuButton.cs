@@ -41,7 +41,7 @@ public class WheelMenuButton : MonoBehaviour {
 			choice = myID;
 
 
-			if(choice == 1 || choice == 2){
+			if(choice == 0 || choice == 1 || choice == 2){
 				// set black screen to begin fading
 				blackScreen.enabled = true;
 				Color tempColor = blackScreen.color;
@@ -87,15 +87,15 @@ public class WheelMenuButton : MonoBehaviour {
 
 			// Change Scene if menu choice selected
 			if(blackScreen.color.a >= 1.0f && choice != -1){
-				if(choice == 1){
+				if (choice == 0) {
+					Debug.Log("TEST");
+					GameController.instance.load();
+				} else if(choice == 1){
 					Application.LoadLevel("PreludeScene");
 				} else if(choice == 2) {
 					Application.LoadLevel("CreditScene");
 				}
-                else if(choice == 2)
-                {
-                    Application.LoadLevel("CreditScene");
-                }
+                
                 choice = -1;
 			}
 		}
