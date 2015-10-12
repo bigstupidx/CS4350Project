@@ -141,6 +141,18 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void load() {
+		PlayerController.instance.Load ();
+		int currentLevel = PlayerController.instance.currentLevel;
+		if (currentLevel == 2) {
+			Application.LoadLevel ("PlatformGameScene");
+		} else if (currentLevel == 1) {
+			Application.LoadLevel ("GroundGameScene");
+		} else if (currentLevel == 0) {
+			Application.LoadLevel ("BasementGameScene");
+		}
+	}
+
 	public void updateItemsVisibility() {
 		foreach (KeyValuePair<string, Item> entry in items) {
 			Item item = entry.Value;
