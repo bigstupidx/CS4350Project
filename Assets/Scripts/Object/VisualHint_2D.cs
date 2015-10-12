@@ -14,7 +14,7 @@ public class VisualHint_2D : MonoBehaviour {
 
 	public int currFrame = 0;
 	private int delay = 5;
-	private int curr = 0;
+	private int counter = 0;
 	public bool isPlayerEntered = false;
 
 	private float startTime = 0.0f;
@@ -38,8 +38,8 @@ public class VisualHint_2D : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		Item curr = GameController.instance.GetItem (this.gameObject.name);
-		myStatus = PlayerController.instance.AbleToTrigger (curr);
+		Item counter = GameController.instance.GetItem (this.gameObject.name);
+		myStatus = PlayerController.instance.AbleToTrigger (counter);
 		isPlayerEntered = true;
 	}
 	
@@ -56,11 +56,11 @@ public class VisualHint_2D : MonoBehaviour {
 			}
 
 			if (startAnimation) {
-				if (curr > delay) {
+				if (counter > delay) {
 					currFrame++;
-					curr = 0;
+					counter = 0;
 				} else
-					curr++;
+					counter++;
 			}
 
 			if (currFrame < spriteLength - 1) {
