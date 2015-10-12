@@ -123,74 +123,72 @@ public class PlayerMovement : MonoBehaviour
 		idleTime = timeBeforeIdle;
 	}
 
-    void FixedUpdate()
-    {
-        // Check mouse input
-        if (Input.GetKey(KeyCode.Mouse0) && PlayerData.MoveFlag && !mouseOverButton)
-        {
-            // Create a ray from the mouse cursor on screen in the direction of the camera.
-            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            // Create a RaycastHit variable to store information about what was hit by the ray.
-            RaycastHit floorHit;
-
-            // Perform the raycast and if it hits something on the floor layer...
-            if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
-            {
-                destination = floorHit.point;
-
-                // Create a vector from the player to the point on the floor the raycast from the mouse hit.
-                Vector3 playerToMouse = floorHit.point - transform.position;
-
-                // Ensure the vector is entirely along the floor plane.
-                playerToMouse.y = 0f;
-
-                // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-                Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-
-                // Set the player's rotation to this new rotation.
-
-                float angle = newRotation.eulerAngles.y;
-
-                //Debug.Log(angle);
-
-                int prevDirection = currDirection;
-
-                // Right
-                if (angle >= 225 && angle <= 315)
-                {
-                    currDirection = leftConst;
-                }
-                //Left
-                else if (angle >= 45 && angle <= 135)
-                {
-                    currDirection = rightConst;
-                }
-                // Up
-                else if (angle >= 315 || angle <= 45)
-                {
-                    currDirection = upConst;
-                }
-                // Down
-                else
-                {
-                    currDirection = downCnst;
-                }
-                if (currDirection != prevDirection)
-                {
-                    currTime = timePerFrame;
-                    currFrame = 0;
-                }
-                isWalking = true;
-                noOfFramesNotMoving = 0;
-            }
-        }
-    }
-
-	void Update ()
+	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
 
+		
+		// Check mouse input
+		if (Input.GetKey(KeyCode.Mouse0) && PlayerData.MoveFlag && !mouseOverButton)
+		{
+			// Create a ray from the mouse cursor on screen in the direction of the camera.
+			Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			
+			// Create a RaycastHit variable to store information about what was hit by the ray.
+			RaycastHit floorHit;
+			
+			// Perform the raycast and if it hits something on the floor layer...
+			if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+			{
+				destination = floorHit.point;
+				
+				// Create a vector from the player to the point on the floor the raycast from the mouse hit.
+				Vector3 playerToMouse = floorHit.point - transform.position;
+				
+				// Ensure the vector is entirely along the floor plane.
+				playerToMouse.y = 0f;
+				
+				// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
+				Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+				
+				// Set the player's rotation to this new rotation.
+				
+				float angle = newRotation.eulerAngles.y;
+				
+				//Debug.Log(angle);
+				
+				int prevDirection = currDirection;
+				
+				// Right
+				if (angle >= 225 && angle <= 315)
+				{
+					currDirection = leftConst;
+				}
+				//Left
+				else if (angle >= 45 && angle <= 135)
+				{
+					currDirection = rightConst;
+				}
+				// Up
+				else if (angle >= 315 || angle <= 45)
+				{
+					currDirection = upConst;
+				}
+				// Down
+				else
+				{
+					currDirection = downCnst;
+				}
+				if (currDirection != prevDirection)
+				{
+					currTime = timePerFrame;
+					currFrame = 0;
+				}
+				isWalking = true;
+				noOfFramesNotMoving = 0;
+			}
+		}
 	
         if(isWalking){
 
