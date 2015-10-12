@@ -64,6 +64,15 @@ public class PlayerController : MonoBehaviour {
 		foreach (string itemId in saveState.restrictedItems) {
 			validItems.Add(itemId, "true");
 		}
+		hideItems = new Dictionary<string, string> ();
+		foreach (string itemId in saveState.hideItems) {
+			hideItems.Add (itemId, "true");
+		}
+		unhideItems = new Dictionary<string, string> ();
+		foreach (string itemId in saveState.unhideItems) {
+			unhideItems.Add (itemId, "true");
+		}
+		this.position = saveState.position;
 		this.currentLevel = saveState.currentLevel;
 	}
 
@@ -72,7 +81,10 @@ public class PlayerController : MonoBehaviour {
 		saveState.triggeredItems = this.triggeredItems;
 		saveState.validItems = new List<string>(this.validItems.Keys);
 		saveState.restrictedItems = new List<string>(this.restrictedItems.Keys);
+		saveState.hideItems = new List<string> (this.hideItems.Keys);
+		saveState.unhideItems = new List<string> (this.unhideItems.Keys);
 		saveState.currentLevel = this.currentLevel;
+		saveState.position = this.position;
 		JsonReader.writePlayerState (saveState);
 	}
 
@@ -107,6 +119,7 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.TRANSITION_TYPE)) {
 			position = item.offset;
 			currentLevel = item.nextLevel;
+			this.Save();
 		}
 
 		foreach (string leadItemId in item.leadItems) {
