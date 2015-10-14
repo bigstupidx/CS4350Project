@@ -15,13 +15,21 @@ public class BlackScreenFading : MonoBehaviour {
 		blackScreenImage = transform.GetComponent<RawImage> ();
 		blackScreenImage.enabled = true;
 	}
+
+	public void TransferToNextScene()
+	{
+		isClearing = false;
+		isTransferingToMain = true;
+	}
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		if(Input.GetKeyDown(KeyCode.Space)){
 			isClearing = false;
 			isTransferingToMain = true;
 		}
+		*/
 
 		if (isClearing) {
 			// Fade Out
