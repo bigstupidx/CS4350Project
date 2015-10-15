@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 	private Dictionary<string, Item> items;
 
 	public Dictionary<string, string> allHintDic;
+	public bool isChapter2Activated = false;
 
 	private int timeSinceGameStart = 0;
 	public bool isPaused = false;
@@ -132,7 +133,8 @@ public class GameController : MonoBehaviour {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
 
-			TraceController.instance.TriggerItem(itemId);
+			if(isChapter2Activated)
+				TraceController.instance.TriggerItem(itemId);
 
 			updateItemsVisibility ();
 			foreach(KeyValuePair<string, Item> entry in items) {

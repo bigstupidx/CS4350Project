@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TraceController : MonoBehaviour {
-
-	public bool isChapter2Activated = false;
+	
 	public List<string> storyList;
 	private LineRenderer lineRenderer;
 	private float counter;
@@ -24,6 +23,7 @@ public class TraceController : MonoBehaviour {
 			DontDestroyOnLoad (this);
 			allItemDic = new Dictionary<string, ItemState>();
 			lineRenderer = transform.GetComponent<LineRenderer>();
+			Init();
 		} else {
 			DestroyImmediate(gameObject);
 		}
@@ -31,8 +31,7 @@ public class TraceController : MonoBehaviour {
 
 	void OnEnable()
 	{
-		if(isChapter2Activated)
-			Init ();
+		Init ();
 	}
 
 	public void Init()
@@ -93,8 +92,6 @@ public class TraceController : MonoBehaviour {
 						destination = GameObject.Find("SewageExit").transform.position;
 					}
 				}
-
-
 			}// end of hasItem
 
 		}// end of item not in same level
@@ -110,14 +107,15 @@ public class TraceController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Application.loadedLevelName.Contains ("GameScene")) {
+		
+		if (Application.loadedLevelName.Contains ("GameScene") && GameController.instance.isChapter2Activated) {
 			lineRenderer.enabled = true;
 		}
 		else
 			lineRenderer.enabled = false;
 
 
-		if (isChapter2Activated) {
+		if (GameController.instance.isChapter2Activated) {
 			if (GameObject.FindGameObjectWithTag ("Player") != null) {
 				origin = GameObject.FindGameObjectWithTag ("Player").transform.position;
 			}

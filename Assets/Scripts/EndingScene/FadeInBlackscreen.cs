@@ -18,6 +18,8 @@ public class FadeInBlackscreen : MonoBehaviour {
 			temp.a += speed * Time.deltaTime;
 			myText.color = temp;
 		} else {
+			TraceController.instance.Init();
+
 			Destroy(GameController.instance);
 			Destroy(PlayerController.instance);
 			Destroy(EndingController.instance);
