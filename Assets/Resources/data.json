@@ -721,7 +721,7 @@
 		"endingPoints": [0, 0, 0, 0, 0],
 		"level": 1,
 		"nextLevel": 1,
-		"offset": [10, 2.0, -19],
+		"offset": [5.68, 2.0, -49.11],
 		"hideItems": [],
 		"unhideItems":[],
 		"isInitiallyHidden": false
@@ -735,10 +735,10 @@
     "eventDialogue": [ ],
     "defaultDialogue": [ "The gates are shut, I can't go through!" ],
     "idleDialogue": [ ],
-    "endingPoints": [ 0, 0, 0, 0, 0 ],
+    "endingPoints": [ 0, 0, 0, 0, 0 ], 
     "level": 1,
     "nextLevel": 1,
-    "offset": [ 10, 2.0, -27 ],
+    "offset": [ 0.1, 2.0 , -48.19],
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false
@@ -755,7 +755,7 @@
 		"endingPoints": [0, 0, 0, 0, 0],
 		"level": 1,
 		"nextLevel": 3,
-		"offset": [7, 2.0, -37],
+		"offset": [-2.52, 2.0, -50.15],
 		"hideItems": [],
 		"unhideItems":[],
 		"isInitiallyHidden": false
