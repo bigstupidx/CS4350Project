@@ -705,7 +705,7 @@
 	    "defaultDialogue": [ ],
 	    "idleDialogue": [ ],
 	    "endingPoints": [ 0, 0, 0, 0, 0],
-	    "offset": [-13.83128, 2.0, -37.29267],
+	    "offset": [-13, 2.0, -47],
 	  	"level": 0,
 	  	"nextLevel": 1
   	},  
