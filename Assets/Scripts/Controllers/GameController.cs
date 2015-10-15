@@ -150,9 +150,12 @@ public class GameController : MonoBehaviour {
 			if (nextLevel == 2) {
 				LevelHandler.Instance.LoadSpecific ("PlatformGameScene");
 			} else if (nextLevel == 1) {
-				LevelHandler.Instance.LoadSpecific ("GroundGameScene");
+				//change this to the indoor scene
+				LevelHandler.Instance.LoadSpecific ("GroundIndoorGameScene");
 			} else if (nextLevel == 0) {
 				LevelHandler.Instance.LoadSpecific ("BasementGameScene");
+			} else if (nextLevel == 3) {
+				LevelHandler.Instance.LoadSpecific ("GroundOutdoorGameScene");
 			}
 		}
 	}
@@ -163,9 +166,11 @@ public class GameController : MonoBehaviour {
 		if (currentLevel == 2) {
 			Application.LoadLevel ("PlatformGameScene");
 		} else if (currentLevel == 1) {
-			Application.LoadLevel ("GroundGameScene");
+			Application.LoadLevel ("GroundIndoorGameScene");
 		} else if (currentLevel == 0) {
 			Application.LoadLevel ("BasementGameScene");
+		} else if (currentLevel == 3) {
+			Application.LoadLevel ("GroundOutdoorGameScene");
 		}
 	}
 
