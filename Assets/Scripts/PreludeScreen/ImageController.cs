@@ -30,7 +30,6 @@ public class ImageController : MonoBehaviour {
 	void Update () {
 
 		float currTime = Time.time - startTime;
-		//Debug.Log ("Curr:" + currTime);
 
 		if (!transitToNextScene) {
 

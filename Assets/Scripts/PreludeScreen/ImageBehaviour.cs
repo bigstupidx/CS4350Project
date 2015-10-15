@@ -20,6 +20,10 @@ public class ImageBehaviour : MonoBehaviour {
 	void OnEnable () {
 		fadeInState = true;
 		GetComponent<Image> ().color = new Color(1.0f,1.0f,1.0f, 0.01f);
+
+		if (isSelectionFrame) {
+			selectionEnabled = true;
+		}
 	}
 
 	public void SetParentID ()
@@ -40,10 +44,10 @@ public class ImageBehaviour : MonoBehaviour {
 		if (selectionEnabled) {
 			GetComponent<Image>().color = Color.white;
 			if(gameObject.name.Contains("Left") ){
-				GameObject.Find("CutsceneImage_Right").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
+				GameObject.Find("CutsceneImage_Right").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.51f);
 			}
 			else
-				GameObject.Find("CutsceneImage_Left").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
+				GameObject.Find("CutsceneImage_Left").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.51f);
 		}
 	}
 
@@ -58,11 +62,11 @@ public class ImageBehaviour : MonoBehaviour {
 
 		if (isSelectionFrame) {
 			// fade in till max
-			if (newAlpha.a < 1.0f && !selectionEnabled) {
+			if (newAlpha.a < 0.5f){// && !selectionEnabled) {
 				newAlpha.a += (speed * Time.deltaTime);
 				GetComponent<Image> ().color = newAlpha;
 			} else {  // hit max already
-				selectionEnabled = true;
+				//selectionEnabled = true;
 
 				if(reference.hasSelectionMade){
 					GetComponent<Image> ().color = new Color(1.0f,1.0f,1.0f, 0.5f);

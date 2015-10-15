@@ -1,0 +1,22 @@
+[
+	{
+		"id": "Ending1",
+		"sequence": [ "PlatformExitSign", "ControlStation", "InfoCounter", "ChargePoint", "TableWithCake", "BigBench", "BlackCat", "CounterShelves", "DeadBlackCat", "GiantScratches", "BigPlasticBox" ]
+	},
+	{
+		"id": "Ending2",
+		"sequence": [ "PlatformExitSign", "ControlStation", "OldMan", "VendingMachine", "Sink", "Dustbin", "HungryDog", "StoreShelves", "WaterCooler", "FriendlyDog" ]
+	},
+	{
+		"id": "Ending3",
+		"sequence": [ "PlatformExitSign", "ControlStation", "OldMan", "VendingMachine", "WishingFountain1", "CoinPurse", "WishingFountain2", "JanitorDesk", "StorageShelves" ]
+	},
+	{
+		"id": "Ending4",
+		"sequence": [ "PlatformExitSign", "ControlStation", "StationExitSign", "TrainMap", "FlowerPot", "CafeCounter", "AdvertisementBoard", "LostRing" ]
+	},
+	{
+		"id": "Ending5",
+		"sequence": [ "PlatformExitSign", "ControlStation", "StationExitSign", "TrainMap", "Johnny1", "BrokenBottle", "Johnny2", "Johnny3" ]
+	}
+]

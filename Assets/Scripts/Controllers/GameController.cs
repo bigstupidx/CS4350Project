@@ -131,6 +131,9 @@ public class GameController : MonoBehaviour {
 		if (PlayerController.instance.AbleToTrigger(item)) {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
+
+			TraceController.instance.TriggerItem(itemId);
+
 			updateItemsVisibility ();
 			foreach(KeyValuePair<string, Item> entry in items) {
 				entry.Value.ItemTriggered(item);

@@ -721,7 +721,7 @@
 		"endingPoints": [0, 0, 0, 0, 0],
 		"level": 1,
 		"nextLevel": 1,
-		"offset": [5, 2.0, -48],
+		"offset": [10, 2.0, -19],
 		"hideItems": [],
 		"unhideItems":[],
 		"isInitiallyHidden": false
@@ -738,7 +738,7 @@
     "endingPoints": [ 0, 0, 0, 0, 0 ],
     "level": 1,
     "nextLevel": 1,
-    "offset": [ -2, 2.0, -48 ],
+    "offset": [ 10, 2.0, -27 ],
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false
