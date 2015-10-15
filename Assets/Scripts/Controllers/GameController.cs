@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour {
 			Application.LoadLevel ("BakeryGameScene");
 		} else if (currentLevel == 5) {
 			Application.LoadLevel ("CStoreGameScene");
-		} else if (currentLevel == 5) {
+		} else if (currentLevel == 6) {
 			Application.LoadLevel ("ToiletGameScene");
 		}
 	}
