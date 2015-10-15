@@ -52,7 +52,8 @@ public class TraceController : MonoBehaviour {
 		}
 
 		lineRenderer.SetPosition (0, origin);
-		lineRenderer.SetWidth (0.2f, 0.2f);
+		lineRenderer.SetWidth (0.15f, 0.15f);
+		lineRenderer.SetColors (new Color (1.0f, 1.0f, 1.0f, 1.0f), new Color (1.0f, 1.0f, 1.0f, 0.2f));
 		
 		SetDestination (storyList [0]);
 		
@@ -62,39 +63,43 @@ public class TraceController : MonoBehaviour {
 
 	public void SetDestination(string _itemName)
 	{
-		GameObject target = GameObject.Find (_itemName);
+		if(Application.loadedLevelName.Contains("GameScene") ){
 
-		if (target != null) {
-			destination = target.transform.position;
-		} else { // target possible not on the same level
-			ItemState temp;
-			bool hasItem = allItemDic.TryGetValue(_itemName, out temp);
+			GameObject target = GameObject.Find (_itemName);
 
-			if(hasItem)
-			{
-				if(PlayerController.instance.currentLevel != temp.level)
+			if (target != null) {
+				destination = target.transform.position;
+			} else { // target possible not on the same level
+				ItemState temp;
+				bool hasItem = allItemDic.TryGetValue(_itemName, out temp);
+
+				if(hasItem)
 				{
-					// if player at platform, target at ground
-					if(PlayerController.instance.currentLevel == 2 && temp.level != 2)
+					if(PlayerController.instance.currentLevel != temp.level)
 					{
-						destination = GameObject.Find("EscalatorDown").transform.position;
+						// if player at platform, target at ground
+						if(PlayerController.instance.currentLevel == 2 && temp.level != 2)
+						{
+							destination = GameObject.Find("EscalatorDown").transform.position;
+						}
+						else if(PlayerController.instance.currentLevel == 1 && temp.level == 2)
+						{
+							destination = GameObject.Find("EscalatorUp").transform.position;
+						}
+						else if(PlayerController.instance.currentLevel == 1 && temp.level == 0)
+						{
+							destination = GameObject.Find("SewageEntrance").transform.position;
+						}
+						else if(PlayerController.instance.currentLevel == 0 && temp.level != 0) // this part need to change
+						{
+							destination = GameObject.Find("SewageExit").transform.position;
+						}
 					}
-					else if(PlayerController.instance.currentLevel == 1 && temp.level == 2)
-					{
-						destination = GameObject.Find("EscalatorUp").transform.position;
-					}
-					else if(PlayerController.instance.currentLevel == 1 && temp.level == 0)
-					{
-						destination = GameObject.Find("SewageEntrance").transform.position;
-					}
-					else if(PlayerController.instance.currentLevel == 0 && temp.level != 0) // this part need to change
-					{
-						destination = GameObject.Find("SewageExit").transform.position;
-					}
-				}
-			}// end of hasItem
+				}// end of hasItem
 
-		}// end of item not in same level
+			}// end of item not in same level
+
+		}
 	}
 
 	public void TriggerItem(string _item)
@@ -124,11 +129,10 @@ public class TraceController : MonoBehaviour {
 				SetDestination (storyList [0]);
 			}
 			
-//			if (GameObject.FindGameObjectWithTag ("Environment") != null) {
-//				float newY = GameObject.FindGameObjectWithTag ("Environment") .transform.position.y;
-//				origin.y = newY;
-//				destination.y = newY;
-//			}
+			if (GameObject.Find ("Floor") != null) {
+				float newY = GameObject.Find ("Floor") .transform.position.y;
+				origin.y = destination.y = (newY + 0.3f);
+			}
 
 			lineRenderer.SetPosition (0, origin);
 			lineRenderer.SetPosition (1, destination);
