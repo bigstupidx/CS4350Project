@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void Reset()
+	{
+		Init ();
+	}
+
 	public void Init() {
 		triggeredItems = new List<string>();
 		validItems = new Dictionary<string, string> ();
@@ -192,7 +197,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void displayHint()
 	{
-		if ((Application.loadedLevelName).Contains ("GameScene")) {
+		if ((Application.loadedLevelName).Contains ("GameScene") && !EndingController.instance.isChapter2Activated) {
 			List<string> allHints = new List<string> (hintDic.Keys);
 
 			if (allHints.Count > 0) {

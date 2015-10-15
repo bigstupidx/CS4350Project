@@ -15,6 +15,7 @@ public class EndingController : MonoBehaviour {
 	private const int ENDING_LIMIT = 100;
 
 	static public EndingController instance;
+	public bool isChapter2Activated = false;
 
 	int[] endings;
 	public EndingType deathReason;
@@ -30,6 +31,11 @@ public class EndingController : MonoBehaviour {
 
 	public void Init() {
 		endings = new int[(int) EndingType.EndingCount];
+	}
+
+	public void ResetEndingController(bool _activateChapter2) {
+		endings = new int[(int) EndingType.EndingCount];
+		isChapter2Activated = _activateChapter2;
 	}
 
 	public void ItemTriggered(Item item) {

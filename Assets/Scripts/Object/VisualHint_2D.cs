@@ -38,8 +38,13 @@ public class VisualHint_2D : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		Item counter = GameController.instance.GetItem (this.gameObject.name);
-		myStatus = PlayerController.instance.AbleToTrigger (counter);
+		Item target = GameController.instance.GetItem (this.gameObject.name);
+		myStatus = PlayerController.instance.AbleToTrigger (target);
+
+		if(EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0)
+		{
+			myStatus = TraceController.instance.storyList[0].Contains(this.gameObject.name);
+		}
 		isPlayerEntered = true;
 	}
 	
@@ -85,7 +90,12 @@ public class VisualHint_2D : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		if(isPlayerEntered)
-			myStatus = PlayerController.instance.AbleToTrigger ( GameController.instance.GetItem (this.gameObject.name) );
+		if (isPlayerEntered) {
+			myStatus = PlayerController.instance.AbleToTrigger (GameController.instance.GetItem (this.gameObject.name));
+			if(EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0)
+			{
+				myStatus = TraceController.instance.storyList[0].Contains(this.gameObject.name);
+			}
+		}
 	}
 }

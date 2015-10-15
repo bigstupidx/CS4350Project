@@ -42,10 +42,14 @@ public class Displaytextbox : MonoBehaviour {
 			if (feedText.ind == -1 ){	// textbox is not fed yet
 
 				if (colliderName.Length < 1) { // player stand at out of nowhere
-					if(PlayerData.ParentGenderId == 1) // Male Parent
-						feedText.SetText ("Papa?");
-					else if(PlayerData.ParentGenderId == 2) // Female Parent
-						feedText.SetText ("Mama?");
+					if( EndingController.instance.isChapter2Activated )
+						feedText.SetText ("Amari..");
+					else{
+						if(PlayerData.ParentGenderId == 1) // Male Parent
+							feedText.SetText ("Papa?");
+						else if(PlayerData.ParentGenderId == 2) // Female Parent
+							feedText.SetText ("Mama?");
+					}
 					textBox.TurnOnTextbox( false ); // means do not fade out
 
 					// Automated flip text
@@ -59,7 +63,12 @@ public class Displaytextbox : MonoBehaviour {
 				{
 					Item curr = GameController.instance.GetItem (colliderName);
 					bool status = PlayerController.instance.AbleToTrigger (curr);
-					string respond = curr.GetRespond (status);
+					if(EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0)
+					{
+						status = TraceController.instance.storyList[0].Contains(colliderName);
+					}
+
+					string respond = curr.GetRespond (status, EndingController.instance.isChapter2Activated);
 
 					if(respond.Length > 0){		// not empty respond 
 						transform.GetComponent <PlayerMovement>().StopMoving ();//PlayerData.MoveFlag = false;	// disable player move

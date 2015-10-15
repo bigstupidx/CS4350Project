@@ -9,7 +9,6 @@ public class GameController : MonoBehaviour {
 	private Dictionary<string, Item> items;
 
 	public Dictionary<string, string> allHintDic;
-	public bool isChapter2Activated = false;
 
 	private int timeSinceGameStart = 0;
 	public bool isPaused = false;
@@ -22,6 +21,11 @@ public class GameController : MonoBehaviour {
 		} else {
 			DestroyImmediate(gameObject);
 		}
+	}
+
+	public void Reset()
+	{
+		SetStartTime ();
 	}
 
 	public void SetStartTime()
@@ -120,7 +124,14 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("Game over: Death by Train Accident");
 			break;
 		}
-		LevelHandler.Instance.LoadSpecific ("EndingScene");
+		if (EndingController.instance.isChapter2Activated) {	// this part need to change
+			Destroy(GameController.instance);
+			Destroy(PlayerController.instance);
+			EndingController.instance.ResetEndingController(false);
+			LevelHandler.Instance.LoadSpecific ("TitleScene");
+		}
+		else
+			LevelHandler.Instance.LoadSpecific ("EndingScene");
 		//Application.LoadLevel ("EndingScene");
 	}
 
@@ -133,7 +144,7 @@ public class GameController : MonoBehaviour {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
 
-			if(isChapter2Activated)
+			if(EndingController.instance.isChapter2Activated)
 				TraceController.instance.TriggerItem(itemId);
 
 			updateItemsVisibility ();

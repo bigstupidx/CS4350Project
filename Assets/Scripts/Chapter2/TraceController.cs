@@ -104,7 +104,6 @@ public class TraceController : MonoBehaviour {
 
 	public void TriggerItem(string _item)
 	{
-		Debug.Log("Input: " + _item + ", curr DEST: " + storyList[0] );
 		if (storyList [0].CompareTo (_item) == 0) {
 			storyList.RemoveAt (0);
 		}
@@ -113,14 +112,14 @@ public class TraceController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (Application.loadedLevelName.Contains ("GameScene") && GameController.instance.isChapter2Activated) {
+		if (Application.loadedLevelName.Contains ("GameScene") && EndingController.instance.isChapter2Activated) {
 			lineRenderer.enabled = true;
 		}
 		else
 			lineRenderer.enabled = false;
 
 
-		if (GameController.instance.isChapter2Activated) {
+		if (EndingController.instance.isChapter2Activated) {
 			if (GameObject.FindGameObjectWithTag ("Player") != null) {
 				origin = GameObject.FindGameObjectWithTag ("Player").transform.position;
 			}

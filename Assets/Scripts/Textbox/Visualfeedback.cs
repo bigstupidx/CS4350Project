@@ -30,7 +30,10 @@ public class Visualfeedback : MonoBehaviour {
 			Item curr = GameController.instance.GetItem (colliderName);
 			bool status = PlayerController.instance.AbleToTrigger (curr);
 			
-			//Debug.Log ("status + " + status);
+			if(EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0)
+			{
+				status = TraceController.instance.storyList[0].Contains(colliderName);
+			}
 
 			if (status) {//if it is interactable
 				transform.GetComponentInChildren<Renderer>().material.SetFloat("_Outline", 0.001f);
