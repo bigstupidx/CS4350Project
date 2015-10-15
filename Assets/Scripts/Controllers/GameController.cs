@@ -169,6 +169,12 @@ public class GameController : MonoBehaviour {
 				LevelHandler.Instance.LoadSpecific ("BasementGameScene");
 			} else if (nextLevel == 3) {
 				LevelHandler.Instance.LoadSpecific ("GroundOutdoorGameScene");
+			} else if (nextLevel == 4) {
+				LevelHandler.Instance.LoadSpecific ("BakeryGameScene");
+			} else if (nextLevel == 5) {
+				LevelHandler.Instance.LoadSpecific ("CStoreGameScene");
+			} else if (nextLevel == 6) {
+				LevelHandler.Instance.LoadSpecific ("ToiletGameScene");
 			}
 		}
 	}
@@ -184,6 +190,12 @@ public class GameController : MonoBehaviour {
 			Application.LoadLevel ("BasementGameScene");
 		} else if (currentLevel == 3) {
 			Application.LoadLevel ("GroundOutdoorGameScene");
+		} else if (currentLevel == 4) {
+			Application.LoadLevel ("BakeryGameScene");
+		} else if (currentLevel == 5) {
+			Application.LoadLevel ("CStoreGameScene");
+		} else if (currentLevel == 6) {
+			Application.LoadLevel ("ToiletGameScene");
 		}
 	}
 
