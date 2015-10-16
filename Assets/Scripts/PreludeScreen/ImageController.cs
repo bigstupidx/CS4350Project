@@ -46,9 +46,9 @@ public class ImageController : MonoBehaviour {
 				if (hasSelectionMade) {
 					if (!imageList [1].activeSelf && !imageList [2].activeSelf) {
 						if (PlayerData.ParentGenderId == 1)  // chosen papa
-							imageList [0].GetComponent<Image> ().sprite = chosenResult [1];
-						else  // chosen mama
 							imageList [0].GetComponent<Image> ().sprite = chosenResult [2];
+						else  // chosen mama
+							imageList [0].GetComponent<Image> ().sprite = chosenResult [1];
 
 						transitToNextScene = true;
 						if (!imageList [0].activeSelf) {
@@ -94,6 +94,7 @@ public class ImageController : MonoBehaviour {
 				else{
 					hasPartOneCompleted = true;
 					startTime = Time.time;
+					GameObject.Find ("BGM").GetComponent<AudioSource>().Stop();
 					GetComponent<AudioSource> ().clip = preludeSfx[0];
 					GetComponent<AudioSource> ().Play ();
 					rollingText.SetActive(true);

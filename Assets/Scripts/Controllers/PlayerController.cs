@@ -190,7 +190,10 @@ public class PlayerController : MonoBehaviour {
 		int timeDiff = ( (currTime - idleTimer) / 60) % 60;
 
 		if( timeDiff >= 30 ){
-			displayHint();
+
+			if( !GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().isActivated ){
+				displayHint();
+			}
 			idleTimer = currTime;
 		}
 	}
