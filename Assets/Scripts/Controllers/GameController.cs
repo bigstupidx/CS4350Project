@@ -234,4 +234,45 @@ public class GameController : MonoBehaviour {
 		}
 		return "";
 	}
+
+	public string[] getCorePath() {
+		string[] triggeredItems = PlayerController.instance.triggeredItems.ToArray();
+		Dictionary<string, int> triggeredDict = new Dictionary<string, int> ();
+		for (int i = 0; i < triggeredItems.Length; i++) {
+			triggeredDict.Add(triggeredItems[i], i);
+		}
+		ItemState[] itemsState = JsonReader.readItemsState();
+		Dictionary<string, ItemState> itemDict = new Dictionary<string, ItemState> ();
+		Dictionary<string, string> path = new Dictionary<string, string> ();
+		foreach (ItemState itemState in itemsState) {
+			itemDict.Add(itemState.id, itemState);
+		}
+		string lastItemId = triggeredItems [triggeredItems.Length - 1];
+		dfs (null, lastItemId, itemDict, triggeredDict, path);
+		List<string> list = new List<string> ();
+		ItemState item = itemDict [lastItemId];
+		list.Add (item.id);
+		while (item.requiredItems.Length != 0) {
+			item = itemDict[path[item.id]];
+			list.Add(item.id);
+		}
+		list.Reverse ();
+
+		return list.ToArray();
+	}
+
+	public void dfs(string previousItemId, string itemId, Dictionary<string, ItemState> itemDict, Dictionary<string, int> triggeredDict, Dictionary<string, string> path) {
+		ItemState item = itemDict [itemId];
+		if (previousItemId != null) {
+			path [previousItemId] = itemId;
+		}
+		if (item.requiredItems.Length == 0) {
+			return;
+		}
+		foreach (string prereqItemId in item.requiredItems) {
+			if (triggeredDict[prereqItemId] != null && triggeredDict[prereqItemId] < triggeredDict[itemId]) {
+				dfs (itemId, prereqItemId, itemDict, triggeredDict, path);
+			}
+		}
+	}
 }
