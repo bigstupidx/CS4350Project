@@ -6,19 +6,52 @@ public class ImageBehaviour : MonoBehaviour {
 
 	public bool fadeInState = true;
 	public bool isSelectionFrame = false;
-	 
+
+	public bool isMoving = false;
+	public bool isMoveLeft = false;
+	public bool isZoomIn = false;
+	public float moveSpeed = 5.0f;
 	private float speed = 0.3f;
 	private ImageController reference;
 
 	public bool selectionEnabled = false;
+	public Vector3 initialPosition;
+	public Vector3 initialScale = new Vector3 (1.1f, 1.1f, 1.0f);
 
 	void Start()
 	{
 		reference = GameObject.Find ("ImageController").GetComponent<ImageController> ();
+		//transform.position = initialPosition;
 	}
 
 	void OnEnable () {
+
 		fadeInState = true;
+		transform.position = initialPosition;
+		transform.localScale = initialScale;
+
+		if (isMoving) {
+			int dir = Random.Range (1, 999);
+			int zoom = Random.Range (1, 999);
+
+			if(transform.name.CompareTo("CutsceneImage_Centre") != 0){
+				isMoveLeft = false;
+				isZoomIn = false;
+				if(dir%2 == 0)
+					isMoveLeft = true;
+				if(zoom%2 == 0)
+					isZoomIn = true;
+			}
+			else{
+				isMoveLeft = !isMoveLeft;
+
+				if(isMoveLeft)
+					transform.position = new Vector3( 200.0f, initialPosition.y, initialPosition.z);
+				else
+					transform.position = new Vector3( 700.0f, initialPosition.y, initialPosition.z);
+			}
+
+		}
 		GetComponent<Image> ().color = new Color(1.0f,1.0f,1.0f, 0.01f);
 
 		if (isSelectionFrame) {
@@ -50,11 +83,6 @@ public class ImageBehaviour : MonoBehaviour {
 				GameObject.Find("CutsceneImage_Left").GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.51f);
 		}
 	}
-
-	public void Fading()
-	{
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -76,7 +104,30 @@ public class ImageBehaviour : MonoBehaviour {
 			}
 
 		} else {
-			if (newAlpha.a >= 1.0f) {
+
+			if( isMoving ){
+				if(transform.name.CompareTo("CutsceneImage_Centre") != 0){
+					if( isZoomIn ){
+						Vector3 newScale = transform.localScale;
+						newScale.x += (moveSpeed*0.0005f) * Time.deltaTime;
+						newScale.y += (moveSpeed*0.0005f) * Time.deltaTime;
+						transform.localScale = newScale;
+					}else{
+						Vector3 newScale = transform.localScale;
+						newScale.x -= (moveSpeed*0.0005f) * Time.deltaTime;
+						newScale.y -= (moveSpeed*0.0005f) * Time.deltaTime;
+						transform.localScale = newScale;
+					}
+				}
+
+				if( isMoveLeft )
+					transform.Translate (moveSpeed * Vector3.right * Time.deltaTime);
+				else
+					transform.Translate (moveSpeed * Vector3.left * Time.deltaTime);
+			}
+
+
+			if (newAlpha.a >= 1.5f) {
 				fadeInState = false;
 			} else if (newAlpha.a < 0.0f) {
 				if(reference.hasSelectionMade && reference.transitToNextScene){

@@ -11,6 +11,7 @@ public class ImageController : MonoBehaviour {
 
 	private bool hasPartOneCompleted = false;
 	public Sprite[] partOneFrame;
+	public Sprite[] partOneText;
 	private int index = 0;
 
 	public GameObject[] imageList; // [ 0 - center, 1 - left, 2 - right ]
@@ -32,6 +33,7 @@ public class ImageController : MonoBehaviour {
 		}
 
 		startTime = Time.time;
+		preludeCredit.SetActive (true);
 	}
 	
 	// Update is called once per frame
@@ -60,7 +62,7 @@ public class ImageController : MonoBehaviour {
 					}
 
 				} else {
-					if (currTime > 15.0f) {
+					if (currTime > 16.0f) {
 						if (!imageList [0].activeSelf) {
 							if (!imageList [1].activeSelf && !imageList [2].activeSelf) {
 								selectionText.SetActive (true);
@@ -68,12 +70,12 @@ public class ImageController : MonoBehaviour {
 								imageList [1].SetActive (true);
 							}
 						}
-					} else if (currTime > 5.0f) {
+					} else if (currTime > 6.0f) {
 						if (!imageList [0].activeSelf) {
 							imageList [0].SetActive (true);
 							imageList [0].GetComponent<Image> ().sprite = chosenResult [0];
 						}
-					} else if (currTime > 2.0f) {
+					} else if (currTime > 3.0f) {
 						imageList [0].SetActive (true);
 					} else {
 				
@@ -86,18 +88,35 @@ public class ImageController : MonoBehaviour {
 			if (currTime > 4.4f) {
 				if( index < partOneFrame.Length ){
 					if(!preludeCredit.activeSelf){
+
+						if(!rollingText.activeSelf && index < partOneText.Length){
+							rollingText.SetActive(true);
+							rollingText.GetComponent<Image>().sprite = partOneText[index];
+						}
+
+						if( index == partOneFrame.Length-1 )
+						{
+							preludeCredit.GetComponent<ImageBehaviour>().isMoving = false;
+						}
+
 						preludeCredit.SetActive(true);
-						preludeCredit.GetComponent<Image>().sprite = partOneFrame[index++];
+						preludeCredit.GetComponent<Image>().sprite = partOneFrame[index];
 						startTime = Time.time;
+						index++;
+
 					}
 				}
 				else{
-					hasPartOneCompleted = true;
-					startTime = Time.time;
-					GameObject.Find ("BGM").GetComponent<AudioSource>().Stop();
-					GetComponent<AudioSource> ().clip = preludeSfx[0];
-					GetComponent<AudioSource> ().Play ();
-					rollingText.SetActive(true);
+					if( preludeCredit.GetComponent<Image>().color.a <= 0.5f ){
+						hasPartOneCompleted = true;
+						startTime = Time.time;
+						GameObject.Find ("BGM").GetComponent<AudioSource>().Stop();
+						GetComponent<AudioSource> ().clip = preludeSfx[0];
+						GetComponent<AudioSource> ().Play ();
+					}
+					else{
+						GameObject.Find ("BGM").GetComponent<AudioSource>().volume = (GameObject.Find ("BGM").GetComponent<AudioSource>().volume - 0.1f *Time.deltaTime);
+					}
 				}
 			}
 		

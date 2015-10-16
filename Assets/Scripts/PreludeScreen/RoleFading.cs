@@ -6,10 +6,14 @@ public class RoleFading : MonoBehaviour {
 
 	//public GameObject reference;
 	public bool isStaticText = false;
+
 	public string[] texts;
 	private Text myText;
 	private int curr = 0;
 	private float startTime;
+
+	public Vector3 origin;
+	public Vector3 destination;
 
 	// Use this for initialization
 	void Start () {
@@ -52,11 +56,9 @@ public class RoleFading : MonoBehaviour {
 
 			if(transform.position.x > 500.0f){
 				Vector3 newPos = transform.position;
-				newPos.x = 0.0f;//-100.0f;
+				newPos.x = 0.0f;
 				transform.position = newPos;
-				//reference.SetActive(true);
 				this.ResetAlpha(false);
-				//this.gameObject.SetActive(false);
 			}
 		}
 
@@ -76,21 +78,5 @@ public class RoleFading : MonoBehaviour {
 		} else {
 			FadeIn(true);
 		}
-
-
-
-		/*
-		if ( (Time.time - startTime) > 1.5f) {
-			curr++;
-
-			if (curr >= texts.Length)
-				this.gameObject.SetActive (false);
-			else{
-				myText.text = texts [curr];
-				startTime = Time.time;
-			}
-		}
-		*/
-
 	}
 }
