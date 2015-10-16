@@ -189,30 +189,29 @@ public class PlayerController : MonoBehaviour {
 		int currTime = GameController.instance.GetTime () ;
 		int timeDiff = ( (currTime - idleTimer) / 60) % 60;
 
-		if( timeDiff >= 30 ){
-
-			if( !GameObject.Find("TextBox").GetComponent<FadeInFadeOut>().isActivated ){
-				displayHint();
+		if ((Application.loadedLevelName).Contains ("GameScene") && !EndingController.instance.isChapter2Activated) {
+			if (timeDiff >= 30) {
+				if (!GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().isActivated) {
+					displayHint ();
+				}
+				idleTimer = currTime;
 			}
-			idleTimer = currTime;
 		}
 	}
 
 	public void displayHint()
 	{
-		if ((Application.loadedLevelName).Contains ("GameScene") && !EndingController.instance.isChapter2Activated) {
-			List<string> allHints = new List<string> (hintDic.Keys);
+		List<string> allHints = new List<string> (hintDic.Keys);
 
-			if (allHints.Count > 0) {
-				int select = Random.Range (0, (allHints.Count));
-				string chosenHint = allHints [select];
+		if (allHints.Count > 0) {
+			int select = Random.Range (0, (allHints.Count));
+			string chosenHint = allHints [select];
 
-				string respond;
-				bool hasItem = hintDic.TryGetValue (chosenHint, out respond);
-				if (hasItem) {
-					GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
-					GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
-				}
+			string respond;
+			bool hasItem = hintDic.TryGetValue (chosenHint, out respond);
+			if (hasItem) {
+				GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
+				GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
 			}
 		}
 	}
