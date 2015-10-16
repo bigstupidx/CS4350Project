@@ -91,6 +91,10 @@ public class VisualHint_2D : MonoBehaviour {
 	void LateUpdate()
 	{
 		if (isPlayerEntered) {
+			if (player.transform.GetComponent<Displaytextbox>().colliderName.Length < 1) {
+				player.transform.GetComponent<Displaytextbox>().colliderName = this.gameObject.name;
+			}
+
 			myStatus = PlayerController.instance.AbleToTrigger (GameController.instance.GetItem (this.gameObject.name));
 			if(EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0)
 			{
