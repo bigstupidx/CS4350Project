@@ -123,7 +123,6 @@ public class PlayerMovement : MonoBehaviour
 		idleTime = timeBeforeIdle;
 	}
 
-
 	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
