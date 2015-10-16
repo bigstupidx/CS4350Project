@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour {
 			} else if (nextLevel == 3) {
 				LevelHandler.Instance.LoadSpecific ("GroundOutdoorGameScene");
 			} else if (nextLevel == 4) {
-				LevelHandler.Instance.LoadSpecific ("BakeryGameScene");
+				LevelHandler.Instance.LoadSpecific ("CafeGameScene");
 			} else if (nextLevel == 5) {
 				LevelHandler.Instance.LoadSpecific ("CStoreGameScene");
 			} else if (nextLevel == 6) {
@@ -191,7 +191,7 @@ public class GameController : MonoBehaviour {
 		} else if (currentLevel == 3) {
 			Application.LoadLevel ("GroundOutdoorGameScene");
 		} else if (currentLevel == 4) {
-			Application.LoadLevel ("BakeryGameScene");
+			Application.LoadLevel ("CafeGameScene");
 		} else if (currentLevel == 5) {
 			Application.LoadLevel ("CStoreGameScene");
 		} else if (currentLevel == 6) {

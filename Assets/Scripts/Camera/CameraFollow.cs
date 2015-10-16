@@ -2,7 +2,10 @@
 using System.Collections;
 
 public class CameraFollow : MonoBehaviour
-{
+{	
+	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-1.6f, 17.5f, -20.2f);
+	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(3.5f, 17.88f, -23.8f);
+	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(4.74f, 19.63f, -27.1f);
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(1.31f, 15.18f, -19.64f);
 	public readonly static Vector3 fixedOffsetLevel2 = new Vector3(0.08f, 5.08f, -3.98f);
 	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(1.31f, 15.18f, -19.64f);
@@ -27,7 +30,14 @@ public class CameraFollow : MonoBehaviour
 	}
 
 	public void switchOffset(int level) {
-		if (level == 3){
+		if (level == 6) {
+			offset = fixedOffsetLevel6;
+		} else if (level == 5) {
+			offset = fixedOffsetLevel5;
+		} else if (level == 4) {
+			offset = fixedOffsetLevel4;
+		}
+		else if (level == 3){
 			offset = fixedOffsetLevel3;
 		} else if (level == 2) {
 			offset = fixedOffsetLevel2;
