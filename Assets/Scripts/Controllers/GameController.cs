@@ -126,6 +126,10 @@ public class GameController : MonoBehaviour {
 			break;
 		}
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
+
+			if(isAndroidVersion)
+				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
+
 			Destroy(GameController.instance);
 			Destroy(PlayerController.instance);
 			EndingController.instance.ResetEndingController(false);
@@ -160,6 +164,14 @@ public class GameController : MonoBehaviour {
 
 	public void transition (Item item) {
 		if (item.type == Item.TRANSITION_TYPE) {
+
+			if(EndingController.instance.isChapter2Activated)
+				TraceController.instance.TurnOffLine();
+
+			if(isAndroidVersion)
+				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
+
+
 			int nextLevel = item.nextLevel;
 			if (nextLevel == 2) {
 				LevelHandler.Instance.LoadSpecific ("PlatformGameScene");

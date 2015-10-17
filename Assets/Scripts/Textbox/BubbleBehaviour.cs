@@ -36,6 +36,10 @@ public class BubbleBehaviour : MonoBehaviour {
 
 		if (!GameController.instance.isAndroidVersion)
 			gameObject.SetActive (false);
+
+		if (EndingController.instance.isChapter2Activated) {
+			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
+		}
 	}
 
 	public void TouchDetected()
@@ -44,16 +48,27 @@ public class BubbleBehaviour : MonoBehaviour {
 		if(!GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isFadingOn)
 			target.GetComponent<Displaytextbox> ().TriggerTextbox ();
 	}
-	
-	void OnEnable()
+
+	public void TurnOffButton()
 	{
+		transform.GetComponent<Image> ().enabled = false;
+	}
+	
+	void Reset()
+	{
+		transform.GetComponent<Image> ().enabled = true;
 		currFrame = 0;
+		if (EndingController.instance.isChapter2Activated) {
+			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
+		}else
+			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 	
 	void FixedUpdate()
 	{
 		if (canTrigger) {
-			transform.GetComponent<Image> ().enabled = true;
+			if(!transform.GetComponent<Image> ().enabled)
+				Reset();
 			Vector3 playerPos = target.transform.position;
 			playerPos.x += 0.2f; 
 			playerPos.y += 1.0f; 
@@ -71,7 +86,7 @@ public class BubbleBehaviour : MonoBehaviour {
 				currFrame = 0;
 			}
 		} else {
-			transform.GetComponent<Image> ().enabled = false;
+			TurnOffButton();
 		}
 	}
 }

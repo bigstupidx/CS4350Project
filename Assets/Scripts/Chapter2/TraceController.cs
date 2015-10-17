@@ -16,6 +16,8 @@ public class TraceController : MonoBehaviour {
 
 	static public TraceController instance;
 	public Dictionary<string, ItemState> allItemDic;
+
+	private GameObject player;
 	
 	public void Awake() {
 		if (instance == null) {
@@ -32,6 +34,11 @@ public class TraceController : MonoBehaviour {
 	void OnEnable()
 	{
 		Init ();
+	}
+
+	public void TurnOffLine()
+	{
+		lineRenderer.enabled = false;
 	}
 
 	public void Init()
@@ -58,6 +65,9 @@ public class TraceController : MonoBehaviour {
 		SetDestination (storyList [0]);
 		
 		distance = Vector3.Distance (origin, destination);
+
+		if (player == null)
+			player = GameObject.FindGameObjectWithTag ("Player");
 	}
 
 
@@ -78,27 +88,75 @@ public class TraceController : MonoBehaviour {
 					if(PlayerController.instance.currentLevel != temp.level)
 					{
 						// if player at platform, target at ground
-						if(PlayerController.instance.currentLevel == 2 && temp.level != 2)
-						{
-							destination = GameObject.Find("EscalatorDown").transform.position;
+						switch(PlayerController.instance.currentLevel){
+						case 6:
+							if(temp.level != 6){
+								destination = GameObject.Find("Transition_ToiletDoorInside").transform.position;
+							}
+							break;
+						
+						case 5:
+							if(temp.level != 5){
+								destination = GameObject.Find("Transition_ShopDoorInside").transform.position;
+							}
+							break;
+
+						case 4:
+							if(temp.level != 4){
+								destination = GameObject.Find("Transition_CafeDoorInside").transform.position;
+							}
+							break;
+
+						case 3:
+							if(temp.level <= 2){
+								destination = GameObject.Find("Transition_StationEntrance").transform.position;
+							}else if(temp.level == 6){
+								destination = GameObject.Find("Transition_ToiletDoorOutside").transform.position;
+							}else if(temp.level == 5){
+								destination = GameObject.Find("Transition_ShopDoorOutside").transform.position;
+							}else if(temp.level == 4){
+								destination = GameObject.Find("Transition_CafeDoorOutside").transform.position;
+							}
+							break;
+							
+						case 2:
+							if(temp.level != 2){
+								destination = GameObject.Find("Transition_EscalatorDown").transform.position;
+							}
+							break;
+							
+						case 1:
+							if(temp.level >= 3){
+								if(player.transform.position.x < 1.0f ){
+									destination = GameObject.Find("Transition_GantryInside").transform.position;
+								}
+								else
+									destination = GameObject.Find("Transition_StationExit").transform.position;
+							}
+							else {
+								if( player.transform.position.x > GameObject.Find("Transition_GantryInside").transform.position.x )
+									destination = GameObject.Find("Transition_GantryOutside").transform.position;
+								else {
+									if(temp.level == 2){
+										destination = GameObject.Find("Transition_EscalatorUp").transform.position;
+									}else{
+										destination = GameObject.Find("Transition_SewageEntrance").transform.position;
+									}
+								}
+							}
+							break;
+
+						case 0:
+							if(temp.level != 0){
+								destination = GameObject.Find("Transition_SewageExit").transform.position;
+							}
+							break;
 						}
-						else if(PlayerController.instance.currentLevel == 1 && temp.level == 2)
-						{
-							destination = GameObject.Find("EscalatorUp").transform.position;
-						}
-						else if(PlayerController.instance.currentLevel == 1 && temp.level == 0)
-						{
-							destination = GameObject.Find("SewageEntrance").transform.position;
-						}
-						else if(PlayerController.instance.currentLevel == 0 && temp.level != 0) // this part need to change
-						{
-							destination = GameObject.Find("SewageExit").transform.position;
-						}
-					}
+
+					} //  end of not same level
 				}// end of hasItem
 
 			}// end of item not in same level
-
 		}
 	}
 
@@ -111,17 +169,21 @@ public class TraceController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		/*
 		if (Application.loadedLevelName.Contains ("GameScene") && EndingController.instance.isChapter2Activated) {
 			lineRenderer.enabled = true;
 		}
 		else
 			lineRenderer.enabled = false;
+			*/
 
 
-		if (EndingController.instance.isChapter2Activated) {
-			if (GameObject.FindGameObjectWithTag ("Player") != null) {
-				origin = GameObject.FindGameObjectWithTag ("Player").transform.position;
+		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene")) {
+			if (player == null)
+				player = GameObject.FindGameObjectWithTag ("Player");
+			else {
+				origin = player.transform.position;
 			}
 
 			if (storyList.Count > 0) {
@@ -133,9 +195,15 @@ public class TraceController : MonoBehaviour {
 				origin.y = destination.y = (newY + 0.3f);
 			}
 
-			lineRenderer.SetPosition (0, origin);
-			lineRenderer.SetPosition (1, destination);
-		}
+			if (Vector3.Distance (origin, destination) < 0.5f)
+				lineRenderer.enabled = false;
+			else {
+				lineRenderer.enabled = true;
+				lineRenderer.SetPosition (0, origin);
+				lineRenderer.SetPosition (1, destination);
+			}
+		} else
+			TurnOffLine ();
 	}
 }
 
