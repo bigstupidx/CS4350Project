@@ -14,6 +14,7 @@ public class ImageController : MonoBehaviour {
 	public Sprite[] partOneText;
 	private int index = 0;
 
+	private Vector3[] oriPos = new Vector3[3]; // [ 0 - center, 1 - left, 2 - right ]
 	public GameObject[] imageList; // [ 0 - center, 1 - left, 2 - right ]
 	public Sprite[] chosenResult;  // [ 1 - chosen papa, 2 - chosen mama ]
 	public bool hasSelectionMade = false;
@@ -28,11 +29,18 @@ public class ImageController : MonoBehaviour {
 	void Start () {
 		color_Clear = new Color (1.0f, 1.0f, 1.0f, 0.0f);
 
+		int index = 0;
 		foreach (GameObject img in imageList) {
+			oriPos[index] = img.transform.position;
 			img.GetComponent<Image>().color = color_Clear;
+			img.SetActive(false);
+			index++;
 		}
 
+		oriPos [0] = preludeCredit.transform.position;
+
 		startTime = Time.time;
+
 		preludeCredit.SetActive (true);
 	}
 	
@@ -73,10 +81,12 @@ public class ImageController : MonoBehaviour {
 					} else if (currTime > 6.0f) {
 						if (!imageList [0].activeSelf) {
 							imageList [0].SetActive (true);
+							imageList[0].GetComponent<ImageBehaviour>().SetPosition(oriPos[2]);
 							imageList [0].GetComponent<Image> ().sprite = chosenResult [0];
 						}
 					} else if (currTime > 3.0f) {
 						imageList [0].SetActive (true);
+						imageList[0].GetComponent<ImageBehaviour>().SetPosition(oriPos[1]);
 					} else {
 				
 					}
@@ -99,7 +109,9 @@ public class ImageController : MonoBehaviour {
 							preludeCredit.GetComponent<ImageBehaviour>().isMoving = false;
 						}
 
+
 						preludeCredit.SetActive(true);
+						preludeCredit.GetComponent<ImageBehaviour>().SetPosition(oriPos[0]);
 						preludeCredit.GetComponent<Image>().sprite = partOneFrame[index];
 						startTime = Time.time;
 						index++;

@@ -5,12 +5,13 @@ using System.Collections.Generic;
 
 public class BlinkingButton : MonoBehaviour {
 
-	private string fileName = "Sprites/DialogueBoxButton/ui_convo_triangle";
-	private int spriteLength = 23;
+	public string fileName = "Sprites/DialogueBoxButton/ui_convo_triangle";
+	public int spriteLength = 23;
 
 	public List<Sprite> spriteSheet;
 	private int currFrame = 0;
-	private bool toggleNext = true;
+	private int counter = 0;
+	public int delay = 2;
 
 	//private Image spriteRenderer;	
 
@@ -36,17 +37,26 @@ public class BlinkingButton : MonoBehaviour {
 		currFrame = 0;
 	}
 
+	public void SetTargetPosition(Vector3 _targetPos)
+	{
+		transform.position = _targetPos;
+	}
+
 	void FixedUpdate()
 	{
 		if (!GameController.instance.isPaused) {
 			if (currFrame < spriteLength - 1) {
-				if (toggleNext)
+				if (counter == delay){
 					currFrame++;
+					counter = 0;
+				}
+				else
+					counter++;
 
 				transform.GetComponent<Image> ().sprite = spriteSheet [currFrame];
-				toggleNext = !toggleNext;
 			} else {
 				currFrame = 0;
+				counter = 0;
 			}
 		}
 	}

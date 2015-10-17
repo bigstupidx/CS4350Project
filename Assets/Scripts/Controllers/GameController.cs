@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
 	public Dictionary<string, string> allHintDic;
 
 	private int timeSinceGameStart = 0;
+	public bool isAndroidVersion = false;
 	public bool isPaused = false;
 
 	public void Awake() {

@@ -129,76 +129,87 @@ public class PlayerMovement : MonoBehaviour
 
 		
 		// Check mouse input
-		if (Input.GetKey(KeyCode.Mouse0) && PlayerData.MoveFlag && !mouseOverButton)
-		{
+		if (Input.GetKey (KeyCode.Mouse0) ){
+
+			if(PlayerData.MoveFlag && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
-			Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
 			// Create a RaycastHit variable to store information about what was hit by the ray.
 			RaycastHit floorHit;
 			
-			// Perform the raycast and if it hits something on the floor layer...
-			if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
-			{
-				destination = floorHit.point;
-				
-				// Create a vector from the player to the point on the floor the raycast from the mouse hit.
-				Vector3 playerToMouse = floorHit.point - transform.position;
-				
-				// Ensure the vector is entirely along the floor plane.
-				playerToMouse.y = 0f;
-				
-				// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-				Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-				
-				// Set the player's rotation to this new rotation.
-				
-				float angle = newRotation.eulerAngles.y;
-				
-				//Debug.Log(angle);
-				
-				int prevDirection = currDirection;
-				
-				// Right
-				if (angle >= 225 && angle <= 315)
-				{
-					currDirection = leftConst;
-				}
-				//Left
-				else if (angle >= 45 && angle <= 135)
-				{
-					currDirection = rightConst;
-				}
-				// Up
-				else if (angle >= 315 || angle <= 45)
-				{
-					currDirection = upConst;
-				}
-				// Down
-				else
-				{
-					currDirection = downCnst;
-				}
-				if (currDirection != prevDirection)
-				{
-					currTime = timePerFrame;
-					currFrame = 0;
-				}
-				isWalking = true;
-				noOfFramesNotMoving = 0;
-			}
-		}
-	
-        if(isWalking){
+				// Perform the raycast and if it hits something on the floor layer...
+				if (Physics.Raycast (camRay, out floorHit, camRayLength, floorMask)) {
 
+					//GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour>().alreadySelected = false;
+					destination = floorHit.point;
+				
+					// Create a vector from the player to the point on the floor the raycast from the mouse hit.
+					Vector3 playerToMouse = floorHit.point - transform.position;
+				
+					// Ensure the vector is entirely along the floor plane.
+					playerToMouse.y = 0f;
+				
+					// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
+					Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
+				
+					// Set the player's rotation to this new rotation.
+				
+					float angle = newRotation.eulerAngles.y;
+				
+					//Debug.Log(angle);
+				
+					int prevDirection = currDirection;
+				
+					// Right
+					if (angle >= 225 && angle <= 315) {
+						currDirection = leftConst;
+					}
+				//Left
+				else if (angle >= 45 && angle <= 135) {
+						currDirection = rightConst;
+					}
+				// Up
+				else if (angle >= 315 || angle <= 45) {
+						currDirection = upConst;
+					}
+				// Down
+				else {
+						currDirection = downCnst;
+					}
+					if (currDirection != prevDirection) {
+						currTime = timePerFrame;
+						currFrame = 0;
+					}
+					isWalking = true;
+					noOfFramesNotMoving = 0;
+				}
+			}// end of move flag is true
+			else{
+				if(GameController.instance.isAndroidVersion){
+					if (GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isActivated) {
+						isWalking = false;
+						PlayerData.MoveFlag = false;
+
+						if(!GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isFadingOn &&
+						   !GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour>().alreadySelected){
+								transform.GetComponent<Displaytextbox> ().TriggerTextbox ();
+							}
+						}
+				}
+			}
+		}// end of mouse down
+
+	
+		if (isWalking) {
 
 			// Movement
 			Vector3 movement = destination - transform.position;
 
-		
+	
 			float moveDifference = lastMovement.magnitude - movement.magnitude;
 
-			if(moveDifference < noMovementThreshold)
+			if (moveDifference < noMovementThreshold)
 				noOfFramesNotMoving++;
 			else
 				noOfFramesNotMoving = 0;
@@ -209,86 +220,75 @@ public class PlayerMovement : MonoBehaviour
 
 			// End movement if close to destination
 			movement = destination - transform.position;
-			if(movement.magnitude <= closeToDestinationThreshold){
+			if (movement.magnitude <= closeToDestinationThreshold) {
 				isWalking = false;
 				noOfFramesNotMoving = 0;
 			}
 
 			//End walk if stuck for too many frames
-			if(noOfFramesNotMoving > maxNoOfFramesNotMoving){
+			if (noOfFramesNotMoving > maxNoOfFramesNotMoving) {
 				isWalking = false;
 				noOfFramesNotMoving = 0;
 			}
 		}
 
-        // Change Idle Timer
-        if (currDirection == downCnst && !isWalking)
-        {
-            float prevTime = idleTime;
-            idleTime += Time.deltaTime;
-            if(idleTime >= timeBeforeIdle)
-            {
+		// Change Idle Timer
+		if (currDirection == downCnst && !isWalking) {
+			float prevTime = idleTime;
+			idleTime += Time.deltaTime;
+			if (idleTime >= timeBeforeIdle) {
 				isIdlePlaying = true;
-            }
-        }
-        else
-        {
+			}
+		} else {
 			isIdlePlaying = false;
-            idleTime = 0;
-        }
+			idleTime = 0;
+		}
 
 
-        // Check for sprite frame update
-        if (currTime >= timePerFrame) {
-			if(isWalking){
-				currFrame = (currFrame+1) % walkFrames;
+		// Check for sprite frame update
+		if (currTime >= timePerFrame) {
+			if (isWalking) {
+				currFrame = (currFrame + 1) % walkFrames;
 			} else {
 
-				if (!isIdlePlaying)
-                {
-                    currFrame = 0;
-                }
-                else
-                {
-					if(currFrame == repeatedFrame){
-						if(idleMidTime < timePauseInIdle){
+				if (!isIdlePlaying) {
+					currFrame = 0;
+				} else {
+					if (currFrame == repeatedFrame) {
+						if (idleMidTime < timePauseInIdle) {
 							idleMidTime += Time.deltaTime;
-						}
-						else{
+						} else {
 							idleMidTime = 0;
 							currFrame++;
 						}
-					}
-					else{
-                    	currFrame++;
+					} else {
+						currFrame++;
 					}
 
 
-					if(currFrame >= idleFrames)
-                    {
-                        currFrame = 0;
-                        idleTime = 0;
+					if (currFrame >= idleFrames) {
+						currFrame = 0;
+						idleTime = 0;
 						isIdlePlaying = false;
-                    }
+					}
 
 
-                }
+				}
 
 
 			}
 
 			int frameToLoad = 0;
-            // Load New Frame
-            //Walkframe 0-7 
-            if (idleTime < timeBeforeIdle)
+			// Load New Frame
+			//Walkframe 0-7 
+			if (idleTime < timeBeforeIdle)
 				frameToLoad = currDirection * 8 + currFrame;
-            
-			else if(isIdlePlaying){
-				frameToLoad = idleConst *  8 + currFrame;
+			else if (isIdlePlaying) {
+				frameToLoad = idleConst * 8 + currFrame;
 			}
 
-            //Debug.Log(currFrame);
-			spriteRenderer.sprite = sprites[frameToLoad];
+			//Debug.Log(currFrame);
+			spriteRenderer.sprite = sprites [frameToLoad];
 			currTime = 0;
 
 		}

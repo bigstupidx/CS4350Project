@@ -15,19 +15,26 @@ public class ImageBehaviour : MonoBehaviour {
 	private ImageController reference;
 
 	public bool selectionEnabled = false;
-	public Vector3 initialPosition;
+	private Vector3 initialPosition = new Vector3(0.0f,0.0f, 0.0f);
 	public Vector3 initialScale = new Vector3 (1.1f, 1.1f, 1.0f);
 
 	void Start()
 	{
-		reference = GameObject.Find ("ImageController").GetComponent<ImageController> ();
-		//transform.position = initialPosition;
+		reference = GameObject.Find ("ImageController").GetComponent<ImageController> ();	
+		if (GameController.instance.isAndroidVersion) {
+			moveSpeed *= 1.2f;
+		}
+	}
+
+	public void SetPosition(Vector3 _pos)
+	{
+		transform.position = _pos;
 	}
 
 	void OnEnable () {
 
 		fadeInState = true;
-		transform.position = initialPosition;
+		//transform.position = initialPosition;
 		transform.localScale = initialScale;
 
 		if (isMoving) {
@@ -46,9 +53,9 @@ public class ImageBehaviour : MonoBehaviour {
 				isMoveLeft = !isMoveLeft;
 
 				if(isMoveLeft)
-					transform.position = new Vector3( 200.0f, initialPosition.y, initialPosition.z);
+					transform.position = GameObject.Find("ImageController").GetComponent<ImageController>().imageList[2].transform.position;
 				else
-					transform.position = new Vector3( 700.0f, initialPosition.y, initialPosition.z);
+					transform.position = GameObject.Find("ImageController").GetComponent<ImageController>().imageList[1].transform.position;
 			}
 
 		}
