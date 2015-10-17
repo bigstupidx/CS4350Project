@@ -27,11 +27,20 @@ public class SelectionSceneController : MonoBehaviour {
 
     Vector3[] movePoints = { new Vector3(0.0f, 0.5f, 1.5f), new Vector3(-2.0f, 0.5f, 1.5f), new Vector3(-2.0f, 0.5f, -0.5f), new Vector3(0.0f, 0.5f, -0.5f), new Vector3(2.0f, 0.5f, -0.5f), new Vector3(2.0f, 0.5f, 1.5f) };
     AmariMovement selected;
+	
+	// Automated flip text
+	public bool isAutomatedStart = false;
+	private float duration = 2.0f;
+	private float startTime = 0.0f;
+	private int currIndex = 0;
 
 	// Use this for initialization
 	void Start () {
         feedText = GameObject.Find("ObjectRespond").GetComponent<FeedTextFromObject>();
         textBox = GameObject.Find("TextBox").GetComponent<FadeInFadeOut>();
+
+		if (GameController.instance.isAndroidVersion)
+			isAutomatedStart = true;
 
         AmariMovement.speed = 3.5f;
         m1pt = 1;
@@ -44,6 +53,21 @@ public class SelectionSceneController : MonoBehaviour {
         blackScreenImage.color = Color.black;
 
     }
+
+	public bool ToggleTextRespond()
+	{
+		Debug.Log ("Enter");
+		currIndex++;
+		feedText.UpdateText(currIndex);
+		
+		if (currIndex == feedText.multipleResponds.Length)
+		{
+			textBox.TurnOnTextbox(true);
+			isReadyToProceed = true;
+			return false;
+		}
+		return true;
+	}
 
     // Update is called once per frame
     void FixedUpdate() {
@@ -70,10 +94,25 @@ public class SelectionSceneController : MonoBehaviour {
                 feedText.SetText("Are you here to bring Amari to you spouse's place?\\Yes, it's getting late. We should really be going.\\Alright then...");
                 textBox.TurnOnTextbox(false);
                 isFedText = true;
+
+				if(isAutomatedStart)
+					startTime = Time.time;
             }
+
+			if(isAutomatedStart && feedText.getIsMoreThanOneLine() )
+			{
+				if( (Time.time - startTime) > duration) {
+					if(ToggleTextRespond())
+						startTime = Time.time;
+				}
+			}
 
             if (Input.GetKeyUp(KeyCode.Space) && stage == 0 && feedText.getIsMoreThanOneLine())
             {
+				if(currIndex < feedText.multipleResponds.Length)
+					ToggleTextRespond();
+
+				/*
                 feedText.ind++;
                 if (feedText.ind == feedText.multipleResponds.Length)
                 {
@@ -83,7 +122,7 @@ public class SelectionSceneController : MonoBehaviour {
                 }
                 else if (feedText.ind < feedText.multipleResponds.Length) {
                     textBox.TurnOnTextbox(false);
-                }
+                }*/
 
             }
 
@@ -91,6 +130,10 @@ public class SelectionSceneController : MonoBehaviour {
             {
                 feedText.SetText("...Children, get into your lines!");
                 textBox.TurnOnTextbox(false);
+
+				if(isAutomatedStart)
+					startTime = Time.time;
+
                 m1.FaceFront();
                 m2.FaceFront();
                 m3.FaceFront();
@@ -162,8 +205,16 @@ public class SelectionSceneController : MonoBehaviour {
         }
         else if(stage == 1) {
             //timer += Time.deltaTime;
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
+			bool canProceed = false;
+			if (isAutomatedStart) {
+				if( (Time.time - startTime) > duration) {
+					isAutomatedStart = false;
+					canProceed = true;
+				}
+			}
+
+			if (Input.GetKeyUp(KeyCode.Space) || canProceed)
+			{
 
                 textBox.TurnOnTextbox(true);
                 AmariMovement.speed = 3.0f;

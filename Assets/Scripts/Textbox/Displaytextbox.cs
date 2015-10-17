@@ -83,12 +83,9 @@ public class Displaytextbox : MonoBehaviour {
 
 	public void TriggerTextbox()
 	{
-		Debug.Log ("Textbox: " + textBox.isActivated);
-
 		if (textBox.isActivated) {
 			toggleRespond ();
 		}else{
-			Debug.Log("Enter trigger");
 			// feedtext into textbox
 			if (colliderName.Length < 1) { // player stand at out of nowhere
 				if (EndingController.instance.isChapter2Activated)
@@ -99,7 +96,6 @@ public class Displaytextbox : MonoBehaviour {
 					else if (PlayerData.ParentGenderId == 2) // Female Parent
 						feedText.SetText ("Mama?");
 				}
-				Debug.Log("Set text out of no where");
 			} else { //  player near to interactable object
 				Item curr = GameController.instance.GetItem (colliderName);
 				bool status = PlayerController.instance.AbleToTrigger (curr);
@@ -167,7 +163,7 @@ public class Displaytextbox : MonoBehaviour {
 		}
 
 		if (GameController.instance.isAndroidVersion) {
-			if (colliderName.Length > 0) {
+			if (colliderName.Length > 0 && !colliderName.Contains("Transition_") ) {
 				interactButton.canTrigger = true;
 			} else
 				interactButton.canTrigger = false;

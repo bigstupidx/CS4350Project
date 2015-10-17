@@ -20,7 +20,7 @@
     "id": "ControlStation",
     "restrictedItems": [ ],
     "requiredItems": [ "PlatformExitSign" ],
-    "leadItems": [ "InfoCounter", "OldMan", "StationExitSign", "GantryInside" ],
+    "leadItems": [ "InfoCounter", "OldMan", "StationExitSign", "Transition_GantryInside" ],
     "eventDialogue": [ "Lets try this button.\\There is a click! The gates is now opened." ],
     "defaultDialogue": [ "There is a button and some pens and papers.", "This desk is very neat." ],
     "idleDialogue": [ "I need to open the gates and go out to find [Parent]." ],
@@ -562,11 +562,11 @@
     "pt2EventDialogue": ["After putting aside finding the ring we lost that morning, Amari was running around the platform.\\The child was laughing as if playing with someone no one can see.\\%He/She% was running close to the edge of the platform.\\And fell."]
 	},
 	{
-		"id": "CafeDoorOutside",
+		"id": "Transition_CafeDoorOutside",
         "type": "transition",
 		"restrictedItems": [ ],
 		"requiredItems": [ ],
-		"leadItems": [ "CafeDoorInside" ],
+		"leadItems": [ "Transition_CafeDoorInside" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": [ ],
 		"idleDialogue": [ ],
@@ -579,11 +579,11 @@
 		"isInitiallyHidden": false
 	},
   {
-    "id": "CafeDoorInside",
+    "id": "Transition_CafeDoorInside",
     "type": "transition",
     "restrictedItems": [ ],
     "requiredItems": [ ],
-    "leadItems": [ "CafeDoorOutside" ],
+    "leadItems": [ "Transition_CafeDoorOutside" ],
     "eventDialogue": [ ],
     "defaultDialogue": [ ],
     "idleDialogue": [ ],
@@ -596,11 +596,11 @@
     "isInitiallyHidden": false
   },
 	{
-		"id": "ShopDoorOutside",
+		"id": "Transition_ShopDoorOutside",
 		"type": "transition",
 		"restrictedItems": [ ],
 		"requiredItems": [ ],
-		"leadItems": [ "ShopDoorInside" ],
+		"leadItems": [ "Transition_ShopDoorInside" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": [ ],
 		"idleDialogue": [ ],
@@ -613,11 +613,11 @@
 		"isInitiallyHidden": false
 	},
   {
-    "id": "ShopDoorInside",
+    "id": "Transition_ShopDoorInside",
     "type": "transition",
     "restrictedItems": [ ],
     "requiredItems": [ ],
-    "leadItems": [ "ShopDoorOutside" ],
+    "leadItems": [ "Transition_ShopDoorOutside" ],
     "eventDialogue": [ ],
     "defaultDialogue": [ ],
     "idleDialogue": [ ],
@@ -630,11 +630,11 @@
     "isInitiallyHidden": false
   },
 	{
-		"id": "ToiletDoorOutside",
+		"id": "Transition_ToiletDoorOutside",
 		"type": "transition",
 		"restrictedItems": [ ],
 		"requiredItems": [ ],
-		"leadItems": [ "ToiletDoorInside" ],
+		"leadItems": [ "Transition_ToiletDoorInside" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": [ ],
 		"idleDialogue": [ ],
@@ -647,11 +647,11 @@
 		"isInitiallyHidden": false
 	},
   {
-    "id": "ToiletDoorInside",
+    "id": "Transition_ToiletDoorInside",
     "type": "transition",
     "restrictedItems": [ ],
     "requiredItems": [ ],
-    "leadItems": [ "ToiletDoorOutside" ],
+    "leadItems": [ "Transition_ToiletDoorOutside" ],
     "eventDialogue": [ ],
     "defaultDialogue": [ ],
     "idleDialogue": [ ],
@@ -664,10 +664,10 @@
     "isInitiallyHidden": false
   },
     {
-		"id": "StorageDoorOutside",
+		"id": "Transition_StorageDoorOutside",
 		"restrictedItems": [ ],
 		"requiredItems": ["JanitorDesk"],
-		"leadItems": [ "StorageDoorInside" ],
+		"leadItems": [ "Transition_StorageDoorInside" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": ["'Storage and Fountain Pump'. But I can't open the door."],
 		"idleDialogue": [ ],
@@ -679,10 +679,10 @@
 		"isInitiallyHidden": false
 	},
 	{
-		"id": "StorageDoorInside",
+		"id": "Transition_StorageDoorInside",
 		"restrictedItems": [ ],
 		"requiredItems": [ ],
-		"leadItems": [ "StorageDoorOutside" ],
+		"leadItems": [ "Transition_StorageDoorOutside" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": [ ],
 		"idleDialogue": [ ],
@@ -694,7 +694,7 @@
 		"isInitiallyHidden": false
 	},
 	{
-	  	"id": "SewageEntrance",
+	  	"id": "Transition_SewageEntrance",
 	  	"type": "transition",
 	  	"restrictedItems": [ ],
 	    "requiredItems": [ ],
@@ -708,7 +708,7 @@
 	  	"nextLevel": 0
   	},  
   	{
-	  	"id": "SewageExit",
+	  	"id": "Transition_SewageExit",
 	  	"type": "transition",
 	  	"restrictedItems": [ ],
 	    "requiredItems": [ ],
@@ -722,11 +722,11 @@
 	  	"nextLevel": 1
   	},  
   	{
-		"id": "GantryInside",
+		"id": "Transition_GantryInside",
 		"type": "transition",
 		"restrictedItems": [ ],
 		"requiredItems": [ "ControlStation" ],
-		"leadItems": [ "GantryOutside" ],
+		"leadItems": [ "Transition_GantryOutside" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": ["The gates are shut, I can't go through!"],
 		"idleDialogue": [ ],
@@ -739,11 +739,11 @@
 		"isInitiallyHidden": false
 	},
   {
-    "id": "GantryOutside",
+    "id": "Transition_GantryOutside",
     "type": "transition",
     "restrictedItems": [ ],
     "requiredItems": [ ],
-    "leadItems": [ "GantryInside" ],
+    "leadItems": [ "Transition_GantryInside" ],
     "eventDialogue": [ ],
     "defaultDialogue": [ "The gates are shut, I can't go through!" ],
     "idleDialogue": [ ],
@@ -756,11 +756,11 @@
     "isInitiallyHidden": false
   },
   	{
-		"id": "StationExit",
+		"id": "Transition_StationExit",
 		"type": "transition",
 		"restrictedItems": [ ],
 		"requiredItems": [ ],
-		"leadItems": [ "StationEntrance" ],
+		"leadItems": [ "Transition_StationEntrance" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": [],
 		"idleDialogue": [ ],
@@ -773,11 +773,11 @@
 		"isInitiallyHidden": false
 	},
 	{
-		"id": "StationEntrance",
+		"id": "Transition_StationEntrance",
 		"type": "transition",
 		"restrictedItems": [ ],
 		"requiredItems": [ ],
-		"leadItems": [ "StationExit" ],
+		"leadItems": [ "Transition_StationExit" ],
 		"eventDialogue": [ ],
 		"defaultDialogue": [],
 		"idleDialogue": [ ],
@@ -790,7 +790,7 @@
 		"isInitiallyHidden": false
 	},
 	{
-	  	"id": "EscalatorDown",
+	  	"id": "Transition_EscalatorDown",
 	  	"type": "transition",
 	  	"restrictedItems": [ ],
 	    "requiredItems": [ ],
@@ -804,7 +804,7 @@
 	  	"nextLevel": 1
   	},
   	{
-	  	"id": "EscalatorUp",
+	  	"id": "Transition_EscalatorUp",
 	  	"type": "transition",
 	  	"restrictedItems": [ ],
 	    "requiredItems": [ ],
