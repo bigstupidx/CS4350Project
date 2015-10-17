@@ -4,8 +4,8 @@ using System.Collections;
 
 public class SelectionSceneController : MonoBehaviour {
 
-    public GeneralMovement teacher;
-    public GeneralMovement parent;
+    public Transform teacher;
+    public Transform parent;
     public AmariMovement m1;
 	public AmariMovement m2;
 	public AmariMovement m3;
@@ -247,7 +247,7 @@ public class SelectionSceneController : MonoBehaviour {
 
                 AmariMovement.speed = 2.0f;
                 Vector3 newDest = selected.transform.position;
-                newDest.z = -2.0f;
+                newDest.z = 1.5f;
                 selected.MoveTo(newDest);
                 stage = 4;
             }

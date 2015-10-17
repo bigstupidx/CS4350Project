@@ -24,7 +24,7 @@ public class AmariMovement : MonoBehaviour {
 	// Sprite Frame Controls
 	const int walkFrames = 8;
 
-	const int downCnst = 0;
+	const int downConst = 0;
 	const int leftConst = 1;
 	const int rightConst = 2;
 	const int upConst = 3;
@@ -60,7 +60,7 @@ public class AmariMovement : MonoBehaviour {
 		
 		// Load Down
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
+			sprites[i+downConst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
 		}
 		
 		// Load Left
@@ -89,7 +89,7 @@ public class AmariMovement : MonoBehaviour {
 	}
 
 	public void FaceFront(){
-		currDirection = downCnst;
+		currDirection = upConst;
 	}
 	
     public void StopMoving()
@@ -151,7 +151,7 @@ public class AmariMovement : MonoBehaviour {
             // Down
             else
             {
-                currDirection = downCnst;
+                currDirection = downConst;
             }
 
 
