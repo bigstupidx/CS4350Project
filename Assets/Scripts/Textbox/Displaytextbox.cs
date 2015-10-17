@@ -165,8 +165,11 @@ public class Displaytextbox : MonoBehaviour {
 		if (GameController.instance.isAndroidVersion) {
 			if (colliderName.Length > 0 && !colliderName.Contains("Transition_") ) {
 				interactButton.canTrigger = true;
-			} else
+				interactButton.itemStatus = PlayerController.instance.AbleToTrigger( GameController.instance.GetItem(colliderName) );
+			} else{
 				interactButton.canTrigger = false;
+				interactButton.itemStatus = false;
+			}
 		}
 		// Automated flip text
 		/*

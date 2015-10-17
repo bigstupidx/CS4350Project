@@ -10,11 +10,13 @@ public class BubbleBehaviour : MonoBehaviour {
 	private string fileName = "Sprites/Textbubble/textbubble_";
 	private int spriteLength = 4;
 	public bool canTrigger = false;
+	public bool itemStatus = false;
 
 	public bool alreadySelected = false;
 	
 	//public List<Texture2D> spriteSheet;
-	public List<Sprite> spriteSheet;
+	public List<Sprite> spriteSheetDefault;
+	public List<Sprite> spriteSheetActive;
 	public int currFrame = 0;
 	private int delay = 25;
 	private int counter = 0;
@@ -23,13 +25,15 @@ public class BubbleBehaviour : MonoBehaviour {
 
 	void Start () {
 
-		spriteSheet = new List<Sprite> (spriteLength);
+		spriteSheetDefault = new List<Sprite> (spriteLength);
+		spriteSheetActive = new List<Sprite> (spriteLength);
 		
 		for (int i = 0; i < spriteLength; i++) {
-			spriteSheet.Add(Resources.Load<Sprite> (fileName + i ) );
+			spriteSheetDefault.Add(Resources.Load<Sprite> (fileName + i ) );
+			spriteSheetActive.Add(Resources.Load<Sprite> (fileName + i + "_highlight") );
 		}
 
-		transform.GetComponent<Image> ().sprite = spriteSheet [0];
+		transform.GetComponent<Image> ().sprite = spriteSheetDefault [0];
 		if (target == null) {
 			target = GameObject.FindGameObjectWithTag("Player");
 		}
@@ -80,8 +84,12 @@ public class BubbleBehaviour : MonoBehaviour {
 			} else
 				counter++;
 			
-			if (currFrame < spriteLength - 1) {
-				transform.GetComponent<Image> ().sprite = spriteSheet [currFrame];
+			if (currFrame < spriteLength) {
+				if(itemStatus)
+					transform.GetComponent<Image> ().sprite = spriteSheetActive[currFrame];
+				else
+					transform.GetComponent<Image> ().sprite = spriteSheetDefault [currFrame];
+
 			} else {
 				currFrame = 0;
 			}

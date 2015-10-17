@@ -320,6 +320,7 @@ public class SelectionSceneController : MonoBehaviour {
                 AmariSelection.selectionDone = false;
                 GameController.instance.SetStartTime();
                 Application.LoadLevel("PlatformGameScene");
+				//Application.LoadLevel("GroundIndoorGameScene");
 			}
 
         }

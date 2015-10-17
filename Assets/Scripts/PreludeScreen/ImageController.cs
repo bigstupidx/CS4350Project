@@ -38,6 +38,7 @@ public class ImageController : MonoBehaviour {
 		}
 
 		oriPos [0] = preludeCredit.transform.position;
+		rollingText.GetComponent<PreludeText> ().PresetLeftAndRight (oriPos [1], oriPos [2]);
 
 		startTime = Time.time;
 
