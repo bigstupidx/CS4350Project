@@ -56,7 +56,7 @@
     "requiredItems": [ "InfoCounter" ],
     "leadItems": [ "TableWithCake" ],
     "eventDialogue": [ "I could power up the phone here!\\...now for my number, 6-7-4-4-6-7-0.\\.....\\'*beep!* Your call cannot be connected. Please try again lat--'\\The phone screen is black again.\\I'm starting to be hungry. What should I do...?" ],
-    "defaultDialogue": [ "Someone left their phone wire here.", "People come here to put wires into their phone here during the day." ],
+    "defaultDialogue": [ "Someone left their phone wire here.", "[Parent] said not to stick my finger into the holes." ],
     "idleDialogue": [ "I need power for the phone." ],
     "endingPoints": [ 1, 0, 1, 0, 0 ],
     "level": 1,
@@ -234,7 +234,7 @@
     "unhideItems": [ "HungryDog" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "It's a simple toilet sink." ],
-    "pt2EventDialogue": [ "After spilling the juice, Amari came here to wash it off %his/her% hands.//To think something as common as spilling a drink could lead up to this... misfortune" ]
+    "pt2EventDialogue": [ "After spilling the juice, Amari came here to wash it off %his/her% hands.\\To think something as common as spilling a drink could lead up to this... misfortune" ]
 
   },
   {
@@ -259,7 +259,7 @@
     "restrictedItems": [ ],
     "requiredItems": [ "Dustbin" ],
     "leadItems": [ "StoreShelves" ],
-    "eventDialogue": [ "Here doggy, have a big nice bone!\\'Bark!' Doggy eats the bone happily.\\Doggy is so cute, like Papa's doggy. But Mama took doggy away one day to a new home.\\I miss playing with Papa's doggy.\\'Bark bark!' Doggy finishes the bone and wags its tail happily.\\Eh, my face is getting itchy, maybe there is cream somewhere to stop the itchy." ],
+    "eventDialogue": [ "Here doggy, have a big nice bone!\\'Bark!' Doggy eats the bone happily.\\Doggy is so cute, but [Parent] always tells me not to play with dogs.\\'Bark bark!' Doggy finishes the bone and wags its tail happily.\\Eh, my face is getting itchy, maybe there is cream somewhere to stop the itchy." ],
     "defaultDialogue": [ "Doggy looks hungry, poor doggy.", "'Bark bark!' Doggy sticks its tongue out and wags its tail.", "Doggy licks the mango juice off the floor." ],
     "idleDialogue": [ "I could feed that doggy with the big bone." ],
     "endingPoints": [ 0, 1, 0, 0, 0 ],
@@ -335,7 +335,7 @@
     "unhideItems": [ "CoinPurse" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari believes that tossing a coin into the fountain would make a wish come true." ],
-    "pt2EventDialogue": [ "To children, the world has fairies and magic that grant wishes.//I didn't think such belief could lead %him/her% into danger." ]
+    "pt2EventDialogue": [ "To children, the world has fairies and magic that grant wishes.\\I didn't think such belief could lead %him/her% into danger." ]
   },
   {
     "id": "CoinPurse",
@@ -375,14 +375,14 @@
     "requiredItems": [ "WishingFountain2" ],
     "leadItems": [ "StorageShelves", "StorageDoorOutside" ],
     "eventDialogue": [ "There is a card here that says 'Storage & Fountain Pump'.\\Maybe it will open the door to the fairies' home." ],
-    "defaultDialogue": [ "There are some cards here and some papers with lines.", "I can't read the words on the paper." ],
+    "defaultDialogue": [ "It's a desk made of wood.", "I can't read the words on the paper." ],
     "idleDialogue": [ "If I am to wake up the fairies, I must first find a way into their home." ],
     "endingPoints": [ 0, 0, 1, 0, 0 ],
     "level": 0,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
-    "pt2DefaultDialogue": [ "An old desk belonging to the janitor." ],
+    "pt2DefaultDialogue": [ "An old desk used by the janitor." ],
     "pt2EventDialogue": [ "The basement isn't somewhere I would let the child go to. Too many things could go wrong there.\\And they did." ]
   },
   {
@@ -390,7 +390,7 @@
     "restrictedItems": [ ],
     "requiredItems": [ "JanitorDesk" ],
     "leadItems": [ ],
-    "eventDialogue": [ "Ah, the lights up there. It must be the fairies!\\I will climb up there and wake them up!" ],
+    "eventDialogue": [ "Ah, there are lights up there. It must be the fairies!\\I will climb up there and wake them up!" ],
     "defaultDialogue": [ "There are a lot of things on these shelves." ],
     "idleDialogue": [ "I have the card to the fairies' home, time to go wake them up!" ],
     "endingPoints": [ 0, 0, 1000, 0, 0 ],
@@ -406,7 +406,7 @@
     "restrictedItems": [ ],
     "requiredItems": [ "ControlStation" ],
     "leadItems": [ "TrainMap" ],
-    "eventDialogue": [ "Maybe if I wait here, [Parent] will come find me.\\.....\\Why isn't [Parent] coming? Is it because I made [Parent] angry this morning when I lost the ring?\\Maybe if I try to ind the ring, [Parent] will come back for me." ],
+    "eventDialogue": [ "Maybe if I wait here, [Parent] will come find me.\\.....\\Why isn't [Parent] coming? Is it because I made [Parent] angry this morning when I lost the ring?\\Maybe if I try to find the ring, [Parent] will come back for me." ],
     "defaultDialogue": [ "It's dark outside the station.", "Mama or Papa brings me to this station every weekday." ],
     "idleDialogue": [ "[Parent] might have left the station for a while, maybe I should wait at the exit for them." ],
     "endingPoints": [ 0, 0, 0, 1, 1 ],
@@ -479,7 +479,7 @@
     "unhideItems": [ "LostRing" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari finds it interesting that the advertisement would sometimes change overnight." ],
-    "pt2EventDialogue": [ "When I tried to snatch back the ring that morning, it fell somewhere.\\And now, seeing Amari trying to look for it.... I regretted what I had said.\\%He/She% was just a child who did not understand things. #He/She# shouldn't had felt the need to make reparations." ]
+    "pt2EventDialogue": [ "When I tried to snatch back the ring that morning, it fell somewhere.\\And now, seeing Amari trying to look for it, I regretted what I had said.\\%He/She% was just a child." ]
   },
   {
     "id": "LostRing",
