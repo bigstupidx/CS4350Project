@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	public double[] position;
 	public int currentLevel;
 
+	private GameObject targetTextbox;
 	private int idleTimer;
 
 	public void Awake() {
@@ -191,7 +192,16 @@ public class PlayerController : MonoBehaviour {
 
 		if ((Application.loadedLevelName).Contains ("GameScene") && !EndingController.instance.isChapter2Activated) {
 			if (timeDiff >= 30) {
-				if (!GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().isActivated) {
+
+				if( targetTextbox == null ){
+					targetTextbox = GameObject.Find("TextBox");
+				}
+
+				if( targetTextbox == null ){
+					targetTextbox = GameObject.Find("TextBox_Android");
+				}
+
+				if (!targetTextbox.GetComponent<FadeInFadeOut> ().isActivated) {
 					displayHint ();
 				}
 				idleTimer = currTime;
@@ -211,7 +221,7 @@ public class PlayerController : MonoBehaviour {
 			bool hasItem = hintDic.TryGetValue (chosenHint, out respond);
 			if (hasItem) {
 				GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
-				GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
+				targetTextbox.GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
 			}
 		}
 	}
