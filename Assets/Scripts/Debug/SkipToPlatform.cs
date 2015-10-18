@@ -14,5 +14,10 @@ public class SkipToPlatform : MonoBehaviour {
         {
             Application.LoadLevel("PlatformGameScene");
         }
+
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            Application.LoadLevel("CharacterSelectionScreen");
+        }
     }
 }
