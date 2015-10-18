@@ -52,6 +52,7 @@ public class Displaytextbox : MonoBehaviour {
 	public void toggleRespond()
 	{
 		if (textBox.isActivated) {
+			interactButton.TurnOffButton();
 			currIndex++;
 			if(currIndex < feedText.multipleResponds.Length){
 				feedText.UpdateText(currIndex);
@@ -66,6 +67,7 @@ public class Displaytextbox : MonoBehaviour {
 	public void TriggerTextbox()
 	{
 		if (textBox.isActivated) {
+			interactButton.TurnOffButton();
 			toggleRespond ();
 		}else{
 			// feedtext into textbox
@@ -145,9 +147,15 @@ public class Displaytextbox : MonoBehaviour {
 
 		if (GameController.instance.isAndroidVersion) {
 			if (colliderName.Length > 0 && !colliderName.Contains("Transition_") ) {
-				interactButton.canTrigger = true;
-				interactButton.itemStatus = PlayerController.instance.AbleToTrigger( GameController.instance.GetItem(colliderName) );
+				if(!textBox.isActivated){
+					interactButton.TurnOnButton();
+					interactButton.canTrigger = true;
+					interactButton.itemStatus = PlayerController.instance.AbleToTrigger( GameController.instance.GetItem(colliderName) );
+				}
+				else
+					interactButton.TurnOffButton();
 			} else{
+				interactButton.TurnOffButton();
 				interactButton.canTrigger = false;
 				interactButton.itemStatus = false;
 			}

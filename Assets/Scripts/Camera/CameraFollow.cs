@@ -67,6 +67,7 @@ public class CameraFollow : MonoBehaviour
 			cameraMode = 3;
 		} else {
 			offset = fixedOffsetLevel2;
+			cameraMode = 1;
 		}
 	}
 

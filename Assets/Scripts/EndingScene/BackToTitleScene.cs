@@ -17,7 +17,8 @@ public class BackToTitleScene : MonoBehaviour {
 	}
 	
 	public void onClick(){
-			Application.LoadLevel ("PlatformGameScene");
+		reference.SetActive(true);
+			//Application.LoadLevel ("PlatformGameScene");
 	}
 
 	void Update()

@@ -56,10 +56,12 @@ public class BubbleBehaviour : MonoBehaviour {
 	public void TurnOffButton()
 	{
 		transform.GetComponent<Image> ().enabled = false;
+		canTrigger = false;
 	}
 	public void TurnOnButton()
 	{
 		transform.GetComponent<Image> ().enabled = true;
+		canTrigger = false;
 	}
 	
 	void Reset()
@@ -77,10 +79,12 @@ public class BubbleBehaviour : MonoBehaviour {
 		if (canTrigger) {
 			if(!transform.GetComponent<Image> ().enabled)
 				Reset();
+			/*
 			Vector3 playerPos = target.transform.position;
 			playerPos.x += 0.2f; 
 			playerPos.y += 1.0f; 
 			transform.position = Camera.main.WorldToScreenPoint (playerPos);
+			*/
 
 			if (counter > delay) {
 				currFrame++;

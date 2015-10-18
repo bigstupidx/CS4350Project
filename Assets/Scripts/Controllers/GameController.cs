@@ -136,7 +136,8 @@ public class GameController : MonoBehaviour {
 			LevelHandler.Instance.LoadSpecific ("TitleScene");
 		} else {
 			LevelHandler.Instance.LoadSpecific ("EndingScene");
-			EndingController.instance.isChapter2Activated = true;
+//			PlayerController.instance.currentLevel = 2;
+//			EndingController.instance.isChapter2Activated = true;
 		}
 		//Application.LoadLevel ("EndingScene");
 	}
