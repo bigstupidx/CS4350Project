@@ -4,8 +4,8 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour
 {	
 	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-1.6f, 17.5f, -20.2f);
-	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(3.5f, 17.88f, -23.8f);
-	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(4.74f, 19.63f, -27.1f);
+	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(3.3f, 23.67f, -26.7f);
+	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(0.2f, 20.56f, -25.44f);
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(5.6f, 13.7f, 14.92f);
 	public readonly static Vector3 fixedOffsetLevel2 = new Vector3(0.08f, 5.08f, -3.98f);
 	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(1.31f, 15.18f, -19.64f);
@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
 
 	// camera setting for ground outside game scene
 	public static float fixedXPosition = -3.45f;
-	public static float fixedYPosition = 3.28f;
+	public static float fixedYPosition = 3.45f;
 	public static float fixedZPosition = -55.2f;
 
 	// camera setting for basement game scene
@@ -84,9 +84,14 @@ public class CameraFollow : MonoBehaviour
 		if (cameraMode == 2) {
 			//Distance towards player
 			//float dist = (targetCamPos-transform.position).magnitude/300.0f;
+			float dist = (target.position.z -transform.position.z);
+			Debug.Log ("distance" + dist);
+
 			targetCamPos.x = fixedXPosition;
 			targetCamPos.y = fixedYPosition;
 			targetCamPos.z = fixedZPosition;
+		
+
 			transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
 			transform.LookAt (target);
 
