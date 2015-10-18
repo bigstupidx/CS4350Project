@@ -4,12 +4,12 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour
 {	
 	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-1.6f, 17.5f, -20.2f);
-	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(3.3f, 23.67f, -26.7f);
+	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(0.4f, 22.37f, -28.1f);
 	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(0.2f, 20.56f, -25.44f);
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(5.6f, 13.7f, 14.92f);
 	public readonly static Vector3 fixedOffsetLevel2 = new Vector3(0.08f, 5.08f, -3.98f);
 	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(1.31f, 15.18f, -19.64f);
-	public readonly static Vector3 fixedOffsetLevel0 = new Vector3 (-0.58f, -1.2f, -6.7f);
+	public readonly static Vector3 fixedOffsetLevel0 = new Vector3 (5.46f, 4.02f, 0.01f);
 
 	// camera mode
 	public static int cameraMode;
@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
 	public static float maxFieldOfView = 60.0f;
 
 	// camera setting for basement game scene
-	public static float Offset = 6f;
+	public static float ZPosition = 3.19f;
 
 	public Transform target;            // The position that that camera will be following.
 	public float followSpeed = 150f;        // The speed with which the camera will be following.
@@ -118,10 +118,7 @@ public class CameraFollow : MonoBehaviour
 		} else if (cameraMode == 3) {
 			targetCamPos = target.position + offset;
 
-			// Camera to move with the player
-			targetCamPos.x += Offset;
-			targetCamPos.y += Offset;
-			targetCamPos.z += Offset;
+			targetCamPos.z = ZPosition;
 
 			transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
 			transform.LookAt(target);
