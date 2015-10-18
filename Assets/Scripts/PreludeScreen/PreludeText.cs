@@ -14,10 +14,11 @@ public class PreludeText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.position = leftPosition;
+		//transform.position = leftPosition;
 		if (GameController.instance.isAndroidVersion) {
 			factor  = 250.0f;
 		}
+		ResetPosition (true);
 	}
 
 	public void PresetLeftAndRight(Vector3 _left, Vector3 _right)
@@ -38,11 +39,11 @@ public class PreludeText : MonoBehaviour {
 		int height = Random.Range (1, 6);
 
 		if (_newDirectionIsLeft) {
-			int left = Random.Range (2, 5);
+			int left = Random.Range (3, 6);
 			transform.position = new Vector3( left* (factor/2) , height * (factor/2), 0.0f);
 			isLeftText = true;
 		} else {
-			int right = Random.Range (5, 9);
+			int right = Random.Range (5, 8);
 			transform.position = new Vector3(right * factor, height * (factor/2), 0.0f);
 			isLeftText = false;
 		}

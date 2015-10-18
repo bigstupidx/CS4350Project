@@ -56,6 +56,8 @@ public class ImageController : MonoBehaviour {
 		GameObject.Find ("BGM").GetComponent<AudioSource>().Stop();
 		GetComponent<AudioSource> ().clip = preludeSfx[0];
 		GetComponent<AudioSource> ().Play ();
+
+		GameObject.Find ("FastForward").GetComponent<Text> ().enabled = false;
 	}
 	
 	// Update is called once per frame
