@@ -4,6 +4,7 @@ using System.Collections;
 
 public class FadeInFadeOut : MonoBehaviour {
 
+	public Sprite[] textboxImages = new Sprite[2];
 	public bool isActivated = false;
 	public bool isFadingOn = false;
 	public float alpha;
@@ -16,10 +17,10 @@ public class FadeInFadeOut : MonoBehaviour {
 	private FeedTextFromObject feedText;
 
 	public GameObject button;
+	public bool eventStatus = false;
 		
 	// Use this for initialization
 	void Start () {
-		//feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
 		feedText = transform.GetComponentInChildren<FeedTextFromObject> ();
 
 		defaultColor = new Color( (148.0f/255.0f) , (159.0f/255.0f), (213.0f/255.0f), defaultAlpha);
@@ -35,12 +36,23 @@ public class FadeInFadeOut : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox> ().toggleRespond ();
 	}
 
+	public void SetEventStatus(bool _status)
+	{
+		eventStatus = _status;
+	}
+
 	public void TurnOnTextbox(bool _fadingOption)
 	{
 		isActivated = true;
 		button.SetActive (true);
 		isFadingOn = _fadingOption;
 		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultAlpha);
+
+		if (!EndingController.instance.isChapter2Activated && eventStatus) {
+			transform.GetComponent<Image> ().sprite = textboxImages [1];
+			gameObject.GetComponent<Image> ().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, 0.8f);
+		} else
+			transform.GetComponent<Image> ().sprite = textboxImages [0];
 	}
 
 	public bool getStatus()

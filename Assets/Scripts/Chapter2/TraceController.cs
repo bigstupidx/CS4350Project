@@ -80,11 +80,13 @@ public class TraceController : MonoBehaviour {
 			if (target != null) {
 				destination = target.transform.position;
 			} else { // target possible not on the same level
+
 				ItemState temp;
 				bool hasItem = allItemDic.TryGetValue(_itemName, out temp);
 
 				if(hasItem)
 				{
+					Debug.Log("Player:" + PlayerController.instance.currentLevel + ", Target: " + temp.level);
 					if(PlayerController.instance.currentLevel != temp.level)
 					{
 						// if player at platform, target at ground

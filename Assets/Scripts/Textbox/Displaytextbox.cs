@@ -35,7 +35,7 @@ public class Displaytextbox : MonoBehaviour {
 			textBoxReference[0].SetActive(false);
 		}
 
-		feedText = GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ();
+		feedText = textBox.transform.GetChild(0).GetComponent<FeedTextFromObject> ();
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -52,14 +52,21 @@ public class Displaytextbox : MonoBehaviour {
 	public void toggleRespond()
 	{
 		if (textBox.isActivated) {
-			interactButton.TurnOffButton();
+			if(GameController.instance.isAndroidVersion){
+				interactButton.TurnOffButton();
+			}
 			currIndex++;
+
 			if(currIndex < feedText.multipleResponds.Length){
 				feedText.UpdateText(currIndex);
 			}
 			else{
-				if(!textBox.isFadingOn)
+				if(!textBox.isFadingOn){
 					textBox.TurnOnTextbox(true);
+					if(GameController.instance.isAndroidVersion){
+						interactButton.canTrigger = false;
+					}
+				}
 			}
 		}
 	}
@@ -67,7 +74,9 @@ public class Displaytextbox : MonoBehaviour {
 	public void TriggerTextbox()
 	{
 		if (textBox.isActivated) {
-			interactButton.TurnOffButton();
+			if(GameController.instance.isAndroidVersion){
+				interactButton.TurnOffButton();
+			}
 			toggleRespond ();
 		}else{
 			// feedtext into textbox
@@ -83,9 +92,12 @@ public class Displaytextbox : MonoBehaviour {
 			} else { //  player near to interactable object
 				Item curr = GameController.instance.GetItem (colliderName);
 				bool status = PlayerController.instance.AbleToTrigger (curr);
+
 				if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
 					status = TraceController.instance.storyList [0].Contains (colliderName);
 				}
+
+				textBox.SetEventStatus(status);
 
 				string respond = curr.GetRespond (status, EndingController.instance.isChapter2Activated);
 			
@@ -150,7 +162,13 @@ public class Displaytextbox : MonoBehaviour {
 				if(!textBox.isActivated){
 					interactButton.TurnOnButton();
 					interactButton.canTrigger = true;
-					interactButton.itemStatus = PlayerController.instance.AbleToTrigger( GameController.instance.GetItem(colliderName) );
+
+					if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
+						interactButton.itemStatus = TraceController.instance.storyList [0].Contains (colliderName);
+					}
+					else
+						interactButton.itemStatus = PlayerController.instance.AbleToTrigger( GameController.instance.GetItem(colliderName) );
+
 				}
 				else
 					interactButton.TurnOffButton();

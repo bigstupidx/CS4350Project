@@ -127,19 +127,18 @@ public class GameController : MonoBehaviour {
 		}
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
 
-			if (isAndroidVersion)
+			if (isAndroidVersion){
+				GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName = "";
 				GameObject.Find ("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton ();
+			}
 
 			Destroy (GameController.instance);
 			Destroy (PlayerController.instance);
 			EndingController.instance.ResetEndingController (false);
-			LevelHandler.Instance.LoadSpecific ("TitleScene");
+			LevelHandler.Instance.LoadSpecific ("CreditScene");
 		} else {
 			LevelHandler.Instance.LoadSpecific ("EndingScene");
-//			PlayerController.instance.currentLevel = 2;
-//			EndingController.instance.isChapter2Activated = true;
 		}
-		//Application.LoadLevel ("EndingScene");
 	}
 
 	public void TriggerItem(string itemId) {

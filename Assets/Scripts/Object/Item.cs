@@ -63,7 +63,7 @@ public class Item : MonoBehaviour {
 	public string GetRespond(bool isActivated, bool isChapterTwoActivated)
 	{
 		if (!isChapterTwoActivated) {
-			if (isActivated) {
+			if (isActivated && type.Contains("event") ) {
 				return eventDialogue [0];
 			} else {
 				return defaultDialogue [(Random.Range (1, defaultDialogue.Length * 256) % defaultDialogue.Length)];

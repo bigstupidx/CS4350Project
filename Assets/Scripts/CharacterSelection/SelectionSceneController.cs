@@ -91,7 +91,7 @@ public class SelectionSceneController : MonoBehaviour {
 
             if (!isFedText)
             {
-                feedText.SetText("Are you here to bring Amari to you spouse's place?\\Yes, it's getting late. We should really be going.\\Alright then...");
+                feedText.SetText("Are you here to bring Amari to your spouse's place?\\Yes, it's getting late. We should really be going.\\Alright then...");
                 textBox.TurnOnTextbox(false);
                 isFedText = true;
 
