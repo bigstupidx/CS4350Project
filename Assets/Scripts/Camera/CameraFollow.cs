@@ -15,9 +15,12 @@ public class CameraFollow : MonoBehaviour
 	public static int cameraMode;
 
 	// camera setting for ground outside game scene
-	public static float fixedXPosition = -3.45f;
-	public static float fixedYPosition = 3.45f;
+	public static float fixedXPosition = -2.00f;
+	public static float fixedYLowPosition = 3.45f;
+	public static float fixedYHighPosition = 5.80f;
 	public static float fixedZPosition = -55.2f;
+	public static float maxDiffPosition = 25.0f;
+	public static float maxFieldOfView = 60.0f;
 
 	// camera setting for basement game scene
 	public static float Offset = 6f;
@@ -83,14 +86,24 @@ public class CameraFollow : MonoBehaviour
 		// Ground outside the camera
 		if (cameraMode == 2) {
 			//Distance towards player
-			//float dist = (targetCamPos-transform.position).magnitude/300.0f;
-			float dist = (target.position.z -transform.position.z);
-			Debug.Log ("distance" + dist);
+			float xDiff = target.position.x - transform.position.x;
+			float yDiff = 0f;
+			float zDiff = target.position.z - transform.position.z;
+			
+			Vector3 diffVector = new Vector3 (xDiff, yDiff, zDiff);
+			float currentLength = diffVector.magnitude;
+
+			float distDiff = maxDiffPosition - currentLength;
+			Camera.main.fieldOfView = (distDiff/maxDiffPosition) * maxFieldOfView;
 
 			targetCamPos.x = fixedXPosition;
-			targetCamPos.y = fixedYPosition;
+
+			if(transform.rotation.eulerAngles.y > 135.0f && transform.rotation.eulerAngles.y <255.0f){
+				targetCamPos.y = fixedYLowPosition;
+			}else{
+				targetCamPos.y = fixedYHighPosition;
+			}
 			targetCamPos.z = fixedZPosition;
-		
 
 			transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
 			transform.LookAt (target);
