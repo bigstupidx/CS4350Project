@@ -4,8 +4,8 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour
 {	
 	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-1.6f, 17.5f, -20.2f);
-	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(3.5f, 17.88f, -23.8f);
-	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(4.74f, 19.63f, -27.1f);
+	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(3.3f, 23.67f, -26.7f);
+	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(0.2f, 20.56f, -25.44f);
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(5.6f, 13.7f, 14.92f);
 	public readonly static Vector3 fixedOffsetLevel2 = new Vector3(0.08f, 5.08f, -3.98f);
 	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(1.31f, 15.18f, -19.64f);
@@ -15,9 +15,12 @@ public class CameraFollow : MonoBehaviour
 	public static int cameraMode;
 
 	// camera setting for ground outside game scene
-	public static float fixedXPosition = -3.45f;
-	public static float fixedYPosition = 3.28f;
+	public static float fixedXPosition = -2.00f;
+	public static float fixedYLowPosition = 3.45f;
+	public static float fixedYHighPosition = 5.80f;
 	public static float fixedZPosition = -55.2f;
+	public static float maxDiffPosition = 25.0f;
+	public static float maxFieldOfView = 60.0f;
 
 	// camera setting for basement game scene
 	public static float Offset = 6f;
@@ -83,10 +86,25 @@ public class CameraFollow : MonoBehaviour
 		// Ground outside the camera
 		if (cameraMode == 2) {
 			//Distance towards player
-			//float dist = (targetCamPos-transform.position).magnitude/300.0f;
+			float xDiff = target.position.x - transform.position.x;
+			float yDiff = 0f;
+			float zDiff = target.position.z - transform.position.z;
+			
+			Vector3 diffVector = new Vector3 (xDiff, yDiff, zDiff);
+			float currentLength = diffVector.magnitude;
+
+			float distDiff = maxDiffPosition - currentLength;
+			Camera.main.fieldOfView = (distDiff/maxDiffPosition) * maxFieldOfView;
+
 			targetCamPos.x = fixedXPosition;
-			targetCamPos.y = fixedYPosition;
+
+			if(transform.rotation.eulerAngles.y > 135.0f && transform.rotation.eulerAngles.y <255.0f){
+				targetCamPos.y = fixedYLowPosition;
+			}else{
+				targetCamPos.y = fixedYHighPosition;
+			}
 			targetCamPos.z = fixedZPosition;
+
 			transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
 			transform.LookAt (target);
 
