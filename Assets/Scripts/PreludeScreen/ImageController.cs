@@ -44,6 +44,19 @@ public class ImageController : MonoBehaviour {
 
 		preludeCredit.SetActive (true);
 	}
+
+	
+	public void FastForward()
+	{
+		hasPartOneCompleted = true;
+		rollingText.SetActive (false);
+		preludeCredit.SetActive (false);
+
+		startTime = Time.time;
+		GameObject.Find ("BGM").GetComponent<AudioSource>().Stop();
+		GetComponent<AudioSource> ().clip = preludeSfx[0];
+		GetComponent<AudioSource> ().Play ();
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -88,9 +101,7 @@ public class ImageController : MonoBehaviour {
 					} else if (currTime > 3.0f) {
 						imageList [0].SetActive (true);
 						imageList[0].GetComponent<ImageBehaviour>().SetPosition(oriPos[1]);
-					} else {
-				
-					}
+					} 
 				}
 		
 			} // end of transit Check
@@ -109,7 +120,6 @@ public class ImageController : MonoBehaviour {
 						{
 							preludeCredit.GetComponent<ImageBehaviour>().isMoving = false;
 						}
-
 
 						preludeCredit.SetActive(true);
 						preludeCredit.GetComponent<ImageBehaviour>().SetPosition(oriPos[0]);

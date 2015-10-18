@@ -57,6 +57,10 @@ public class BubbleBehaviour : MonoBehaviour {
 	{
 		transform.GetComponent<Image> ().enabled = false;
 	}
+	public void TurnOnButton()
+	{
+		transform.GetComponent<Image> ().enabled = true;
+	}
 	
 	void Reset()
 	{

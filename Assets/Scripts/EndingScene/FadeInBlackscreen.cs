@@ -10,7 +10,7 @@ public class FadeInBlackscreen : MonoBehaviour {
 	void Start () {
 		myText = transform.GetComponent<Image> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (myText.color.a < 1.0f) {

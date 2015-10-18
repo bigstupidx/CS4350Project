@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PreludeText : MonoBehaviour {
-
+	
 	public bool isLeftText = true;
 	public bool fadeInState = true;
 	private float speed = 0.3f;
@@ -38,11 +38,11 @@ public class PreludeText : MonoBehaviour {
 		int height = Random.Range (1, 6);
 
 		if (_newDirectionIsLeft) {
-			int left = Random.Range (1, 4);
+			int left = Random.Range (2, 5);
 			transform.position = new Vector3( left* (factor/2) , height * (factor/2), 0.0f);
 			isLeftText = true;
 		} else {
-			int right = Random.Range (5, 8);
+			int right = Random.Range (5, 9);
 			transform.position = new Vector3(right * factor, height * (factor/2), 0.0f);
 			isLeftText = false;
 		}

@@ -59,25 +59,6 @@ public class Displaytextbox : MonoBehaviour {
 			else{
 				textBox.TurnOnTextbox(true);
 			}
-
-//			if( feedText.getIsMoreThanOneLine() ){		// respond more than 1 line
-//				feedText.UpdateText(currIndex);
-//				if(feedText.ind == feedText.multipleResponds.Length)
-//				{
-//					textBox.TurnOnTextbox( true ); // fade out
-//					//PlayerData.MoveFlag = true;	// ENABLE player move
-//				}
-//				else if(feedText.ind < feedText.multipleResponds.Length){
-//					transform.GetComponent <PlayerMovement>().StopMoving ();
-//					textBox.TurnOnTextbox( false ); // means do not fade out
-//				}
-//			}
-//			else {		// respond ONLY have 1 line
-//				if( !textBox.isFadingOn ){
-//					textBox.TurnOnTextbox( true );
-//					PlayerData.MoveFlag = true;	// ENABLE player move
-//				}
-//			}
 		}
 	}
 
