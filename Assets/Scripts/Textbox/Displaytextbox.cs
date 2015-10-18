@@ -57,7 +57,8 @@ public class Displaytextbox : MonoBehaviour {
 				feedText.UpdateText(currIndex);
 			}
 			else{
-				textBox.TurnOnTextbox(true);
+				if(!textBox.isFadingOn)
+					textBox.TurnOnTextbox(true);
 			}
 		}
 	}
@@ -139,7 +140,6 @@ public class Displaytextbox : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyUp (KeyCode.Space) && !colliderName.Contains("ZoomPoint") ) {
-			Debug.Log("Enter");
 			TriggerTextbox();
 		}
 

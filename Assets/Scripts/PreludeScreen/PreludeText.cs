@@ -43,7 +43,7 @@ public class PreludeText : MonoBehaviour {
 			transform.position = new Vector3( left* (factor/2) , height * (factor/2), 0.0f);
 			isLeftText = true;
 		} else {
-			int right = Random.Range (5, 8);
+			int right = Random.Range (5, 7);
 			transform.position = new Vector3(right * factor, height * (factor/2), 0.0f);
 			isLeftText = false;
 		}

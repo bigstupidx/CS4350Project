@@ -30,7 +30,7 @@ public class SelectionSceneController : MonoBehaviour {
 	
 	// Automated flip text
 	public bool isAutomatedStart = false;
-	private float duration = 2.0f;
+	private float duration = 2.5f;
 	private float startTime = 0.0f;
 	private int currIndex = 0;
 

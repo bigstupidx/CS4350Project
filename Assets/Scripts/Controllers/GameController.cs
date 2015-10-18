@@ -127,16 +127,17 @@ public class GameController : MonoBehaviour {
 		}
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
 
-			if(isAndroidVersion)
-				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
+			if (isAndroidVersion)
+				GameObject.Find ("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton ();
 
-			Destroy(GameController.instance);
-			Destroy(PlayerController.instance);
-			EndingController.instance.ResetEndingController(false);
+			Destroy (GameController.instance);
+			Destroy (PlayerController.instance);
+			EndingController.instance.ResetEndingController (false);
 			LevelHandler.Instance.LoadSpecific ("TitleScene");
-		}
-		else
+		} else {
 			LevelHandler.Instance.LoadSpecific ("EndingScene");
+			EndingController.instance.isChapter2Activated = true;
+		}
 		//Application.LoadLevel ("EndingScene");
 	}
 

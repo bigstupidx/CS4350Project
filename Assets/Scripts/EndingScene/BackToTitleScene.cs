@@ -17,9 +17,7 @@ public class BackToTitleScene : MonoBehaviour {
 	}
 	
 	public void onClick(){
-		if(transform.name.Equals ("BackToTitleScene")){
 			Application.LoadLevel ("PlatformGameScene");
-		}
 	}
 
 	void Update()
