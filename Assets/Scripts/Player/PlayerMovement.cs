@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	const int idleFrames = 15;
     const int repeatedFrame = 7;
     const int repeatedFrameTimes = 20;
-	const int downCnst = 0;
+	const int downConst = 0;
 	const int leftConst = 1;
 	const int rightConst = 2;
 	const int upConst = 3;
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
 		// Load Down
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
+			sprites[i+downConst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
 		}
 
 		// Load Left
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ForceIdle(){
 		StopMoving ();
-		currDirection = downCnst;
+		currDirection = downConst;
 		currFrame = 0;
 		idleTime = timeBeforeIdle;
 	}
@@ -149,34 +149,42 @@ public class PlayerMovement : MonoBehaviour
 				
 					// Ensure the vector is entirely along the floor plane.
 					playerToMouse.y = 0f;
+
+                    Vector3 camForward = GameObject.Find("Main Camera").transform.forward;
+
+                    camForward.y = 0f;
+
+                    float angle = Mathf.Rad2Deg*Mathf.Atan2(playerToMouse.x * camForward.z - playerToMouse.z * camForward.x, playerToMouse.x * camForward.x + playerToMouse.z * camForward.z)+180;
+
+                    // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
+                    //Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
 				
-					// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-					Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
+					//float angle = newRotation.eulerAngles.y;
 				
-					// Set the player's rotation to this new rotation.
-				
-					float angle = newRotation.eulerAngles.y;
-				
-					//Debug.Log(angle);
+					Debug.Log(angle);
 				
 					int prevDirection = currDirection;
 				
 					// Right
 					if (angle >= 225 && angle <= 315) {
-						currDirection = leftConst;
+                        //currDirection = leftConst;
+                        currDirection = rightConst;
 					}
 				//Left
 				else if (angle >= 45 && angle <= 135) {
-						currDirection = rightConst;
-					}
-				// Up
-				else if (angle >= 315 || angle <= 45) {
-						currDirection = upConst;
-					}
+                        //currDirection = rightConst;
+                        currDirection = leftConst;
+                    }
 				// Down
+				else if (angle >= 315 || angle <= 45) {
+                        //currDirection = upConst;
+                        currDirection = downConst;
+                    }
+				// up
 				else {
-						currDirection = downCnst;
-					}
+                        //currDirection = downCnst;
+                        currDirection = upConst;
+                    }
 					if (currDirection != prevDirection) {
 						currTime = timePerFrame;
 						currFrame = 0;
@@ -233,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		// Change Idle Timer
-		if (currDirection == downCnst && !isWalking) {
+		if (currDirection == downConst && !isWalking) {
 			float prevTime = idleTime;
 			idleTime += Time.deltaTime;
 			if (idleTime >= timeBeforeIdle) {
