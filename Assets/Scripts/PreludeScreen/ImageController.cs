@@ -19,6 +19,7 @@ public class ImageController : MonoBehaviour {
 	public Sprite[] chosenResult;  // [ 1 - chosen papa, 2 - chosen mama ]
 	public bool hasSelectionMade = false;
 	public bool transitToNextScene = false;
+	public bool fastForwardSelected = false;
 
 	public AudioClip[] preludeSfx;
 
@@ -52,7 +53,8 @@ public class ImageController : MonoBehaviour {
 		rollingText.SetActive (false);
 		preludeCredit.SetActive (false);
 
-		startTime = Time.time;
+		//startTime = Time.time;
+		fastForwardSelected = true;
 		GameObject.Find ("BGM").GetComponent<AudioSource>().Stop();
 		GetComponent<AudioSource> ().clip = preludeSfx[0];
 		GetComponent<AudioSource> ().Play ();
@@ -86,7 +88,7 @@ public class ImageController : MonoBehaviour {
 					}
 
 				} else {
-					if (currTime > 16.0f) {
+					if (currTime > 16.0f || fastForwardSelected) {
 						if (!imageList [0].activeSelf) {
 							if (!imageList [1].activeSelf && !imageList [2].activeSelf) {
 								selectionText.SetActive (true);
