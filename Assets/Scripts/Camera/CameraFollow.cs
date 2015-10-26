@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(5.6f, 13.7f, 14.92f);
 	public readonly static Vector3 fixedOffsetLevel2 = new Vector3(0.08f, 5.08f, -3.98f);
 	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(1.31f, 15.18f, -19.64f);
-	public readonly static Vector3 fixedOffsetLevel0 = new Vector3 (5.46f, 4.02f, 0.01f);
+	public readonly static Vector3 fixedOffsetLevel0 = new Vector3 (5.46f, 10.00f, 0.01f);
 
 	// camera mode
 	public static int cameraMode;
