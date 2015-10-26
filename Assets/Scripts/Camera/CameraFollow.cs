@@ -3,13 +3,13 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {	
-	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-1.6f, 17.5f, -20.2f);
+	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-0.1f, 17.4f, -21.82f);
 	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(0.4f, 22.37f, -28.1f);
 	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(0.2f, 20.56f, -25.44f);
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(5.6f, 13.7f, 14.92f);
 	public readonly static Vector3 fixedOffsetLevel2 = new Vector3(0.08f, 5.08f, -3.98f);
-	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(1.31f, 15.18f, -19.64f);
-	public readonly static Vector3 fixedOffsetLevel0 = new Vector3 (5.46f, 4.02f, 0.01f);
+	public readonly static Vector3 fixedOffsetLevel1 = new Vector3(0.72f, 16.00f, -19.64f);
+	public readonly static Vector3 fixedOffsetLevel0 = new Vector3 (5.46f, 10.00f, 0.01f);
 
 	// camera mode
 	public static int cameraMode;
@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 	public static float fixedYHighPosition = 5.80f;
 	public static float fixedZPosition = -55.2f;
 	public static float maxDiffPosition = 25.0f;
-	public static float maxFieldOfView = 60.0f;
+	public static float maxFieldOfView = 40.0f;
 
 	// camera setting for basement game scene
 	public static float ZPosition = 3.19f;

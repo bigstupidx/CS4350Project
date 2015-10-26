@@ -89,9 +89,14 @@ public class AmariMovement : MonoBehaviour {
 	}
 
 	public void FaceFront(){
-		currDirection = upConst;
+		currDirection = downConst;
 	}
-	
+
+    public void FaceBack()
+    {
+        currDirection = upConst;
+    }
+
     public void StopMoving()
     {
         isWalking = false;

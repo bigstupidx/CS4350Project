@@ -91,7 +91,7 @@ public class SelectionSceneController : MonoBehaviour {
 
             if (!isFedText)
             {
-                feedText.SetText("Are you here to bring Amari to your spouse's place?\\Yes, it's getting late. We should really be going.\\Alright then...");
+                feedText.SetText("Ah, Amari would be staying over at your place tonight isn't it?\\Yes, it's getting late. We should really be going.\\Alright then...");
                 textBox.TurnOnTextbox(false);
                 isFedText = true;
 
@@ -134,12 +134,12 @@ public class SelectionSceneController : MonoBehaviour {
 				if(isAutomatedStart)
 					startTime = Time.time;
 
-                m1.FaceFront();
-                m2.FaceFront();
-                m3.FaceFront();
-                f4.FaceFront();
-                f5.FaceFront();
-                f6.FaceFront();
+                m1.FaceBack();
+                m2.FaceBack();
+                m3.FaceBack();
+                f4.FaceBack();
+                f5.FaceBack();
+                f6.FaceBack();
 
                 m1.StopMoving();
                 m2.StopMoving();
@@ -148,12 +148,14 @@ public class SelectionSceneController : MonoBehaviour {
                 f5.StopMoving();
                 f6.StopMoving();
 
+                /*
                 m1.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 m2.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 m3.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f4.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f5.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
                 f6.transform.GetComponentInChildren<AmariEyes>().LookAtObject(teacher.gameObject);
+                */
                 stage = 1;
                 timer = 0.0f;
 
@@ -229,13 +231,14 @@ public class SelectionSceneController : MonoBehaviour {
                 f5.MoveTo(new Vector3(1.1f, 0.5f, 0.7f));
                 f6.MoveTo(new Vector3(-0.4f, 0.5f, -1.0f));
 
+                /*
                 m1.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
                 m2.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
                 m3.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
                 f4.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
                 f5.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
                 f6.transform.GetComponentInChildren<AmariEyes>().LookAtObject(null);
-
+                */
                 
 
             }
