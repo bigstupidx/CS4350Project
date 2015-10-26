@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {	
-	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-2.0f, 17.5f, -20.2f);
+	public readonly static Vector3 fixedOffsetLevel6 = new Vector3(-0.1f, 17.4f, -21.82f);
 	public readonly static Vector3 fixedOffsetLevel5 = new Vector3(0.4f, 22.37f, -28.1f);
 	public readonly static Vector3 fixedOffsetLevel4 = new Vector3(0.2f, 20.56f, -25.44f);
 	public readonly static Vector3 fixedOffsetLevel3 = new Vector3(5.6f, 13.7f, 14.92f);
