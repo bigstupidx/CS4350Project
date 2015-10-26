@@ -173,9 +173,9 @@ public class Displaytextbox : MonoBehaviour {
 				else
 					interactButton.TurnOffButton();
 			} else{
-				interactButton.TurnOffButton();
-				interactButton.canTrigger = false;
-				interactButton.itemStatus = false;
+//				interactButton.TurnOffButton();
+//				interactButton.canTrigger = false;
+//				interactButton.itemStatus = false;
 			}
 		}
 		// Automated flip text

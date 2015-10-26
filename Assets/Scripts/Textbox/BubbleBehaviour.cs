@@ -7,24 +7,24 @@ public class BubbleBehaviour : MonoBehaviour {
 
 	public GameObject target;
 
-	private string fileName = "Sprites/Textbubble/textbubble_";
-	private int spriteLength = 4;
+	//private string fileName = "Sprites/Textbubble/textbubble_";
+	//private int spriteLength = 4;
 	public bool canTrigger = false;
 	public bool itemStatus = false;
 
 	public bool alreadySelected = false;
 	
-	//public List<Texture2D> spriteSheet;
-	public List<Sprite> spriteSheetDefault;
-	public List<Sprite> spriteSheetActive;
-	public int currFrame = 0;
-	private int delay = 25;
-	private int counter = 0;
+//	public List<Texture2D> spriteSheet;
+//	public List<Sprite> spriteSheetDefault;
+//	public List<Sprite> spriteSheetActive;
+//	public int currFrame = 0;
+//	private int delay = 25;
+//	private int counter = 0;
 
 	// Use this for initialization
 
 	void Start () {
-
+		/*
 		spriteSheetDefault = new List<Sprite> (spriteLength);
 		spriteSheetActive = new List<Sprite> (spriteLength);
 		
@@ -33,7 +33,9 @@ public class BubbleBehaviour : MonoBehaviour {
 			spriteSheetActive.Add(Resources.Load<Sprite> (fileName + i + "_highlight") );
 		}
 
+
 		transform.GetComponent<Image> ().sprite = spriteSheetDefault [0];
+		*/
 		if (target == null) {
 			target = GameObject.FindGameObjectWithTag("Player");
 		}
@@ -41,13 +43,17 @@ public class BubbleBehaviour : MonoBehaviour {
 		if (!GameController.instance.isAndroidVersion)
 			gameObject.SetActive (false);
 
-		if (EndingController.instance.isChapter2Activated) {
-			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
-		}
+		Reset();
+//		if (EndingController.instance.isChapter2Activated) {
+//			//gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
+//		}
 	}
 
 	public void TouchDetected()
 	{
+		target.GetComponent<PlayerMovement> ().StopMoving ();
+		target.GetComponent<PlayerMovement> ().enabled = false;
+		PlayerData.MoveFlag = false;
 		alreadySelected = true;
 		if(!GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isFadingOn)
 			target.GetComponent<Displaytextbox> ().TriggerTextbox ();
@@ -62,47 +68,60 @@ public class BubbleBehaviour : MonoBehaviour {
 	{
 		transform.GetComponent<Image> ().enabled = true;
 		canTrigger = false;
+		target.GetComponent<PlayerMovement> ().enabled = true;
+		PlayerData.MoveFlag = true;
 	}
 	
 	void Reset()
 	{
 		transform.GetComponent<Image> ().enabled = true;
-		currFrame = 0;
-		if (EndingController.instance.isChapter2Activated) {
-			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
-		}else
-			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+		//currFrame = 0;
+//		if (EndingController.instance.isChapter2Activated) {
+//			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
+//		}else
+//			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 	}
 	
-	void FixedUpdate()
+	void Update()
 	{
-		if (canTrigger) {
-			if(!transform.GetComponent<Image> ().enabled)
-				Reset();
-			/*
-			Vector3 playerPos = target.transform.position;
-			playerPos.x += 0.2f; 
-			playerPos.y += 1.0f; 
-			transform.position = Camera.main.WorldToScreenPoint (playerPos);
-			*/
-
-			if (counter > delay) {
-				currFrame++;
-				counter = 0;
-			} else
-				counter++;
-			
-			if (currFrame < spriteLength) {
-				if(itemStatus)
-					transform.GetComponent<Image> ().sprite = spriteSheetActive[currFrame];
-				else
-					transform.GetComponent<Image> ().sprite = spriteSheetDefault [currFrame];
-
+		if (GameController.instance.isAndroidVersion) {
+			if (GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isActivated) {
+				if (transform.GetComponent<Image> ().enabled)
+					TurnOffButton ();
 			} else {
-				currFrame = 0;
+				if (!transform.GetComponent<Image> ().enabled)
+					TurnOnButton ();
 			}
-		} else {
-			TurnOffButton();
 		}
+		//if (canTrigger) {
+//			if(!transform.GetComponent<Image> ().enabled)
+//				Reset();
+//
+//			Vector3 playerPos = target.transform.position;
+//			playerPos.x += 0.2f; 
+//			playerPos.y += 1.0f; 
+//			transform.position = Camera.main.WorldToScreenPoint (playerPos);
+//
+//
+//			if (counter > delay) {
+//				currFrame++;
+//				counter = 0;
+//			} else
+//				counter++;
+//			
+//			if (currFrame < spriteLength) {
+//				if(itemStatus)
+//					transform.GetComponent<Image> ().sprite = spriteSheetActive[currFrame];
+//				else
+//					transform.GetComponent<Image> ().sprite = spriteSheetDefault [currFrame];
+//
+//			} else {
+//				currFrame = 0;
+//			}
+//
+//		} else {
+//			TurnOffButton();
+//		}
 	}
 }
