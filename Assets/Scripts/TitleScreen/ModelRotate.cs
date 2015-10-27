@@ -15,7 +15,7 @@ public class ModelRotate : MonoBehaviour
     private float cyclingZ;
     private bool cyclingDir;
     private float cyclingZoom;
-    private AudioSource audio;
+    private AudioSource audioF;
     private AudioSource flash;
     public static bool flashLight =false;
 
@@ -56,7 +56,7 @@ public class ModelRotate : MonoBehaviour
         cyclingY = Random.Range(0.0f, 360.0f);
         cyclingZ = Random.Range(0.0f, 360.0f);
         cyclingZoom = Random.Range(0.5f, 1.0f);
-        audio = GetComponent<AudioSource>();
+        audioF = GetComponent<AudioSource>();
         flash = spotLight.GetComponent<AudioSource>();
     }
 
@@ -79,9 +79,9 @@ public class ModelRotate : MonoBehaviour
         if (cyclingDir) {
             if (cameraHandler.fieldOfView > 10) {
                 cameraHandler.fieldOfView -= cyclingZoom;
-                if(!audio.isPlaying)
+                if(!audioF.isPlaying)
                 {
-                    audio.Play();
+                    audioF.Play();
                 }
             }
         }
@@ -89,9 +89,9 @@ public class ModelRotate : MonoBehaviour
         {
             if (cameraHandler.fieldOfView < 30) { 
                 cameraHandler.fieldOfView += cyclingZoom;
-                if (!audio.isPlaying)
+                if (!audioF.isPlaying)
                 {
-                    audio.Play();
+                    audioF.Play();
                 }
             }
         }
@@ -172,7 +172,6 @@ public class ModelRotate : MonoBehaviour
             cameraHandler.fieldOfView = 30.0f;
             flash.Play();
             flashLight = true;
-
         }
 	}
 }
