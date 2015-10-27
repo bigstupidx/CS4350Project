@@ -17,6 +17,7 @@ public class ModelRotate : MonoBehaviour
     private float cyclingZoom;
     private AudioSource audio;
     private AudioSource flash;
+    public static bool flashLight =false;
 
     public float[] angles = { 0, 20, 40, 60, 80 };
 	int currAngle = 0;
@@ -76,7 +77,7 @@ public class ModelRotate : MonoBehaviour
         cyclingZoom = Random.Range(0.1f, 0.5f);
 
         if (cyclingDir) {
-            if (cameraHandler.fieldOfView > 5) {
+            if (cameraHandler.fieldOfView > 10) {
                 cameraHandler.fieldOfView -= cyclingZoom;
                 if(!audio.isPlaying)
                 {
@@ -135,15 +136,20 @@ public class ModelRotate : MonoBehaviour
         
 
         Vector3 offset = new Vector3(Mathf.Cos(cyclingX)*0.25f, Mathf.Cos(cyclingY) * 0.25f + 1.0f, Mathf.Cos(cyclingZ) * 0.25f);
-        cameraHandler.transform.LookAt(offset,new Vector3(0.0f, 1.0f, 0.0f));
+        cameraHandler.transform.LookAt(offset + new Vector3(-cameraHandler.fieldOfView/20.0f, 0.0f,0.0f),new Vector3(0.0f, 1.0f, 0.0f));
 
         if (blackScreenTimeLeft >= 0) {
 			blackScreenTimeLeft -= Time.deltaTime;
 
-			if(blackScreenTimeLeft <= 0)
-				blackScreen.SetActive(false);
-			else
-				return;
+
+
+            if (blackScreenTimeLeft <= 0)
+            {
+                blackScreen.SetActive(false);
+                flashLight = false;
+            }
+            else
+                return;
 		}
 
 
@@ -165,6 +171,7 @@ public class ModelRotate : MonoBehaviour
 			blackScreen.SetActive(true);
             cameraHandler.fieldOfView = 30.0f;
             flash.Play();
+            flashLight = true;
 
         }
 	}
