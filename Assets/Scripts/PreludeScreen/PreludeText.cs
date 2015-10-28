@@ -9,22 +9,13 @@ public class PreludeText : MonoBehaviour {
 	private float speed = 0.3f;
 	private float factor = 100.0f;
 
-	public Vector3 leftPosition =  new Vector3 (100.0f, 150.0f, 0.0f);
-	public Vector3 rightPosition = new Vector3 (800.0f, 150.0f, 0.0f);
-
 	// Use this for initialization
 	void Start () {
 		//transform.position = leftPosition;
-		if (GameController.instance.isAndroidVersion) {
-			factor  = 250.0f;
-		}
+//		if (GameController.instance.isAndroidVersion) {
+//			factor  = 250.0f;
+//		}
 		ResetPosition (true);
-	}
-
-	public void PresetLeftAndRight(Vector3 _left, Vector3 _right)
-	{
-		leftPosition = _left;
-		rightPosition = _right;
 	}
 
 	void OnEnable()

@@ -4,10 +4,16 @@ using System.Collections;
 
 public class FadeToClear : MonoBehaviour {
 
+	public float fadeSpeed = 0.3f;
 	public bool transitionToNextScreen = false;
 	public string targetScene = "";
 
 	private Image myImage;
+
+	public void SetTargetScene(string _targetScene)
+	{
+		targetScene = _targetScene;
+	}
 
 	public void TransitToNextScene()
 	{
@@ -16,10 +22,12 @@ public class FadeToClear : MonoBehaviour {
 			transitionToNextScreen = true;
 		}
 	}
+
 	void Start()
 	{
 		myImage = GetComponent<Image> ();
 	}
+
 	void FixedUpdate () {
 
 		if (transitionToNextScreen) {
@@ -31,13 +39,13 @@ public class FadeToClear : MonoBehaviour {
 					Debug.Log("ERROR!!! No target scene");
 			}
 			else {
-				temp.a += (0.3f * Time.deltaTime);
+				temp.a += (fadeSpeed * Time.deltaTime);
 				myImage.color = temp;
 			}
 		} else {
 			Color temp = myImage.color;
 			if( temp.a > 0.0f && temp.a <= 1.0f ){
-				temp.a -= (0.3f * Time.deltaTime);
+				temp.a -= (fadeSpeed * Time.deltaTime);
 				myImage.color = temp;
 			}
 		}
