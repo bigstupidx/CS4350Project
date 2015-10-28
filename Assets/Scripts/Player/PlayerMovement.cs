@@ -129,7 +129,19 @@ public class PlayerMovement : MonoBehaviour
 
 		
 		// Check mouse input
-		if (Input.GetKey (KeyCode.Mouse0) ){
+		if (Input.GetKey (KeyCode.Mouse0)) {
+
+			Debug.Log (Input.mousePosition + " , Screen Size: " + Screen.width + " x " + Screen.height);
+			if (Input.mousePosition.x > (Screen.width * 0.9f) && Input.mousePosition.y < (Screen.height * 0.2f)){
+				mouseOverButton = true;
+
+				isWalking = false;
+				currFrame = 0;
+				int frameToLoad = currDirection * 8 + currFrame;
+				spriteRenderer.sprite = sprites [frameToLoad];
+			}
+			else 
+				mouseOverButton = false;
 
 			if(PlayerData.MoveFlag && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
