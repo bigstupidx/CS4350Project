@@ -43,14 +43,14 @@ public class ImageController : MonoBehaviour {
 
 		if (currTime > 4.4f) {
 			if(!rollingText.activeSelf){
-				if(index < partOneText.Length - 1 ){
-					index++;
+				if(index < partOneText.Length ){
 					rollingText.SetActive(true);
 					rollingText.GetComponent<Image>().sprite = partOneText[index];
 
 					preludeCredit.GetComponent<MeshRenderer>().enabled = true;
 					preludeCredit.GetComponent<MeshRenderer>().material.mainTexture = partOneFrame[index];
 					startTime = Time.time;
+					index++;
 				}
 				else
 				{
