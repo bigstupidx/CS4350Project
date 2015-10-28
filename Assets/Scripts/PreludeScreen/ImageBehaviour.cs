@@ -11,8 +11,8 @@ public class ImageBehaviour : MonoBehaviour {
 	public bool isMoveLeft = false;
 	public bool isZoomIn = false;
 	public float moveSpeed = 5.0f;
-	private float speed = 0.3f;
-	private ImageController reference;
+    private float speed = 0.4f;
+    private ImageController reference;
 
 	public bool selectionEnabled = false;
 	private Vector3 initialPosition = new Vector3(0.0f,0.0f, 0.0f);
@@ -148,7 +148,7 @@ public class ImageBehaviour : MonoBehaviour {
 				newAlpha.a += (speed * Time.deltaTime);
 				GetComponent<Image> ().color = newAlpha;
 			} else {
-				newAlpha.a -= (speed * Time.deltaTime);
+				newAlpha.a -= (speed  * Time.deltaTime);
 				GetComponent<Image> ().color = newAlpha;
 			}
 		} //  end of NOT selection frame
