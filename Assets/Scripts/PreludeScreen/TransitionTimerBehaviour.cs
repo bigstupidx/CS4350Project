@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class TransitionTimerBehaviour : MonoBehaviour {
 
@@ -17,6 +18,10 @@ public class TransitionTimerBehaviour : MonoBehaviour {
 	void Start () {
 		timeText = this.GetComponent<Text> ();
 		startTime = Time.time;
+
+		startTimeHour = System.DateTime.Now.Hour;
+		startTimeMinutes = System.DateTime.Now.Minute;
+		startTimeSeconds = System.DateTime.Now.Second;
 	}
 	
 	// Update is called once per frame

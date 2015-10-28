@@ -16,6 +16,7 @@ public class EndingController : MonoBehaviour {
 
 	static public EndingController instance;
 	public bool isChapter2Activated = false;
+	public bool isChapter2Completed = false;
 
 	int[] endings;
 	public EndingType deathReason;

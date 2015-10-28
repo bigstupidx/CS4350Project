@@ -5,6 +5,7 @@ using System.Collections;
 public class ImageController : MonoBehaviour {
 
 	public GameObject reference;
+	public GameObject gameTitle;
 	public GameObject preludeCredit;
 	public GameObject rollingText;
 	
@@ -29,6 +30,7 @@ public class ImageController : MonoBehaviour {
 	{
 		rollingText.SetActive (false);
 		preludeCredit.SetActive (false);
+		index = 100;
 		reference.GetComponent<FadeToClear>().TransitToNextScene();
 
 		GameObject.Find ("FastForward").GetComponent<Text> ().enabled = false;
@@ -44,15 +46,15 @@ public class ImageController : MonoBehaviour {
 				if(index < partOneText.Length - 1 ){
 					index++;
 					rollingText.SetActive(true);
-					preludeCredit.GetComponent<MeshRenderer>().enabled = true;
 					rollingText.GetComponent<Image>().sprite = partOneText[index];
-				
 
+					preludeCredit.GetComponent<MeshRenderer>().enabled = true;
 					preludeCredit.GetComponent<MeshRenderer>().material.mainTexture = partOneFrame[index];
 					startTime = Time.time;
 				}
 				else
 				{
+					gameTitle.SetActive(true);
 					reference.GetComponent<FadeToClear>().TransitToNextScene();
 				}
 			}else

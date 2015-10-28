@@ -21,7 +21,6 @@ public class TraceController : MonoBehaviour {
 	public Dictionary<string, ItemState> allItemDic;
 
 	private GameObject player;
-	private GameObject filter;
 	
 	public void Awake() {
 		if (instance == null) {
@@ -35,23 +34,8 @@ public class TraceController : MonoBehaviour {
 		}
 	}
 
-	void ChangeTexture()
+	void Start()
 	{
-		if (filter == null )
-			filter = GameObject.Find ("Chapter2Filter");
-
-		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene")) {
-			modelTexture.mainTexture = textureArray [1];
-			filter.GetComponent<Image>().color = new Color( (112.0f/255.0f), (66.0f/255.0f), (20.0f/255.0f), 0.3f );
-		} else {
-			modelTexture.mainTexture = textureArray [0];
-			filter.GetComponent<Image>().color = new Color( (112.0f/255.0f), (66.0f/255.0f), (20.0f/255.0f), 0.0f );
-		}
-	}
-
-	void OnEnable()
-	{
-		Init ();
 	}
 
 	public void TurnOffLine()
@@ -59,6 +43,11 @@ public class TraceController : MonoBehaviour {
 		lineRenderer.enabled = false;
 	}
 
+	public void TurnOnLine()
+	{
+		lineRenderer.enabled = true;
+	}
+	
 	public void Init()
 	{
 		EndingState[] endingList = JsonReader.readEndingState();
@@ -87,8 +76,6 @@ public class TraceController : MonoBehaviour {
 		if (player == null)
 			player = GameObject.FindGameObjectWithTag ("Player");
 
-		if (filter == null && Application.loadedLevelName.Contains("GameScene") )
-			filter = GameObject.Find ("Chapter2Filter");
 	}
 
 
@@ -192,14 +179,13 @@ public class TraceController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		/*
+
 		if (Application.loadedLevelName.Contains ("GameScene") && EndingController.instance.isChapter2Activated) {
-			lineRenderer.enabled = true;
-		}
-		else
-			lineRenderer.enabled = false;
-			*/
-		ChangeTexture();
+			modelTexture.mainTexture = textureArray [1];
+		} else
+			modelTexture.mainTexture = textureArray [0];
+
+
 
 		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene")) {
 			if (player == null)

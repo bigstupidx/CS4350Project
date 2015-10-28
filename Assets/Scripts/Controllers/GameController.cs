@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
 	public Dictionary<string, string> allHintDic;
 
+	public string lastLoadedScene = "TitleScene";
 	private int timeSinceGameStart = 0;
 	public bool isAndroidVersion = false;
 	public bool isPaused = false;
@@ -126,19 +127,19 @@ public class GameController : MonoBehaviour {
 			break;
 		}
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
+			EndingController.instance.isChapter2Completed = true;
+		} 
+//		else {
+//			TraceController.instance.TurnOffLine();
+//			EndingController.instance.isChapter2Activated = true;
+//		}
+			GameController.instance.SetLastLoadedScene(Application.loadedLevelName);
+			LevelHandler.Instance.LoadSpecific ("TransitionScene");
+	}
 
-			if (isAndroidVersion){
-				GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName = "";
-				GameObject.Find ("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton ();
-			}
-
-			Destroy (GameController.instance);
-			Destroy (PlayerController.instance);
-			EndingController.instance.ResetEndingController (false);
-			LevelHandler.Instance.LoadSpecific ("CreditScene");
-		} else {
-			LevelHandler.Instance.LoadSpecific ("EndingScene");
-		}
+	public void SetLastLoadedScene(string _sceneName)
+	{
+		lastLoadedScene = _sceneName;
 	}
 
 	public void TriggerItem(string itemId) {
@@ -172,6 +173,7 @@ public class GameController : MonoBehaviour {
 			if(isAndroidVersion)
 				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
 
+			SetLastLoadedScene(Application.loadedLevelName);
 
 			int nextLevel = item.nextLevel;
 			if (nextLevel == 2) {

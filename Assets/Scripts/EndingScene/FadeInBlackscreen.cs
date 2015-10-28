@@ -23,8 +23,8 @@ public class FadeInBlackscreen : MonoBehaviour {
 			GameController.instance.Reset();
 			PlayerController.instance.Reset();
 
-			Application.LoadLevel("PlatformGameScene");
-			//Application.LoadLevel("TitleScene");
+			//Application.LoadLevel("PlatformGameScene");
+			Application.LoadLevel("CreditScene");
 
 		}
 	}

@@ -10,6 +10,8 @@ public class TransitionSceneSettings : MonoBehaviour {
 
 	void Start()
 	{
+		isPartOneEnded = EndingController.instance.isChapter2Activated;
+
 		children [0] = transform.GetChild (0).gameObject;
 		children [1] = transform.GetChild (1).gameObject;
 
