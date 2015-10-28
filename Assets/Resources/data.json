@@ -431,7 +431,7 @@
     "unhideItems": [ "Johnny1" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "It's a map, showing the various lines of train services." ],
-    "pt2EventDialogue": [ "Amari began tracing events of that morning.\\It was here, without me noticing, that Amari slipped the ring off my finger. %He/She% has a thing for shiny objects." ]
+    "pt2EventDialogue": [ "Amari began tracing events of that morning.\\It was here, without me noticing, that Amari slipped the ring off my finger. %He/She% imagined it as a toy." ]
   },
   {
     "id": "FlowerPot",
@@ -455,7 +455,7 @@
     "requiredItems": [ "FlowerPot" ],
     "leadItems": [ "AdvertisementBoard" ],
     "eventDialogue": [ "[Parent] said that if I give back the ring, we could get some hot chocolate before riding the train.\\I said that I didn't want to and [Parent] got very angry.\\[Parent] bought coffee and gave me plain water because I was bad.\\We went to take the train afterwards." ],
-    "defaultDialogue": [ "The cafe people makes the best hot chocolate!", "When I'm good, [Parent] buys me hot chocolate here." ],
+    "defaultDialogue": [ "The cafe people make the best hot chocolate!", "When I'm good, [Parent] buys me hot chocolate here." ],
     "idleDialogue": [ "I think [Parent] and I went to the cafe this morning." ],
     "endingPoints": [ 0, 0, 0, 1, 0 ],
     "level": 4,
@@ -479,14 +479,14 @@
     "unhideItems": [ "LostRing" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari finds it interesting that the advertisement would sometimes change overnight." ],
-    "pt2EventDialogue": [ "When I tried to snatch back the ring that morning, it fell somewhere.\\And now, seeing Amari trying to look for it, I regretted what I had said.\\%He/She% was just a child." ]
+    "pt2EventDialogue": [ "When I tried to snatch back the ring that morning, it fell somewhere. That's how we lost it.\\And now, seeing Amari trying to look for it, I regretted what I had said.\\%He/She% was just a child." ]
   },
   {
     "id": "LostRing",
     "restrictedItems": [ ],
     "requiredItems": [ "AdvertisementBoard" ],
     "leadItems": [ ],
-    "eventDialogue": [ "This is the ring I lost this morning!\\Maybe [Parent] would come and bring me home now." ],
+    "eventDialogue": [ "This is the ring I lost this morning!\\Maybe [Parent] would come and bring me home now!" ],
     "defaultDialogue": [ "It's [Parent]'s ring!" ],
     "idleDialogue": [ "I should look around upstairs for [Parent]'s ring." ],
     "endingPoints": [ 0, 0, 0, 1000, 0 ],
@@ -495,7 +495,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": [ "Amari did find the ring in the end... but I wish now that #he/she# didn't" ],
-    "pt2EventDialogue": [ "When they found Amari, #he/she# was holding the same ring we lost this morning.\\My child... found crushed under a fallen piece of ceiling.\\And the position suggested that %he/she% was crouching to pick something up." ]
+    "pt2EventDialogue": [ "When they found Amari, #he/she# was holding the same ring we lost this morning.\\My child... found crushed under a fallen piece of ceiling.\\Just as %he/she% was picking up the ring..." ]
   },
 	{
 		"id": "Johnny1",
