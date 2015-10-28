@@ -1,7 +1,7 @@
 [
 	{
 		"id": "Ending1",
-		"sequence": [ "PlatformExitSign", "ControlStation", "InfoCounter", "ChargePoint", "TableWithCake", "BigBench", "BlackCat", "CounterShelves", "DeadBlackCat", "GiantScratches", "BigPlasticBox" ]
+		"sequence": [ "PlatformExitSign", "ControlStation", "InfoCounter", "ChargePoint", "TableWithCake", "BigBench", "BlackCat", "CounterShelves", "GiantScratches", "DeadBlackCat", "BigPlasticBox" ]
 	},
 	{
 		"id": "Ending2",

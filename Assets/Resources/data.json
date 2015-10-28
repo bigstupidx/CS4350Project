@@ -3,9 +3,9 @@
     "id": "PlatformExitSign",
     "restrictedItems": [ ],
     "requiredItems": [ ],
-    "leadItems": [ "ControlStation" ],
-    "eventDialogue": [ "The sign says 'Exit'!\\There is nobody around. Did [Parent] and everybody leave the station?" ],
-    "defaultDialogue": [ "[Parent] said that I can follow signs like this to leave the station.", "Where is [Parent]?" ],
+    "leadItems": [ "ControlStation", "Transition_EscalatorDown" ],
+    "eventDialogue": [ "The sign says 'Exit'!\\But where is [Parent]? Did [Parent] leave the station?\\I must find [Parent]!" ],
+    "defaultDialogue": [ "Exit signs show the way out!", "Where is [Parent]?" ],
     "idleDialogue": [ "I was with [Parent] near the exit sign just now." ],
     "endingPoints": [ 1, 1, 1, 1, 1 ],
     "level": 2,
@@ -13,7 +13,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "If only I had been more attentive that day..." ],
-    "pt2EventDialogue": [ "That day, I was seperate from Amari at the platform.\\I looked everywhere for %him/her%, but I could not find my child." ]
+    "pt2EventDialogue": [ "I was sure Amari was with me when I alighted the train.\\%He/She% was my child, my responsibility...\\Yet I lost #him/her#." ]
 
   },
   {
@@ -21,16 +21,16 @@
     "restrictedItems": [ ],
     "requiredItems": [ "PlatformExitSign" ],
     "leadItems": [ "InfoCounter", "OldMan", "StationExitSign", "Transition_GantryInside" ],
-    "eventDialogue": [ "Lets try this button.\\There is a click! The gates is now opened." ],
-    "defaultDialogue": [ "There is a button and some pens and papers.", "This desk is very neat." ],
+    "eventDialogue": [ "Maybe this button could open the gate! Let's try it!\\There is a click! The gates are open!" ],
+    "defaultDialogue": [ "There are a lot of buttons there." ],
     "idleDialogue": [ "I need to open the gates and go out to find [Parent]." ],
     "endingPoints": [ 1, 1, 1, 1, 1 ],
     "level": 1,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
-    "pt2DefaultDialogue": [ "The station's employees tried to help me find Amari, but still, nothing." ],
-    "pt2EventDialogue": [ "The station was closing then, but their people did what they could to help me.\\Still, we could not find Amari. As if, %he/she% mysteriously disappeared." ]
+    "pt2DefaultDialogue": [ "Even with the station employees' help, I could not find Amari." ],
+    "pt2EventDialogue": [ "The station was closing then.\\But even with the station employees' help, I could not find my child.\\It was as if %he/she% mysteriously disappeared." ]
 
   },
   {
@@ -38,16 +38,16 @@
     "restrictedItems": [ ],
     "requiredItems": [ "ControlStation" ],
     "leadItems": [ "ChargePoint" ],
-    "eventDialogue": [ "[Parent] said to come here if I am lost but there is no one here.\\Someone left a phone here. Maybe I should call home?\\...but this is out of power." ],
-    "defaultDialogue": [ "The lady that was here must have gone home.", "[Parent] said to come here when I'm lost, but there is no one here.." ],
-    "idleDialogue": [ "[Parent] said to go to the information counter if I am lost." ],
+    "eventDialogue": [ "I should come here when I lost [Parent], but there is no one here.\\Oh, look! It's a handphone! Maybe I should call home?\\...but this has no power." ],
+    "defaultDialogue": [ "The lady that was here must have gone home.", "I should come here when I lost [Parent], but there is no one here." ],
+    "idleDialogue": [ "I lost [Parent]! [Parent] said to go to the information counter if this happens." ],
     "endingPoints": [ 1, 0, 1, 0, 0 ],
     "level": 1,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "I searched everywhere, asked everyone I could. But it was not enough." ],
-    "pt2EventDialogue": [ "We often tell our childen what to do in case of the worst.\\But what is a parent to do when their child is missing?\\All I could do was make a report, and wait... Was there more I could have done?" ]
+    "pt2EventDialogue": [ "I had once told Amari to go to the information counter should we be seperated.\\I waited there in vain hope until the counter's attendant offered to bring me to the nearest police station.\\She was kind and very compassionate. She even forgot her phone on the counter because of me." ]
 
   },
   {
@@ -55,16 +55,16 @@
     "restrictedItems": [ ],
     "requiredItems": [ "InfoCounter" ],
     "leadItems": [ "TableWithCake" ],
-    "eventDialogue": [ "I could power up the phone here!\\...now for my number, 6-7-4-4-6-7-0.\\.....\\'*beep!* Your call cannot be connected. Please try again lat--'\\The phone screen is black again.\\I'm starting to be hungry. What should I do...?" ],
+    "eventDialogue": [ "I could power up the phone here!\\...now for my number, 6-7-4-4-6-7-0.\\'*beep!* Your call cannot be connected. Please try again lat--'\\Hey, I can't turn it on again! Stupid phone must be broke!\\I'm starting to be hungry. What should I do...?" ],
     "defaultDialogue": [ "Someone left their phone wire here.", "[Parent] said not to stick my finger into the holes." ],
-    "idleDialogue": [ "I need power for the phone." ],
+    "idleDialogue": [ "I need power for the handphone." ],
     "endingPoints": [ 1, 0, 1, 0, 0 ],
     "level": 1,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "If I had done things differently, would it had made a difference?" ],
-    "pt2EventDialogue": [ "Amari did try to call me, but my phone was out of power at that time.\\If only I had made sure it was turned on at that time. If only I had made sure to charge it the night before.\\If only..." ]
+    "pt2EventDialogue": [ "Amari did try to call me, but my phone was out of power at that time.\\If only I had made sure it was turned on then. If only I had made sure to charge it the night before.\\If only..." ]
 
   },
   {
@@ -72,16 +72,16 @@
     "restrictedItems": [ ],
     "requiredItems": [ "ChargePoint" ],
     "leadItems": [ "BigBench" ],
-    "eventDialogue": [ "Ooh, someone left cake here!\\Mmm..it does taste nice.\\I remember [Parent] eating cakes with me a week ago, after buying me Mr Bunny.\\...? Where is Mr Bunny?! He is not in my bag!\\I played with him after getting off the train but where is he?!" ],
-    "defaultDialogue": [ "Someone was naughty and din't finish their food!", "The cake looks so colourful!" ],
-    "idleDialogue": [ "I'm hungry.. I want something to eat." ],
+    "eventDialogue": [ "Ooh, someone left cake here!\\Mmm..it taste nice!\\I remember eating cakes with [Parent] weeks ago after buying me Mr Bunny.\\Eh? Where is Mr Bunny?! He is not in my bag!\\Oops. I think I left him on the platform." ],
+    "defaultDialogue": [ "Someone was naughty and din't finish their food!", "The cake looks yummy!" ],
+    "idleDialogue": [ "I'm hungry! I want something to eat!" ],
     "endingPoints": [ 1, 0, 0, 0, 0 ],
     "level": 4,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "We often sat here at the cafe, except when it was taken. It's kind of a habit." ],
-    "pt2EventDialogue": [ "I remember the time I bought the rabbit plush for Amari.\\'Mr Bunny' %he/she% named it, right after taking it off the shelves and before we even went to pay.\\Amari could hardly bear to part with it since then." ]
+    "pt2EventDialogue": [ "I remember the time I bought the rabbit plush for Amari.\\'Mr Bunny' %he/she% named it, right after taking it off the shelves and even before paying for it.\\Amari could hardly bear to part with it since then." ]
 
   },
   {
@@ -89,16 +89,16 @@
     "restrictedItems": [ ],
     "requiredItems": [ "TableWithCake" ],
     "leadItems": [ "BlackCat" ],
-    "eventDialogue": [ "Mr Bunny! Found you! Aww, I missed you.\\I missed [Parent] too, maybe someone have seen [Parent]." ],
+    "eventDialogue": [ "Mr Bunny! Found you! Aww, I missed you.\\I miss [Parent] too, maybe the kitty downstairs saw [Parent]?" ],
     "defaultDialogue": [ "Me and [Parent] would sit here to wait for the train.", "This bench is hard and not nice to sit on." ],
-    "idleDialogue": [ "I might have left Mr Bunny upstairs somewhere.." ],
+    "idleDialogue": [ "I might have left Mr Bunny on the platform somewhere." ],
     "endingPoints": [ 1, 0, 0, 0, 0 ],
     "level": 2,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "It was supposed to be just another normal day at the station." ],
-    "pt2EventDialogue": [ "Knowing %he/she% lost the plush, Amari naturally went to search for it.\\Amari was probably distracted by something else #he/she# found interesting, leaving behind and forgetting about the plush." ]
+    "pt2EventDialogue": [ "Knowing %he/she% left behind the plush, Amari naturally went back for it.\\Amari was probably distracted by something else #he/she# found interesting, leaving behind and forgetting about the plush." ]
 
   },
   {
@@ -106,67 +106,67 @@
     "restrictedItems": [ ],
     "requiredItems": [ "BigBench" ],
     "leadItems": [ "CounterShelves" ],
-    "eventDialogue": [ "Hello, kitty! Have you seen [Parent]?\\'Meoooow!'  Kitty bites onto Mr Bunny and tries to pull him away!\\No you can't have him! He's mine! MINE!!\\'Meow!!'\\You're BAD kitty! You hurt Mr Bunny! Bad BAAD KITTY!\\'Meooow...' Kitty lets go of Mr Bunny.\\Poor Mr Bunny, I should get some plasters for him." ],
+    "eventDialogue": [ "Hello, kitty! Have you seen [Parent]?\\'Meoooow!' Kitty bites onto Mr Bunny and tries to pull him away!\\No you can't have him! He's mine! MINE!!\\'Meow!!'\\You're BAD kitty! You hurt Mr Bunny! BAD BAD KITTY!\\'Meooow...' Kitty lets go of Mr Bunny.\\Poor Mr Bunny, I should get some plasters for him." ],
     "defaultDialogue": [ "'Meooow!'", "[Parent] said black cats are bad luck, but I think kitty is cute." ],
-    "idleDialogue": [ "Maybe the cat have seen [Parent]?" ],
+    "idleDialogue": [ "Maybe kitty saw [Parent]?" ],
     "endingPoints": [ 1, 0, 0, 0, 0 ],
     "level": 1,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari is the sort of child who is fascinated by animals." ],
-    "pt2EventDialogue": [ "Amari tends to talk to animals as if they were people.\\I often worry because the animals might not always be as friendly." ]
+    "pt2EventDialogue": [ "Amari tends to talk to animals as if they were people.\\I often worry because the animals might not always be as friendly.\\This stray cat, for example, seem to take on a dangerous liking for the plush rabbit and tried to grab it from Amari.\\That would've hurt my child if it was any fiercer." ]
 
   },
   {
     "id": "CounterShelves",
     "restrictedItems": [ ],
     "requiredItems": [ "BlackCat" ],
-    "leadItems": [ "DeadBlackCat" ],
-    "eventDialogue": [ "There! Some plasters for Mr Bunny!\\Here My Bunny, I will put these plasters on your wound.\\Mr Bunny feels better now!" ],
+    "leadItems": [ "GiantScratches" ],
+    "eventDialogue": [ "There! Some plasters for Mr Bunny!\\Here Mr Bunny, the plasters will make you okay.\\Mr Bunny feels better now!\\I should keep looking for help to find [Parent].\\Maybe look around the basement?" ],
     "defaultDialogue": [ "The box have plasters and some bottles.", "[Parent] calls this a first-aid box." ],
     "idleDialogue": [ "Mr Bunny is hurt, he needs some plasters." ],
     "endingPoints": [ 1, 0, 0, 0, 0 ],
     "level": 5,
     "hideItems": [ "BlackCat" ],
-    "unhideItems": [ "DeadBlackCat", "GiantScratches" ],
+    "unhideItems": [ "GiantScratches" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "There were times when we stopped by this store." ],
-    "pt2EventDialogue": [ "The plush became something very important to Amari.\\%He/She% 'takes care' of it by feeding it food or putting plasters on its 'wounds'.\\When #he/she# sleeps, I would've to steal it away to give it a wash." ]
+    "pt2EventDialogue": [ "The plush became something very important to Amari.\\%He/She% 'takes care' of it by feeding it food or putting plasters on its 'wounds'.\\When #he/she# sleeps, I would had to steal it away to give it a wash." ]
+
+  },
+  {
+    "id": "GiantScratches",
+    "restrictedItems": [ ],
+    "requiredItems": [ "CounterShelves" ],
+    "leadItems": [ "DeadBlackCat" ],
+    "eventDialogue": [ "Those are big scratches. Like a monster's!\\I don't think this place is safe.\\Maybe I should try asking kitty for help again. Kitty is less scary.\\Here, Mr Bunny, you will be safe in my bag when I talk to kitty." ],
+    "defaultDialogue": [ "Something big scratched up the wall.", "Those big scratches, a scary monster might be nearby..." ],
+    "idleDialogue": [ "Maybe there is someone in the basement who saw [Parent]" ],
+    "endingPoints": [ 1, 0, 0, 0, 0 ],
+    "level": 0,
+    "hideItems": [ ],
+    "unhideItems": [ "DeadBlackCat" ],
+    "isInitiallyHidden": true,
+    "pt2DefaultDialogue": [ "Dangerous things would come through the sewers." ],
+    "pt2EventDialogue": [ "The sewers beneath the station was a way that wildlife use to enter and leave the place.\\I heard that sometimes they made markings on the wall to show that it is their territory.\\Amari was lucky enough to not have met it." ]
 
   },
   {
     "id": "DeadBlackCat",
     "restrictedItems": [ ],
-    "requiredItems": [ "CounterShelves" ],
-    "leadItems": [ "GiantScratches" ],
-    "eventDialogue": [ "Kitty....?\\It is not moving and very hurt. Did a monster hurt it?\\I'm scared." ],
+    "requiredItems": [ "GiantScratches" ],
+    "leadItems": [ "BigPlasticBox" ],
+    "eventDialogue": [ "Kitty...?\\It is not moving and very hurt. Did a monster hurt it?\\I'm scared. It might hurt me too.\\Come, Mr Bunny, we must find somewhere to hide outside the station and hope [Parent] come back." ],
     "defaultDialogue": [ "What if the monster that hurt it is nearby?", "Poor kitty..." ],
-    "idleDialogue": [ "Where did kitty go...?" ],
+    "idleDialogue": [ "I wonder where is kitty now?" ],
     "endingPoints": [ 1, 0, 0, 0, 0 ],
     "level": 2,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": [ "Dangerous things might come out at night." ],
-    "pt2EventDialogue": [ "I heard rumours that there are dangerous wildlife that prowl around the place when everyone is gone.\\Before now, I would not have believed it.\\Amari was in danger then." ]
-
-  },
-  {
-    "id": "GiantScratches",
-    "restrictedItems": [ ],
-    "requiredItems": [ "DeadBlackCat" ],
-    "leadItems": [ "BigPlasticBox" ],
-    "eventDialogue": [ "Those big scratches. Is it the monster that hurt kitty?\\I'm scared, what if it come and hurt me too?\\I should find somewhere to hide." ],
-    "defaultDialogue": [ "Something big scratched up the wall.", "Those big scratches, did a monster do that?" ],
-    "idleDialogue": [ "Is there a monster about? I'm scared..." ],
-    "endingPoints": [ 1, 0, 0, 0, 0 ],
-    "level": 0,
-    "hideItems": [ ],
-    "unhideItems": [ ],
-    "isInitiallyHidden": true,
-    "pt2DefaultDialogue": [ "Dangerous things would come through the sewers." ],
-    "pt2EventDialogue": [ "The sewers beneath the station was a way that wildlife use to enter and leave the place.\\I heard that sometimes they made markings on the wall to show that it is their territory.\\Amari was lucky enough to not meet it, but the marks and the dead cat it left behind must have frighten %him/her%." ]
+    "pt2EventDialogue": [ "The dead cat was another sign that something dangerous prowled the station that night.\\It must had frightened Amari terribly. I wish I was there for my child." ]
 
   },
   {
@@ -174,16 +174,16 @@
     "restrictedItems": [ ],
     "requiredItems": [ "GiantScratches" ],
     "leadItems": [ ],
-    "eventDialogue": [ "This box looks like a good hiding place.\\Come Mr Bunny, we would be safe from the monster in here." ],
+    "eventDialogue": [ "This box looks like a good hiding place.\\Me and Mr Bunny could wait here safely until [Parent] come and find us." ],
     "defaultDialogue": [ "When I hide in boxes during hide-and-seek, [Parent] couldn't find me.", "This box is so big I could hide in it!" ],
-    "idleDialogue": [ "I should hide somewhere before the monster finds me." ],
+    "idleDialogue": [ "I must find a safe place and hide until [Parent] come back." ],
     "endingPoints": [ 1000, 0, 0, 0, 0 ],
     "level": 3,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari is quite good at hide-and-seek and be difficult to find." ],
-    "pt2EventDialogue": [ "Afraid, Amari tried to hide for safety, not knowing that the chosen box had a lid too heavy for a child to lift once closed.\\#He/She# suffocated within.\\They found %him/her% hugging tightly onto that beloved rabbit plush." ]
+    "pt2EventDialogue": [ "Afraid, Amari tried to hide for safety, not knowing that the chosen box had a lid too heavy for a child to lift once closed.\\#He/She# suffocated within.\\They found %him/her% hugging tightly onto that beloved rabbit plush.\\To think... I would never see #him/her# playing with it again." ]
 
   },
   {
@@ -209,7 +209,7 @@
     "requiredItems": [ "OldMan" ],
     "leadItems": [ "Sink", "WishingFountain1" ],
     "eventDialogue": [ "I've coin to buy some juice! [Parent] taught me to insert coin and press this button.\\There! The bottle fell out!\\Mmm, I love mango juice! Papa always buy me juice as long as I don't tell Mama.\\Oops, I spilt it...\\Eww my hands are sticky, I want to wash them." ],
-    "defaultDialogue": [ "The drinks in there are tasty", "It has mango juice, my second favourite drink! Hot chocolate is the first!" ],
+    "defaultDialogue": [ "The drinks in there are tasty", "It has mango juice, and I love mango juice!" ],
     "idleDialogue": [ "Now that I've coins, I could buy some sweet juice!" ],
     "endingPoints": [ 0, 1, 1, 0, 0 ],
     "level": 3,
@@ -217,7 +217,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari loves the mango juice that can be bought here." ],
-    "pt2EventDialogue": [ "With the coins Amari took, %he/she% came here to buy a bottle of mango juice.\\I often worry if buying it too frequently would spoil the child but to know that I will never have the chance again..." ]
+    "pt2EventDialogue": [ "With the coins Amari took, %he/she% came here to buy a bottle of mango juice.\\I often worry if buying it too frequently would spoil my child but to know that I will never have the chance again..." ]
 
   },
   {
@@ -226,7 +226,7 @@
     "requiredItems": [ "VendingMachine" ],
     "leadItems": [ "Dustbin" ],
     "eventDialogue": [ "Washing this sticky juice off my fingers.\\Mama says I should wash with soap like this.\\My hands are clean and don't have the juice smell now." ],
-    "defaultDialogue": [ "I always wash my hands when they are dirty.", "Mama always tell me to wash with soap and between the fingers.", "Sometimes I pour milk away when [Parent] isn't looking. Milk taste awful." ],
+    "defaultDialogue": [ "I always wash my hands when they are dirty.", "Mama always tell me to wash with soap and between the fingers.", "Sometimes I pour milk away when [Parent] isn't looking. Milk taste bad!" ],
     "idleDialogue": [ "My hands are sticky with juice, I should wash it." ],
     "endingPoints": [ 0, 1, 0, 0, 0 ],
     "level": 6,
@@ -242,7 +242,7 @@
     "restrictedItems": [ ],
     "requiredItems": [ "Sink" ],
     "leadItems": [ "HungryDog" ],
-    "eventDialogue": [ "There is a big bone in here.\\Papa's doggy liked bones like this one." ],
+    "eventDialogue": [ "There is a big bone in here.\\The doggy there would like it!" ],
     "defaultDialogue": [ "There is nothing fun in this dustbin.", "[Parent] gets angry when I take things from dustbins. 'Dirty things', [Parent] said, but there is no dirt." ],
     "idleDialogue": [ "Maybe there is something that helps in that dustbin?" ],
     "endingPoints": [ 0, 1, 0, 0, 0 ],
@@ -268,7 +268,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": [ "A seemingly innocent dog." ],
-    "pt2EventDialogue": [ "'Allergies can developed at anytime,' said the Doctor when Amari had the first case of rashes after playing with the our dog.\\That dog had to be put in a new home as Amari's symptoms got steadily worse.\\But I did not explain to the child why, nor try to educate %him/her% about the allergy as #he/she# may not understand.\\I wish I had." ]
+    "pt2EventDialogue": [ "'Allergies can developed at anytime,' said the Doctor when Amari had the first case of rashes after playing with the our dog.\\That dog had to be put in a new home as Amari's symptoms got steadily worse.\\But I did not explain to my child why, nor try to educate %him/her% about the allergy as #he/she# may not understand.\\I wish I had." ]
 
   },
   {
@@ -276,7 +276,7 @@
     "restrictedItems": [ ],
     "requiredItems": [ "HungryDog" ],
     "leadItems": [ "WaterCooler" ],
-    "eventDialogue": [ "There is cream here like the one [Parent] put on me to stop the itchy. I should put some on my face.\\There, the itchy is less now.\\I do start to feel a little sick. I wish [Parent] is here...\\Maybe I can drink some water, [Parent] says to drink a lot of water when I am sick." ],
+    "eventDialogue": [ "There is cream here like the one [Parent] put on me to stop the itchy. I should put some on my face.\\There, the itchy is less now.\\I do start to feel a little sick. I wish [Parent] is here...\\Maybe I should drink some water, [Parent] says to drink a lot of water when I am sick." ],
     "defaultDialogue": [ "The shelves have a lot of colourful boxes.", "There is a drawing of cream on this box. It looks like cream [Parent] put on me to stop itchy." ],
     "idleDialogue": [ "I need some cream to stop the itchy." ],
     "endingPoints": [ 0, 1, 0, 0, 0 ],
@@ -318,7 +318,7 @@
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": true,
-    "pt2DefaultDialogue": [ "A friendly dog that took likely to Amari after #he/she# fed it." ],
+    "pt2DefaultDialogue": [ "A friendly dog that took liking to Amari after #he/she# fed it." ],
     "pt2EventDialogue": [ "Perhaps, the presence of the animal comforted Amari.\\Little did %he/she% know the same animal was causing the allergic reactions. It got steadily worse with the time spent with the creature.\\And eventually killed #him/her#." ]
   },
   {
@@ -343,22 +343,22 @@
     "requiredItems": [ "WishingFountain1" ],
     "leadItems": [ "WishingFountain2" ],
     "eventDialogue": [ "Someone dropped their coins! Their Mama must be angry at them.\\My Mama gets angry when Papa dropped his coins at the casino.\\There are many coins here, the fountain fairies would be happy!" ],
-    "defaultDialogue": [ "It's a purse full of coins!" ],
+    "defaultDialogue": [ "It's a red bag!" ],
     "idleDialogue": [ "I need to find more coins for the fountain fairies to make my wish come true." ],
     "endingPoints": [ 0, 0, 1, 0, 0 ],
     "level": 0,
     "hideItems": [ "WishingFountain1" ],
     "unhideItems": [ "WishingFountain2" ],
     "isInitiallyHidden": true,
-    "pt2DefaultDialogue": [ "A pouch of coins." ],
-    "pt2EventDialogue": [ "Money. Me and my spouse would often quarrel about it. Sometimes, doing so while forgetting that Amari is there.\\Here, though, the coins were probably a small hope to the child that %his/her% predicament might change." ]
+    "pt2DefaultDialogue": [ "A bag someone carelessly left behind." ],
+    "pt2EventDialogue": [ "Money. Me and my spouse would often quarrel about it.\\Sometimes, doing so while forgetting that Amari is there.\\Here, though, the coins were probably a small hope to Amari that %he/she% might find me again." ]
   },
   {
     "id": "WishingFountain2",
     "restrictedItems": [ ],
     "requiredItems": [ "CoinPurse" ],
     "leadItems": [ "JanitorDesk" ],
-    "eventDialogue": [ "I will put all these coins in the well!\\.....\\Nothing happen still?! Are the fairies sleeping?\\HEY!!! WAKE UP!! I want [Parent] to be here!\\They must be sleeping under the fountain, I will go wake them up." ],
+    "eventDialogue": [ "I will put all these coins in the well!\\.....\\Nothing happen still?! Is it not enough?\\I must have more. I need the fairies help to find [Parent]!\\Maybe I should look around the basement again? But it is a bit scary." ],
     "defaultDialogue": [ "There are coins in the water.", "There are words in the side, 'Fountain of Wishes'.", "[Parent] once told me there are fairies under the fountain that grant wishes." ],
     "idleDialogue": [ "I have many coins now, the fountain fairies is sure to grant my wish!" ],
     "endingPoints": [ 0, 0, 1, 0, 0 ],
@@ -374,32 +374,32 @@
     "restrictedItems": [ ],
     "requiredItems": [ "WishingFountain2" ],
     "leadItems": [ "StorageShelves", "StorageDoorOutside" ],
-    "eventDialogue": [ "There is a card here that says 'Storage & Fountain Pump'.\\Maybe it will open the door to the fairies' home." ],
+    "eventDialogue": [ "It's a note here with difficult words but I will try to read it...\\'If ??? need change, tell him there are coins ??? in the ??? box in the ??? room across here.'\\'They are on the top shelf'\\Coins in the top shelf? That could help me!" ],
     "defaultDialogue": [ "It's a desk made of wood.", "I can't read the words on the paper." ],
-    "idleDialogue": [ "If I am to wake up the fairies, I must first find a way into their home." ],
+    "idleDialogue": [ "I need more coins in the fairies. Maybe I should try the dark scary basement again?" ],
     "endingPoints": [ 0, 0, 1, 0, 0 ],
     "level": 0,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "An old desk used by the janitor." ],
-    "pt2EventDialogue": [ "The basement isn't somewhere I would let the child go to. Too many things could go wrong there.\\And they did." ]
+    "pt2EventDialogue": [ "The basement isn't somewhere I would let my child go to. Too many things could go wrong there.\\And they did." ]
   },
   {
     "id": "StorageShelves",
     "restrictedItems": [ ],
     "requiredItems": [ "JanitorDesk" ],
     "leadItems": [ ],
-    "eventDialogue": [ "Ah, there are lights up there. It must be the fairies!\\I will climb up there and wake them up!" ],
+    "eventDialogue": [ "The coins must be up there.\\It's high up, but I must try and climb!" ],
     "defaultDialogue": [ "There are a lot of things on these shelves." ],
-    "idleDialogue": [ "I have the card to the fairies' home, time to go wake them up!" ],
+    "idleDialogue": [ "The note said there are coins on the top shelf of a room in the basement." ],
     "endingPoints": [ 0, 0, 1000, 0, 0 ],
     "level": 0,
     "hideItems": [ ],
     "unhideItems": [ ],
     "isInitiallyHidden": false,
-    "pt2DefaultDialogue": [ "A storage shelves stacked with many unused things." ],
-    "pt2EventDialogue": [ "Because of what #he/she# believed, Amari tried to reached for the lights.\\But instead %he/she% fell, receiving a concussion that killed." ]
+    "pt2DefaultDialogue": [ "A storage shelves stacked with many things." ],
+    "pt2EventDialogue": [ "Amari tried to reached for the box on the top shelf.\\My child believed it would contain coins that would help #him/her# appease the fountain fairies.\\But instead %he/she% fell, receiving a concussion that killed.\\Why..? Why did this happen? I only thought that the story of fairies would be fun for my child to hear.\\Why did it lead to this?" ]
   },
   {
     "id": "StationExitSign",
@@ -415,7 +415,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Here marks the way out of the station." ],
-    "pt2EventDialogue": [ "Amari waited here for awhile, perhaps thinking that I would come for %him/her%.\\But I did not know. And the child went off, thinking that #he/she# was left behind because of what happened that morning.\\If I was more patient that morning, would Amari not have thought that?" ]
+    "pt2EventDialogue": [ "Amari waited here for awhile, perhaps thinking that I would come for %him/her%.\\But I did not know. And my child went off, thinking that #he/she# was left behind because of what happened that morning.\\If I was more patient that morning, would Amari not have thought that?" ]
   },
   {
     "id": "TrainMap",
@@ -423,7 +423,7 @@
     "requiredItems": [ "StationExitSign" ],
     "leadItems": [ "FlowerPot", "Johnny1" ],
     "eventDialogue": [ "Here this morning, I took the ring off [Parent]'s finger without being found.\\After that, I think, we went near a pretty flower.." ],
-    "defaultDialogue": [ "It's a map with all the train stations.", "[Parent] once told me that there are different colours on this map because there are different lines." ],
+    "defaultDialogue": [ "It's a map with all the train stations.", "[Parent] once told me that different train lines have different colours." ],
     "idleDialogue": [ "I need to remember how I lost the ring. I first got it near the map with stations." ],
     "endingPoints": [ 0, 0, 0, 1, 1 ],
     "level": 1,
@@ -431,7 +431,7 @@
     "unhideItems": [ "Johnny1" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "It's a map, showing the various lines of train services." ],
-    "pt2EventDialogue": [ "Amari began tracing events of that morning.\\It was here, without me noticing, that Amari slipped the ring off my finger. %He/She% has a thing for shiny objects." ]
+    "pt2EventDialogue": [ "Amari began tracing events of that morning.\\It was here, without me noticing, that Amari slipped the ring off my finger. %He/She% imagined it as a toy." ]
   },
   {
     "id": "FlowerPot",
@@ -447,7 +447,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Simple flower decorations to keep the place lookign fresh." ],
-    "pt2EventDialogue": [ "I caught Amari trying to decorate the flower with my ring.\\The child was rightly stubborn about keeping %his/her% hard-won prize.\\To think that I was more concerned then about an object over the way I was treating my child..." ]
+    "pt2EventDialogue": [ "I caught Amari trying to decorate the flower with my ring.\\My child was rightly stubborn about keeping %his/her% hard-won prize.\\To think that I was more concerned then about an object over the way I was treating my child..." ]
   },
   {
     "id": "CafeCounter",
@@ -455,7 +455,7 @@
     "requiredItems": [ "FlowerPot" ],
     "leadItems": [ "AdvertisementBoard" ],
     "eventDialogue": [ "[Parent] said that if I give back the ring, we could get some hot chocolate before riding the train.\\I said that I didn't want to and [Parent] got very angry.\\[Parent] bought coffee and gave me plain water because I was bad.\\We went to take the train afterwards." ],
-    "defaultDialogue": [ "The cafe people makes the best hot chocolate!", "When I'm good, [Parent] buys me hot chocolate here." ],
+    "defaultDialogue": [ "The cafe people make the best hot chocolate!", "When I'm good, [Parent] buys me hot chocolate here." ],
     "idleDialogue": [ "I think [Parent] and I went to the cafe this morning." ],
     "endingPoints": [ 0, 0, 0, 1, 0 ],
     "level": 4,
@@ -463,7 +463,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "The counter cafe where one can order drinks." ],
-    "pt2EventDialogue": [ "I got more and more annoyed by my child's stubborness.\\But if I had known that morning was my last time with the child at that cafe...\\...It would had been different." ]
+    "pt2EventDialogue": [ "I got more and more annoyed by my child's stubborness.\\But if I had known that morning was my last time with my child at that cafe...\\...It would had been different." ]
   },
   {
     "id": "AdvertisementBoard",
@@ -479,14 +479,14 @@
     "unhideItems": [ "LostRing" ],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": [ "Amari finds it interesting that the advertisement would sometimes change overnight." ],
-    "pt2EventDialogue": [ "When I tried to snatch back the ring that morning, it fell somewhere.\\And now, seeing Amari trying to look for it, I regretted what I had said.\\%He/She% was just a child." ]
+    "pt2EventDialogue": [ "When I tried to snatch back the ring that morning, it fell somewhere. That's how we lost it.\\And now, seeing Amari trying to look for it, I regretted what I had said.\\%He/She% was just a child." ]
   },
   {
     "id": "LostRing",
     "restrictedItems": [ ],
     "requiredItems": [ "AdvertisementBoard" ],
     "leadItems": [ ],
-    "eventDialogue": [ "This is the ring I lost this morning!\\Maybe [Parent] would come and bring me home now." ],
+    "eventDialogue": [ "This is the ring I lost this morning!\\Maybe [Parent] would come and bring me home now!" ],
     "defaultDialogue": [ "It's [Parent]'s ring!" ],
     "idleDialogue": [ "I should look around upstairs for [Parent]'s ring." ],
     "endingPoints": [ 0, 0, 0, 1000, 0 ],
@@ -495,7 +495,7 @@
     "unhideItems": [ ],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": [ "Amari did find the ring in the end... but I wish now that #he/she# didn't" ],
-    "pt2EventDialogue": [ "When they found Amari, #he/she# was holding the same ring we lost this morning.\\The child was found crushed under a fallen piece of ceiling.\\And the position suggested that %he/she% was crouching to pick something up." ]
+    "pt2EventDialogue": [ "When they found Amari, #he/she# was holding the same ring we lost this morning.\\My child... found crushed under a fallen piece of ceiling.\\Just as %he/she% was picking up the ring..." ]
   },
 	{
 		"id": "Johnny1",
@@ -511,7 +511,7 @@
 		"unhideItems":[],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": ["'Johnny' is the name of Amari's imaginary friend."],
-    "pt2EventDialogue": ["Amari has an imaginary friend called Johnny.\\I once found Amari crying, saying that Johnny told %him/her% that #he/she# was the reason me and my spouse was quarreling.\\Of course, I told the child that was not the case. But Amari would sometimes be crying about it again"]
+    "pt2EventDialogue": ["Amari has an imaginary friend called Johnny.\\I once found Amari crying, saying that Johnny told %him/her% that #he/she# was the reason me and my spouse was quarreling.\\Of course, I told my child that was not the case. But Amari would sometimes be crying about it again"]
 	},
 	{
 		"id": "BrokenBottle",
@@ -527,7 +527,7 @@
 		"unhideItems":["Johnny2"],
     "isInitiallyHidden": false,
     "pt2DefaultDialogue": ["A broken bottle with sharp edges could hurt."],
-    "pt2EventDialogue": ["Amari must had witnessed some of our quarrels.\\Sometimes, the quarrels would be about taking care the child.\\Perhaps the it was these, that the child misinterpreted. Thinking %he/she% was the reasons for our problems."]
+    "pt2EventDialogue": ["Amari must had witnessed some of our quarrels.\\Sometimes, the quarrels would be about taking care of our child.\\Perhaps the it was these Amari misinterpreted. Thinking %he/she% was the reasons for our problems."]
 	},
 	{
 		"id": "Johnny2",
@@ -559,7 +559,7 @@
 		"unhideItems":[],
     "isInitiallyHidden": true,
     "pt2DefaultDialogue": ["'Johnny' is the name of Amari's imaginary friend."],
-    "pt2EventDialogue": ["After putting aside finding the ring we lost that morning, Amari was running around the platform.\\The child was laughing as if playing with someone no one can see.\\%He/She% was running close to the edge of the platform.\\And fell."]
+    "pt2EventDialogue": ["After putting aside finding the ring we lost that morning, Amari was running around the platform.\\My child was laughing as if playing with someone no one can see.\\%He/She% was running close to the edge of the platform.\\And fell."]
 	},
 	{
 		"id": "Transition_CafeDoorOutside",
@@ -793,13 +793,13 @@
 	  	"id": "Transition_EscalatorDown",
 	  	"type": "transition",
 	  	"restrictedItems": [ ],
-	    "requiredItems": [ ],
+	    "requiredItems": [ "PlatformExitSign" ],
 	    "leadItems": [ ],
 	    "eventDialogue": [ ],
-	    "defaultDialogue": [ ],
+	    "defaultDialogue": [ "Did I miss out anything here?"],
 	    "idleDialogue": [ ],
 	    "endingPoints": [ 0, 0, 0, 0, 0],
-	    "offset": [-2.50, 2.0, -49.67],   //change
+	    "offset": [-2.50, 2.0, -49.67],  //Change
 	  	"level": 2,
 	  	"nextLevel": 1
   	},

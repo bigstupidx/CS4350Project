@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     public float timePerFrame = 0.025f;
 
 
+	// Destination Marker
+	public GameObject marker;
 
 
 	Sprite[] sprites;
@@ -94,8 +96,8 @@ public class PlayerMovement : MonoBehaviour
 	
 		spriteRenderer.sprite = sprites[currDirection + currFrame];
 
-
-
+		if (marker == null)
+			marker = GameObject.Find ("DestinationMarker");
 	
 
 	}
@@ -127,9 +129,19 @@ public class PlayerMovement : MonoBehaviour
 	{
 		currTime += Time.deltaTime;
 
-		
 		// Check mouse input
-		if (Input.GetKey (KeyCode.Mouse0) ){
+		if (Input.GetKey (KeyCode.Mouse0)) {
+
+			if (Input.mousePosition.x > (Screen.width * 0.9f) && Input.mousePosition.y < (Screen.height * 0.2f)){
+				mouseOverButton = true;
+
+				isWalking = false;
+				currFrame = 0;
+				int frameToLoad = currDirection * 8 + currFrame;
+				spriteRenderer.sprite = sprites [frameToLoad];
+			}
+			else 
+				mouseOverButton = false;
 
 			if(PlayerData.MoveFlag && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
@@ -143,6 +155,10 @@ public class PlayerMovement : MonoBehaviour
 
 					//GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour>().alreadySelected = false;
 					destination = floorHit.point;
+				
+					marker.transform.position = new Vector3( destination.x , destination.y + 0.3f, destination.z - 0.3f);
+					//marker.GetComponent<MeshRenderer>().enabled = true;
+
 				
 					// Create a vector from the player to the point on the floor the raycast from the mouse hit.
 					Vector3 playerToMouse = floorHit.point - transform.position;
@@ -161,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
 				
 					//float angle = newRotation.eulerAngles.y;
 				
-					Debug.Log(angle);
+					//Debug.Log(angle);
 				
 					int prevDirection = currDirection;
 				
@@ -210,15 +226,16 @@ public class PlayerMovement : MonoBehaviour
 
 	
 		if (isWalking) {
-
+			marker.GetComponent<MeshRenderer>().enabled = true;
 			// Movement
 			Vector3 movement = destination - transform.position;
 
 	
 			float moveDifference = lastMovement.magnitude - movement.magnitude;
 
-			if (moveDifference < noMovementThreshold)
+			if (moveDifference < noMovementThreshold){
 				noOfFramesNotMoving++;
+			}
 			else
 				noOfFramesNotMoving = 0;
 
@@ -228,6 +245,10 @@ public class PlayerMovement : MonoBehaviour
 
 			// End movement if close to destination
 			movement = destination - transform.position;
+
+			if( movement.magnitude < 0.7f)
+				marker.GetComponent<MeshRenderer>().enabled = false;
+
 			if (movement.magnitude <= closeToDestinationThreshold) {
 				isWalking = false;
 				noOfFramesNotMoving = 0;
@@ -239,6 +260,8 @@ public class PlayerMovement : MonoBehaviour
 				noOfFramesNotMoving = 0;
 			}
 		}
+		else
+			marker.GetComponent<MeshRenderer>().enabled = false;
 
 		// Change Idle Timer
 		if (currDirection == downConst && !isWalking) {

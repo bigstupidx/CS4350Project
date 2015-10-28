@@ -81,6 +81,7 @@ public class Displaytextbox : MonoBehaviour {
 		}else{
 			// feedtext into textbox
 			if (colliderName.Length < 1) { // player stand at out of nowhere
+				textBox.SetEventStatus(false);
 				if (EndingController.instance.isChapter2Activated)
 					feedText.SetText ("Amari..");
 				else {

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class TraceController : MonoBehaviour {
 	
 	public List<string> storyList;
+	public Material modelTexture;
+	public Texture2D[] textureArray;
 	private LineRenderer lineRenderer;
 	private float counter;
 	private float distance;
@@ -18,6 +21,7 @@ public class TraceController : MonoBehaviour {
 	public Dictionary<string, ItemState> allItemDic;
 
 	private GameObject player;
+	private GameObject filter;
 	
 	public void Awake() {
 		if (instance == null) {
@@ -28,6 +32,20 @@ public class TraceController : MonoBehaviour {
 			Init();
 		} else {
 			DestroyImmediate(gameObject);
+		}
+	}
+
+	void ChangeTexture()
+	{
+		if (filter == null )
+			filter = GameObject.Find ("Chapter2Filter");
+
+		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene")) {
+			modelTexture.mainTexture = textureArray [1];
+			filter.GetComponent<Image>().color = new Color( (112.0f/255.0f), (66.0f/255.0f), (20.0f/255.0f), 0.3f );
+		} else {
+			modelTexture.mainTexture = textureArray [0];
+			filter.GetComponent<Image>().color = new Color( (112.0f/255.0f), (66.0f/255.0f), (20.0f/255.0f), 0.0f );
 		}
 	}
 
@@ -68,6 +86,9 @@ public class TraceController : MonoBehaviour {
 
 		if (player == null)
 			player = GameObject.FindGameObjectWithTag ("Player");
+
+		if (filter == null && Application.loadedLevelName.Contains("GameScene") )
+			filter = GameObject.Find ("Chapter2Filter");
 	}
 
 
@@ -86,7 +107,6 @@ public class TraceController : MonoBehaviour {
 
 				if(hasItem)
 				{
-					Debug.Log("Player:" + PlayerController.instance.currentLevel + ", Target: " + temp.level);
 					if(PlayerController.instance.currentLevel != temp.level)
 					{
 						// if player at platform, target at ground
@@ -179,7 +199,7 @@ public class TraceController : MonoBehaviour {
 		else
 			lineRenderer.enabled = false;
 			*/
-
+		ChangeTexture();
 
 		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene")) {
 			if (player == null)
