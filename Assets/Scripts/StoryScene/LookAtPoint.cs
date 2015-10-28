@@ -108,7 +108,7 @@ public class LookAtPoint : MonoBehaviour {
     public void unfreeze()
     {
         freeze = false;
-		photoMama.SetActive(true); photoPapa.SetActive(true);
+		photoMama.SetActive(false); photoPapa.SetActive(false);
         Debug.Log("Clicked");
     }
 	

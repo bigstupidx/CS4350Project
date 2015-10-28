@@ -15,6 +15,7 @@ public class PreludeText : MonoBehaviour {
 //		if (GameController.instance.isAndroidVersion) {
 //			factor  = 250.0f;
 //		}
+		factor  = Screen.width / 10;
 		ResetPosition (true);
 	}
 
@@ -27,15 +28,15 @@ public class PreludeText : MonoBehaviour {
 	{
 		fadeInState = true;
 		GetComponent<Image>().color = new Color(1.0f,1.0f, 1.0f, 0.0f);
-		int height = Random.Range (1, 6);
+		int height = Random.Range (1, 5);
 
 		if (_newDirectionIsLeft) {
-			int left = Random.Range (3, 6);
-			transform.position = new Vector3( left* (factor/2) , height * (factor/2), 0.0f);
+			int left = Random.Range (2, 6);
+			transform.position = new Vector3( left* factor , height * ( Screen.height / 6 ), 0.0f);
 			isLeftText = true;
 		} else {
 			int right = Random.Range (5, 7);
-			transform.position = new Vector3(right * factor, height * (factor/2), 0.0f);
+			transform.position = new Vector3(right * factor, height * ( Screen.height / 6 ), 0.0f);
 			isLeftText = false;
 		}
 	}
