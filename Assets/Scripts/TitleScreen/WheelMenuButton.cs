@@ -2,152 +2,130 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class WheelMenuButton : MonoBehaviour {
-	public static float posLeft = -700.0f;
-	public static float posCenter = 0.0f;
-	public static float posRight = 700.0f;
-	static float totalMoveTimeInSec = 0.2f;
-	static float halfScreenWidth = 1080;
-	static float blackFadeAlphaChg = 0.3f;
+public class WheelMenuButton : MonoBehaviour
+{
+    public static float posLeft = -700.0f;
+    public static float posCenter = 0.0f;
+    public static float posRight = 700.0f;
+    static float totalMoveTimeInSec = 0.2f;
+    static float halfScreenWidth = 1080;
+    static float blackFadeAlphaChg = 0.1f;
+    static float colFadeAlphaChgUp = 10.0f;
+    static float colFadeAlphaChgDown = 1.0f;
 
-	RectTransform myRect;
-	Text myText;
+    RectTransform myRect;
+    Text myText;
+    public string hint_text;
 
-	public WheelMenuButton leftFriend;
-	public WheelMenuButton rightFriend;
-	public RawImage blackScreen;
-	public int myID;
+    public RawImage blackScreen;
+    public int myID;
+    static int choice = -1;
+    public GameObject hint;
 
-	float moveTime = 0.0f;
-	float dest;
-	static bool isGoingLeft = false; // false == left, true == right
-	static int choice = -1;
+    public Color32 colHighlighted = new Color32(255, 255, 255, 255);
+    public Color32 colNormal = new Color32(119, 167, 210, 255);
+    private bool highlighted = false;
+    static bool floatIn;
+    // Use this for initialization
+    void Start()
+    {
+        myRect = transform.GetComponent<RectTransform>();
+        myText = transform.GetComponent<Text>();
+        blackScreen.enabled = true;
+        floatIn = false;
+        myText.color = colNormal;
+    }
 
-	// Use this for initialization
-	void Start () {
-		myRect = transform.GetComponent<RectTransform> ();
-		myText = transform.GetComponent<Text> ();
-		blackScreen.enabled = false;
-	}
+    public void onClick()
+    {
+        if (choice != -1)
+            return;
 
-	public void onClick(){
-		if (choice != -1)
-			return;
+        // Set menu choice
+        choice = myID;
+        floatIn = true;
+        //Debug.Log("Set" + choice);
+        blackScreen.enabled = true;
+    }
 
-		if (myRect.anchoredPosition.x == 0) {
+    public void onPointerEnter()
+    {
+        highlighted = true;
+        hint.GetComponent<Text>().text = hint_text;
+    }
 
-			// Set menu choice
-			Debug.Log (transform.name + " EXECTUE");
-			choice = myID;
+    public void onPointerExit()
+    {
+        highlighted = false;
+        hint.GetComponent<Text>().text = "";
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(ModelRotate.flashLight)
+        {
+            myText.color = colHighlighted;
+        }
+
+        if(highlighted|| ModelRotate.flashLight)
+        {
+            Color tempColor = myText.color;
+            tempColor *= new Vector4(255.0f, 255.0f, 255.0f, 255.0f);
+            tempColor.r += (colHighlighted.r - tempColor.r) * colFadeAlphaChgUp * Time.deltaTime;
+            tempColor.g += (colHighlighted.g - tempColor.g) * colFadeAlphaChgUp * Time.deltaTime;
+            tempColor.b += (colHighlighted.b - tempColor.b) * colFadeAlphaChgUp * Time.deltaTime;
+            tempColor *= new Vector4(0.00392156862f, 0.00392156862f, 0.00392156862f, 1.0f);
+            myText.color = tempColor;
+        } else
+        {
+            Color tempColor = myText.color;
+            tempColor *= new Vector4(255.0f, 255.0f, 255.0f, 255.0f);
+            tempColor.r += (colNormal.r - tempColor.r) * colFadeAlphaChgDown * Time.deltaTime;
+            tempColor.g += (colNormal.g - tempColor.g) * colFadeAlphaChgDown * Time.deltaTime;
+            tempColor.b += (colNormal.b - tempColor.b) * colFadeAlphaChgDown * Time.deltaTime;
+            tempColor *= new Vector4(0.00392156862f, 0.00392156862f, 0.00392156862f, 1.0f);
+            myText.color = tempColor;
+        }
+
+        if (floatIn)
+        {
+            // Fade black in
+            Color tempColor = blackScreen.color;
+            tempColor.a = Mathf.Min(1.0f, tempColor.a + blackFadeAlphaChg * Time.deltaTime);
+            blackScreen.color = tempColor;
+            AudioSource a = blackScreen.GetComponent<AudioSource>();
+            a.volume = 1.0f - tempColor.a;
 
 
-			if(choice == 1 || choice == 2){
-				// set black screen to begin fading
-				blackScreen.enabled = true;
-				Color tempColor = blackScreen.color;
-				tempColor.a = 0.0f;
-				blackScreen.color = tempColor;
-			}
-			else{
-				// So menu moves if choices arent implemnted yet
-				choice = -1;
-			}
-		}
-		
-		else {
-
-			if(myRect.anchoredPosition.x <= 0){
-				isGoingLeft = false;
-			}
-			else{
-				isGoingLeft = true;
-			}
-
-			leftFriend.StartMove (posLeft);
-			this.StartMove (posCenter);
-			rightFriend.StartMove (posRight);
-		}
-
-	}
-
-	public void StartMove(float newDest){
-		dest = newDest;
-		moveTime = totalMoveTimeInSec;
-	}
-
-	// Update is called once per frame
-	void Update () {
-		if (blackScreen.enabled) {
-			// Fade black in
-			Color tempColor = blackScreen.color;
-			tempColor.a = Mathf.Min(1.0f, tempColor.a + blackFadeAlphaChg*Time.deltaTime);
-			blackScreen.color = tempColor;
-
-			//Debug.Log (blackScreen.color.a);
-
-			// Change Scene if menu choice selected
-			if(blackScreen.color.a >= 1.0f && choice != -1){
-				if(choice == 1){
-					Application.LoadLevel("PreludeScene");
-				} else if(choice == 2) {
-					Application.LoadLevel("CreditScene");
-				}
-                else if(choice == 2)
+            // Change Scene if menu choice selected
+            if (blackScreen.color.a >= 1.0f && choice != -1)
+            {
+                if (choice == 0)
+                {
+                    Debug.Log("TEST");
+                    GameController.instance.load();
+                }
+                else if (choice == 1)
+                {
+                    Application.LoadLevel("PreludeScene");
+                }
+                else if (choice == 2)
                 {
                     Application.LoadLevel("CreditScene");
                 }
-                choice = -1;
-			}
-		}
-
-		if (moveTime > 0) {
-			float currX = myRect.anchoredPosition.x;
-			float lengthLeft = 0; 
-			float moveAmt = 0;
-			float halfMyWidth = myRect.rect.width/2;
-			//Debug.Log (myRect.name + ": " + dest + "   currX: " + currX);
-			if(isGoingLeft){
-				if(dest>currX){
-					lengthLeft = -(currX+halfScreenWidth)-(halfScreenWidth-dest) - halfMyWidth;
-				}
-				else{
-					lengthLeft = dest - currX;
-				}
-
-				moveAmt = Mathf.Max (lengthLeft, lengthLeft/moveTime*Time.deltaTime);
-
-
-			}
-			else{
-				if(dest<currX){
-					lengthLeft = (halfScreenWidth-currX) + (halfScreenWidth+dest)+ halfMyWidth;
-				}
-				else{
-					lengthLeft = dest-currX;
-				}
-
-				moveAmt = Mathf.Min (lengthLeft, lengthLeft/moveTime*Time.deltaTime);
-			}
-
-			myRect.anchoredPosition = new Vector2(myRect.anchoredPosition.x+moveAmt, myRect.anchoredPosition.y);
-
-			if( (myRect.anchoredPosition.x >= (halfScreenWidth + halfMyWidth)) && !isGoingLeft){ // out of screen right
-				myRect.anchoredPosition = new Vector2(-halfScreenWidth - halfMyWidth, myRect.anchoredPosition.y); 
-			}
-			else if( (myRect.anchoredPosition.x <=  (-halfScreenWidth - halfMyWidth)) && isGoingLeft){// out of screen left
-				myRect.anchoredPosition = new Vector2(halfScreenWidth + halfMyWidth, myRect.anchoredPosition.y); 
-			}
-
-			moveTime -= Time.deltaTime;
-			
-		}
-
-		if (myRect.anchoredPosition.x == 0) {
-			myText.fontStyle = FontStyle.Bold;
-			myText.fontSize = 60;
-		} else {
-			myText.fontStyle = FontStyle.Normal;
-			myText.fontSize = 50;
-		}
-	}
+            }
+        }
+        else
+        {
+            // Fade black out
+            Color tempColor = blackScreen.color;
+            tempColor.a = Mathf.Max(0.0f, tempColor.a - blackFadeAlphaChg * Time.deltaTime);
+            if (tempColor.a <= 0.0f)
+                blackScreen.enabled = false;
+            blackScreen.color = tempColor;
+            AudioSource a = blackScreen.GetComponent<AudioSource>();
+            a.volume = 1.0f - tempColor.a;
+        }
+    }
 }

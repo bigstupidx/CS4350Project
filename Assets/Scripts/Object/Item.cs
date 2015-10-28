@@ -22,6 +22,8 @@ public class Item : MonoBehaviour {
 	public int[] endingPoints;
 	public double[] offset;
 	public bool isInitiallyHidden;
+	public string[] pt2DefaultDialogue;
+	public string[] pt2EventDialogue;
 	
 
 	public void ItemTriggered(Item item) {
@@ -42,6 +44,8 @@ public class Item : MonoBehaviour {
 		idleDialogue = state.idleDialogue;
 		endingPoints = state.endingPoints;
 		isInitiallyHidden = state.isInitiallyHidden;
+		pt2DefaultDialogue = state.pt2DefaultDialogue;
+		pt2EventDialogue = state.pt2EventDialogue;
 	}
 
 	public void loadTransitionItemState(ItemState state) {
@@ -56,12 +60,20 @@ public class Item : MonoBehaviour {
 		offset = state.offset;
 	}
 
-	public string GetRespond(bool isActivated)
+	public string GetRespond(bool isActivated, bool isChapterTwoActivated)
 	{
-		if (isActivated) {
-			return eventDialogue [0];
-		} else {
-			return defaultDialogue[(Random.Range(1, defaultDialogue.Length * 256) % defaultDialogue.Length)];
+		if (!isChapterTwoActivated) {
+			if (isActivated && type.Contains("event") ) {
+				return eventDialogue [0];
+			} else {
+				return defaultDialogue [(Random.Range (1, defaultDialogue.Length * 256) % defaultDialogue.Length)];
+			}
+		}else {
+			if (isActivated) {
+				return pt2EventDialogue [0];
+			} else {
+				return pt2DefaultDialogue [(Random.Range (1, defaultDialogue.Length * 256) % defaultDialogue.Length)];
+			}
 		}
 	}
 
@@ -83,6 +95,8 @@ public class ItemState {
 	public int[] endingPoints;
 	public double[] offset;
 	public bool isInitiallyHidden;
+	public string[] pt2DefaultDialogue;
+	public string[] pt2EventDialogue;
 
 	public ItemState() {
 		type = Item.EVENT_TYPE;
@@ -98,5 +112,7 @@ public class ItemState {
 		endingPoints = new int[(int) EndingType.EndingCount];
 		offset = new double[3];
 		isInitiallyHidden = false;
+		pt2DefaultDialogue = new string[0];
+		pt2EventDialogue = new string[0];
 	}
 }

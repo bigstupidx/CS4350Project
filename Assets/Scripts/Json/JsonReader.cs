@@ -13,6 +13,12 @@ public class JsonReader : MonoBehaviour {
 		return JsonMapper.ToObject<ItemState[]>(jsonString);
 	}
 
+	static public EndingState[] readEndingState() {
+		TextAsset endingAsset = Resources.Load ("EndingSequence") as TextAsset;
+		string jsonString = endingAsset.text;
+		return JsonMapper.ToObject<EndingState[]>(jsonString);
+	}
+
 	static public PlayerState readPlayerState() {
 		string jsonString = File.ReadAllText (JsonReader.getDocumentDir() + "/player.json");
 		return JsonMapper.ToObject<PlayerState> (jsonString);

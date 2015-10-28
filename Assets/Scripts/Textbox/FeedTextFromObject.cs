@@ -8,10 +8,10 @@ public class FeedTextFromObject : MonoBehaviour {
 	public bool isActivated = false;
 
 	public bool endOfRespond = false;
-	public int ind = -1;
-	public string[] multipleResponds;
-	private Color defaultColor;
+	public string[] multipleResponds = new string[1];
+	private Color defaultColor = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 
+	public int ind = -1;
 	public Item targetItem;
 	public bool targetStatus;
 
@@ -21,15 +21,14 @@ public class FeedTextFromObject : MonoBehaviour {
 	private FadeInFadeOut textBox;
 
 	void Start(){
-		textBox = GameObject.Find ("TextBox").GetComponent<FadeInFadeOut> ();
+		textBox = transform.GetComponentInParent<FadeInFadeOut> ();
 		text = transform.GetComponent<Text> ();
-		defaultColor = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 		ResetTextFeed ();
 	}
 
 	public void setAlpha(float _alpha)
 	{
-		alpha = _alpha;
+		text.color = new Color (1.0f, 1.0f, 1.0f, _alpha); 
 	}
 
 	public bool getIsMoreThanOneLine()
@@ -96,82 +95,47 @@ public class FeedTextFromObject : MonoBehaviour {
 
 	public void SetText(string _respond, Item _item = null, bool _status = false)
 	{
-		isActivated = true;
 		if (_respond.Length > 1) {
 			if (_respond.Contains ("\\")) {
 				moreThanOneLine = true; 
 				multipleResponds = _respond.Split ('\\');
-				ind = 0;
 			} else {
-				text.text = PostRespondProcessing(_respond);
 				moreThanOneLine = false;
-				ind = 0;
+				multipleResponds[0] = _respond;
 			}
-		} else
-			ind = -1;
+			text.text = PostRespondProcessing( multipleResponds [0] );
+		} 
 
 		targetItem = _item;
 		targetStatus = _status;
 
-
+		UpdateText (0);
 	}
 
-	public void Update(){
-		// change text set when multiple lines of responds is detected
-		if (Input.GetKeyUp (KeyCode.Space) && !textBox.isFadingOn) {
-			endOfRespond = false;
-			
-			if (moreThanOneLine) {
-				if( ind < multipleResponds.Length)
-					text.text = PostRespondProcessing( multipleResponds [ind] );
-			}
-		}
-
-		if (isActivated) {
-			if (textBox.getStatus () && textBox.isFadingOn ) {
-				if(alpha < 0.0f)
-					alpha = 1.0f;
-				text.color = new Color (1.0f, 1.0f, 1.0f, alpha); 
-
-				if(alpha <= 0.1f)
-					endOfRespond = true;
-			}
-			else if (textBox.getStatus () && !textBox.isFadingOn ) {
-				text.color = text.color = defaultColor;
-			}
-		}
-	}
-
-	void LateUpdate()
+	public void UpdateText(int _index)
 	{
-		if (textBox.isFadingOn) {
-				if(targetItem != null &&  targetStatus )
-				{
-					Debug.Log("Enter");
-					GameController.instance.TriggerItem(targetItem.itemId);
-					Debug.Log("Over");
-					targetStatus = false;	
-					targetItem = null;
-					
-				}
+		if (moreThanOneLine) {
+			if (_index < multipleResponds.Length) {
+				text.text = PostRespondProcessing (multipleResponds [_index]);
+				endOfRespond = false;
+				isActivated = true;
+			} else {
+				endOfRespond = true;
+				isActivated = true;
+			}
 		}
-		
-		// guard to reset multipleResponds
-		if ( (endOfRespond && isActivated) )
-			ResetTextFeed ();
-
-		if ( (!isActivated) )
-			ResetTextFeed ();
-
 	}
 	
 	public void ResetTextFeed()
 	{
-		ind = -1;
-		multipleResponds = new string[0];
+		multipleResponds = new string[1];
 		endOfRespond = false;
 		isActivated = false;
 		text.color = defaultColor;
 		text.text = "";
+
+		if (targetItem != null && targetStatus) {
+			GameController.instance.TriggerItem(targetItem.itemId);
+		}
 	}
 }

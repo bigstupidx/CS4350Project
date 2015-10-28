@@ -10,14 +10,22 @@ public class FadeInBlackscreen : MonoBehaviour {
 	void Start () {
 		myText = transform.GetComponent<Image> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (myText.color.a < 1.0f) {
 			Color temp = myText.color;
 			temp.a += speed * Time.deltaTime;
 			myText.color = temp;
-		} else 
-			Application.LoadLevel ("TitleScene");
+		} else {
+			TraceController.instance.Init();
+			EndingController.instance.ResetEndingController(true);
+			GameController.instance.Reset();
+			PlayerController.instance.Reset();
+
+			Application.LoadLevel("PlatformGameScene");
+			//Application.LoadLevel("TitleScene");
+
+		}
 	}
 }

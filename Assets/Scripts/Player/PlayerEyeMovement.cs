@@ -23,11 +23,11 @@ public class PlayerEyeMovement : MonoBehaviour {
 			float shortestDist = Mathf.Infinity;
 			Vector3 playerPosition = GameObject.FindGameObjectWithTag ("Player").transform.position;
 			playerPosition.y = 0;
-			Collider[] nearbyColliders = Physics.OverlapSphere (GameObject.FindGameObjectWithTag ("Player").transform.position, detectionRadius);
+			Collider[] nearbyColliders = Physics.OverlapSphere (playerPosition, detectionRadius);
 
 			foreach (Collider col in nearbyColliders) {
 
-				Item curr = GameController.instance.GetItem (col.gameObject.name);
+                Item curr = col.gameObject.GetComponent<Item>();
 
 				if (curr != null) {
 					bool status = PlayerController.instance.AbleToTrigger (curr);
@@ -48,8 +48,6 @@ public class PlayerEyeMovement : MonoBehaviour {
 			if (!targetFound) {
 				transform.localPosition = new Vector3 (0, 0, 0);
 			} else {
-
-
 
 				targetPos.y = 0;
 

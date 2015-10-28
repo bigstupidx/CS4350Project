@@ -4,11 +4,16 @@ using System.Collections;
 
 public class RoleFading : MonoBehaviour {
 
-	public GameObject reference;
+	//public GameObject reference;
+	public bool isStaticText = false;
+
 	public string[] texts;
 	private Text myText;
 	private int curr = 0;
 	private float startTime;
+
+	public Vector3 origin;
+	public Vector3 destination;
 
 	// Use this for initialization
 	void Start () {
@@ -46,11 +51,25 @@ public class RoleFading : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.Translate ( 30.0f * Vector3.right * Time.deltaTime);
+		if (!isStaticText) {
+			transform.Translate (30.0f * Vector3.right * Time.deltaTime);
+
+			if(transform.position.x > 500.0f){
+				Vector3 newPos = transform.position;
+				newPos.x = 0.0f;
+				transform.position = newPos;
+				this.ResetAlpha(false);
+			}
+		}
 
 		float timeDiff = Time.time - startTime; 
 		if ((timeDiff) > 6.0f) {
-			myText.text = texts [1];
+			if(curr < texts.Length-1){
+			curr++;
+			}
+			else
+				curr = texts.Length-1;
+			myText.text = texts [curr];
 			startTime = Time.time;
 		} else if ((timeDiff) > 4.0f) {
 			FadeIn(false);
@@ -59,28 +78,5 @@ public class RoleFading : MonoBehaviour {
 		} else {
 			FadeIn(true);
 		}
-
-		if(transform.position.x > 550.0f){
-			reference.SetActive(true);
-			this.ResetAlpha(false);
-			Vector3 newPos = transform.position;
-			newPos.x = -200.0f;
-			transform.position = newPos;
-			this.gameObject.SetActive(false);
-		}
-
-		/*
-		if ( (Time.time - startTime) > 1.5f) {
-			curr++;
-
-			if (curr >= texts.Length)
-				this.gameObject.SetActive (false);
-			else{
-				myText.text = texts [curr];
-				startTime = Time.time;
-			}
-		}
-		*/
-
 	}
 }

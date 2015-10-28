@@ -6,26 +6,42 @@ using LitJson;
 public class GameController : MonoBehaviour {
 
 	static public GameController instance;
-	private float timeSinceGameStart;
-
 	private Dictionary<string, Item> items;
+
+	public Dictionary<string, string> allHintDic;
+
+	private int timeSinceGameStart = 0;
+	public bool isAndroidVersion = false;
+	public bool isPaused = false;
 
 	public void Awake() {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad (this);
+			allHintDic = new Dictionary<string, string>();
 		} else {
 			DestroyImmediate(gameObject);
 		}
 	}
 
-	public void SetStartTime()
+	public void Reset()
 	{
-		timeSinceGameStart = Time.time;
+		SetStartTime ();
 	}
 
-	public float GetTime(){
+	public void SetStartTime()
+	{
+		isPaused = false;
+		timeSinceGameStart = 0;
+	}
+
+	public int GetTime(){
 		return timeSinceGameStart;
+	}
+
+	public void ToggleTimer()
+	{
+		isPaused = !isPaused;
 	}
 
 	public void Start() {
@@ -38,6 +54,12 @@ public class GameController : MonoBehaviour {
 	
 	}
 
+	public void FixedUpdate()
+	{
+		if (!isPaused)
+			timeSinceGameStart++;
+	}
+
 	public void InitializeLevel() {
 		this.items = new Dictionary<string, Item> ();
 		GameObject itemList = GameObject.Find ("Items");
@@ -47,7 +69,15 @@ public class GameController : MonoBehaviour {
 		ItemState[] itemsState = JsonReader.readItemsState();
 		List<string> noReqItems = new List<string> ();
 		List<string> initiallyHiddenItems = new List<string> ();
+
 		foreach (ItemState itemState in itemsState) {
+
+			if (itemState.type.Equals(Item.EVENT_TYPE)) {
+				if(itemState.idleDialogue.Length > 0 && !allHintDic.ContainsKey(itemState.id) ){
+					allHintDic.Add(itemState.id, itemState.idleDialogue[0]);
+				}
+			}
+
 			if (!items.ContainsKey(itemState.id)) {
 				continue;
 			}
@@ -68,6 +98,8 @@ public class GameController : MonoBehaviour {
 		PlayerController.instance.AddInitialItems (noReqItems);
 		PlayerController.instance.AddInitiallyHiddenItems (initiallyHiddenItems);
 		PlayerController.instance.updatePlayerPositon ();
+		PlayerController.instance.UpdateHintDic ();
+
 		GameObject camera = GameObject.Find ("Main Camera");
 		CameraFollow followCamera = camera.GetComponent<CameraFollow> ();
 		Debug.Log (followCamera);
@@ -76,9 +108,37 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver(EndingType endingType) {
-		Debug.Log ("Game over");
-		LevelHandler.Instance.LoadSpecific ("EndingScene");
-		//Application.LoadLevel ("EndingScene");
+		switch (endingType) {
+		case EndingType.Ending1:
+			Debug.Log ("Game over: Death by Suffocation");
+			break;
+		case EndingType.Ending2:
+			Debug.Log ("Game over: Death by Dog Allergy");
+			break;
+		case EndingType.Ending3:
+			Debug.Log ("Game over: Death by Head Injury");
+			break;
+		case EndingType.Ending4:
+			Debug.Log ("Game over: Death by Fallen Ceiling");
+			break;
+		case EndingType.Ending5:
+			Debug.Log ("Game over: Death by Train Accident");
+			break;
+		}
+		if (EndingController.instance.isChapter2Activated) {	// this part need to change
+
+			if (isAndroidVersion){
+				GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().colliderName = "";
+				GameObject.Find ("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton ();
+			}
+
+			Destroy (GameController.instance);
+			Destroy (PlayerController.instance);
+			EndingController.instance.ResetEndingController (false);
+			LevelHandler.Instance.LoadSpecific ("CreditScene");
+		} else {
+			LevelHandler.Instance.LoadSpecific ("EndingScene");
+		}
 	}
 
 	public void TriggerItem(string itemId) {
@@ -89,6 +149,10 @@ public class GameController : MonoBehaviour {
 		if (PlayerController.instance.AbleToTrigger(item)) {
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
+
+			if(EndingController.instance.isChapter2Activated)
+				TraceController.instance.TriggerItem(itemId);
+
 			updateItemsVisibility ();
 			foreach(KeyValuePair<string, Item> entry in items) {
 				entry.Value.ItemTriggered(item);
@@ -101,14 +165,51 @@ public class GameController : MonoBehaviour {
 
 	public void transition (Item item) {
 		if (item.type == Item.TRANSITION_TYPE) {
+
+			if(EndingController.instance.isChapter2Activated)
+				TraceController.instance.TurnOffLine();
+
+			if(isAndroidVersion)
+				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
+
+
 			int nextLevel = item.nextLevel;
 			if (nextLevel == 2) {
 				LevelHandler.Instance.LoadSpecific ("PlatformGameScene");
 			} else if (nextLevel == 1) {
-				LevelHandler.Instance.LoadSpecific ("Testing_scene_1");
+				//change this to the indoor scene
+				LevelHandler.Instance.LoadSpecific ("GroundIndoorGameScene");
 			} else if (nextLevel == 0) {
 				LevelHandler.Instance.LoadSpecific ("BasementGameScene");
+			} else if (nextLevel == 3) {
+				LevelHandler.Instance.LoadSpecific ("GroundOutdoorGameScene");
+			} else if (nextLevel == 4) {
+				LevelHandler.Instance.LoadSpecific ("CafeGameScene");
+			} else if (nextLevel == 5) {
+				LevelHandler.Instance.LoadSpecific ("CStoreGameScene");
+			} else if (nextLevel == 6) {
+				LevelHandler.Instance.LoadSpecific ("ToiletGameScene");
 			}
+		}
+	}
+
+	public void load() {
+		PlayerController.instance.Load ();
+		int currentLevel = PlayerController.instance.currentLevel;
+		if (currentLevel == 2) {
+			Application.LoadLevel ("PlatformGameScene");
+		} else if (currentLevel == 1) {
+			Application.LoadLevel ("GroundIndoorGameScene");
+		} else if (currentLevel == 0) {
+			Application.LoadLevel ("BasementGameScene");
+		} else if (currentLevel == 3) {
+			Application.LoadLevel ("GroundOutdoorGameScene");
+		} else if (currentLevel == 4) {
+			Application.LoadLevel ("CafeGameScene");
+		} else if (currentLevel == 5) {
+			Application.LoadLevel ("CStoreGameScene");
+		} else if (currentLevel == 6) {
+			Application.LoadLevel ("ToiletGameScene");
 		}
 	}
 
@@ -116,12 +217,12 @@ public class GameController : MonoBehaviour {
 		foreach (KeyValuePair<string, Item> entry in items) {
 			Item item = entry.Value;
 			if (PlayerController.instance.hideItems.ContainsKey(item.itemId)) {
-				Debug.Log("Hide: " + item.itemId);
+//				Debug.Log("Hide: " + item.itemId);
 				item.gameObject.SetActive(false);
 				continue;
 			}
 			if (PlayerController.instance.unhideItems.ContainsKey(item.itemId)) {
-				Debug.Log("Unhide: " + item.itemId);
+//				Debug.Log("Unhide: " + item.itemId);
 				item.gameObject.SetActive(true);
 				continue;
 			}
@@ -137,5 +238,55 @@ public class GameController : MonoBehaviour {
 		}
 
 		return null;
+	}
+
+	public string GetHint(string itemId) {
+		string respond;
+		bool hasItem = this.allHintDic.TryGetValue(itemId, out respond);
+		if (hasItem) {
+			return respond;
+		}
+		return "";
+	}
+
+	public string[] getCorePath() {
+		string[] triggeredItems = PlayerController.instance.triggeredItems.ToArray();
+		Dictionary<string, int> triggeredDict = new Dictionary<string, int> ();
+		for (int i = 0; i < triggeredItems.Length; i++) {
+			triggeredDict.Add(triggeredItems[i], i);
+		}
+		ItemState[] itemsState = JsonReader.readItemsState();
+		Dictionary<string, ItemState> itemDict = new Dictionary<string, ItemState> ();
+		Dictionary<string, string> path = new Dictionary<string, string> ();
+		foreach (ItemState itemState in itemsState) {
+			itemDict.Add(itemState.id, itemState);
+		}
+		string lastItemId = triggeredItems [triggeredItems.Length - 1];
+		dfs (null, lastItemId, itemDict, triggeredDict, path);
+		List<string> list = new List<string> ();
+		ItemState item = itemDict [lastItemId];
+		list.Add (item.id);
+		while (item.requiredItems.Length != 0) {
+			item = itemDict[path[item.id]];
+			list.Add(item.id);
+		}
+		list.Reverse ();
+
+		return list.ToArray();
+	}
+
+	public void dfs(string previousItemId, string itemId, Dictionary<string, ItemState> itemDict, Dictionary<string, int> triggeredDict, Dictionary<string, string> path) {
+		ItemState item = itemDict [itemId];
+		if (previousItemId != null) {
+			path [previousItemId] = itemId;
+		}
+		if (item.requiredItems.Length == 0) {
+			return;
+		}
+		foreach (string prereqItemId in item.requiredItems) {
+			if (triggeredDict[prereqItemId] != null && triggeredDict[prereqItemId] < triggeredDict[itemId]) {
+				dfs (itemId, prereqItemId, itemDict, triggeredDict, path);
+			}
+		}
 	}
 }

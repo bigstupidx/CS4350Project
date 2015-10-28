@@ -15,8 +15,10 @@ public class EndingController : MonoBehaviour {
 	private const int ENDING_LIMIT = 100;
 
 	static public EndingController instance;
+	public bool isChapter2Activated = false;
 
 	int[] endings;
+	public EndingType deathReason;
 
 	public void Awake() {
 		if (instance == null) {
@@ -31,6 +33,11 @@ public class EndingController : MonoBehaviour {
 		endings = new int[(int) EndingType.EndingCount];
 	}
 
+	public void ResetEndingController(bool _activateChapter2) {
+		endings = new int[(int) EndingType.EndingCount];
+		isChapter2Activated = _activateChapter2;
+	}
+
 	public void ItemTriggered(Item item) {
 		if (item.type.Equals (Item.TRANSITION_TYPE)) {
 			return;
@@ -40,6 +47,7 @@ public class EndingController : MonoBehaviour {
 				endings[i] += item.endingPoints[i];
 			}
 			if (endings[i] > ENDING_LIMIT) {
+				deathReason = (EndingType) i;
 				GameController.instance.GameOver((EndingType) i);
 				break;
 			}

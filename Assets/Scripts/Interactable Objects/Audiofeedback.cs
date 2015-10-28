@@ -17,6 +17,11 @@ public class Audiofeedback : MonoBehaviour {
 		Item curr = GameController.instance.GetItem (colliderName);
 		bool status = PlayerController.instance.GetComponent<PlayerController> ().AbleToTrigger (curr);
 
+		if(EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0)
+		{
+			status = TraceController.instance.storyList[0].Contains(colliderName);
+		}
+
 		
 		if (status) {
 			GetComponent<AudioSource> ().Play ();

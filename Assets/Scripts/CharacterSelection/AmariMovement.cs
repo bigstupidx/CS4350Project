@@ -24,7 +24,7 @@ public class AmariMovement : MonoBehaviour {
 	// Sprite Frame Controls
 	const int walkFrames = 8;
 
-	const int downCnst = 0;
+	const int downConst = 0;
 	const int leftConst = 1;
 	const int rightConst = 2;
 	const int upConst = 3;
@@ -60,7 +60,7 @@ public class AmariMovement : MonoBehaviour {
 		
 		// Load Down
 		for (int i=0; i<walkFrames; i++) {
-			sprites[i+downCnst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
+			sprites[i+downConst*walkFrames] = Resources.Load<Sprite> (PlayerData.FormSpritePath(pieceName, 0) + i);
 		}
 		
 		// Load Left
@@ -89,9 +89,14 @@ public class AmariMovement : MonoBehaviour {
 	}
 
 	public void FaceFront(){
-		currDirection = downCnst;
+		currDirection = downConst;
 	}
-	
+
+    public void FaceBack()
+    {
+        currDirection = upConst;
+    }
+
     public void StopMoving()
     {
         isWalking = false;
@@ -105,54 +110,59 @@ public class AmariMovement : MonoBehaviour {
 		destination = newDest;
 		moveToCalled = true;
 	}
-
+ 
 	void FixedUpdate ()
 	{
 		currTime += Time.deltaTime;
-		// Check mouse input
-		if (moveToCalled) {
-                isWalking = true;
-                moveToCalled = false;
-				// Create a vector from the player to the point on the floor the raycast from the mouse hit.
-				Vector3 playerToMouse = destination - transform.position;
-				
-				// Ensure the vector is entirely along the floor plane.
-				playerToMouse.y = 0f;
-				
-				// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-				Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
-				
-				// Set the player's rotation to this new rotation.
-				
-				float angle = newRotation.eulerAngles.y;
-				
-				//Debug.Log(angle);
-				
-				
-				currTime = timePerFrame;
-				currFrame = 0;
-				// Right
-				if(angle>=225 && angle <= 315){
-					currDirection = leftConst;
-				}
-				//Left
-				else if(angle>=45 && angle <= 135){
-					currDirection = rightConst;
-				}
-				// Up
-				else if(angle>=315 || angle <= 45){
-					currDirection = upConst;
-				}
-				// Down
-				else{
-					currDirection = downCnst;
-				}
-				
 
-		}
-		
-		
-		if(isWalking){
+        // Check mouse input
+        if (moveToCalled)
+        {
+            isWalking = true;
+            moveToCalled = false;
+            // Create a vector from the player to the point on the floor the raycast from the mouse hit.
+            Vector3 playerToMouse = destination - transform.position;
+
+            // Ensure the vector is entirely along the floor plane.
+            playerToMouse.y = 0f;
+
+            // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+
+            // Set the player's rotation to this new rotation.
+
+            float angle = newRotation.eulerAngles.y;
+
+            //Debug.Log(angle);
+
+
+            currTime = timePerFrame;
+            currFrame = 0;
+            // Right
+            if (angle >= 225 && angle <= 315)
+            {
+                currDirection = leftConst;
+            }
+            //Left
+            else if (angle >= 45 && angle <= 135)
+            {
+                currDirection = rightConst;
+            }
+            // Up
+            else if (angle >= 315 || angle <= 45)
+            {
+                currDirection = upConst;
+            }
+            // Down
+            else
+            {
+                currDirection = downConst;
+            }
+
+
+        }
+
+        if (isWalking){
 			
 			
 			// Movement
