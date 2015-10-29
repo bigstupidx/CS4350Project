@@ -7,23 +7,34 @@ public class ImageController : MonoBehaviour {
 	public GameObject reference;
 	public GameObject gameTitle;
 	public GameObject preludeCredit;
-	public GameObject rollingText;
-	
-	public Texture2D[] partOneFrame;
+    public GameObject rollingText;
+    public Camera cameraHandler;
+
+    public Texture2D[] partOneFrame;
 	public Sprite[] partOneText;
-	private int index = 0;
+    public Vector3[] cameraPos;
+    public Vector3[] cameraLookAt;
+    private int index = 0;
 
 	public bool transitToNextScene = false;
 	public bool fastForwardSelected = false;
 
 	private float startTime;
+    private float cyclingX;
+    private float cyclingY;
+    private float cyclingZ;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		startTime = Time.time;
+        cameraHandler.transform.position = cameraPos[0];
+        cameraHandler.transform.LookAt(cameraLookAt[0]);
+        preludeCredit.SetActive (true);
 
-		preludeCredit.SetActive (true);
-	}
+        cyclingX = Random.Range(0.0f, 360.0f);
+        cyclingY = Random.Range(0.0f, 360.0f);
+        cyclingZ = Random.Range(0.0f, 360.0f);
+    }
 
 	
 	public void FastForward()
@@ -38,8 +49,19 @@ public class ImageController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        cyclingX += Random.Range(0.0f, 3.0f) * Time.deltaTime;
+        cyclingY += Random.Range(0.0f, 3.0f) * Time.deltaTime;
+        cyclingZ += Random.Range(0.0f, 3.0f) * Time.deltaTime;
 
-		float currTime = Time.time - startTime;
+        cyclingX = cyclingX % 360;
+        cyclingY = cyclingY % 360;
+        cyclingZ = cyclingY % 360;
+
+        Vector3 offset = new Vector3(Mathf.Cos(cyclingX) * 0.025f, Mathf.Cos(cyclingY) * 0.05f, Mathf.Cos(cyclingZ) * 0.025f);
+        cameraHandler.transform.LookAt(cameraLookAt[index]+ offset);
+
+
+        float currTime = Time.time - startTime;
 
 		if (currTime > 4.4f) {
 			if(!rollingText.activeSelf){
@@ -49,7 +71,10 @@ public class ImageController : MonoBehaviour {
 
 					preludeCredit.GetComponent<MeshRenderer>().enabled = true;
 					preludeCredit.GetComponent<MeshRenderer>().material.mainTexture = partOneFrame[index];
-					startTime = Time.time;
+                    cameraHandler.transform.position = cameraPos[index+1];
+                    Debug.Log(index);
+
+                    startTime = Time.time;
 					index++;
 				}
 				else
