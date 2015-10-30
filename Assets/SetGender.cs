@@ -11,9 +11,15 @@ public class SetGender : MonoBehaviour {
 
     void onMouseDown()
     {
-        LookAtPoint.genderSet = genderSet;
-        GameObject.Find("Main_Camera").GetComponent<LookAtPoint>().unfreeze();
+		SetGenderId (genderSet);
     }
+
+	public void SetGenderId(int _index)
+	{
+		LookAtPoint.genderSet = genderSet;
+		Camera.main.GetComponent<LookAtPoint> ().unfreeze ();
+		//GameObject.Find("Main_Camera").GetComponent<LookAtPoint>().unfreeze();
+	}
 	
 	// Update is called once per frame
 	void Update () {

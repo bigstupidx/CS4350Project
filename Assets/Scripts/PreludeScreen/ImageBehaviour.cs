@@ -52,10 +52,6 @@ public class ImageBehaviour : MonoBehaviour {
 			else{
 				isMoveLeft = !isMoveLeft;
 
-				if(isMoveLeft)
-					transform.position = GameObject.Find("ImageController").GetComponent<ImageController>().imageList[2].transform.position;
-				else
-					transform.position = GameObject.Find("ImageController").GetComponent<ImageController>().imageList[1].transform.position;
 			}
 
 		}
@@ -75,7 +71,6 @@ public class ImageBehaviour : MonoBehaviour {
 			   PlayerData.ParentGenderId = 2;
 
 			selectionEnabled = false;
-			reference.hasSelectionMade = true;
 		}
 	}
 
@@ -100,15 +95,7 @@ public class ImageBehaviour : MonoBehaviour {
 			if (newAlpha.a < 0.5f){// && !selectionEnabled) {
 				newAlpha.a += (speed * Time.deltaTime);
 				GetComponent<Image> ().color = newAlpha;
-			} else {  // hit max already
-				//selectionEnabled = true;
-
-				if(reference.hasSelectionMade){
-					GetComponent<Image> ().color = new Color(1.0f,1.0f,1.0f, 0.5f);
-					isSelectionFrame = false;
-					fadeInState = false;
-				}
-			}
+			} 
 
 		} else {
 
@@ -137,9 +124,6 @@ public class ImageBehaviour : MonoBehaviour {
 			if (newAlpha.a >= 1.5f) {
 				fadeInState = false;
 			} else if (newAlpha.a < 0.0f) {
-				if(reference.hasSelectionMade && reference.transitToNextScene){
-					reference.LoadNextLevel();
-				}
 				GetComponent<Image>().color = new Color(1.0f,1.0f, 1.0f, -1.0f);
 				gameObject.SetActive (false);
 			}

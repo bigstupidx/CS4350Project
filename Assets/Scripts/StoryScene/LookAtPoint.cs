@@ -5,6 +5,10 @@ public class LookAtPoint : MonoBehaviour {
     public GameObject eyeTop;
     public GameObject eyeBottom;
     public GameObject lookAtLocations;
+
+	public GameObject photoMama;
+	public GameObject photoPapa;
+
     static public int genderSet;
     private int currentState;
     private float stateTimer;
@@ -85,12 +89,13 @@ public class LookAtPoint : MonoBehaviour {
                 case 7: stateTimer = 30.0f; break;
                 case 8: stateTimer = 50.0f; break;
                 case 9: stateTimer = 50.0f; break;
-                case 10: stateTimer = 50.0f; freeze = true; break;
+				case 10: stateTimer = 20.0f; freeze = true; photoMama.SetActive(true); photoPapa.SetActive(true); break;
                 case 11: stateTimer = 50.0f; break;
                 case 12: stateTimer = 50.0f; break;
                 case 13: stateTimer = 20.0f; break;
                 case 14: stateTimer = 50.0f; break;
-                case 15: stateTimer = 100.0f; break;
+                case 15: stateTimer = 50.0f; break;
+				case 16: GameController.instance.SetLastLoadedScene(Application.loadedLevelName); Application.LoadLevel("TransitionScene");break;
                 default: stateTimer = 100000.0f; break;
 
             }
@@ -103,6 +108,7 @@ public class LookAtPoint : MonoBehaviour {
     public void unfreeze()
     {
         freeze = false;
+		photoMama.SetActive(false); photoPapa.SetActive(false);
         Debug.Log("Clicked");
     }
 	

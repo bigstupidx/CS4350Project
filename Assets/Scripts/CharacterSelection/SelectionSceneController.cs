@@ -321,8 +321,8 @@ public class SelectionSceneController : MonoBehaviour {
 
             if(tempColor.a >= 1.0f){
                 AmariSelection.selectionDone = false;
-                GameController.instance.SetStartTime();
-                Application.LoadLevel("PlatformGameScene");
+				GameController.instance.SetLastLoadedScene(Application.loadedLevelName);
+                Application.LoadLevel("TransitionScene");
 				//Application.LoadLevel("GroundIndoorGameScene");
 			}
 

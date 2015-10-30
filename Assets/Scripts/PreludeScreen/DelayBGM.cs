@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class DelayBGM : MonoBehaviour {
@@ -6,6 +7,7 @@ public class DelayBGM : MonoBehaviour {
 
     public float fadeTimer;
     public float delayTimer;
+    public GameObject fadeHandler;
 
     private float count;
     private AudioSource audioF;
@@ -21,6 +23,6 @@ public class DelayBGM : MonoBehaviour {
 	    if(count< fadeTimer)
             count+=Time.deltaTime;
 
-        audioF.volume = Mathf.Max(0.0f, count) / fadeTimer;
+        audioF.volume= Mathf.Min(Mathf.Max(0.0f, count) / fadeTimer, 1.0f - fadeHandler.GetComponent<Image>().color.a);
     }
 }
