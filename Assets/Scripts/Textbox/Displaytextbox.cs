@@ -11,6 +11,7 @@ public class Displaytextbox : MonoBehaviour {
 	private BubbleBehaviour interactButton;
 	private FeedTextFromObject feedText;
 	private FadeInFadeOut textBox;
+    private PlayerSound playerSound;
 
 	private int currIndex = 0;
 
@@ -25,6 +26,8 @@ public class Displaytextbox : MonoBehaviour {
 	void Start () {
 		textBoxReference [0] = GameObject.Find ("TextBox_Android");
 		textBoxReference [1] = GameObject.Find ("TextBox");
+
+        playerSound = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSound>();
 
 		if (GameController.instance.isAndroidVersion) {
 			interactButton = GameObject.Find ("InteractionButton").GetComponent<BubbleBehaviour> ();
@@ -89,10 +92,16 @@ public class Displaytextbox : MonoBehaviour {
 						feedText.SetText ("Papa?");
 					else if (PlayerData.ParentGenderId == 2) // Female Parent
 						feedText.SetText ("Mama?");
+                    playerSound.PlayIdleDialogueSound();
 				}
 			} else { //  player near to interactable object
 				Item curr = GameController.instance.GetItem (colliderName);
 				bool status = PlayerController.instance.AbleToTrigger (curr);
+
+                if (!EndingController.instance.isChapter2Activated)
+                {
+                    playerSound.PlayDialgoueSound();
+                }
 
 				if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
 					status = TraceController.instance.storyList [0].Contains (colliderName);

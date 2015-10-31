@@ -109,6 +109,11 @@ public class PlayerMovement : MonoBehaviour
 		mouseOverButton = false;
 	}
 
+    public bool isMoving() {
+        return isWalking;
+    }
+
+
 	public void StopMoving(){
 		isWalking = false;
 	}
