@@ -9,12 +9,16 @@ public class ImageController : MonoBehaviour {
 	public GameObject preludeCredit;
     public GameObject rollingText;
     public Camera cameraHandler;
+	public GameObject skipOption;
+	public GameObject touchDetector;
+	
 
     public Texture2D[] partOneFrame;
 	public Sprite[] partOneText;
     public Vector3[] cameraPos;
     public Vector3[] cameraLookAt;
     private int index = 0;
+	private int touchDetectedCount = 0;
 
 	public bool transitToNextScene = false;
 	public bool fastForwardSelected = false;
@@ -39,13 +43,23 @@ public class ImageController : MonoBehaviour {
 	
 	public void FastForward()
 	{
+		skipOption.SetActive (false);
 		rollingText.SetActive (false);
 		preludeCredit.SetActive (false);
-		index = 100;
+		index = 5;
 		reference.GetComponent<FadeToClear>().TransitToNextScene();
-
-		GameObject.Find ("FastForward").GetComponent<Text> ().enabled = false;
 	}
+	
+	public void TurnOnSkipOption()
+	{
+		if (touchDetectedCount >= 2) {
+			skipOption.SetActive (true);
+			touchDetector.SetActive(false);
+		} else {
+			touchDetectedCount++;
+		}
+	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -63,6 +77,11 @@ public class ImageController : MonoBehaviour {
 
         float currTime = Time.time - startTime;
 
+		if (Input.GetKeyUp (KeyCode.Space)) {
+			TurnOnSkipOption();
+		}
+		
+		
 		if (currTime > 4.4f) {
 			if(!rollingText.activeSelf){
 				if(index < partOneText.Length ){
