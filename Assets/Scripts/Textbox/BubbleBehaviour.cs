@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class BubbleBehaviour : MonoBehaviour {
 
 	public GameObject target;
+	public GUITexture overlay;
 
 	//private string fileName = "Sprites/Textbubble/textbubble_";
 	//private int spriteLength = 4;
@@ -13,29 +14,11 @@ public class BubbleBehaviour : MonoBehaviour {
 	public bool itemStatus = false;
 
 	public bool alreadySelected = false;
-	
-//	public List<Texture2D> spriteSheet;
-//	public List<Sprite> spriteSheetDefault;
-//	public List<Sprite> spriteSheetActive;
-//	public int currFrame = 0;
-//	private int delay = 25;
-//	private int counter = 0;
 
-	// Use this for initialization
+
 
 	void Start () {
-		/*
-		spriteSheetDefault = new List<Sprite> (spriteLength);
-		spriteSheetActive = new List<Sprite> (spriteLength);
-		
-		for (int i = 0; i < spriteLength; i++) {
-			spriteSheetDefault.Add(Resources.Load<Sprite> (fileName + i ) );
-			spriteSheetActive.Add(Resources.Load<Sprite> (fileName + i + "_highlight") );
-		}
 
-
-		transform.GetComponent<Image> ().sprite = spriteSheetDefault [0];
-		*/
 		if (target == null) {
 			target = GameObject.FindGameObjectWithTag("Player");
 		}
@@ -43,10 +26,11 @@ public class BubbleBehaviour : MonoBehaviour {
 		if (!GameController.instance.isAndroidVersion)
 			gameObject.SetActive (false);
 
+		if (Application.loadedLevelName.Contains ("GameScene") && overlay == null) {
+			overlay = LevelHandler.Instance.overlay;
+		}
+
 		Reset();
-//		if (EndingController.instance.isChapter2Activated) {
-//			//gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
-//		}
 	}
 
 	public void TouchDetected()
@@ -76,17 +60,12 @@ public class BubbleBehaviour : MonoBehaviour {
 	{
 		transform.GetComponent<Image> ().enabled = true;
 		gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-		//currFrame = 0;
-//		if (EndingController.instance.isChapter2Activated) {
-//			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
-//		}else
-//			gameObject.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 	}
 	
 	void Update()
 	{
 		if (GameController.instance.isAndroidVersion) {
-			if (GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isActivated) {
+			if (GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isActivated || overlay.gameObject.activeSelf) {
 				if (transform.GetComponent<Image> ().enabled)
 					TurnOffButton ();
 			} else {
@@ -94,34 +73,6 @@ public class BubbleBehaviour : MonoBehaviour {
 					TurnOnButton ();
 			}
 		}
-		//if (canTrigger) {
-//			if(!transform.GetComponent<Image> ().enabled)
-//				Reset();
-//
-//			Vector3 playerPos = target.transform.position;
-//			playerPos.x += 0.2f; 
-//			playerPos.y += 1.0f; 
-//			transform.position = Camera.main.WorldToScreenPoint (playerPos);
-//
-//
-//			if (counter > delay) {
-//				currFrame++;
-//				counter = 0;
-//			} else
-//				counter++;
-//			
-//			if (currFrame < spriteLength) {
-//				if(itemStatus)
-//					transform.GetComponent<Image> ().sprite = spriteSheetActive[currFrame];
-//				else
-//					transform.GetComponent<Image> ().sprite = spriteSheetDefault [currFrame];
-//
-//			} else {
-//				currFrame = 0;
-//			}
-//
-//		} else {
-//			TurnOffButton();
-//		}
+
 	}
 }

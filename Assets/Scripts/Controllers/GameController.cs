@@ -167,11 +167,16 @@ public class GameController : MonoBehaviour {
 	public void transition (Item item) {
 		if (item.type == Item.TRANSITION_TYPE) {
 
+			// Disable action when transition
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().canTextBoxDisplay = false;
+			PlayerData.MoveFlag = false;
+
 			if(EndingController.instance.isChapter2Activated)
 				TraceController.instance.TurnOffLine();
 
-			if(isAndroidVersion)
+			if(isAndroidVersion){
 				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
+			}
 
 			SetLastLoadedScene(Application.loadedLevelName);
 

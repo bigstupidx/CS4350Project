@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 
@@ -49,6 +50,10 @@ public class LevelHandler: MonoBehaviour{
 		
 		overlay.color = Color.clear;
 		overlay.gameObject.SetActive(false);
+
+		GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().canTextBoxDisplay = true;
+		PlayerData.MoveFlag = true;
+
 	}
 	
 	private IEnumerator FadeToBlack(Action levelMethod){
@@ -57,7 +62,7 @@ public class LevelHandler: MonoBehaviour{
 		float rate = 1.0f/fadeTime;
 		
 		float progress = 0.0f;
-		
+
 		while(progress < 1.0f)
 		{
 			overlay.color = Color.Lerp(Color.clear, Color.black, progress);
