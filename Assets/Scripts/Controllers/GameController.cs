@@ -58,6 +58,11 @@ public class GameController : MonoBehaviour {
 		return timeSinceGameStart;
 	}
 
+	public DateTime GetCurrentObjectTime()
+	{
+		return startGameTime;
+	}
+
 	public int GetActualTime(int _option){
 		switch (_option) {
 		case 0: // seconds
@@ -156,9 +161,9 @@ public class GameController : MonoBehaviour {
 		PlayerController.instance.updatePlayerPositon ();
 		PlayerController.instance.UpdateHintDic ();
 
-		GameObject camera = GameObject.Find ("Main Camera");
+		GameObject camera = Camera.main.gameObject;//GameObject.Find ("Main Camera");
 		CameraFollow followCamera = camera.GetComponent<CameraFollow> ();
-		Debug.Log (followCamera);
+		//Debug.Log (followCamera);
 		followCamera.switchOffset (PlayerController.instance.currentLevel);
 		updateItemsVisibility ();
 	}
@@ -166,35 +171,25 @@ public class GameController : MonoBehaviour {
 	public void GameOver(EndingType endingType) {
 
 		string[] ending = this.getCorePath ();
-		string endingSequence = "";
-		foreach (string item in ending)
-			endingSequence += item + " -> ";
-		Debug.Log (endingSequence);
-		List<string> timeStampList = new List<string> (timeStamp.Keys);
-
-		endingSequence = "";
-		foreach (string item in timeStampList)
-			endingSequence += item + " -> ";
-		Debug.Log (endingSequence);
-
 		
-		switch (endingType) {
-		case EndingType.Ending1:
-			Debug.Log ("Game over: Death by Suffocation");
-			break;
-		case EndingType.Ending2:
-			Debug.Log ("Game over: Death by Dog Allergy");
-			break;
-		case EndingType.Ending3:
-			Debug.Log ("Game over: Death by Head Injury");
-			break;
-		case EndingType.Ending4:
-			Debug.Log ("Game over: Death by Fallen Ceiling");
-			break;
-		case EndingType.Ending5:
-			Debug.Log ("Game over: Death by Train Accident");
-			break;
-		}
+//		switch (endingType) {
+//		case EndingType.Ending1:
+//			Debug.Log ("Game over: Death by Suffocation");
+//			break;
+//		case EndingType.Ending2:
+//			Debug.Log ("Game over: Death by Dog Allergy");
+//			break;
+//		case EndingType.Ending3:
+//			Debug.Log ("Game over: Death by Head Injury");
+//			break;
+//		case EndingType.Ending4:
+//			Debug.Log ("Game over: Death by Fallen Ceiling");
+//			break;
+//		case EndingType.Ending5:
+//			Debug.Log ("Game over: Death by Train Accident");
+//			break;
+//		}
+
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
 			EndingController.instance.isChapter2Completed = true;
 		} 
@@ -207,6 +202,22 @@ public class GameController : MonoBehaviour {
 		lastLoadedScene = _sceneName;
 	}
 
+	public void SetChapter2ObjectTime(string itemId)
+	{
+		if (EndingController.instance.isChapter2Activated) {
+			
+			DateTime currTimeStamp;
+			bool hasItem = timeStamp.TryGetValue (itemId, out currTimeStamp);
+			if (hasItem) {
+				if (timeStamp.ContainsKey ("StartGame"))
+					timeStamp.Remove ("StartGame");
+				
+				startGameTime = currTimeStamp;
+				GameObject.Find ("timer").GetComponent<TimeCounter> ().setTime (currTimeStamp.Hour, currTimeStamp.Minute, currTimeStamp.Second);
+			}
+		}
+	}
+
 	public void TriggerItem(string itemId) {
 		Item item = this.GetItem(itemId);
 		if (item == null) {
@@ -216,14 +227,17 @@ public class GameController : MonoBehaviour {
 			if (item.type == Item.TRANSITION_TYPE) {
 				this.transition(item);
 			}
-			else
-				timeStamp.Add(itemId, DateTime.Now);
+			else{
+				if(!EndingController.instance.isChapter2Activated)
+					timeStamp.Add(itemId, DateTime.Now);
+			}
 
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
 
-			if(EndingController.instance.isChapter2Activated)
+			if(EndingController.instance.isChapter2Activated){
 				TraceController.instance.TriggerItem(itemId);
+			}
 
 			updateItemsVisibility ();
 			foreach(KeyValuePair<string, Item> entry in items) {
@@ -345,6 +359,7 @@ public class GameController : MonoBehaviour {
 		list.Reverse ();
 
 
+		// remove compliment of death sequence time stamp
 		Dictionary<string, DateTime> coreTimeStamp = new Dictionary<string, DateTime>();
 		foreach (string itemId in list) {
 			if( timeStamp.ContainsKey(itemId) ){
@@ -357,7 +372,8 @@ public class GameController : MonoBehaviour {
 
 		timeStamp.Clear ();
 		timeStamp = coreTimeStamp;
-
+		timeStamp.Add ("StartGame", startGameTime);
+		
 		return list.ToArray();
 	}
 

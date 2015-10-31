@@ -47,13 +47,12 @@ public class LevelHandler: MonoBehaviour{
 			
 			yield return null;
 		}
-		
-		overlay.color = Color.clear;
-		overlay.gameObject.SetActive(false);
 
 		GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().canTextBoxDisplay = true;
 		PlayerData.MoveFlag = true;
 
+		overlay.color = Color.clear;
+		overlay.gameObject.SetActive(false);
 	}
 	
 	private IEnumerator FadeToBlack(Action levelMethod){
@@ -73,8 +72,6 @@ public class LevelHandler: MonoBehaviour{
 		}
 		
 		overlay.color = Color.black;
-		//Debug.Log (overlay.color);
-		//overlay.gameObject.SetActive (false);
 	    levelMethod();
 	}
 	

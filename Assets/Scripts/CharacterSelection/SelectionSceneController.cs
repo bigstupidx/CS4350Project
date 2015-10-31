@@ -56,7 +56,6 @@ public class SelectionSceneController : MonoBehaviour {
 
 	public bool ToggleTextRespond()
 	{
-		Debug.Log ("Enter");
 		currIndex++;
 		feedText.UpdateText(currIndex);
 		
@@ -101,6 +100,13 @@ public class SelectionSceneController : MonoBehaviour {
 
 			if(isAutomatedStart && feedText.getIsMoreThanOneLine() )
 			{
+				if(currIndex == 0)
+				{
+					duration = 3.0f;
+				}
+				else
+					duration = 2.5f;
+
 				if( (Time.time - startTime) > duration) {
 					if(ToggleTextRespond())
 						startTime = Time.time;

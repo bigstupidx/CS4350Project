@@ -98,6 +98,8 @@ public class Displaytextbox : MonoBehaviour {
 
 					if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
 						status = TraceController.instance.storyList [0].Contains (colliderName);
+						if(status)
+							GameController.instance.SetChapter2ObjectTime(colliderName);
 					}
 
 					textBox.SetEventStatus (status);
