@@ -13,11 +13,13 @@ public class RunningTrain : MonoBehaviour {
 	Vector3 origPosition; 
 	float timer;
 
+    AudioSource audioSource;
 
 	bool isRunning;
 
 	// Use this for initialization
 	void Start () {
+        audioSource = transform.GetComponent<AudioSource>();
 		origPosition = transform.position;
 	
 		meshRenderer = transform.GetComponent<MeshRenderer> ();
@@ -30,6 +32,7 @@ public class RunningTrain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		timer += Time.deltaTime;
 
 		if (isRunning) {
@@ -42,11 +45,15 @@ public class RunningTrain : MonoBehaviour {
 				isRunning = false;
 			}
 		} else {
+			if(!Application.loadedLevelName.ToLower().Contains("prelude"))
+           	 	audioSource.Stop();
 			if(timer >= timeBetweenRuns){
 				timer = 0;
 				isRunning = true;
 				meshRenderer.enabled=true;
-			}
+				if(!Application.loadedLevelName.ToLower().Contains("prelude"))
+                	audioSource.Play();
+            }
 		}
 	}
 }

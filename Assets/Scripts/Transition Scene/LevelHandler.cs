@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 
@@ -46,7 +47,10 @@ public class LevelHandler: MonoBehaviour{
 			
 			yield return null;
 		}
-		
+
+		GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().canTextBoxDisplay = true;
+		PlayerData.MoveFlag = true;
+
 		overlay.color = Color.clear;
 		overlay.gameObject.SetActive(false);
 	}
@@ -57,7 +61,7 @@ public class LevelHandler: MonoBehaviour{
 		float rate = 1.0f/fadeTime;
 		
 		float progress = 0.0f;
-		
+
 		while(progress < 1.0f)
 		{
 			overlay.color = Color.Lerp(Color.clear, Color.black, progress);
@@ -68,8 +72,6 @@ public class LevelHandler: MonoBehaviour{
 		}
 		
 		overlay.color = Color.black;
-		//Debug.Log (overlay.color);
-		//overlay.gameObject.SetActive (false);
 	    levelMethod();
 	}
 	

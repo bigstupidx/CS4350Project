@@ -41,11 +41,13 @@ public class TraceController : MonoBehaviour {
 	public void TurnOffLine()
 	{
 		lineRenderer.enabled = false;
+		//SetDestination ("Player2D");
 	}
 
 	public void TurnOnLine()
 	{
 		lineRenderer.enabled = true;
+		//SetDestination (storyList [0]);
 	}
 	
 	public void Init()
@@ -96,6 +98,7 @@ public class TraceController : MonoBehaviour {
 				{
 					if(PlayerController.instance.currentLevel != temp.level)
 					{
+						GameObject _target = null;
 						// if player at platform, target at ground
 						switch(PlayerController.instance.currentLevel){
 						case 6:
@@ -118,14 +121,17 @@ public class TraceController : MonoBehaviour {
 
 						case 3:
 							if(temp.level <= 2){
-								destination = GameObject.Find("Transition_StationEntrance").transform.position;
+								_target = GameObject.Find("Transition_StationEntrance");
 							}else if(temp.level == 6){
-								destination = GameObject.Find("Transition_ToiletDoorOutside").transform.position;
+								_target = GameObject.Find("Transition_ToiletDoorOutside");
 							}else if(temp.level == 5){
-								destination = GameObject.Find("Transition_ShopDoorOutside").transform.position;
+								_target = GameObject.Find("Transition_ShopDoorOutside");
 							}else if(temp.level == 4){
-								destination = GameObject.Find("Transition_CafeDoorOutside").transform.position;
+								_target = GameObject.Find("Transition_CafeDoorOutside");
 							}
+
+							if(_target != null)
+								destination = _target.transform.position;
 							break;
 							
 						case 2:
@@ -137,22 +143,42 @@ public class TraceController : MonoBehaviour {
 						case 1:
 							if(temp.level >= 3){
 								if(player.transform.position.x < 1.0f ){
-									destination = GameObject.Find("Transition_GantryInside").transform.position;
+									_target = GameObject.Find("Transition_GantryInside");
 								}
 								else
-									destination = GameObject.Find("Transition_StationExit").transform.position;
+									_target = GameObject.Find("Transition_StationExit");
 							}
-							else {
-								if( player.transform.position.x > GameObject.Find("Transition_GantryInside").transform.position.x )
-									destination = GameObject.Find("Transition_GantryOutside").transform.position;
-								else {
+							else { // Target's level is 0 or 2
+
+								// inside Gantry : x < 3	Outside Gantry: x > 4
+								GameObject gantryObject = null;
+								gantryObject = GameObject.Find("Transition_GantryInside");
+
+								// if player is at left right of gantry and target is 0 or 2
+								if( player.transform.position.x >= 4 ) // right of gantry
+									_target = GameObject.Find("Transition_GantryOutside");
+								else if(player.transform.position.x <= 2){
 									if(temp.level == 2){
-										destination = GameObject.Find("Transition_EscalatorUp").transform.position;
+										_target = GameObject.Find("Transition_EscalatorUp");
 									}else{
-										destination = GameObject.Find("Transition_SewageEntrance").transform.position;
+										_target = GameObject.Find("Transition_SewageEntrance");
 									}
 								}
+
+//								if(gantryObject != null){
+//									if( player.transform.position.x > gantryObject.transform.position.x )
+//										_target = GameObject.Find("Transition_GantryOutside");
+//								}
+//								else {
+//									if(temp.level == 2){
+//										_target = GameObject.Find("Transition_EscalatorUp");
+//									}else{
+//										_target = GameObject.Find("Transition_SewageEntrance");
+//									}
+//								}
 							}
+							if(_target != null)
+								destination = _target.transform.position;
 							break;
 
 						case 0:
@@ -187,7 +213,10 @@ public class TraceController : MonoBehaviour {
 
 
 
-		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene")) {
+		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene") ){//&& !LevelHandler.Instance.overlay.gameObject.activeSelf) {
+			if(lineRenderer.enabled == false)
+				TurnOnLine();
+
 			if (player == null)
 				player = GameObject.FindGameObjectWithTag ("Player");
 			else {

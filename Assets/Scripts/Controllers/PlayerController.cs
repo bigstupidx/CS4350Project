@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 		currentLevel = 2;
 		position = new double[3] {0.0f, 0.5f, 0.0f};
 
-		idleTimer = GameController.instance.GetTime ();
+		idleTimer = GameController.instance.GetTick ();
 	}
 
 	public void UpdateHintDic()
@@ -151,8 +151,7 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.TRANSITION_TYPE)) {
 			position = item.offset;
 			currentLevel = item.nextLevel;
-			if(!GameController.instance.isAndroidVersion)
-				this.Save();
+			this.Save();
 		}
 
 		foreach (string leadItemId in item.leadItems) {
@@ -182,14 +181,14 @@ public class PlayerController : MonoBehaviour {
 			hideItems.Remove(unhideItemId);
 		}
 
-		idleTimer = GameController.instance.GetTime ();
+		idleTimer = GameController.instance.GetTick ();
 		UpdateHintDic ();
 	}
 
 	public void Update()
 	{
-		int currTime = GameController.instance.GetTime () ;
-		int timeDiff = ( (currTime - idleTimer) / 60) % 60;
+		int currTime = GameController.instance.GetTick () ;
+		int timeDiff = (currTime - idleTimer);
 
 		if ((Application.loadedLevelName).Contains ("GameScene") && !EndingController.instance.isChapter2Activated) {
 			if (timeDiff >= 30) {

@@ -13,6 +13,7 @@ public class SkipToPlatform : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Space))
         {
             Application.LoadLevel("PlatformGameScene");
+			GameController.instance.SetStartTime();
         }
 
         if (Input.GetKeyUp(KeyCode.C))

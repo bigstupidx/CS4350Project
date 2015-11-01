@@ -72,7 +72,8 @@ public class FadeInFadeOut : MonoBehaviour {
 			if(!isFadingOn) // fading is OFF
 			{
 				PlayerData.MoveFlag = false;
-				feedText.setAlpha(1.0f);
+                PlayerSound.AllowIdleAutoSound = false;
+                feedText.setAlpha(1.0f);
 			}
 			else if (isFadingOn && gameObject.GetComponent<Image> ().color.a > 0.0f) {
 				button.SetActive(false);
@@ -91,6 +92,7 @@ public class FadeInFadeOut : MonoBehaviour {
 			isFadingOn = false;
 			feedText.ResetTextFeed();
 			PlayerData.MoveFlag = true;
+            PlayerSound.AllowIdleAutoSound = true;
 		}
 	}
 }
