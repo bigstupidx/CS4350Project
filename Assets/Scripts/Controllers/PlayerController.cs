@@ -151,8 +151,7 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.TRANSITION_TYPE)) {
 			position = item.offset;
 			currentLevel = item.nextLevel;
-			if(!GameController.instance.isAndroidVersion)
-				this.Save();
+			this.Save();
 		}
 
 		foreach (string leadItemId in item.leadItems) {

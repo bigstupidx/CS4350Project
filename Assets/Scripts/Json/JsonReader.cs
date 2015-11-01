@@ -34,7 +34,7 @@ public class JsonReader : MonoBehaviour {
 	}
 
 	static public string getDocumentDir() {
-		return System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+		return Application.persistentDataPath;
 	}
 
 	static public string[] toStrArray(JsonData jsonData) {
