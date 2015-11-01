@@ -32,6 +32,7 @@ public class RunningTrain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		timer += Time.deltaTime;
 
 		if (isRunning) {
@@ -44,12 +45,14 @@ public class RunningTrain : MonoBehaviour {
 				isRunning = false;
 			}
 		} else {
-            audioSource.Stop();
+			if(!Application.loadedLevelName.ToLower().Contains("prelude"))
+           	 	audioSource.Stop();
 			if(timer >= timeBetweenRuns){
 				timer = 0;
 				isRunning = true;
 				meshRenderer.enabled=true;
-                audioSource.Play();
+				if(!Application.loadedLevelName.ToLower().Contains("prelude"))
+                	audioSource.Play();
             }
 		}
 	}
