@@ -6,6 +6,7 @@ public class GamePause: MonoBehaviour {
     public GameObject pauseButton;
     public GameObject pausePanel;
 
+	public static bool isPaused = false;
     Displaytextbox textboxScript;
     PlayerMovement movementScript;
     //BlinkingButton blinkingScript;
@@ -26,6 +27,7 @@ public class GamePause: MonoBehaviour {
 	}
 
     public void PausePressed() {
+		isPaused = true;
         pauseButton.SetActive(false);
         pausePanel.SetActive(true);
         textboxScript.enabled= false;
@@ -37,6 +39,7 @@ public class GamePause: MonoBehaviour {
     }
 
     public void ResumePressed() {
+		isPaused = false;
 		GameController.instance.ToggleTimer ();
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
@@ -47,6 +50,7 @@ public class GamePause: MonoBehaviour {
     }
 
     public void ExitPressed() {
+		isPaused = false;
         //blinkingScript.enabled = true;
         textboxScript.enabled = true;
         Destroy(GameController.instance);

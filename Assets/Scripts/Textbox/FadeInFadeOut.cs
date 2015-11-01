@@ -91,7 +91,8 @@ public class FadeInFadeOut : MonoBehaviour {
 			isActivated = false;
 			isFadingOn = false;
 			feedText.ResetTextFeed();
-			PlayerData.MoveFlag = true;
+			if(!GamePause.isPaused)
+				PlayerData.MoveFlag = true;
             PlayerSound.AllowIdleAutoSound = true;
 		}
 	}
