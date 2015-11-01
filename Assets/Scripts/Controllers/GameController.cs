@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 
 	public void Awake() {
 		if (instance == null) {
+			AudioListener.pause = false;
 			instance = this;
 			DontDestroyOnLoad (this);
 			allHintDic = new Dictionary<string, string>();
