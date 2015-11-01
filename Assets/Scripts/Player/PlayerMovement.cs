@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
 			else 
 				mouseOverButton = false;
 
-			if(PlayerData.MoveFlag && !mouseOverButton) {
+			if(PlayerData.MoveFlag && !GamePause.isPaused && !mouseOverButton) {
 			// Create a ray from the mouse cursor on screen in the direction of the camera.
 			Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 			
