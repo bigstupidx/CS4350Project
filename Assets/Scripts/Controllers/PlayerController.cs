@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour {
 			bool hasItem = hintDic.TryGetValue (chosenHint, out respond);
 			if (hasItem) {
 				GameObject.Find ("ObjectRespond").GetComponent<FeedTextFromObject> ().SetText (respond);
-				targetTextbox.GetComponent<FadeInFadeOut> ().TurnOnTextbox (false);
+				targetTextbox.GetComponent<FadeInFadeOut> ().TurnOnTextbox (false, true);
 			}
 		}
 	}

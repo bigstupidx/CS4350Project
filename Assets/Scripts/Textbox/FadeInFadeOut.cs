@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FadeInFadeOut : MonoBehaviour {
 
-	public Sprite[] textboxImages = new Sprite[2];
+	private Sprite[] textboxImages = new Sprite[3];
 	public bool isActivated = false;
 	public bool isFadingOn = false;
 	public float alpha;
@@ -19,7 +19,14 @@ public class FadeInFadeOut : MonoBehaviour {
 	public GameObject button;
 	public bool eventStatus = false;
 		
-	// Use this for initialization
+
+	void Awake()
+	{
+		textboxImages [0] =  Resources.Load<Sprite> ("GUI/ui_bkg_textbox");	// black for default
+		textboxImages [1] =  Resources.Load<Sprite> ("GUI/ui_bkg_textbox_gold") as Sprite;	// GOLD for Event
+		textboxImages [2] =  Resources.Load<Sprite> ("GUI/ui_bkg_textbox_blue") as Sprite;	// BLUE for Hint
+	}
+
 	void Start () {
 		feedText = transform.GetComponentInChildren<FeedTextFromObject> ();
 
@@ -41,18 +48,23 @@ public class FadeInFadeOut : MonoBehaviour {
 		eventStatus = _status;
 	}
 
-	public void TurnOnTextbox(bool _fadingOption)
+	public void TurnOnTextbox(bool _fadingOption, bool _isHint = false)
 	{
 		isActivated = true;
 		button.SetActive (true);
 		isFadingOn = _fadingOption;
 		gameObject.GetComponent<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultAlpha);
 
-		if (!EndingController.instance.isChapter2Activated && eventStatus) {
+		if (_isHint) { // use BLUE textbox for hint dialogue
+			transform.GetComponent<Image> ().sprite = textboxImages [2];
+		}
+		else if (!EndingController.instance.isChapter2Activated && eventStatus) { // use gold textbox for chapter 1 event dialogue
 			transform.GetComponent<Image> ().sprite = textboxImages [1];
 			gameObject.GetComponent<Image> ().color = new Color (defaultColor.r, defaultColor.g, defaultColor.b, 0.8f);
-		} else
+		}
+		else{ // use black for default dialogue
 			transform.GetComponent<Image> ().sprite = textboxImages [0];
+		}
 	}
 
 	public bool getStatus()

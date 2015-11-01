@@ -7,9 +7,7 @@ public class BubbleBehaviour : MonoBehaviour {
 
 	public GameObject target;
 	public GUITexture overlay;
-
-	//private string fileName = "Sprites/Textbubble/textbubble_";
-	//private int spriteLength = 4;
+	
 	public bool canTrigger = false;
 	public bool itemStatus = false;
 
