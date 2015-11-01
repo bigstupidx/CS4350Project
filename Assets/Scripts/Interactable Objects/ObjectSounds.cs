@@ -13,6 +13,7 @@ public class ObjectSounds : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		audioSource = transform.GetComponent<AudioSource> ();
+		ResetTimer ();
 	}
 
 	void ResetTimer (){
