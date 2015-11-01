@@ -7,24 +7,21 @@ public class Displaytextbox : MonoBehaviour {
 	public string colliderName = "";
 
 	public GameObject[] textBoxReference = new GameObject[2];
+	public bool canTextBoxDisplay = false;
 
 	private BubbleBehaviour interactButton;
 	private FeedTextFromObject feedText;
 	private FadeInFadeOut textBox;
+    private PlayerSound playerSound;
 
 	private int currIndex = 0;
+	
 
-	// Automated flip text
-	/*
-	private float duration = 1.5f;
-	private bool isAutomatedStart = false;
-	private float startTime = 0.0f;
-	*/
-
-	// Use this for initialization
 	void Start () {
 		textBoxReference [0] = GameObject.Find ("TextBox_Android");
 		textBoxReference [1] = GameObject.Find ("TextBox");
+
+        playerSound = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSound>();
 
 		if (GameController.instance.isAndroidVersion) {
 			interactButton = GameObject.Find ("InteractionButton").GetComponent<BubbleBehaviour> ();
@@ -41,7 +38,6 @@ public class Displaytextbox : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		isTrigger = true;
 		colliderName = other.name;
-		//Debug.Log ("Enter: " + colliderName);
 	}
 	
 	void OnTriggerExit(Collider other){
@@ -73,82 +69,53 @@ public class Displaytextbox : MonoBehaviour {
 
 	public void TriggerTextbox()
 	{
-		if (textBox.isActivated) {
-			if(GameController.instance.isAndroidVersion){
-				interactButton.TurnOffButton();
-			}
-			toggleRespond ();
-		}else{
-			// feedtext into textbox
-			if (colliderName.Length < 1) { // player stand at out of nowhere
-				textBox.SetEventStatus(false);
-				if (EndingController.instance.isChapter2Activated)
-					feedText.SetText ("Amari..");
-				else {
-					if (PlayerData.ParentGenderId == 1) // Male Parent
-						feedText.SetText ("Papa?");
-					else if (PlayerData.ParentGenderId == 2) // Female Parent
-						feedText.SetText ("Mama?");
+		if (canTextBoxDisplay) {
+			if (textBox.isActivated) {
+				if (GameController.instance.isAndroidVersion) {
+					interactButton.TurnOffButton ();
 				}
-			} else { //  player near to interactable object
-				Item curr = GameController.instance.GetItem (colliderName);
-				bool status = PlayerController.instance.AbleToTrigger (curr);
+				toggleRespond ();
+			} else {
+				// feedtext into textbox
+				if (colliderName.Length < 1) { // player stand at out of nowhere
+					textBox.SetEventStatus (false);
+					if (EndingController.instance.isChapter2Activated)
+						feedText.SetText ("Amari..");
+					else {
+						if (PlayerData.ParentGenderId == 1) // Male Parent
+							feedText.SetText ("Papa?");
+						else if (PlayerData.ParentGenderId == 2) // Female Parent
+							feedText.SetText ("Mama?");
+						playerSound.PlayIdleDialogueSound ();
+					}
+				} else { //  player near to interactable object
+					Item curr = GameController.instance.GetItem (colliderName);
+					bool status = PlayerController.instance.AbleToTrigger (curr);
 
-				if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
-					status = TraceController.instance.storyList [0].Contains (colliderName);
-				}
+					if (!EndingController.instance.isChapter2Activated) {
+						playerSound.PlayDialgoueSound ();
+					}
 
-				textBox.SetEventStatus(status);
+					if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
+						status = TraceController.instance.storyList [0].Contains (colliderName);
+						if(status)
+							GameController.instance.SetChapter2ObjectTime(colliderName);
+					}
 
-				string respond = curr.GetRespond (status, EndingController.instance.isChapter2Activated);
+					textBox.SetEventStatus (status);
+
+					string respond = curr.GetRespond (status, EndingController.instance.isChapter2Activated);
 			
-				if (respond.Length > 0) {		// not empty respond 
-					feedText.SetText (respond, curr, status);
-					transform.GetComponent <PlayerMovement> ().StopMoving ();//PlayerData.MoveFlag = false;	// disable player move
+					if (respond.Length > 0) {		// not empty respond 
+						feedText.SetText (respond, curr, status);
+						transform.GetComponent <PlayerMovement> ().StopMoving ();	// disable player move
+					}
 				}
+
+				currIndex = 0;
+				textBox.TurnOnTextbox (false); // means do not fade out
 			}
-			// set currIndex = 0 and Feed text
-			currIndex = 0;
-			// turn on textbox
-			textBox.TurnOnTextbox (false); // means do not fade out
-
-
-//			if (feedText.ind == -1) {	// textbox is not fed yet
-//			
-//				if (colliderName.Length < 1) { // player stand at out of nowhere
-//					if (EndingController.instance.isChapter2Activated)
-//						feedText.SetText ("Amari..");
-//					else {
-//						if (PlayerData.ParentGenderId == 1) // Male Parent
-//							feedText.SetText ("Papa?");
-//						else if (PlayerData.ParentGenderId == 2) // Female Parent
-//							feedText.SetText ("Mama?");
-//					}
-//					textBox.TurnOnTextbox (false); // means do not fade out
-//				
-//					// Automated flip text
-//					/*
-//					isAutomatedStart = true;
-//					startTime = Time.time;
-//					*/
-//				} else { //  player near to interactable object
-//					Item curr = GameController.instance.GetItem (colliderName);
-//					bool status = PlayerController.instance.AbleToTrigger (curr);
-//					if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
-//						status = TraceController.instance.storyList [0].Contains (colliderName);
-//					}
-//				
-//					string respond = curr.GetRespond (status, EndingController.instance.isChapter2Activated);
-//				
-//					if (respond.Length > 0) {		// not empty respond 
-//						transform.GetComponent <PlayerMovement> ().StopMoving ();//PlayerData.MoveFlag = false;	// disable player move
-//						feedText.SetText (respond, curr, status);
-//						textBox.TurnOnTextbox (false); // means do not fade out
-//					}
-//				}
-//			}
 		}
-
 	}
 
 		
@@ -173,40 +140,7 @@ public class Displaytextbox : MonoBehaviour {
 				}
 				else
 					interactButton.TurnOffButton();
-			} else{
-//				interactButton.TurnOffButton();
-//				interactButton.canTrigger = false;
-//				interactButton.itemStatus = false;
-			}
+			} 
 		}
-		// Automated flip text
-		/*
-		if (isAutomatedStart) {
-			if( (Time.time - startTime) > duration) {
-				if( feedText.getIsMoreThanOneLine() ){		// respond more than 1 line
-					feedText.ind++;
-					startTime = Time.time;
-					feedText.UpdateText();
-					if(feedText.ind == feedText.multipleResponds.Length)
-					{
-						textBox.TurnOnTextbox( true ); // fade out
-						isAutomatedStart = false;
-						//PlayerData.MoveFlag = true;	// ENABLE player move
-					}
-					else if(feedText.ind < feedText.multipleResponds.Length){
-						transform.GetComponent <PlayerMovement>().StopMoving ();
-						textBox.TurnOnTextbox( false ); // means do not fade out
-					}
-				}
-				else {		// respond ONLY have 1 line
-					if( !textBox.isFadingOn ){
-						textBox.TurnOnTextbox( true );
-						isAutomatedStart = false;
-						PlayerData.MoveFlag = true;	// ENABLE player move
-					}
-				}
-			}
-		}
-		*/
 	}
 }

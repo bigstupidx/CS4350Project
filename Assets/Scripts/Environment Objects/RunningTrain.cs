@@ -13,11 +13,13 @@ public class RunningTrain : MonoBehaviour {
 	Vector3 origPosition; 
 	float timer;
 
+    AudioSource audioSource;
 
 	bool isRunning;
 
 	// Use this for initialization
 	void Start () {
+        audioSource = transform.GetComponent<AudioSource>();
 		origPosition = transform.position;
 	
 		meshRenderer = transform.GetComponent<MeshRenderer> ();
@@ -42,11 +44,13 @@ public class RunningTrain : MonoBehaviour {
 				isRunning = false;
 			}
 		} else {
+            audioSource.Stop();
 			if(timer >= timeBetweenRuns){
 				timer = 0;
 				isRunning = true;
 				meshRenderer.enabled=true;
-			}
+                audioSource.Play();
+            }
 		}
 	}
 }

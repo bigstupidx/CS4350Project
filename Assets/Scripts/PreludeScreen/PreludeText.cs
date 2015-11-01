@@ -3,19 +3,18 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PreludeText : MonoBehaviour {
-	
+
+	public bool isMoving = true;
 	public bool isLeftText = true;
 	public bool fadeInState = true;
 	private float speed = 0.3f;
-	private float factor = 100.0f;
+	private float wFactor;
+	private float hFactor;
 
 	// Use this for initialization
 	void Start () {
-		//transform.position = leftPosition;
-//		if (GameController.instance.isAndroidVersion) {
-//			factor  = 250.0f;
-//		}
-		factor  = Screen.width / 10;
+		wFactor = Screen.width / 10;
+		hFactor = Screen.height / 6;
 		ResetPosition (true);
 	}
 
@@ -27,43 +26,57 @@ public class PreludeText : MonoBehaviour {
 	public void ResetPosition(bool _newDirectionIsLeft)
 	{
 		fadeInState = true;
-		GetComponent<Image>().color = new Color(1.0f,1.0f, 1.0f, 0.0f);
-		int height = Random.Range (1, 5);
 
-		if (_newDirectionIsLeft) {
-			int left = Random.Range (2, 6);
-			transform.position = new Vector3( left* factor , height * ( Screen.height / 6 ), 0.0f);
-			isLeftText = true;
-		} else {
-			int right = Random.Range (5, 7);
-			transform.position = new Vector3(right * factor, height * ( Screen.height / 6 ), 0.0f);
-			isLeftText = false;
+		if (isMoving) {
+			GetComponent<Image>().color = new Color(1.0f,1.0f, 1.0f, 0.0f);
+			int height = Random.Range (1, 5);
+
+			if (_newDirectionIsLeft) {
+				int left = Random.Range (2, 6);
+				transform.position = new Vector3 (left * wFactor, height * hFactor, 0.0f);
+				isLeftText = true;
+			} else {
+				int right = Random.Range (5, 7);
+				transform.position = new Vector3 (right * wFactor, height * hFactor, 0.0f);
+				isLeftText = false;
+			}
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Color newAlpha = GetComponent<Image> ().color;
+		Color newAlpha;
 
-		if(isLeftText)
-			transform.Translate (20.0f * Vector3.right * Time.deltaTime);
-		else
-			transform.Translate (20.0f * Vector3.left * Time.deltaTime);
+		if (isMoving) {
+			newAlpha = GetComponent<Image> ().color;
+
+			if (isLeftText)
+				transform.Translate (20.0f * Vector3.right * Time.deltaTime);
+			else
+				transform.Translate (20.0f * Vector3.left * Time.deltaTime);
+		} else
+			newAlpha = GetComponent<Text> ().color;
 
 		if (newAlpha.a >= 1.0f) {
 			fadeInState = false;
 		} else if (newAlpha.a < 0.0f) {
-			GetComponent<Image>().color = new Color(1.0f,1.0f, 1.0f, -0.1f);
-			//ResetPosition(!isLeftText);
-			gameObject.SetActive (false);
+			if(isMoving){
+				GetComponent<Image>().color = new Color(1.0f,1.0f, 1.0f, -0.1f);
+				gameObject.SetActive (false);
+			}
+			else
+				fadeInState = true;
 		}
 		
 		if (fadeInState) {
 			newAlpha.a += (speed * Time.deltaTime);
-			GetComponent<Image> ().color = newAlpha;
 		} else {
 			newAlpha.a -= (speed * Time.deltaTime);
-			GetComponent<Image> ().color = newAlpha;
 		}
+
+		if(isMoving)
+			GetComponent<Image> ().color = newAlpha;
+		else
+			GetComponent<Text> ().color = newAlpha;
 	}
 }

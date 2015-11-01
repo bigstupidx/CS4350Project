@@ -39,12 +39,15 @@ public class Visualfeedback : MonoBehaviour {
 			}
 
 			if (status) {//if it is interactable
-				transform.GetComponentInChildren<Renderer>().material.SetFloat("_Outline", outlineThickness);
+				for( int i = 0; i < transform.GetComponentInChildren<Renderer>().materials.Length; i++)
+					transform.GetComponentInChildren<Renderer>().materials[i].SetFloat("_Outline", outlineThickness);
 			} else {
-				transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0.00f);
+				for( int i = 0; i < transform.GetComponentInChildren<Renderer>().materials.Length; i++)
+						transform.GetComponentInChildren<Renderer>().materials[i].SetFloat("_Outline", 0.0f);
 			}
 		} else {
-				transform.GetComponentInChildren<Renderer>().material.SetFloat ("_Outline", 0.00f);
+			for( int i = 0; i < transform.GetComponentInChildren<Renderer>().materials.Length; i++)
+				transform.GetComponentInChildren<Renderer>().materials[i].SetFloat("_Outline", 0.0f);
 		}
 	}	
 

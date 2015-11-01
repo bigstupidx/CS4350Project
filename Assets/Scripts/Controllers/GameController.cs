@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using LitJson;
@@ -9,17 +10,26 @@ public class GameController : MonoBehaviour {
 	private Dictionary<string, Item> items;
 
 	public Dictionary<string, string> allHintDic;
+	public Dictionary<string, DateTime> timeStamp;
 
+	private DateTime startGameTime;
 	public string lastLoadedScene = "TitleScene";
 	private int timeSinceGameStart = 0;
 	public bool isAndroidVersion = false;
 	public bool isPaused = false;
+
+	private float prevTime;
+
+	private int realTime_hour = 0;
+	private int realTime_minute = 0;
+	private int realTime_second = 0;
 
 	public void Awake() {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad (this);
 			allHintDic = new Dictionary<string, string>();
+			timeStamp = new Dictionary<string, DateTime>();
 		} else {
 			DestroyImmediate(gameObject);
 		}
@@ -33,11 +43,56 @@ public class GameController : MonoBehaviour {
 	public void SetStartTime()
 	{
 		isPaused = false;
+		startGameTime = System.DateTime.Now;
+
+		realTime_hour = startGameTime.Hour;
+		realTime_minute = startGameTime.Minute;
+		realTime_second = startGameTime.Second;
+
+
+		prevTime = Time.time;
 		timeSinceGameStart = 0;
 	}
 
-	public int GetTime(){
+	public int GetTick(){
 		return timeSinceGameStart;
+	}
+
+	public DateTime GetCurrentObjectTime()
+	{
+		return startGameTime;
+	}
+
+	public int GetActualTime(int _option){
+		switch (_option) {
+		case 0: // seconds
+			return realTime_second;
+		case 1: // minutes
+			return realTime_minute;
+		case 2:
+			return realTime_hour;
+		}
+		return 0;
+
+	}
+
+	private void incrementSeconds()
+	{
+		realTime_second++;
+
+		if (realTime_second == 60) {
+			realTime_minute++;
+			realTime_second = 0;
+		}
+		
+		if (realTime_minute == 60) {
+			realTime_hour++;
+			realTime_minute = 0;
+		}
+		
+		if (realTime_hour == 24) {
+			realTime_hour = 0;
+		}
 	}
 
 	public void ToggleTimer()
@@ -55,10 +110,15 @@ public class GameController : MonoBehaviour {
 	
 	}
 
-	public void FixedUpdate()
+	public void Update()
 	{
-		if (!isPaused)
-			timeSinceGameStart++;
+		if (!isPaused) {
+			if( Time.time - prevTime > 1.0f){
+				incrementSeconds();
+				timeSinceGameStart++;
+				prevTime = Time.time;
+			}
+		}
 	}
 
 	public void InitializeLevel() {
@@ -101,38 +161,38 @@ public class GameController : MonoBehaviour {
 		PlayerController.instance.updatePlayerPositon ();
 		PlayerController.instance.UpdateHintDic ();
 
-		GameObject camera = GameObject.Find ("Main Camera");
+		GameObject camera = Camera.main.gameObject;//GameObject.Find ("Main Camera");
 		CameraFollow followCamera = camera.GetComponent<CameraFollow> ();
-		Debug.Log (followCamera);
+		//Debug.Log (followCamera);
 		followCamera.switchOffset (PlayerController.instance.currentLevel);
 		updateItemsVisibility ();
 	}
 
 	public void GameOver(EndingType endingType) {
-		switch (endingType) {
-		case EndingType.Ending1:
-			Debug.Log ("Game over: Death by Suffocation");
-			break;
-		case EndingType.Ending2:
-			Debug.Log ("Game over: Death by Dog Allergy");
-			break;
-		case EndingType.Ending3:
-			Debug.Log ("Game over: Death by Head Injury");
-			break;
-		case EndingType.Ending4:
-			Debug.Log ("Game over: Death by Fallen Ceiling");
-			break;
-		case EndingType.Ending5:
-			Debug.Log ("Game over: Death by Train Accident");
-			break;
-		}
+
+		string[] ending = this.getCorePath ();
+		
+//		switch (endingType) {
+//		case EndingType.Ending1:
+//			Debug.Log ("Game over: Death by Suffocation");
+//			break;
+//		case EndingType.Ending2:
+//			Debug.Log ("Game over: Death by Dog Allergy");
+//			break;
+//		case EndingType.Ending3:
+//			Debug.Log ("Game over: Death by Head Injury");
+//			break;
+//		case EndingType.Ending4:
+//			Debug.Log ("Game over: Death by Fallen Ceiling");
+//			break;
+//		case EndingType.Ending5:
+//			Debug.Log ("Game over: Death by Train Accident");
+//			break;
+//		}
+
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
 			EndingController.instance.isChapter2Completed = true;
 		} 
-//		else {
-//			TraceController.instance.TurnOffLine();
-//			EndingController.instance.isChapter2Activated = true;
-//		}
 			GameController.instance.SetLastLoadedScene(Application.loadedLevelName);
 			LevelHandler.Instance.LoadSpecific ("TransitionScene");
 	}
@@ -142,24 +202,46 @@ public class GameController : MonoBehaviour {
 		lastLoadedScene = _sceneName;
 	}
 
+	public void SetChapter2ObjectTime(string itemId)
+	{
+		if (EndingController.instance.isChapter2Activated) {
+			
+			DateTime currTimeStamp;
+			bool hasItem = timeStamp.TryGetValue (itemId, out currTimeStamp);
+			if (hasItem) {
+				if (timeStamp.ContainsKey ("StartGame"))
+					timeStamp.Remove ("StartGame");
+				
+				startGameTime = currTimeStamp;
+				GameObject.Find ("timer").GetComponent<TimeCounter> ().setTime (currTimeStamp.Hour, currTimeStamp.Minute, currTimeStamp.Second);
+			}
+		}
+	}
+
 	public void TriggerItem(string itemId) {
 		Item item = this.GetItem(itemId);
 		if (item == null) {
 			return;
 		}
 		if (PlayerController.instance.AbleToTrigger(item)) {
+			if (item.type == Item.TRANSITION_TYPE) {
+				this.transition(item);
+			}
+			else{
+				if(!EndingController.instance.isChapter2Activated)
+					timeStamp.Add(itemId, DateTime.Now);
+			}
+
 			PlayerController.instance.ItemTriggered(item);
 			EndingController.instance.ItemTriggered(item);
 
-			if(EndingController.instance.isChapter2Activated)
+			if(EndingController.instance.isChapter2Activated){
 				TraceController.instance.TriggerItem(itemId);
+			}
 
 			updateItemsVisibility ();
 			foreach(KeyValuePair<string, Item> entry in items) {
 				entry.Value.ItemTriggered(item);
-			}
-			if (item.type == Item.TRANSITION_TYPE) {
-				this.transition(item);
 			}
 		}
 	}
@@ -167,11 +249,16 @@ public class GameController : MonoBehaviour {
 	public void transition (Item item) {
 		if (item.type == Item.TRANSITION_TYPE) {
 
+			// Disable action during transition
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Displaytextbox>().canTextBoxDisplay = false;
+			PlayerData.MoveFlag = false;
+
 			if(EndingController.instance.isChapter2Activated)
 				TraceController.instance.TurnOffLine();
 
-			if(isAndroidVersion)
+			if(isAndroidVersion){
 				GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour> ().TurnOffButton();
+			}
 
 			SetLastLoadedScene(Application.loadedLevelName);
 
@@ -179,7 +266,6 @@ public class GameController : MonoBehaviour {
 			if (nextLevel == 2) {
 				LevelHandler.Instance.LoadSpecific ("PlatformGameScene");
 			} else if (nextLevel == 1) {
-				//change this to the indoor scene
 				LevelHandler.Instance.LoadSpecific ("GroundIndoorGameScene");
 			} else if (nextLevel == 0) {
 				LevelHandler.Instance.LoadSpecific ("BasementGameScene");
@@ -219,12 +305,10 @@ public class GameController : MonoBehaviour {
 		foreach (KeyValuePair<string, Item> entry in items) {
 			Item item = entry.Value;
 			if (PlayerController.instance.hideItems.ContainsKey(item.itemId)) {
-//				Debug.Log("Hide: " + item.itemId);
 				item.gameObject.SetActive(false);
 				continue;
 			}
 			if (PlayerController.instance.unhideItems.ContainsKey(item.itemId)) {
-//				Debug.Log("Unhide: " + item.itemId);
 				item.gameObject.SetActive(true);
 				continue;
 			}
@@ -233,7 +317,6 @@ public class GameController : MonoBehaviour {
 
 	public Item GetItem(string itemId) {
 		Item item;
-//		Debug.Log (this.items);
 		bool hasItem = this.items.TryGetValue(itemId, out item);
 		if (hasItem) {
 			return item;
@@ -246,7 +329,8 @@ public class GameController : MonoBehaviour {
 		string respond;
 		bool hasItem = this.allHintDic.TryGetValue(itemId, out respond);
 		if (hasItem) {
-			return respond;
+			if(respond.Length > 0)
+				return respond;
 		}
 		return "";
 	}
@@ -274,8 +358,27 @@ public class GameController : MonoBehaviour {
 		}
 		list.Reverse ();
 
+
+		// remove compliment of death sequence time stamp
+		Dictionary<string, DateTime> coreTimeStamp = new Dictionary<string, DateTime>();
+		foreach (string itemId in list) {
+			if( timeStamp.ContainsKey(itemId) ){
+				DateTime value = DateTime.Now;
+
+				if( timeStamp.TryGetValue( itemId, out value ) )
+					coreTimeStamp.Add(itemId, value) ;
+			}
+		}
+
+		timeStamp.Clear ();
+		timeStamp = coreTimeStamp;
+		timeStamp.Add ("StartGame", startGameTime);
+		
 		return list.ToArray();
 	}
+
+
+
 
 	public void dfs(string previousItemId, string itemId, Dictionary<string, ItemState> itemDict, Dictionary<string, int> triggeredDict, Dictionary<string, string> path) {
 		ItemState item = itemDict [itemId];
