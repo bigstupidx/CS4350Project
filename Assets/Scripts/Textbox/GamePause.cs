@@ -39,26 +39,25 @@ public class GamePause: MonoBehaviour {
     }
 
     public void ResumePressed() {
-		isPaused = false;
+
 		GameController.instance.ToggleTimer ();
         pauseButton.SetActive(true);
         pausePanel.SetActive(false);
         textboxScript.enabled = true;
         //blinkingScript.enabled = true;
-        PlayerData.MoveFlag = true;
-
+		isPaused = false;
     }
 
     public void ExitPressed() {
-		isPaused = false;
+
         //blinkingScript.enabled = true;
         textboxScript.enabled = true;
         Destroy(GameController.instance);
         Destroy(PlayerController.instance);
         Destroy(EndingController.instance);
+		Destroy (TraceController.instance);
         LevelHandler.Instance.LoadSpecific("TitleScene");
-        
-        PlayerData.MoveFlag = true;
+		isPaused = false;
     }
 
 }
