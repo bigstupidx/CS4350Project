@@ -1,60 +1,15 @@
 fileFormatVersion: 2
-guid: 2a00f874306f44f36912bf50bccd6975
-timeCreated: 1444877416
+guid: bb68dd4b295b4ff48af2a5d0d0b00b83
+timeCreated: 1446399658
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCylinder1
-    100004: pCylinder2
-    100006: pCylinder3
-    100008: pCylinder4
-    100010: pCylinder5
-    100012: pCylinder6
-    100014: pPlane1
-    100016: pPlane2
-    100018: transform1
-    100020: transform2
-    100022: transform3
-    100024: transform4
-    100026: transform5
-    100028: transform6
-    100030: transform7
-    100032: polySurface1
-    100034: polySurface1 1
-    100036: polySurface2
-    100038: polySurface3
-    100040: polySurface4
-    100042: polySurface5
     400000: //RootNode
-    400002: pCylinder1
-    400004: pCylinder2
-    400006: pCylinder3
-    400008: pCylinder4
-    400010: pCylinder5
-    400012: pCylinder6
-    400014: pPlane1
-    400016: pPlane2
-    400018: transform1
-    400020: transform2
-    400022: transform3
-    400024: transform4
-    400026: transform5
-    400028: transform6
-    400030: transform7
-    400032: polySurface1
-    400034: polySurface1 1
-    400036: polySurface2
-    400038: polySurface3
-    400040: polySurface4
-    400042: polySurface5
-    2300000: pPlane2
-    2300002: polySurface1
-    3300000: pPlane2
-    3300002: polySurface1
-    4300000: pPlane2
-    4300002: polySurface1
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: polySurface1323
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -79,12 +34,12 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 50
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

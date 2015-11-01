@@ -1121,6 +1121,9 @@ ModelImporter:
     102226: transform99
     102228: zbc:ambientLight2
     102230: zbc:polySurface14
+    102232: pCube100
+    102234: pCube98
+    102236: pCube99
     400000: dmodel_pCube1
     400002: group
     400004: //RootNode
@@ -2237,6 +2240,9 @@ ModelImporter:
     402226: transform99
     402228: zbc:ambientLight2
     402230: zbc:polySurface14
+    402232: pCube100
+    402234: pCube98
+    402236: pCube99
     2300000: pasted__pCube32
     2300002: pasted__pCube33
     2300004: pCube1
@@ -2267,6 +2273,9 @@ ModelImporter:
     2300054: polySurface35
     2300056: pPlane1
     2300058: pPlane5
+    2300060: pCube100
+    2300062: pCube98
+    2300064: pCube99
     3300000: pasted__pCube32
     3300002: pasted__pCube33
     3300004: pCube1
@@ -2297,6 +2306,9 @@ ModelImporter:
     3300054: polySurface35
     3300056: pPlane1
     3300058: pPlane5
+    3300060: pCube100
+    3300062: pCube98
+    3300064: pCube99
     4300000: pCube1
     4300002: polySurface1304
     4300004: polySurface1289
@@ -2327,6 +2339,9 @@ ModelImporter:
     4300054: pCube97
     4300056: polySurface1397
     4300058: polySurface1388
+    4300060: pCube98
+    4300062: pCube99
+    4300064: pCube100
     9500000: //RootNode
   materials:
     importMaterials: 1
