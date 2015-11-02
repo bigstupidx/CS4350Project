@@ -22,6 +22,11 @@ ModelImporter:
     100028: transform6
     100030: transform7
     100032: polySurface1
+    100034: polySurface1 1
+    100036: polySurface2
+    100038: polySurface3
+    100040: polySurface4
+    100042: polySurface5
     400000: //RootNode
     400002: pCylinder1
     400004: pCylinder2
@@ -39,6 +44,11 @@ ModelImporter:
     400028: transform6
     400030: transform7
     400032: polySurface1
+    400034: polySurface1 1
+    400036: polySurface2
+    400038: polySurface3
+    400040: polySurface4
+    400042: polySurface5
     2300000: pPlane2
     2300002: polySurface1
     3300000: pPlane2

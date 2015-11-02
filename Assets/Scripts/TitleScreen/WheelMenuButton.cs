@@ -19,7 +19,7 @@ public class WheelMenuButton : MonoBehaviour
 
     public RawImage blackScreen;
     public int myID;
-    static int choice = -1;
+    public int choice = -1;
     public GameObject hint;
 
     public Color32 colHighlighted = new Color32(255, 255, 255, 255);
@@ -44,7 +44,6 @@ public class WheelMenuButton : MonoBehaviour
         // Set menu choice
         choice = myID;
         floatIn = true;
-        //Debug.Log("Set" + choice);
         blackScreen.enabled = true;
     }
 
@@ -103,7 +102,6 @@ public class WheelMenuButton : MonoBehaviour
             {
                 if (choice == 0)
                 {
-                    Debug.Log("TEST");
                     GameController.instance.load();
                 }
                 else if (choice == 1)

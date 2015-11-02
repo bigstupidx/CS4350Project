@@ -132,80 +132,81 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate ()
 	{
+
 		currTime += Time.deltaTime;
 
 		// Check mouse input
 		if (Input.GetKey (KeyCode.Mouse0)) {
 
-			if (Input.mousePosition.x > (Screen.width * 0.9f) && Input.mousePosition.y < (Screen.height * 0.2f)){
+			if ((Input.mousePosition.x > (Screen.width * 0.9f) && Input.mousePosition.y < (Screen.height * 0.2f)) || 
+				(Input.mousePosition.x < (Screen.width * 0.12f) && Input.mousePosition.y > (Screen.height * 0.9f))) {
 				mouseOverButton = true;
 
 				isWalking = false;
 				currFrame = 0;
 				int frameToLoad = currDirection * 8 + currFrame;
 				spriteRenderer.sprite = sprites [frameToLoad];
-			}
-			else 
+			} else 
 				mouseOverButton = false;
 
-			if(PlayerData.MoveFlag && !mouseOverButton) {
-			// Create a ray from the mouse cursor on screen in the direction of the camera.
-			Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
-			
-			// Create a RaycastHit variable to store information about what was hit by the ray.
-			RaycastHit floorHit;
-			
+			if (PlayerData.MoveFlag && !GamePause.isPaused && !mouseOverButton) {
+				// Create a ray from the mouse cursor on screen in the direction of the camera.
+				Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+		
+				// Create a RaycastHit variable to store information about what was hit by the ray.
+				RaycastHit floorHit;
+		
 				// Perform the raycast and if it hits something on the floor layer...
 				if (Physics.Raycast (camRay, out floorHit, camRayLength, floorMask)) {
 
 					//GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour>().alreadySelected = false;
 					destination = floorHit.point;
-				
-					marker.transform.position = new Vector3( destination.x , destination.y + 0.3f, destination.z - 0.3f);
+			
+					marker.transform.position = new Vector3 (destination.x, destination.y + 0.3f, destination.z - 0.3f);
 					//marker.GetComponent<MeshRenderer>().enabled = true;
 
-				
+			
 					// Create a vector from the player to the point on the floor the raycast from the mouse hit.
 					Vector3 playerToMouse = floorHit.point - transform.position;
-				
+			
 					// Ensure the vector is entirely along the floor plane.
 					playerToMouse.y = 0f;
 
-                    Vector3 camForward = GameObject.Find("Main Camera").transform.forward;
+					Vector3 camForward = GameObject.Find ("Main Camera").transform.forward;
 
-                    camForward.y = 0f;
+					camForward.y = 0f;
 
-                    float angle = Mathf.Rad2Deg*Mathf.Atan2(playerToMouse.x * camForward.z - playerToMouse.z * camForward.x, playerToMouse.x * camForward.x + playerToMouse.z * camForward.z)+180;
+					float angle = Mathf.Rad2Deg * Mathf.Atan2 (playerToMouse.x * camForward.z - playerToMouse.z * camForward.x, playerToMouse.x * camForward.x + playerToMouse.z * camForward.z) + 180;
 
-                    // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-                    //Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
-				
+					// Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
+					//Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
+			
 					//float angle = newRotation.eulerAngles.y;
-				
+			
 					//Debug.Log(angle);
-				
+			
 					int prevDirection = currDirection;
-				
+			
 					// Right
 					if (angle >= 225 && angle <= 315) {
-                        //currDirection = leftConst;
-                        currDirection = rightConst;
+						//currDirection = leftConst;
+						currDirection = rightConst;
 					}
-				//Left
-				else if (angle >= 45 && angle <= 135) {
-                        //currDirection = rightConst;
-                        currDirection = leftConst;
-                    }
-				// Down
-				else if (angle >= 315 || angle <= 45) {
-                        //currDirection = upConst;
-                        currDirection = downConst;
-                    }
-				// up
-				else {
-                        //currDirection = downCnst;
-                        currDirection = upConst;
-                    }
+			//Left
+			else if (angle >= 45 && angle <= 135) {
+						//currDirection = rightConst;
+						currDirection = leftConst;
+					}
+			// Down
+			else if (angle >= 315 || angle <= 45) {
+						//currDirection = upConst;
+						currDirection = downConst;
+					}
+			// up
+			else {
+						//currDirection = downCnst;
+						currDirection = upConst;
+					}
 					if (currDirection != prevDirection) {
 						currTime = timePerFrame;
 						currFrame = 0;
@@ -214,34 +215,20 @@ public class PlayerMovement : MonoBehaviour
 					noOfFramesNotMoving = 0;
 				}
 			}// end of move flag is true
-			else{
-				if(GameController.instance.isAndroidVersion){
-					if (GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isActivated) {
-						isWalking = false;
-						PlayerData.MoveFlag = false;
-
-						if(!GameObject.Find ("TextBox_Android").GetComponent<FadeInFadeOut> ().isFadingOn &&
-						   !GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour>().alreadySelected){
-								transform.GetComponent<Displaytextbox> ().TriggerTextbox ();
-							}
-						}
-				}
-			}
 		}// end of mouse down
 
-	
+
 		if (isWalking) {
-			marker.GetComponent<MeshRenderer>().enabled = true;
+			marker.GetComponent<MeshRenderer> ().enabled = true;
 			// Movement
 			Vector3 movement = destination - transform.position;
 
-	
+
 			float moveDifference = lastMovement.magnitude - movement.magnitude;
 
-			if (moveDifference < noMovementThreshold){
+			if (moveDifference < noMovementThreshold) {
 				noOfFramesNotMoving++;
-			}
-			else
+			} else
 				noOfFramesNotMoving = 0;
 
 			lastMovement = movement;
@@ -251,8 +238,8 @@ public class PlayerMovement : MonoBehaviour
 			// End movement if close to destination
 			movement = destination - transform.position;
 
-			if( movement.magnitude < 0.7f)
-				marker.GetComponent<MeshRenderer>().enabled = false;
+			if (movement.magnitude < 0.7f)
+				marker.GetComponent<MeshRenderer> ().enabled = false;
 
 			if (movement.magnitude <= closeToDestinationThreshold) {
 				isWalking = false;
@@ -264,9 +251,8 @@ public class PlayerMovement : MonoBehaviour
 				isWalking = false;
 				noOfFramesNotMoving = 0;
 			}
-		}
-		else
-			marker.GetComponent<MeshRenderer>().enabled = false;
+		} else
+			marker.GetComponent<MeshRenderer> ().enabled = false;
 
 		// Change Idle Timer
 		if (currDirection == downConst && !isWalking) {
@@ -328,7 +314,6 @@ public class PlayerMovement : MonoBehaviour
 			currTime = 0;
 
 		}
-
 	}
 
 }
