@@ -639,7 +639,7 @@
 		"defaultDialogue": [ ],
 		"idleDialogue": [ ],
 		"endingPoints": [ 0, 0, 0, 0, 0],
-		"offset": [1.4, 2.0, -46.25],
+		"offset": [-1.8, 2.0, -46.25],    //edit here
 	    "level": 3,
 	    "nextLevel":  6,
 		"hideItems": [],
