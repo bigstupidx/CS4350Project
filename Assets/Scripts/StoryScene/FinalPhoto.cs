@@ -7,9 +7,12 @@ public class FinalPhoto : MonoBehaviour {
 
 	public void SetFinalPhoto(int choice)
 	{
-		if (choice == 1)
+		if (choice == 1) {
 			transform.GetComponent<MeshRenderer> ().material.mainTexture = photoSet [0];
-		else
+			PlayerData.ParentGenderId = 1;
+		} else {
 			transform.GetComponent<MeshRenderer> ().material.mainTexture = photoSet [1];
+			PlayerData.ParentGenderId = 2;
+		}
 	}
 }
