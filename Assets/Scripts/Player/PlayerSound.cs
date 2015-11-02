@@ -23,10 +23,12 @@ public class PlayerSound : MonoBehaviour {
         movementScript = transform.GetComponent<PlayerMovement>();
 
         // Load idle auto clips
-        idleAutoClips = new AudioClip[3];
+        idleAutoClips = new AudioClip[5];
         idleAutoClips[0] = Resources.Load<AudioClip>("Sound/Amari/humming");
         idleAutoClips[1] = Resources.Load<AudioClip>("Sound/Amari/i_want_to_go_home");
         idleAutoClips[2] = Resources.Load<AudioClip>("Sound/Amari/what_should_i_do");
+		idleAutoClips[3] = Resources.Load<AudioClip>("Sound/Amari/what_is_this");
+		idleAutoClips[4] = Resources.Load<AudioClip>("Sound/Amari/woah");
 
         ResetIdleTimer();
 
@@ -40,12 +42,16 @@ public class PlayerSound : MonoBehaviour {
         }
 
         // Load standard dialogue clips
-        dialogueAudioClips = new AudioClip[5];
+        dialogueAudioClips = new AudioClip[9];
         dialogueAudioClips[0] = Resources.Load<AudioClip>("Sound/Amari/awawa");
         dialogueAudioClips[1] = Resources.Load<AudioClip>("Sound/Amari/chuckle");
         dialogueAudioClips[2] = Resources.Load<AudioClip>("Sound/Amari/hmm");
         dialogueAudioClips[3] = Resources.Load<AudioClip>("Sound/Amari/lets_see");
         dialogueAudioClips[4] = Resources.Load<AudioClip>("Sound/Amari/maybe..");
+		dialogueAudioClips[5] = Resources.Load<AudioClip>("Sound/Amari/oh");
+		dialogueAudioClips[6] = Resources.Load<AudioClip>("Sound/Amari/oh_no");
+		dialogueAudioClips[7] = Resources.Load<AudioClip>("Sound/Amari/awright");
+		dialogueAudioClips[8] = Resources.Load<AudioClip>("Sound/Amari/booya");
     }
 	
 	// Update is called once per frame
