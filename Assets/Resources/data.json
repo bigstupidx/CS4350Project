@@ -605,7 +605,7 @@
 		"defaultDialogue": [ ],
 		"idleDialogue": [ ],
 		"endingPoints": [ 0, 0, 0, 0, 0],
-        "offset": [-2.6, 2.0, -47.3],
+        "offset": [-1.6, 2.0, -48.92],
         "level": 3,
         "nextLevel": 5, 
 		"hideItems": [],
