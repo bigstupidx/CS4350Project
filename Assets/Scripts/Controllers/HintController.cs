@@ -23,8 +23,14 @@ public class HintController : MonoBehaviour {
 		hintTimer = Time.time;
 	}
 
+	public void ResetTimer()
+	{
+		hintTimer = Time.time;
+	}
+
 	public void DisplayHint()
 	{
+		/*
 		if (textBoxRef == null) {
 			PlayerController.instance.SetTextboxObj ();
 			textBoxRef = PlayerController.instance.GetTextboxObj ();
@@ -35,33 +41,54 @@ public class HintController : MonoBehaviour {
 
 		textBoxRef.transform.GetChild(0).GetComponent<FeedTextFromObject> ().SetText (respond);
 		textBoxRef.GetComponent<FadeInFadeOut> ().TurnOnTextbox (false, true);
+		*/
 
+		PlayerController.instance.displayHint ();
 		hasHint = false;
 		hintTimer = Time.time;
+	}
+
+	private int GetPeak(int[] _input)
+	{
+		int result = 0;
+		int max = _input[0];
+
+		for (int i = 0; i < _input.Length; i++) {
+			if( max < _input[i]){
+				max = _input[i];
+				result = i;
+			}
+		}
+
+		return result;
 	}
 
 	private string GetHint()
 	{
 		string chosenHint = "HINT";
-//		List<string> allHints = new List<string> (PlayerController.instance.hintDic.Keys);
-//		
-//		if (allHints.Count > 0) {
-//			foreach( string hintID in allHints){
-//				Item curr = GameController.instance.GetItem(hintID);
-//				int endType = curr.GetEndingType();
-//
-//				if( !hintList[endType].Contains(curr.idleDialogue[0]) )
-//				{
-//					hintList[endType].Add(curr.idleDialogue[0]);
-//				}
-//			}
-//
-//			int currPeak = EndingController.instance.GetCurrEndingPeak();
-//
-//			List<string> currSet = hintList[currPeak];
-//			int select = Random.Range (0, ( currSet.Count) );
-//			chosenHint = currSet [select];
-//		}
+		List<string> allHints = new List<string> (PlayerController.instance.hintDic.Keys);
+		
+		if (allHints.Count > 0) {
+			foreach( string hintID in allHints){
+				Item curr = GameController.instance.GetItem(hintID);
+
+				if(curr !=  null){
+					int endType = GetPeak( curr.endingPoints );
+					Debug.Log("curr item:" +  hintID + " , " + endType);
+					if( !hintList[endType].Contains(curr.idleDialogue[0]) )
+					{
+						hintList[endType].Add(curr.idleDialogue[0]);
+					}
+				}
+			}
+
+			int currPeak = GetPeak( EndingController.instance.endings );
+
+			List<string> currSet = hintList[currPeak];
+			int select = Random.Range (0, ( currSet.Count) );
+			chosenHint = currSet [select];
+			hintList[currPeak].Remove(chosenHint);
+		}
 
 		return chosenHint;
 	}

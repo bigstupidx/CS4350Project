@@ -18,7 +18,7 @@ public class EndingController : MonoBehaviour {
 	public bool isChapter2Activated = false;
 	public bool isChapter2Completed = false;
 
-	int[] endings;
+	public int[] endings;
 	public EndingType deathReason;
 
 	public void Awake() {
