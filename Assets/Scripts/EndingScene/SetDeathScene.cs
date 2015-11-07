@@ -21,8 +21,8 @@ public class SetDeathScene : MonoBehaviour {
         rend = GetComponent<Renderer>();
         randomizeTimer = Random.Range(0.0f, randomizeTimer);
 
-        //eT = EndingController.instance.deathReason;
-        eT = (EndingType)1;
+        eT = EndingController.instance.deathReason;
+        //eT = (EndingType)1;
         Debug.Log(eT);
         updateScreen(-1);
     }
