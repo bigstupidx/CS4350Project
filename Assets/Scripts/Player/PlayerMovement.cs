@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKey (KeyCode.Mouse0)) {
 
 			if ((Input.mousePosition.x > (Screen.width * 0.9f) && Input.mousePosition.y < (Screen.height * 0.2f)) || 
-				(Input.mousePosition.x < (Screen.width * 0.12f) && Input.mousePosition.y > (Screen.height * 0.9f))) {
+				(Input.mousePosition.x < (Screen.width * 0.20f) && Input.mousePosition.y > (Screen.height * 0.9f))) {
 				mouseOverButton = true;
 
 				isWalking = false;

@@ -209,6 +209,21 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void SetTextboxObj()
+	{
+		if( targetTextbox == null ){
+			targetTextbox = GameObject.Find("TextBox");
+		}
+		
+		if( targetTextbox == null ){
+			targetTextbox = GameObject.Find("TextBox_Android");
+		}
+	}
+	public GameObject GetTextboxObj()
+	{
+		return targetTextbox;
+	}
+	
 	public void displayHint()
 	{
 		List<string> allHints = new List<string> (hintDic.Keys);
