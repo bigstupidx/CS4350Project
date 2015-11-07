@@ -266,7 +266,7 @@ public class SelectionSceneController : MonoBehaviour {
                 f6.FaceFront();
 
             if (!m1.IsMoving () && !m2.IsMoving () && !m3.IsMoving () && !f4.IsMoving () && !f5.IsMoving () && !f6.IsMoving ()) {
-				stage = 3;
+				
 				// Stage 2 initialisation here
 				AmariSelection.selectionEnabled = true;
                 m1.FaceFront();
@@ -275,9 +275,15 @@ public class SelectionSceneController : MonoBehaviour {
                 f4.FaceFront();
                 f5.FaceFront();
                 f6.FaceFront();
+
+                feedText.SetText("(Pick a child)");
+                textBox.TurnOnTextbox(false);
+                stage = 3;
+                
             }
 
         } else if (stage == 3) {
+
             m1.FaceFront();
             m2.FaceFront();
             m3.FaceFront();
@@ -287,7 +293,8 @@ public class SelectionSceneController : MonoBehaviour {
 
 
 			if (AmariSelection.selectionDone) {
-				AmariSelection.selectionEnabled = false;
+                textBox.TurnOnTextbox(true);
+                AmariSelection.selectionEnabled = false;
                 
 
                 // Find selected amari
