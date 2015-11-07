@@ -182,6 +182,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		idleTimer = GameController.instance.GetTick ();
+		GameObject.Find ("HintButton").GetComponent<HintController> ().ResetTimer ();
 		UpdateHintDic ();
 	}
 
@@ -194,11 +195,7 @@ public class PlayerController : MonoBehaviour {
 			if (timeDiff >= 30) {
 
 				if( targetTextbox == null ){
-					targetTextbox = GameObject.Find("TextBox");
-				}
-
-				if( targetTextbox == null ){
-					targetTextbox = GameObject.Find("TextBox_Android");
+					SetTextboxObj();
 				}
 
 				if (!targetTextbox.GetComponent<FadeInFadeOut> ().isActivated) {
@@ -209,10 +206,29 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void SetTextboxObj()
+	{
+		if( targetTextbox == null ){
+			targetTextbox = GameObject.Find("TextBox");
+		}
+		
+		if( targetTextbox == null ){
+			targetTextbox = GameObject.Find("TextBox_Android");
+		}
+	}
+	public GameObject GetTextboxObj()
+	{
+		return targetTextbox;
+	}
+	
 	public void displayHint()
 	{
 		List<string> allHints = new List<string> (hintDic.Keys);
 
+		if( targetTextbox == null ){
+			SetTextboxObj();
+		}
+		
 		if (allHints.Count > 0) {
 			int select = Random.Range (0, (allHints.Count));
 			string chosenHint = allHints [select];
