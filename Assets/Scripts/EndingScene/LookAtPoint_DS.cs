@@ -2,13 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class LookAtPoint : MonoBehaviour {
+public class LookAtPoint_DS : MonoBehaviour {
     public GameObject eyeTop;
     public GameObject eyeBottom;
     public GameObject lookAtLocations;
-
-	public GameObject photoMama;
-    public GameObject photoPapa;
+    
     public GameObject textHandler;
 
     static public int genderSet;
@@ -50,36 +48,18 @@ public class LookAtPoint : MonoBehaviour {
             case 1: tEyeY = 0.0f; break;
             case 2: tEyeY = 100.0f; break;
             case 3: tEyeY = 0.0f; break;
-            case 4: tEyeY = 500.0f; h.text = "Amari!"; break;
+            case 4: tEyeY = 500.0f; h.text = ""; break;
             case 5: lookAtIndex = 1; fov = 65.0f; h.text = ""; break;
             case 6: lookAtIndex = 2; fov = 65.0f; h.text = ""; break;
-            case 7: lookAtIndex = 3; fov = 40.0f; h.text = "I just hope that you are safe."; break;
-            case 8: lookAtIndex = 4; fov = 20.0f; h.text = "It has always been my dream to have my own child."; break;
-            case 9: lookAtIndex = 5; fov = 25.0f; h.text = "You always bring joy to our lives."; break;
-            case 10: lookAtIndex = 6; fov = 28.0f; h.text = "Everyday, I look forward to holding you in my arms. (Choose a photo)"; break;
-            case 11: lookAtIndex = 7; fov = 32.0f;
-                if (genderSet == 1)
-                    h.text = "I remember the first word from your mouth was 'Papa'. Love is all it takes to keep the family together.";
-                if (genderSet == 2)
-                    h.text = "I remember the first word from your mouth was 'Mama'. Love is all it takes to keep the family together.";
-
-                    break;
-            case 12: lookAtIndex = 8; fov = 40.0f;
-                if (genderSet == 1)
-                    h.text = "But I couldn't control myself, your mom warned me.";
-                if (genderSet == 2)
-                    h.text = "But I couldn't control myself, your dad warned me.";
-                break;
-            case 13: lookAtIndex = 9; fov = 50.0f;
-                h.text = "I am so sorry Amari, I really am. I promise I will get myself better.";
-                break;
-            case 14: lookAtIndex = 9; fov = 20.0f;
-                if (genderSet == 1)
-                    h.text = "But the only way to give you a proper childhood was to leave. Your mom will be able to take care of you, Amari.";
-                if (genderSet == 2)
-                    h.text = "But the only way to give you a proper childhood was to leave. Your dad will be able to take care of you, Amari.";
-                break;
-            case 15: tEyeY = 0.0f; fov = 25.0f; h.text = ""; break;
+            case 7: lookAtIndex = 3; fov = 65.0f; h.text = ""; break;
+            case 8: lookAtIndex = 4; fov = 50.0f; h.text = ""; break;
+            case 9: lookAtIndex = 5; fov = 55.0f; h.text = ""; break;
+            case 10: lookAtIndex = 6; fov = 28.0f; h.text = ""; break;
+            case 11: lookAtIndex = 7; fov = 20.0f;break;
+            case 12: lookAtIndex = 8; fov = 25.0f;break;
+            case 13: lookAtIndex = 9; fov = 30.0f;break;
+            case 14: lookAtIndex = 9; fov = 60.0f;break;
+            case 15: tEyeY = 0.0f; fov = 100.0f; h.text = ""; break;
 
         }
 
@@ -107,28 +87,27 @@ public class LookAtPoint : MonoBehaviour {
                 case 5: stateTimer = 10.0f; break;
                 case 6: stateTimer = 15.0f; break;
                 case 7: stateTimer = 30.0f; break;
-                case 8: stateTimer = 50.0f; break;
-                case 9: stateTimer = 50.0f; break;
-				case 10: stateTimer = 2.0f; freeze = true; photoMama.SetActive(true); photoPapa.SetActive(true); break;
-                case 11: stateTimer = 60.0f; break;
-                case 12: stateTimer = 50.0f; break;
-                case 13: stateTimer = 60.0f; break;
-                case 14: stateTimer = 55.0f; break;
-                case 15: stateTimer = 50.0f; break;
-				case 16: GameController.instance.SetLastLoadedScene(Application.loadedLevelName); Application.LoadLevel("TransitionScene");break;
+                case 8: stateTimer = 10.0f; break;
+                case 9: stateTimer = 5.0f; break;
+				case 10: stateTimer = 5.0f; break;
+                case 11: stateTimer = 40.0f; break;
+                case 12: stateTimer = 30.0f; break;
+                case 13: stateTimer = 20.0f; break;
+                case 14: stateTimer = 40.0f; break;
+                case 15: stateTimer = 80.0f; break;
+				case 16: GameController.instance.SetLastLoadedScene(Application.loadedLevelName); Application.LoadLevel("CreditScene");break;
                 default: stateTimer = 100000.0f; break;
 
             }
         }
 
-        //Debug.Log(currentState +" "+ stateTimer);
+        Debug.Log(currentState +" "+ stateTimer);
 
     }
 
     public void unfreeze()
     {
         freeze = false;
-		photoMama.SetActive(false); photoPapa.SetActive(false);
         //Debug.Log("Clicked");
     }
 	
