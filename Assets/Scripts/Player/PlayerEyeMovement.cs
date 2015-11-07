@@ -52,13 +52,14 @@ public class PlayerEyeMovement : MonoBehaviour {
 				targetPos.y = 0;
 
 				Vector3 diffVec = targetPos - playerPosition;
+                Vector3 camForward = GameObject.Find("Main Camera").transform.forward;
 
-				float angle = Mathf.Atan2 (diffVec.z, diffVec.x) * Mathf.Rad2Deg;
+                float angle = Mathf.Atan2 (diffVec.x * camForward.z - diffVec.z * camForward.x, diffVec.x * camForward.x + diffVec.z * camForward.z) * Mathf.Rad2Deg ;
 			
 				Vector3 pos = new Vector3 ();
 				float eyeStrength = Mathf.Min (1.0f, Mathf.Max (0.0f, diffVec.magnitude / detectionRadius));
-				pos.x = Mathf.Cos (angle * Mathf.Deg2Rad) * 0.01f * eyeStrength;
-				pos.y = Mathf.Sin (angle * Mathf.Deg2Rad) * 0.01f * eyeStrength;
+				pos.y = Mathf.Cos (angle * Mathf.Deg2Rad) * 0.01f * eyeStrength;
+				pos.x = Mathf.Sin (angle * Mathf.Deg2Rad) * 0.01f * eyeStrength;
 				pos.z = 0.0f;
 			
 				transform.localPosition = pos;
