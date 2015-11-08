@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		idleTimer = GameController.instance.GetTick ();
-		GameObject.Find ("HintButton").GetComponent<HintController> ().ResetTimer ();
+		GameObject.Find ("HintButton").GetComponent<HintController> ().SetHintStatus (false);
 		UpdateHintDic ();
 	}
 

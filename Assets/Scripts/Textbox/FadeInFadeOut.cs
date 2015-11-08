@@ -57,6 +57,7 @@ public class FadeInFadeOut : MonoBehaviour {
 
 		if (_isHint) { // use BLUE textbox for hint dialogue
 			transform.GetComponent<Image> ().sprite = textboxImages [2];
+			GameObject.Find ("HintButton").GetComponent<HintController> ().SetHintStatus (false);
 		}
 		else if (!EndingController.instance.isChapter2Activated && eventStatus) { // use gold textbox for chapter 1 event dialogue
 			transform.GetComponent<Image> ().sprite = textboxImages [1];
@@ -105,6 +106,7 @@ public class FadeInFadeOut : MonoBehaviour {
 			feedText.ResetTextFeed();
 			PlayerData.MoveFlag = true;
             PlayerSound.AllowIdleAutoSound = true;
+			GameObject.Find ("HintButton").GetComponent<HintController> ().SetHintStatus (true);
 		}
 	}
 }
