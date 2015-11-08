@@ -284,6 +284,7 @@ public class GameController : MonoBehaviour {
 
 	public void load() {
 		PlayerController.instance.Load ();
+		EndingController.instance.Load ();
 		int currentLevel = PlayerController.instance.currentLevel;
 		if (currentLevel == 2) {
 			Application.LoadLevel ("PlatformGameScene");

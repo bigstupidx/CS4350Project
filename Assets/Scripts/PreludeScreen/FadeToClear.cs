@@ -38,7 +38,6 @@ public class FadeToClear : MonoBehaviour {
 			}
 			else{
 				targetScene = "PlatformGameScene";
-				EndingController.instance.isChapter2Activated = true;
 				TraceController.instance.Init();
 				EndingController.instance.ResetEndingController(true);
 				GameController.instance.Reset();
