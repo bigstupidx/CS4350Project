@@ -27,7 +27,7 @@ public class HintController : MonoBehaviour {
 
 	public void DisplayHint()
 	{
-		if (hasHint) {
+		if (hasHint && !GameController.instance.isPaused) {
 			PlayerController.instance.displayHint ();
 			hasHint = false;
 		}
@@ -82,7 +82,7 @@ public class HintController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!EndingController.instance.isChapter2Activated) {
-			if (hasHint) {
+			if (hasHint && !GameController.instance.isPaused) {
 				this.GetComponent<Image> ().color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 			} else
 				this.GetComponent<Image> ().color = new Color (1.0f, 1.0f, 1.0f, 0.5f);

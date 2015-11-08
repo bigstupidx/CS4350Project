@@ -24,6 +24,7 @@ public class WheelMenuButton : MonoBehaviour
 
     public Color32 colHighlighted = new Color32(255, 255, 255, 255);
     public Color32 colNormal = new Color32(119, 167, 210, 255);
+	public Color32 colDisabled = new Color32(121, 137, 150, 255);
     private bool highlighted = false;
     static bool floatIn;
     // Use this for initialization
@@ -42,15 +43,20 @@ public class WheelMenuButton : MonoBehaviour
             return;
 
         // Set menu choice
-        choice = myID;
-        floatIn = true;
-        blackScreen.enabled = true;
+		if ((myID == 0 && JsonReader.hasSaveFile ()) || myID != 0 ) {
+			choice = myID;
+			floatIn = true;
+			blackScreen.enabled = true;
+		}
     }
 
     public void onPointerEnter()
     {
         highlighted = true;
-        hint.GetComponent<Text>().text = hint_text;
+		if(myID == 0 && !JsonReader.hasSaveFile())
+			hint.GetComponent<Text>().text = "No Save File Found. Please Start New Game.";
+		else
+	        hint.GetComponent<Text>().text = hint_text;
     }
 
     public void onPointerExit()
@@ -76,7 +82,15 @@ public class WheelMenuButton : MonoBehaviour
             tempColor.b += (colHighlighted.b - tempColor.b) * colFadeAlphaChgUp * Time.deltaTime;
             tempColor *= new Vector4(0.00392156862f, 0.00392156862f, 0.00392156862f, 1.0f);
             myText.color = tempColor;
-        } else
+        } else if (myID == 0 && !JsonReader.hasSaveFile ()) {
+			Color tempColor = myText.color;
+			tempColor *= new Vector4(255.0f, 255.0f, 255.0f, 255.0f);
+			tempColor.r += (colDisabled.r - tempColor.r) * colFadeAlphaChgDown * Time.deltaTime;
+			tempColor.g += (colDisabled.g - tempColor.g) * colFadeAlphaChgDown * Time.deltaTime;
+			tempColor.b += (colDisabled.b - tempColor.b) * colFadeAlphaChgDown * Time.deltaTime;
+			tempColor *= new Vector4(0.00392156862f, 0.00392156862f, 0.00392156862f, 1.0f);
+			myText.color = tempColor;
+		}else
         {
             Color tempColor = myText.color;
             tempColor *= new Vector4(255.0f, 255.0f, 255.0f, 255.0f);
@@ -102,10 +116,20 @@ public class WheelMenuButton : MonoBehaviour
             {
                 if (choice == 0)
                 {
-                    GameController.instance.load();
+					if(JsonReader.hasSaveFile())
+	                    GameController.instance.load();
+					else
+						hint.GetComponent<Text>().text = "No Save File Found. Please Start New Game.";
                 }
                 else if (choice == 1)
                 {
+					// Reset Save file when game completed
+					PlayerController.instance.Reset();
+					PlayerController.instance.Save();
+					
+					EndingController.instance.Reset ();
+					EndingController.instance.Save();
+
                     Application.LoadLevel("PreludeScene");
                 }
                 else if (choice == 2)
