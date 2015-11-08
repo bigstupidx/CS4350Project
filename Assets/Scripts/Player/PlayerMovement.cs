@@ -48,6 +48,14 @@ public class PlayerMovement : MonoBehaviour
 	// Destination Marker
 	public GameObject marker;
 
+	// Button Restricted area
+	private float screenTopLeft_x_chapter2Activated;
+	private float screenTopLeft_x;
+	private float screenTopLeft_y;
+	private float screenBottomRight_x;
+	private float screenBottomRight_y;
+
+
 
 	Sprite[] sprites;
 
@@ -98,6 +106,13 @@ public class PlayerMovement : MonoBehaviour
 
 		if (marker == null)
 			marker = GameObject.Find ("DestinationMarker");
+
+
+		screenTopLeft_x_chapter2Activated = (Screen.width * 0.12f);
+		screenTopLeft_x = (Screen.width * 0.20f);
+		screenTopLeft_y = (Screen.height * 0.9f);
+		screenBottomRight_x = (Screen.width * 0.9f);
+		screenBottomRight_y = (Screen.height * 0.2f);
 	
 
 	}
@@ -138,8 +153,11 @@ public class PlayerMovement : MonoBehaviour
 		// Check mouse input
 		if (Input.GetKey (KeyCode.Mouse0)) {
 
-			if ((Input.mousePosition.x > (Screen.width * 0.9f) && Input.mousePosition.y < (Screen.height * 0.2f)) || 
-				(Input.mousePosition.x < (Screen.width * 0.20f) && Input.mousePosition.y > (Screen.height * 0.9f))) {
+			if(EndingController.instance.isChapter2Activated)
+				screenTopLeft_x = screenTopLeft_x_chapter2Activated;
+
+			if ((Input.mousePosition.x > screenBottomRight_x && Input.mousePosition.y < screenBottomRight_y) || 
+			    (Input.mousePosition.x < screenTopLeft_x && Input.mousePosition.y > screenTopLeft_y)) {
 				mouseOverButton = true;
 
 				isWalking = false;

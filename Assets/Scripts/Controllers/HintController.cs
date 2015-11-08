@@ -42,10 +42,11 @@ public class HintController : MonoBehaviour {
 		textBoxRef.transform.GetChild(0).GetComponent<FeedTextFromObject> ().SetText (respond);
 		textBoxRef.GetComponent<FadeInFadeOut> ().TurnOnTextbox (false, true);
 		*/
-
-		PlayerController.instance.displayHint ();
-		hasHint = false;
-		hintTimer = Time.time;
+		if (hasHint) {
+			PlayerController.instance.displayHint ();
+			hasHint = false;
+			hintTimer = Time.time;
+		}
 	}
 
 	private int GetPeak(int[] _input)
@@ -96,15 +97,18 @@ public class HintController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((Time.time - hintTimer) > 15.0f) {
-			hasHint = true;
-		}
+		if (!EndingController.instance.isChapter2Activated) {
+			if ((Time.time - hintTimer) > 15.0f) {
+				hasHint = true;
+			}
 
-		if (hasHint) {
-			this.GetComponent<Image>().color = new Color( 1.0f, 1.0f, 1.0f, 1.0f);
+			if (hasHint) {
+				this.GetComponent<Image> ().color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
+			} else
+				this.GetComponent<Image> ().color = new Color (1.0f, 1.0f, 1.0f, 0.5f);
 		}
 		else
-			this.GetComponent<Image>().color = new Color( 1.0f, 1.0f, 1.0f, 0.5f);
+			this.GetComponent<Image> ().color = new Color (1.0f, 1.0f, 1.0f, 0.0f);
 
 	}
 }

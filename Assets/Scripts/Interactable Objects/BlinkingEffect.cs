@@ -4,7 +4,7 @@ using System.Collections;
 public class BlinkingEffect : MonoBehaviour {
 
 	public Light lightSource;
-	private float delay = 0.2f;
+	public float delay = 0.2f;
 	private float startTime;
 
 	
