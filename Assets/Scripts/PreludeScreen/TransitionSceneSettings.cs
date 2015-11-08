@@ -10,7 +10,7 @@ public class TransitionSceneSettings : MonoBehaviour {
 
 	void Start()
 	{
-		isPartOneEnded = EndingController.instance.isChapter2Activated;
+		isPartOneEnded = (EndingController.instance.isChapter2Activated || EndingController.instance.isChapter2Completed);
 
 		children [0] = transform.GetChild (0).gameObject;
 		children [1] = transform.GetChild (1).gameObject;
@@ -19,7 +19,7 @@ public class TransitionSceneSettings : MonoBehaviour {
 			child.SetActive(false);
 		}
 		
-		if (isPartOneEnded || EndingController.instance.isChapter2Completed) {
+		if (isPartOneEnded) {
 			transform.GetChild (1).gameObject.SetActive(true);
 		}
 		else{

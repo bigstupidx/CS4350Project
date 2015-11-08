@@ -36,6 +36,18 @@ public class LookAtPoint_DS : MonoBehaviour {
         fov = 85.0f;
         cam = this.GetComponent<Camera>();
         freeze = false;
+
+		// Reset Save file when game completed
+		PlayerController.instance.Reset();
+		PlayerController.instance.Save();
+
+		EndingController.instance.Reset ();
+		EndingController.instance.Save();
+		
+		Destroy (GameController.instance);
+		Destroy (PlayerController.instance);
+		Destroy (EndingController.instance);
+		Destroy (TraceController.instance);
     }
 
     void stateRun()

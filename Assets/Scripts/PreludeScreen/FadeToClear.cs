@@ -31,10 +31,7 @@ public class FadeToClear : MonoBehaviour {
 			targetScene = "PlatformGameScene";
 		} else if (GameController.instance.lastLoadedScene.Contains ("GameScene")) {
 			if(EndingController.instance.isChapter2Completed){
-				targetScene = "EndingScene"; // this part need to change to ending scene
-				Destroy (GameController.instance);
-				Destroy (PlayerController.instance);
-				EndingController.instance.ResetEndingController (false);
+				targetScene = "EndingScene";
 			}
 			else{
 				targetScene = "PlatformGameScene";
