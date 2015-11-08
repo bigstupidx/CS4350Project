@@ -20,11 +20,17 @@ public class JsonReader : MonoBehaviour {
 	}
 
 	static public PlayerState readPlayerState() {
+		if (!File.Exists (JsonReader.getDocumentDir () + "/player.json")) {
+			PlayerController.instance.Save();
+		}
 		string jsonString = File.ReadAllText (JsonReader.getDocumentDir() + "/player.json");
 		return JsonMapper.ToObject<PlayerState> (jsonString);
 	}
 
 	static public EndingSaveState readEndingSaveState() {
+		if (!File.Exists (JsonReader.getDocumentDir () + "/ending.json")) {
+			EndingController.instance.Save();
+		}
 		string jsonString = File.ReadAllText (JsonReader.getDocumentDir () + "/ending.json");
 		return JsonMapper.ToObject<EndingSaveState> (jsonString);
 	}
