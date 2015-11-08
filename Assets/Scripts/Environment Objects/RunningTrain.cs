@@ -45,14 +45,12 @@ public class RunningTrain : MonoBehaviour {
 				isRunning = false;
 			}
 		} else {
-
-           	 	audioSource.Stop();
+           	audioSource.Stop();
 			if(timer >= timeBetweenRuns){
 				timer = 0;
 				isRunning = true;
 				meshRenderer.enabled=true;
-
-                	audioSource.Play();
+                audioSource.Play();
             }
 		}
 	}
