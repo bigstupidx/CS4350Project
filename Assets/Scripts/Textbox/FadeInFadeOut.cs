@@ -106,7 +106,8 @@ public class FadeInFadeOut : MonoBehaviour {
 			feedText.ResetTextFeed();
 			PlayerData.MoveFlag = true;
             PlayerSound.AllowIdleAutoSound = true;
-			GameObject.Find ("HintButton").GetComponent<HintController> ().SetHintStatus (true);
+			if(Application.loadedLevelName.Contains ("GameScene"))
+				GameObject.Find ("HintButton").GetComponent<HintController> ().SetHintStatus (true);
 		}
 	}
 }

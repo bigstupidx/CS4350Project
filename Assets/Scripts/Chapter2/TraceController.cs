@@ -28,7 +28,7 @@ public class TraceController : MonoBehaviour {
 			DontDestroyOnLoad (this);
 			allItemDic = new Dictionary<string, ItemState>();
 			lineRenderer = transform.GetComponent<LineRenderer>();
-			Init();
+			//Init();
 		} else {
 			DestroyImmediate(gameObject);
 		}
@@ -36,6 +36,8 @@ public class TraceController : MonoBehaviour {
 
 	void Start()
 	{
+		if(Application.loadedLevelName.Contains ("GameScene") && EndingController.instance.isChapter2Activated)
+			Init ();
 	}
 
 	public void TurnOffLine()
@@ -52,31 +54,42 @@ public class TraceController : MonoBehaviour {
 	
 	public void Init()
 	{
-		EndingState[] endingList = JsonReader.readEndingState();
-		ItemState[] itemList = JsonReader.readItemsState ();
+		if (EndingController.instance.isChapter2Activated) {
+			EndingState[] endingList = JsonReader.readEndingState ();
+			ItemState[] itemList = JsonReader.readItemsState ();
 
-		foreach (ItemState currItem in itemList) {
-			if( !allItemDic.ContainsKey(currItem.id) )
-				allItemDic.Add(currItem.id, currItem);
-		}
-
-		foreach (EndingState currEnding in endingList) {
-			if(currEnding.id.CompareTo( (EndingController.instance.deathReason).ToString() ) == 0 )
-			{
-				storyList = new List<string>(currEnding.sequence);
+			foreach (ItemState currItem in itemList) {
+				if (!allItemDic.ContainsKey (currItem.id))
+					allItemDic.Add (currItem.id, currItem);
 			}
+
+			foreach (EndingState currEnding in endingList) {
+				if (currEnding.id.CompareTo ((EndingController.instance.deathReason).ToString ()) == 0) {
+					storyList = new List<string> (currEnding.sequence);
+					break;
+				}
+			}
+
+			List<string> savedTriggered = PlayerController.instance.triggeredItems;
+			foreach (string item in savedTriggered) {
+				storyList.Remove (item);
+			}
+
+
+			lineRenderer.SetPosition (0, origin);
+			lineRenderer.SetWidth (0.15f, 0.15f);
+			lineRenderer.SetColors (new Color (1.0f, 1.0f, 1.0f, 1.0f), new Color (1.0f, 1.0f, 1.0f, 0.2f));
+
+			if (storyList.Count > 0) {
+				SetDestination (storyList [0]);
+		
+				distance = Vector3.Distance (origin, destination);
+			} else
+				TurnOffLine ();
+
+			if (player == null)
+				player = GameObject.FindGameObjectWithTag ("Player");
 		}
-
-		lineRenderer.SetPosition (0, origin);
-		lineRenderer.SetWidth (0.15f, 0.15f);
-		lineRenderer.SetColors (new Color (1.0f, 1.0f, 1.0f, 1.0f), new Color (1.0f, 1.0f, 1.0f, 0.2f));
-		
-		SetDestination (storyList [0]);
-		
-		distance = Vector3.Distance (origin, destination);
-
-		if (player == null)
-			player = GameObject.FindGameObjectWithTag ("Player");
 
 	}
 
@@ -164,18 +177,6 @@ public class TraceController : MonoBehaviour {
 										_target = GameObject.Find("Transition_SewageEntrance");
 									}
 								}
-
-//								if(gantryObject != null){
-//									if( player.transform.position.x > gantryObject.transform.position.x )
-//										_target = GameObject.Find("Transition_GantryOutside");
-//								}
-//								else {
-//									if(temp.level == 2){
-//										_target = GameObject.Find("Transition_EscalatorUp");
-//									}else{
-//										_target = GameObject.Find("Transition_SewageEntrance");
-//									}
-//								}
 							}
 							if(_target != null)
 								destination = _target.transform.position;
@@ -207,13 +208,15 @@ public class TraceController : MonoBehaviour {
 
 
 		if (Application.loadedLevelName.Contains ("GameScene") && EndingController.instance.isChapter2Activated) {
+			if(storyList.Count == 0)
+				this.Init();
 			modelTexture.mainTexture = textureArray [1];
 		} else
 			modelTexture.mainTexture = textureArray [0];
 
 
 
-		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene") ){//&& !LevelHandler.Instance.overlay.gameObject.activeSelf) {
+		if (EndingController.instance.isChapter2Activated && Application.loadedLevelName.Contains ("GameScene") ){
 			if(lineRenderer.enabled == false)
 				TurnOnLine();
 

@@ -267,6 +267,9 @@ public class GameController : MonoBehaviour {
 	public void load() {
 		PlayerController.instance.Load ();
 		EndingController.instance.Load ();
+
+		TraceController.instance.Init ();
+
 		int currentLevel = PlayerController.instance.currentLevel;
 		if (currentLevel == 2) {
 			Application.LoadLevel ("PlatformGameScene");
