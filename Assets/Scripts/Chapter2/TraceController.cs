@@ -78,7 +78,7 @@ public class TraceController : MonoBehaviour {
 
 			lineRenderer.SetPosition (0, origin);
 			lineRenderer.SetWidth (0.10f, 0.10f);
-			lineRenderer.SetColors (new Color (1.0f, 1.0f, 1.0f, 0.7f), new Color (1.0f, 1.0f, 1.0f, 0.2f));
+			lineRenderer.SetColors (new Color (1.0f, 1.0f, 1.0f, 0.5f), new Color (1.0f, 1.0f, 1.0f, 0.2f));
 
 			if (storyList.Count > 0) {
 				SetDestination (storyList [0]);
@@ -222,13 +222,18 @@ public class TraceController : MonoBehaviour {
 
 			if (player == null)
 				player = GameObject.FindGameObjectWithTag ("Player");
-			else {
-				origin = player.transform.GetChild(3).position;
-			}
+
+			origin = player.transform.GetChild(3).position;
 
 			if (storyList.Count > 0) {
 				SetDestination (storyList [0]);
 			}
+			
+			if (GameObject.Find ("Floor") != null) {
+				float newY = GameObject.Find ("Floor") .transform.position.y;
+				origin.y = destination.y = (newY + 0.25f);
+			}
+			origin.y = destination.y;
 
 			if (Vector3.Distance (origin, destination) < 0.5f)
 				lineRenderer.enabled = false;
