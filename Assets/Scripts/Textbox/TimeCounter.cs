@@ -18,19 +18,19 @@ public class TimeCounter : MonoBehaviour {
 
 	void Start()
 	{
-		if (EndingController.instance.isChapter2Activated) {
-			DateTime currTimeStamp;
-			bool hasItem = GameController.instance.timeStamp.TryGetValue("StartGame", out currTimeStamp);
-			if (hasItem) {
-				this.setTime(currTimeStamp.Hour, currTimeStamp.Minute, currTimeStamp.Second);
-			}
-			else
-			{
-				this.setTime(GameController.instance.GetCurrentObjectTime().Hour,
-				             GameController.instance.GetCurrentObjectTime().Minute, 
-				             GameController.instance.GetCurrentObjectTime().Second);
-			}
-		}
+		//if (EndingController.instance.isChapter2Activated) {
+		//	DateTime currTimeStamp;
+//			bool hasItem = GameController.instance.timeStamp.TryGetValue("StartGame", out currTimeStamp);
+//			if (hasItem) {
+//				this.setTime(currTimeStamp.Hour, currTimeStamp.Minute, currTimeStamp.Second);
+//			}
+//			else
+//			{
+				this.setTime(DateTime.Now.Hour,
+				             DateTime.Now.Minute, 
+				             DateTime.Now.Second);
+//			}
+//		}
 	}
 
 	public void setTime(int _hour, int _min, int _sec)
@@ -43,11 +43,11 @@ public class TimeCounter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!EndingController.instance.isChapter2Activated) {
-			hour = GameController.instance.GetActualTime (2);
-			minutes = GameController.instance.GetActualTime (1);
-			seconds = GameController.instance.GetActualTime (0);
-		}
+		//if (!EndingController.instance.isChapter2Activated) {
+			hour = DateTime.Now.Hour;
+			minutes = DateTime.Now.Minute;
+			seconds = DateTime.Now.Second;
+		//}
 
 		time.text = string.Format ("{0:00}:{1:00}:{2:00}",hour, minutes, seconds); 
 	}

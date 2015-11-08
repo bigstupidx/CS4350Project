@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 	public void Reset()
 	{
 		Init ();
+		Save ();
 	}
 
 	public void Init() {
@@ -151,7 +152,6 @@ public class PlayerController : MonoBehaviour {
 		if (item.type.Equals (Item.TRANSITION_TYPE)) {
 			position = item.offset;
 			currentLevel = item.nextLevel;
-			this.Save();
 		}
 
 		foreach (string leadItemId in item.leadItems) {
@@ -182,8 +182,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		idleTimer = GameController.instance.GetTick ();
-		GameObject.Find ("HintButton").GetComponent<HintController> ().ResetTimer ();
+		GameObject.Find ("HintButton").GetComponent<HintController> ().SetHintStatus (false);
 		UpdateHintDic ();
+		this.Save();
 	}
 
 	public void Update()
