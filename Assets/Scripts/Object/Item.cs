@@ -62,17 +62,24 @@ public class Item : MonoBehaviour {
 
 	public string GetRespond(bool isActivated, bool isChapterTwoActivated)
 	{
+		int index = 0;
 		if (!isChapterTwoActivated) {
 			if (isActivated && type.Contains("event") ) {
 				return eventDialogue [0];
 			} else {
-				return defaultDialogue [(Random.Range (1, defaultDialogue.Length * 256) % defaultDialogue.Length)];
+				if(defaultDialogue.Length > 1){
+					index = (Random.Range (1, defaultDialogue.Length * 256) % defaultDialogue.Length);
+				}
+				return defaultDialogue [index];
 			}
 		}else {
 			if (isActivated) {
 				return pt2EventDialogue [0];
 			} else {
-				return pt2DefaultDialogue [(Random.Range (1, defaultDialogue.Length * 256) % defaultDialogue.Length)];
+				if(pt2DefaultDialogue.Length > 1){
+					index = (Random.Range (1, pt2DefaultDialogue.Length * 256) % pt2DefaultDialogue.Length);
+				}
+				return pt2DefaultDialogue [index];
 			}
 		}
 	}
