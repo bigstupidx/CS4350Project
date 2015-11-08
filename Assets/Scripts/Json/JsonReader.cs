@@ -19,6 +19,10 @@ public class JsonReader : MonoBehaviour {
 		return JsonMapper.ToObject<EndingState[]>(jsonString);
 	}
 
+	static public bool hasSaveFile() {
+		return File.Exists (JsonReader.getDocumentDir () + "/player.json");
+	}
+
 	static public PlayerState readPlayerState() {
 		if (!File.Exists (JsonReader.getDocumentDir () + "/player.json")) {
 			PlayerController.instance.Save();
