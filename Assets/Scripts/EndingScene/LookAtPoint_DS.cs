@@ -36,18 +36,6 @@ public class LookAtPoint_DS : MonoBehaviour {
         fov = 85.0f;
         cam = this.GetComponent<Camera>();
         freeze = false;
-
-		// Reset Save file when game completed
-		PlayerController.instance.Reset();
-		PlayerController.instance.Save();
-
-		EndingController.instance.Reset ();
-		EndingController.instance.Save();
-		
-		Destroy (GameController.instance);
-		Destroy (PlayerController.instance);
-		Destroy (EndingController.instance);
-		Destroy (TraceController.instance);
     }
 
     void stateRun()
@@ -107,7 +95,19 @@ public class LookAtPoint_DS : MonoBehaviour {
                 case 13: stateTimer = 20.0f; break;
                 case 14: stateTimer = 40.0f; break;
                 case 15: stateTimer = 80.0f; break;
-				case 16: GameController.instance.SetLastLoadedScene(Application.loadedLevelName); Application.LoadLevel("CreditScene");break;
+				case 16: GameController.instance.SetLastLoadedScene(Application.loadedLevelName); 
+				// Reset Save file when game completed
+				PlayerController.instance.Reset();
+				PlayerController.instance.Save();
+				
+				EndingController.instance.Reset ();
+				EndingController.instance.Save();
+				
+				Destroy (GameController.instance);
+				Destroy (PlayerController.instance);
+				Destroy (EndingController.instance);
+				Destroy (TraceController.instance);
+				Application.LoadLevel("CreditScene");break;
                 default: stateTimer = 100000.0f; break;
 
             }
