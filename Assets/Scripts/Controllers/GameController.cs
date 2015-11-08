@@ -172,24 +172,6 @@ public class GameController : MonoBehaviour {
 	public void GameOver(EndingType endingType) {
 
 		string[] ending = this.getCorePath ();
-		
-//		switch (endingType) {
-//		case EndingType.Ending1:
-//			Debug.Log ("Game over: Death by Suffocation");
-//			break;
-//		case EndingType.Ending2:
-//			Debug.Log ("Game over: Death by Dog Allergy");
-//			break;
-//		case EndingType.Ending3:
-//			Debug.Log ("Game over: Death by Head Injury");
-//			break;
-//		case EndingType.Ending4:
-//			Debug.Log ("Game over: Death by Fallen Ceiling");
-//			break;
-//		case EndingType.Ending5:
-//			Debug.Log ("Game over: Death by Train Accident");
-//			break;
-//		}
 
 		if (EndingController.instance.isChapter2Activated) {	// this part need to change
 			EndingController.instance.isChapter2Completed = true;
@@ -284,6 +266,7 @@ public class GameController : MonoBehaviour {
 
 	public void load() {
 		PlayerController.instance.Load ();
+		EndingController.instance.Load ();
 		int currentLevel = PlayerController.instance.currentLevel;
 		if (currentLevel == 2) {
 			Application.LoadLevel ("PlatformGameScene");

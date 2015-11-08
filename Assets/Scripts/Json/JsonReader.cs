@@ -23,6 +23,11 @@ public class JsonReader : MonoBehaviour {
 		string jsonString = File.ReadAllText (JsonReader.getDocumentDir() + "/player.json");
 		return JsonMapper.ToObject<PlayerState> (jsonString);
 	}
+
+	static public EndingSaveState readEndingSaveState() {
+		string jsonString = File.ReadAllText (JsonReader.getDocumentDir () + "/ending.json");
+		return JsonMapper.ToObject<EndingSaveState> (jsonString);
+	}
   
 	static public void writePlayerState(PlayerState state) {
 		StringBuilder builder = new StringBuilder();
@@ -31,6 +36,15 @@ public class JsonReader : MonoBehaviour {
 		writer.IndentValue = 2;
 		JsonMapper.ToJson(state, writer);
 		File.WriteAllText (JsonReader.getDocumentDir() + "/player.json", builder.ToString ());
+	}
+
+	static public void writeEndingSaveState(EndingSaveState state) {
+		StringBuilder builder = new StringBuilder ();
+		JsonWriter writer = new JsonWriter (builder);
+		writer.PrettyPrint = true;
+		writer.IndentValue = 2;
+		JsonMapper.ToJson (state, writer);
+		File.WriteAllText (JsonReader.getDocumentDir () + "/ending.json", builder.ToString ());
 	}
 
 	static public string getDocumentDir() {

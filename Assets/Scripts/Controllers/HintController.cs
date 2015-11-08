@@ -10,8 +10,6 @@ public class HintController : MonoBehaviour {
 
 	public List< List<string> > hintList;
 
-	private float hintTimer;
-
 	// Use this for initialization
 	void Start () {
 		hintList = new List< List<string> > ();
@@ -20,32 +18,18 @@ public class HintController : MonoBehaviour {
 			hintList.Add(newList);
 		}
 
-		hintTimer = Time.time;
 	}
 
-	public void ResetTimer()
+	public void SetHintStatus(bool _status)
 	{
-		hintTimer = Time.time;
+		hasHint = _status;
 	}
 
 	public void DisplayHint()
 	{
-		/*
-		if (textBoxRef == null) {
-			PlayerController.instance.SetTextboxObj ();
-			textBoxRef = PlayerController.instance.GetTextboxObj ();
-		}
-
-
-		string respond = GetHint();
-
-		textBoxRef.transform.GetChild(0).GetComponent<FeedTextFromObject> ().SetText (respond);
-		textBoxRef.GetComponent<FadeInFadeOut> ().TurnOnTextbox (false, true);
-		*/
 		if (hasHint) {
 			PlayerController.instance.displayHint ();
 			hasHint = false;
-			hintTimer = Time.time;
 		}
 	}
 
@@ -98,10 +82,6 @@ public class HintController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!EndingController.instance.isChapter2Activated) {
-			if ((Time.time - hintTimer) > 15.0f) {
-				hasHint = true;
-			}
-
 			if (hasHint) {
 				this.GetComponent<Image> ().color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 			} else
