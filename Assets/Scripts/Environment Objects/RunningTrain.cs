@@ -45,13 +45,13 @@ public class RunningTrain : MonoBehaviour {
 				isRunning = false;
 			}
 		} else {
-			if(!Application.loadedLevelName.ToLower().Contains("prelude"))
+
            	 	audioSource.Stop();
 			if(timer >= timeBetweenRuns){
 				timer = 0;
 				isRunning = true;
 				meshRenderer.enabled=true;
-				if(!Application.loadedLevelName.ToLower().Contains("prelude"))
+
                 	audioSource.Play();
             }
 		}
