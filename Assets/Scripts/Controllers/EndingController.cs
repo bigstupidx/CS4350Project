@@ -31,12 +31,39 @@ public class EndingController : MonoBehaviour {
 	}
 
 	public void Init() {
+		isChapter2Activated = false;
+		isChapter2Completed = false;
 		endings = new int[(int) EndingType.EndingCount];
+	}
+
+	public void Reset() {
+		this.Init ();
+	}
+
+	public void Load() {
+		EndingSaveState saveState = JsonReader.readEndingSaveState ();
+		this.isChapter2Activated = saveState.isChapter2Activated;
+		this.isChapter2Completed = saveState.isChapter2Completed;
+		this.endings = saveState.endings;
+		this.deathReason = saveState.deathReason;
+	}
+	
+	public void Save() {
+		EndingSaveState saveState = new EndingSaveState ();
+		saveState.isChapter2Activated = this.isChapter2Activated;
+		saveState.isChapter2Completed = this.isChapter2Completed;
+		saveState.endings = this.endings;
+		saveState.deathReason = this.deathReason;
+		JsonReader.writeEndingSaveState (saveState);
 	}
 
 	public void ResetEndingController(bool _activateChapter2) {
 		endings = new int[(int) EndingType.EndingCount];
 		isChapter2Activated = _activateChapter2;
+		if (!_activateChapter2) {
+			isChapter2Completed = false;
+		}
+		this.Save ();
 	}
 
 	public void ItemTriggered(Item item) {
@@ -49,9 +76,25 @@ public class EndingController : MonoBehaviour {
 			}
 			if (endings[i] > ENDING_LIMIT) {
 				deathReason = (EndingType) i;
+				this.Save();
 				GameController.instance.GameOver((EndingType) i);
 				break;
 			}
 		}
+		this.Save ();
+	}
+}
+
+public class EndingSaveState {
+	public bool isChapter2Activated;
+	public bool isChapter2Completed;
+	public int[] endings;
+	public EndingType deathReason;
+	
+	public EndingSaveState() {
+		isChapter2Activated = false;
+		isChapter2Completed = false;
+		endings = new int[(int) EndingType.EndingCount];
+		deathReason = EndingType.Ending1;
 	}
 }
