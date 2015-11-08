@@ -180,7 +180,10 @@ public class PlayerMovement : MonoBehaviour
 					//GameObject.Find("InteractionButton").GetComponent<BubbleBehaviour>().alreadySelected = false;
 					destination = floorHit.point;
 			
-					marker.transform.position = new Vector3 (destination.x, destination.y + 0.3f, destination.z - 0.3f);
+					if(Application.loadedLevelName.Equals("GroundOutdoorGameScene")||Application.loadedLevelName.Equals("BasementGameScene"))
+						marker.transform.position = new Vector3 (destination.x, destination.y, destination.z);
+					else
+						marker.transform.position = new Vector3 (destination.x, destination.y + 0.3f, destination.z - 0.3f);
 					//marker.GetComponent<MeshRenderer>().enabled = true;
 
 			

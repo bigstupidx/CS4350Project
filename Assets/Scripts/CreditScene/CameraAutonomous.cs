@@ -6,6 +6,7 @@ public class CameraAutonomous : MonoBehaviour {
 
 	public GameObject cameraObject;
 	public GameObject background;
+	public float alphaValue;
 
 	private int currentState;
 	private Color bg_color;
@@ -91,7 +92,7 @@ public class CameraAutonomous : MonoBehaviour {
 	}
 
 	void fadeIn() {
-		if (bg_color.a < 0.50f) {
+		if (bg_color.a < alphaValue) {
 			threshold = 0.0f;
 		}
 		bg_color.a -= threshold * Time.deltaTime;
