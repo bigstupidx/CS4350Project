@@ -93,7 +93,7 @@ public class Displaytextbox : MonoBehaviour {
 					bool status = PlayerController.instance.AbleToTrigger (curr);
 
 					if (!EndingController.instance.isChapter2Activated) {
-						playerSound.PlayDialgoueSound ();
+						playerSound.PlayDialgoueSound (colliderName, status);
 					}
 
 					if (EndingController.instance.isChapter2Activated && TraceController.instance.storyList.Count > 0) {
