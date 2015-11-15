@@ -8,13 +8,15 @@ public class TextScroll_Up : MonoBehaviour {
 	public GameObject text;
 	public GameObject end;
 	public GameObject canvas;
-	
-	private Color logo_temp;
+    public float sceneSpeed;
+
+    private Color logo_temp;
 	private Color header_temp;
 	private Color text_temp;
 	private Color end_temp;
 
 	private float stateTimer;
+    private float contentTextVelocity;
 	private int currentState;
 
 	// Use this for initialization
@@ -36,7 +38,8 @@ public class TextScroll_Up : MonoBehaviour {
 
 		currentState = 0;
 		stateTimer = 20.0f;
-	}
+        contentTextVelocity = 0.0f;
+    }
 
 	void run()
 	{
@@ -64,16 +67,22 @@ public class TextScroll_Up : MonoBehaviour {
 			default: stateTimer = 100000.0f; break;
 			}
 		}
-		//Debug.Log (currentState + " " + stateTimer);
+		Debug.Log (currentState + " " + stateTimer);
 	}
 
 	void up() {
-		float temp =  (float)canvas.GetComponent<RectTransform> ().rect.height/ 1080.0f;
+        if (contentTextVelocity < sceneSpeed)
+        {
+            contentTextVelocity += 0.01f;
+            contentTextVelocity *= 1.05f;
+        }
+
+        float temp =  (float)canvas.GetComponent<RectTransform> ().rect.height/ 1080.0f;
 		Debug.Log (temp);
-		text.transform.Translate (Vector3.up * 30.0f * temp * Time.deltaTime);
-		logo.transform.Translate (Vector3.up * 30.0f * temp * Time.deltaTime);
-		header.transform.Translate (Vector3.up * 30.0f * temp * Time.deltaTime);
-		end.transform.Translate (Vector3.up * 30.0f * temp * Time.deltaTime);
+		text.transform.Translate (Vector3.up * contentTextVelocity * temp * Time.deltaTime);
+		logo.transform.Translate (Vector3.up * contentTextVelocity * temp * Time.deltaTime);
+		header.transform.Translate (Vector3.up * contentTextVelocity * temp * Time.deltaTime);
+		end.transform.Translate (Vector3.up * contentTextVelocity * temp * Time.deltaTime);
 		if (end.transform.position.y >= Screen.height/2) {
 			currentState++;
 			stateTimer = 60.0f;
