@@ -79,14 +79,17 @@ public class Displaytextbox : MonoBehaviour {
 				// feedtext into textbox
 				if (colliderName.Length < 1) { // player stand at out of nowhere
 					textBox.SetEventStatus (false);
-					if (EndingController.instance.isChapter2Activated)
+					if (EndingController.instance.isChapter2Activated){
 						feedText.SetText ("Amari..");
+						textBox.TurnOnTextbox (false); // means do not fade out
+					}
 					else {
 						if (PlayerData.ParentGenderId == 1) // Male Parent
 							feedText.SetText ("Papa?");
 						else if (PlayerData.ParentGenderId == 2) // Female Parent
 							feedText.SetText ("Mama?");
 						playerSound.PlayIdleDialogueSound ();
+						textBox.TurnOnTextbox (false); // means do not fade out
 					}
 				} else { //  player near to interactable object
 					Item curr = GameController.instance.GetItem (colliderName);
@@ -109,11 +112,12 @@ public class Displaytextbox : MonoBehaviour {
 					if (respond.Length > 0) {		// not empty respond 
 						feedText.SetText (respond, curr, status);
 						transform.GetComponent <PlayerMovement> ().StopMoving ();	// disable player move
+						textBox.TurnOnTextbox (false); // means do not fade out
 					}
 				}
 
 				currIndex = 0;
-				textBox.TurnOnTextbox (false); // means do not fade out
+//				textBox.TurnOnTextbox (false); // means do not fade out
 			}
 		}
 	}
