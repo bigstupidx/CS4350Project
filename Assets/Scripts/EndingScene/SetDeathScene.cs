@@ -28,7 +28,7 @@ public class SetDeathScene : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (counter < startTimer + randomizeTimer+sceneTimer)
         {
             counter += 0.1f;

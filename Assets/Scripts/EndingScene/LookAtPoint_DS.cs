@@ -124,7 +124,7 @@ public class LookAtPoint_DS : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         stateRun();
 
         eyeTop.transform.position = new Vector3(eyeTop.transform.position.x, initialY1+eyeY, eyeTop.transform.position.z);
