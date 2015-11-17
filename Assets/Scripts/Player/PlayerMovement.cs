@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
 					if(Application.loadedLevelName.Equals("BasementGameScene")) //\\ Application.loadedLevelName.Equals("GroundOutdoorGameScene")
 						marker.transform.position = new Vector3 (destination.x, destination.y, destination.z);
 					else if(Application.loadedLevelName.Equals("GroundOutdoorGameScene"))
-						marker.transform.position = new Vector3 (destination.x, destination.y + 0.3f, destination.z);
+						marker.transform.position = new Vector3 (destination.x, marker.transform.position.y, destination.z);
 					else
 						marker.transform.position = new Vector3 (destination.x, destination.y + 0.3f, destination.z - 0.3f);
 					//marker.GetComponent<MeshRenderer>().enabled = true;
