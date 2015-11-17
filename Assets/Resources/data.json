@@ -454,7 +454,7 @@
     "restrictedItems": [ ],
     "requiredItems": [ "FlowerPot" ],
     "leadItems": [ "AdvertisementBoard" ],
-    "eventDialogue": [ "[Parent] said that if I give back the ring, we could get some hot chocolate before riding the train.\\I said that I didn't want to and [Parent] got very angry.\\[Parent] bought coffee and gave me plain water because I was bad.\\Then, we went to the platform to wait for the train.\\We were standing in front of the board that has a pitcure of an aeroplane." ],
+    "eventDialogue": [ "[Parent] said that if I give back the ring, we could get some hot chocolate before riding the train.\\I said that I didn't want to and [Parent] got very angry.\\[Parent] bought coffee and gave me plain water because I was bad.\\Then, we went to the platform to wait for the train.\\We were standing in front of the board that has a picture of an aeroplane." ],
     "defaultDialogue": [ "The cafe people make the best hot chocolate!", "When I'm good, [Parent] buys me hot chocolate here." ],
     "idleDialogue": [ "I got [Parent] mad when we were buying coffee at the cafe counter." ],
     "endingPoints": [ 0, 0, 0, 1, 0 ],
